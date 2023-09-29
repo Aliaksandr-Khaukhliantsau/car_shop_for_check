@@ -53,7 +53,7 @@ public class Order {
         return "Order{" +
                 "id='" + id + '\'' +
                 ", number=" + number +
-                ", idCustomer='" + customer + '\'' +
+                ", customer=" + customer +
                 ", idCar='" + idCar + '\'' +
                 '}';
     }

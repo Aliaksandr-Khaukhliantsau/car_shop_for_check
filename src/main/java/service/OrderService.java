@@ -1,5 +1,6 @@
 package service;
 
+import entity.Customer;
 import entity.Order;
 
 import java.sql.SQLException;
@@ -12,6 +13,8 @@ public interface OrderService {
     List<Order> getByNumber(String number) throws SQLException;
 
     List<Order> getByIdCustomer(String idCustomer) throws SQLException;
+
+    List<Order> getByCustomer(Customer customer) throws SQLException;
 
     List<Order> getByIdCar(String idCar) throws SQLException;
 
