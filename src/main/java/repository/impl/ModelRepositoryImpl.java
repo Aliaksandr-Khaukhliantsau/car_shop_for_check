@@ -19,8 +19,10 @@ public class ModelRepositoryImpl implements ModelRepository {
     public ResultSet getById(String id) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_SHOW_MODELS_BY_ID = "SELECT * FROM models WHERE id = " + "'" + id + "'" + " ORDER BY name ASC;";
+        // prepare statement, строки в константы.
         ResultSet resultSet = statement.executeQuery(SQL_SHOW_MODELS_BY_ID);
-//        statement.close();
+//        statement.close(); не должно быть ничего закоменченого, край ToDo
+        // закрыть любым способом все ресурсы
         return resultSet;
     }
 

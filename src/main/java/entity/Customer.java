@@ -1,7 +1,7 @@
 package entity;
 
 public class Customer {
-    private String id;
+    private String id;//UUID in all id`s
     private String firstName;
     private String middleName;
     private String lastName;

@@ -5,6 +5,7 @@ import repository.CarRepository;
 import java.sql.*;
 
 public class CarRepositoryImpl implements CarRepository {
+    // настройки подключения к бд должны быть в 1 месте, в файле .properties.
     private static final String POSTGRES_URL = "jdbc:postgresql://localhost:5432/car_shop";
     private static final String POSTGRES_USER = "postgres";
     private static final String POSTGRES_PASSWORD = "12345678";

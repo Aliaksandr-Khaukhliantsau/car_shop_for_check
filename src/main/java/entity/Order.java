@@ -4,7 +4,7 @@ public class Order {
     private String id;
     private int number;
     private Customer customer;
-    private String idCar;
+    private String idCar;// carId - all
 
     public Order() {
     }

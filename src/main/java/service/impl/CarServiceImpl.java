@@ -75,7 +75,7 @@ public class CarServiceImpl implements CarService {
             car.setVin(resultSet.getString("vin"));
             car.setIdModel(resultSet.getString("idmodel"));
 
-            carList.add(car);
+            carList.add(car); // cars никаких лист
         }
         return carList;
     }
@@ -105,7 +105,7 @@ public class CarServiceImpl implements CarService {
             Car car = new Car();
             car.setId(resultSet.getString("id"));
             car.setVin(resultSet.getString("vin"));
-            car.setIdModel(resultSet.getString("idmodel"));
+            car.setIdModel(resultSet.getString("idmodel"));// название в бд привести в порядок
 
             carList.add(car);
         }
