@@ -1,0 +1,1 @@
+SELECT * FROM completions ORDER BY name ASC;
