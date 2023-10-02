@@ -3,6 +3,7 @@ package repository.impl;
 import repository.OrderRepository;
 
 import java.sql.*;
+import java.util.UUID;
 
 public class OrderRepositoryImpl implements OrderRepository {
     private static final String POSTGRES_URL = "jdbc:postgresql://localhost:5432/car_shop";
@@ -34,7 +35,8 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
-    public ResultSet getByIdCustomer(String idCustomer) throws SQLException {
+//    public ResultSet getByIdCustomer(String idCustomer) throws SQLException {
+    public ResultSet getByIdCustomer(UUID idCustomer) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_SHOW_ORDERS_BY_ID_USER = "SELECT * FROM orders WHERE idcustomer = " + "'" + idCustomer + "'" + " ORDER BY number ASC;";
         ResultSet resultSet = statement.executeQuery(SQL_SHOW_ORDERS_BY_ID_USER);
@@ -60,7 +62,8 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
-    public ResultSet create(String idCustomer, String idCar) throws SQLException {
+//    public ResultSet create(String idCustomer, String idCar) throws SQLException {
+    public ResultSet create(UUID idCustomer, String idCar) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_ADD_A_NEW_ORDER = "INSERT INTO orders (idcustomer, idcar) VALUES ('" + idCustomer + "', '" + idCar + "') RETURNING *;";
         ResultSet resultSet = statement.executeQuery(SQL_ADD_A_NEW_ORDER);
@@ -69,7 +72,8 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
-    public ResultSet update(String id, String idCustomer, String idCar) throws SQLException {
+//    public ResultSet update(String id, String idCustomer, String idCar) throws SQLException {
+    public ResultSet update(String id, UUID idCustomer, String idCar) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_CHANGE_AN_ORDER = "UPDATE orders SET idcustomer = '" + idCustomer + "', idcar = '" + idCar + "' WHERE id = '" + id + "' RETURNING *;";
         ResultSet resultSet = statement.executeQuery(SQL_CHANGE_AN_ORDER);

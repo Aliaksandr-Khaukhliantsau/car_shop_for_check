@@ -1,7 +1,10 @@
 package entity;
 
+import java.util.UUID;
+
 public class Customer {
-    private String id;//UUID in all id`s
+    //    private String customerId;//UUID in all id`s !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private UUID customerId;//UUID in all id`s !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     private String firstName;
     private String middleName;
     private String lastName;
@@ -9,19 +12,20 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String id, String firstName, String middleName, String lastName) {
-        this.id = id;
+    //    public Customer(String customerId, String firstName, String middleName, String lastName) {
+    public Customer(UUID customerId, String firstName, String middleName, String lastName) {
+        this.customerId = customerId;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
     }
 
-    public String getId() {
-        return id;
+    public UUID getCustomerId() {
+        return customerId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCustomerId(UUID customerId) {
+        this.customerId = customerId;
     }
 
     public String getFirstName() {
@@ -51,7 +55,7 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "id='" + id + '\'' +
+                "customerId=" + customerId +
                 ", firstName='" + firstName + '\'' +
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +

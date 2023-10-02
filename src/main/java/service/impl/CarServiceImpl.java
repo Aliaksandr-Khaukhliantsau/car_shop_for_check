@@ -17,19 +17,16 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> getById(String id) throws SQLException {
+    public Car getCarById(String id) throws SQLException {
         ResultSet resultSet = carRepository.getById(id);
-        List<Car> carList = new ArrayList<>();
 
-        while (resultSet.next()) {
-            Car car = new Car();
-            car.setId(resultSet.getString("id"));
-            car.setVin(resultSet.getString("vin"));
-            car.setIdModel(resultSet.getString("idmodel"));
+        Car car = new Car();
 
-            carList.add(car);
-        }
-        return carList;
+        car.setId(resultSet.getString("id"));
+        car.setVin(resultSet.getString("vin"));
+        car.setIdModel(resultSet.getString("idmodel"));
+
+        return car;
     }
 
     @Override

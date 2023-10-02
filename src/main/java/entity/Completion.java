@@ -5,7 +5,6 @@ import java.util.List;
 public class Completion {
     private String id;
     private String name;
-    //проверить лишние пробелы(тут был)
     private List<Option> options;
 
     public Completion() {

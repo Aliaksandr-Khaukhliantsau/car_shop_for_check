@@ -1,3 +1,5 @@
+package outputToTheConsole;
+
 import entity.CompletionOption;
 import service.CompletionOptionService;
 import service.impl.CompletionOptionServiceImpl;
@@ -6,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
-public class TestCompletionOption {
+public class CompletionOptionOutput {
     public static void main(String[] args) throws SQLException {
         CompletionOptionService completionOptionService = new CompletionOptionServiceImpl();
         Scanner scanner = new Scanner(System.in);

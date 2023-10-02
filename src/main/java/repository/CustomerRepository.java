@@ -2,10 +2,12 @@ package repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
 
 public interface CustomerRepository {
 
-    ResultSet getById(String id) throws SQLException;
+//    ResultSet getById(String id) throws SQLException;
+    ResultSet getById(UUID id) throws SQLException;
 
     ResultSet getByFirstName(String firstName) throws SQLException;
 

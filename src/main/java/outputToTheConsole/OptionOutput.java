@@ -1,3 +1,5 @@
+package outputToTheConsole;
+
 import entity.Option;
 import service.OptionService;
 import service.impl.OptionServiceImpl;
@@ -6,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
-public class TestOption {
+public class OptionOutput {
     public static void main(String[] args) throws SQLException {
         OptionService optionService = new OptionServiceImpl();
         Scanner scanner = new Scanner(System.in);

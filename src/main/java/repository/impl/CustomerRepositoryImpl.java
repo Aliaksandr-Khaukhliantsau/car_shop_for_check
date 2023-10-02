@@ -3,6 +3,7 @@ package repository.impl;
 import repository.CustomerRepository;
 
 import java.sql.*;
+import java.util.UUID;
 
 public class CustomerRepositoryImpl implements CustomerRepository {
     private static final String POSTGRES_URL = "jdbc:postgresql://localhost:5432/car_shop";
@@ -16,7 +17,8 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
-    public ResultSet getById(String id) throws SQLException {
+//    public ResultSet getById(String id) throws SQLException {
+    public ResultSet getById(UUID id) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_SHOW_CUSTOMERS_BY_ID = "SELECT * FROM customers WHERE id = " + "'" + id + "'" + " ORDER BY lastname ASC;";
         ResultSet resultSet = statement.executeQuery(SQL_SHOW_CUSTOMERS_BY_ID);

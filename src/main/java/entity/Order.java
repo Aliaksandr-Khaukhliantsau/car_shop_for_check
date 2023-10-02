@@ -1,35 +1,36 @@
 package entity;
 
 public class Order {
-    private String id;
-    private int number;
+    private String OrderId;
+    private int OrderNumber;
     private Customer customer;
-    private String idCar;// carId - all
+    private Car car;
 
     public Order() {
     }
 
-    public Order(String id, int number, Customer customer, String idCar) {
-        this.id = id;
-        this.number = number;
+
+    public Order(String OrderId, int OrderNumber, Customer customer, Car car) {
+        this.OrderId = OrderId;
+        this.OrderNumber = OrderNumber;
         this.customer = customer;
-        this.idCar = idCar;
+        this.car = car;
     }
 
-    public String getId() {
-        return id;
+    public String getOrderId() {
+        return OrderId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setOrderId(String orderId) {
+        this.OrderId = orderId;
     }
 
-    public int getNumber() {
-        return number;
+    public int getOrderNumber() {
+        return OrderNumber;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setOrderNumber(int orderNumber) {
+        this.OrderNumber = orderNumber;
     }
 
     public Customer getCustomer() {
@@ -40,21 +41,21 @@ public class Order {
         this.customer = customer;
     }
 
-    public String getIdCar() {
-        return idCar;
+    public Car getCar() {
+        return car;
     }
 
-    public void setIdCar(String idCar) {
-        this.idCar = idCar;
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     @Override
     public String toString() {
         return "Order{" +
-                "id='" + id + '\'' +
-                ", number=" + number +
+                "OrderId='" + OrderId + '\'' +
+                ", OrderNumber=" + OrderNumber +
                 ", customer=" + customer +
-                ", idCar='" + idCar + '\'' +
+                ", car=" + car +
                 '}';
     }
 }

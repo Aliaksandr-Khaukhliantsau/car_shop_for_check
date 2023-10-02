@@ -1,3 +1,5 @@
+package outputToTheConsole;
+
 import entity.Car;
 import service.CarService;
 import service.impl.CarServiceImpl;
@@ -6,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
-public class TestCar {
+public class CarOutput {
     public static void main(String[] args) throws SQLException {
         CarService carService = new CarServiceImpl();
         Scanner scanner = new Scanner(System.in);
@@ -53,11 +55,9 @@ public class TestCar {
                         System.out.println("Enter the car's id:");
                         String id = scanner.nextLine();
 
-                        List<Car> carList = carService.getById(id);
+                        Car car = carService.getCarById(id);
 
-                        for (Car car : carList) {
-                            System.out.println(car);
-                        }
+                        System.out.println(car);
                         System.out.println();
 
                     } else if (userCommand.equals("2")) { // Выборка по VIN

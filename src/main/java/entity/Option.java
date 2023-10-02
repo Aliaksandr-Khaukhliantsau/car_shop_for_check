@@ -1,5 +1,5 @@
 package entity;
-// Model, Option, Order - зарезервированные имена в бд и java, рекомендую изменить но не теряя смысл и понимания.
+// Model, Option, Order - зарезервированные имена в бд и java, рекомендую изменить но не теряя смысл и понимания.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 public class Option {
     private String id;
     private String name;

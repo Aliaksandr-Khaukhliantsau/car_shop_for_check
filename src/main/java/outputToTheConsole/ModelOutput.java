@@ -1,3 +1,5 @@
+package outputToTheConsole;
+
 import entity.Model;
 import service.ModelService;
 import service.impl.ModelServiceImpl;
@@ -6,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
-public class TestModel {
+public class ModelOutput {
     public static void main(String[] args) throws SQLException {
         ModelService modelService = new ModelServiceImpl();
         Scanner scanner = new Scanner(System.in);
