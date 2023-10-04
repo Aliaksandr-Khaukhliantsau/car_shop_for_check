@@ -18,7 +18,7 @@ public class CarRepositoryImpl implements CarRepository {
     }
 
     @Override
-    public ResultSet getCarById(UUID carId) throws SQLException {
+    public ResultSet getCarByCarId(UUID carId) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_SHOW_CARS_BY_ID = "SELECT * FROM cars WHERE id = " + "'" + carId + "'" + " ORDER BY vin ASC;";
         ResultSet resultSet = statement.executeQuery(SQL_SHOW_CARS_BY_ID);

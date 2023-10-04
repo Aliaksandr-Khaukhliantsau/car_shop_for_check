@@ -6,15 +6,15 @@ import java.util.UUID;
 public class Car {
     private UUID carId;
     private String vin;
-    private Model model;
+    private CarModel carModel;
 
     public Car() {
     }
 
-    public Car(UUID carId, String vin, Model model) {
+    public Car(UUID carId, String vin, CarModel carModel) {
         this.carId = carId;
         this.vin = vin;
-        this.model = model;
+        this.carModel = carModel;
     }
 
     public UUID getCarId() {
@@ -33,12 +33,12 @@ public class Car {
         this.vin = vin;
     }
 
-    public Model getModel() {
-        return model;
+    public CarModel getCarModel() {
+        return carModel;
     }
 
-    public void setModel(Model model) {
-        this.model = model;
+    public void setCarModel(CarModel carModel) {
+        this.carModel = carModel;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Car {
         return "Car{" +
                 "carId=" + carId +
                 ", vin='" + vin + '\'' +
-                ", model=" + model +
+                ", carModel=" + carModel +
                 '}';
     }
 }

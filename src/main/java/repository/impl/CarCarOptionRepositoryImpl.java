@@ -1,40 +1,41 @@
 package repository.impl;
 
-import repository.OptionRepository;
+import repository.CarOptionRepository;
 
 import java.sql.*;
+import java.util.UUID;
 
-public class OptionRepositoryImpl implements OptionRepository {
+public class CarCarOptionRepositoryImpl implements CarOptionRepository {
     private static final String POSTGRES_URL = "jdbc:postgresql://localhost:5432/car_shop";
     private static final String POSTGRES_USER = "postgres";
     private static final String POSTGRES_PASSWORD = "12345678";
     private static final String SQL_SHOW_ALL_OPTIONS = "SELECT * FROM options ORDER BY name ASC;";
     private final Connection connection;
 
-    public OptionRepositoryImpl() throws SQLException {
+    public CarCarOptionRepositoryImpl() throws SQLException {
         connection = DriverManager.getConnection(POSTGRES_URL, POSTGRES_USER, POSTGRES_PASSWORD);
     }
 
     @Override
-    public ResultSet getById(String id) throws SQLException {
+    public ResultSet getCarOptionByOptionId(UUID optionId) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_SHOW_OPTIONS_BY_ID = "SELECT * FROM options WHERE id = " + "'" + id + "'" + " ORDER BY name ASC;";
+        String SQL_SHOW_OPTIONS_BY_ID = "SELECT * FROM options WHERE id = " + "'" + optionId + "'" + " ORDER BY name ASC;";
         ResultSet resultSet = statement.executeQuery(SQL_SHOW_OPTIONS_BY_ID);
 //        statement.close();
         return resultSet;
     }
 
     @Override
-    public ResultSet getByName(String name) throws SQLException {
+    public ResultSet getCarOptionByOptionName(String optionName) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_SHOW_OPTIONS_BY_NAME = "SELECT * FROM options WHERE name = " + "'" + name + "'" + " ORDER BY name ASC;";
+        String SQL_SHOW_OPTIONS_BY_NAME = "SELECT * FROM options WHERE name = " + "'" + optionName + "'" + " ORDER BY name ASC;";
         ResultSet resultSet = statement.executeQuery(SQL_SHOW_OPTIONS_BY_NAME);
 //        statement.close();
         return resultSet;
     }
 
     @Override
-    public ResultSet getAllOptions() throws SQLException {
+    public ResultSet getAllCarOptions() throws SQLException {
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(SQL_SHOW_ALL_OPTIONS);
 //        statement.close();
@@ -42,27 +43,27 @@ public class OptionRepositoryImpl implements OptionRepository {
     }
 
     @Override
-    public ResultSet create(String name) throws SQLException {
+    public ResultSet create(String optionName) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_ADD_A_NEW_OPTION = "INSERT INTO options (name) VALUES ('" + name + "') RETURNING *;";
+        String SQL_ADD_A_NEW_OPTION = "INSERT INTO options (name) VALUES ('" + optionName + "') RETURNING *;";
         ResultSet resultSet = statement.executeQuery(SQL_ADD_A_NEW_OPTION);
 //        statement.close();
         return resultSet;
     }
 
     @Override
-    public ResultSet update(String id, String name) throws SQLException {
+    public ResultSet update(UUID optionId, String optionName) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_CHANGE_AN_OPTION = "UPDATE options SET name = '" + name + "' WHERE id = '" + id + "' RETURNING *;";
+        String SQL_CHANGE_AN_OPTION = "UPDATE options SET name = '" + optionName + "' WHERE id = '" + optionId + "' RETURNING *;";
         ResultSet resultSet = statement.executeQuery(SQL_CHANGE_AN_OPTION);
 //        statement.close();
         return resultSet;
     }
 
     @Override
-    public ResultSet delete(String id) throws SQLException {
+    public ResultSet delete(UUID optionId) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_DELETE_AN_OPTION = "DELETE FROM options WHERE id = '" + id + "' RETURNING *;";
+        String SQL_DELETE_AN_OPTION = "DELETE FROM options WHERE id = '" + optionId + "' RETURNING *;";
         ResultSet resultSet = statement.executeQuery(SQL_DELETE_AN_OPTION);
 //        statement.close();
         return resultSet;

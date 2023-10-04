@@ -2,18 +2,18 @@ package repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
 
 public interface CompletionRepository {
+    ResultSet getCompletionByCompletionId(UUID completionId) throws SQLException;
 
-    ResultSet getById(String id) throws SQLException;
-
-    ResultSet getByName(String name) throws SQLException;
+    ResultSet getCompletionByCompletionName(String completionName) throws SQLException;
 
     ResultSet getAllCompletions() throws SQLException;
 
-    ResultSet create(String name) throws SQLException;
+    ResultSet create(String completionName) throws SQLException;
 
-    ResultSet update(String id, String name) throws SQLException;
+    ResultSet update(UUID completionId, String completionName) throws SQLException;
 
-    ResultSet delete(String id) throws SQLException;
+    ResultSet delete(UUID completionId) throws SQLException;
 }

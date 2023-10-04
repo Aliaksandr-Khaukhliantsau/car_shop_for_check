@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class CompletionServiceImpl implements CompletionService {
     CompletionRepository completionRepository = new CompletionRepositoryImpl();
@@ -17,14 +18,14 @@ public class CompletionServiceImpl implements CompletionService {
     }
 
     @Override
-    public List<Completion> getById(String id) throws SQLException {
-        ResultSet resultSet = completionRepository.getById(id);
+    public List<Completion> getCompletionByCompletionId(UUID completionId) throws SQLException {
+        ResultSet resultSet = completionRepository.getCompletionByCompletionId(completionId);
         List<Completion> completionList = new ArrayList<>();
 
         while (resultSet.next()) {
             Completion completion = new Completion();
-            completion.setId(resultSet.getString("id"));
-            completion.setName(resultSet.getString("name"));
+            completion.setCompletionId(resultSet.getString("id"));
+            completion.setCompletionName(resultSet.getString("name"));
 
             completionList.add(completion);
         }
@@ -32,14 +33,14 @@ public class CompletionServiceImpl implements CompletionService {
     }
 
     @Override
-    public List<Completion> getByName(String name) throws SQLException {
-        ResultSet resultSet = completionRepository.getByName(name);
+    public List<Completion> getCompletionByCompletionName(String completionName) throws SQLException {
+        ResultSet resultSet = completionRepository.getCompletionByCompletionName(completionName);
         List<Completion> completionList = new ArrayList<>();
 
         while (resultSet.next()) {
             Completion completion = new Completion();
-            completion.setId(resultSet.getString("id"));
-            completion.setName(resultSet.getString("name"));
+            completion.setCompletionId(resultSet.getString("id"));
+            completion.setCompletionName(resultSet.getString("name"));
 
             completionList.add(completion);
         }
@@ -53,8 +54,8 @@ public class CompletionServiceImpl implements CompletionService {
 
         while (resultSet.next()) {
             Completion completion = new Completion();
-            completion.setId(resultSet.getString("id"));
-            completion.setName(resultSet.getString("name"));
+            completion.setCompletionId(resultSet.getString("id"));
+            completion.setCompletionName(resultSet.getString("name"));
 
             completionList.add(completion);
         }
@@ -62,14 +63,14 @@ public class CompletionServiceImpl implements CompletionService {
     }
 
     @Override
-    public List<Completion> create(String name) throws SQLException {
-        ResultSet resultSet = completionRepository.create(name);
+    public List<Completion> create(String completionName) throws SQLException {
+        ResultSet resultSet = completionRepository.create(completionName);
         List<Completion> completionList = new ArrayList<>();
 
         while (resultSet.next()) {
             Completion completion = new Completion();
-            completion.setId(resultSet.getString("id"));
-            completion.setName(resultSet.getString("name"));
+            completion.setCompletionId(resultSet.getString("id"));
+            completion.setCompletionName(resultSet.getString("name"));
 
             completionList.add(completion);
         }
@@ -77,14 +78,14 @@ public class CompletionServiceImpl implements CompletionService {
     }
 
     @Override
-    public List<Completion> update(String id, String name) throws SQLException {
-        ResultSet resultSet = completionRepository.update(id, name);
+    public List<Completion> update(UUID CompletionId, String completionName) throws SQLException {
+        ResultSet resultSet = completionRepository.update(CompletionId, completionName);
         List<Completion> completionList = new ArrayList<>();
 
         while (resultSet.next()) {
             Completion completion = new Completion();
-            completion.setId(resultSet.getString("id"));
-            completion.setName(resultSet.getString("name"));
+            completion.setCompletionId(resultSet.getString("id"));
+            completion.setCompletionName(resultSet.getString("name"));
 
             completionList.add(completion);
         }
@@ -92,14 +93,14 @@ public class CompletionServiceImpl implements CompletionService {
     }
 
     @Override
-    public List<Completion> delete(String id) throws SQLException {
-        ResultSet resultSet = completionRepository.delete(id);
+    public List<Completion> delete(UUID CompletionId) throws SQLException {
+        ResultSet resultSet = completionRepository.delete(CompletionId);
         List<Completion> completionList = new ArrayList<>();
 
         while (resultSet.next()) {
             Completion completion = new Completion();
-            completion.setId(resultSet.getString("id"));
-            completion.setName(resultSet.getString("name"));
+            completion.setCompletionId(resultSet.getString("id"));
+            completion.setCompletionName(resultSet.getString("name"));
 
             completionList.add(completion);
         }

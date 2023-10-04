@@ -55,7 +55,7 @@ public class CompletionOutput {
                         System.out.println("Enter the id:");
                         String id = scanner.nextLine();
 
-                        List<Completion> completionList = completionService.getById(id);
+                        List<Completion> completionList = completionService.getCompletionByCompletionId(id);
 
                         for (Completion completion : completionList) {
                             System.out.println(completion);
@@ -66,7 +66,7 @@ public class CompletionOutput {
                         System.out.println("Enter the name:");
                         String name = scanner.nextLine();
 
-                        List<Completion> completionList = completionService.getByName(name);
+                        List<Completion> completionList = completionService.getCompletionByCompletionName(name);
 
                         for (Completion completion : completionList) {
                             System.out.println(completion);

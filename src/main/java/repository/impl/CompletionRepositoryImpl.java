@@ -3,6 +3,7 @@ package repository.impl;
 import repository.CompletionRepository;
 
 import java.sql.*;
+import java.util.UUID;
 
 public class CompletionRepositoryImpl implements CompletionRepository {
     private static final String POSTGRES_URL = "jdbc:postgresql://localhost:5432/car_shop";
@@ -16,18 +17,18 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     }
 
     @Override
-    public ResultSet getById(String id) throws SQLException {
+    public ResultSet getCompletionByCompletionId(UUID completionId) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_SHOW_COMPLETIONS_BY_ID = "SELECT * FROM completions WHERE id = " + "'" + id + "'" + " ORDER BY name ASC;";
+        String SQL_SHOW_COMPLETIONS_BY_ID = "SELECT * FROM completions WHERE id = " + "'" + completionId + "'" + " ORDER BY name ASC;";
         ResultSet resultSet = statement.executeQuery(SQL_SHOW_COMPLETIONS_BY_ID);
 //        statement.close();
         return resultSet;
     }
 
     @Override
-    public ResultSet getByName(String name) throws SQLException {
+    public ResultSet getCompletionByCompletionName(String completionName) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_SHOW_COMPLETIONS_BY_NAME = "SELECT * FROM completions WHERE name = " + "'" + name + "'" + " ORDER BY name ASC;";
+        String SQL_SHOW_COMPLETIONS_BY_NAME = "SELECT * FROM completions WHERE name = " + "'" + completionName + "'" + " ORDER BY name ASC;";
         ResultSet resultSet = statement.executeQuery(SQL_SHOW_COMPLETIONS_BY_NAME);
 //        statement.close();
         return resultSet;
@@ -42,27 +43,27 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     }
 
     @Override
-    public ResultSet create(String name) throws SQLException {
+    public ResultSet create(String completionName) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_ADD_A_NEW_COMPLETION = "INSERT INTO completions (name) VALUES ('" + name + "') RETURNING *;";
+        String SQL_ADD_A_NEW_COMPLETION = "INSERT INTO completions (name) VALUES ('" + completionName + "') RETURNING *;";
         ResultSet resultSet = statement.executeQuery(SQL_ADD_A_NEW_COMPLETION);
 //        statement.close();
         return resultSet;
     }
 
     @Override
-    public ResultSet update(String id, String name) throws SQLException {
+    public ResultSet update(UUID completionId, String completionName) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_CHANGE_A_COMPLETION = "UPDATE completions SET name = '" + name + "' WHERE id = '" + id + "' RETURNING *;";
+        String SQL_CHANGE_A_COMPLETION = "UPDATE completions SET name = '" + completionName + "' WHERE id = '" + completionId + "' RETURNING *;";
         ResultSet resultSet = statement.executeQuery(SQL_CHANGE_A_COMPLETION);
 //        statement.close();
         return resultSet;
     }
 
     @Override
-    public ResultSet delete(String id) throws SQLException {
+    public ResultSet delete(UUID completionId) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_DELETE_A_COMPLETION = "DELETE FROM completions WHERE id = '" + id + "' RETURNING *;";
+        String SQL_DELETE_A_COMPLETION = "DELETE FROM completions WHERE id = '" + completionId + "' RETURNING *;";
         ResultSet resultSet = statement.executeQuery(SQL_DELETE_A_COMPLETION);
 //        statement.close();
         return resultSet;

@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CarService {
-
-    Car getCarById(UUID carId) throws SQLException;
+    Car getCarByCarId(UUID carId) throws SQLException;
 
     List<Car> getCarByVin(String vin) throws SQLException;
 

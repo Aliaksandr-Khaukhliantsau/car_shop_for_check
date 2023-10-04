@@ -4,10 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-// java doc !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 public interface CarRepository {
     // Везде java doc по формату, образец в инете !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    ResultSet getCarById(UUID carId) throws SQLException;
+    ResultSet getCarByCarId(UUID carId) throws SQLException;
 
     ResultSet getCarByVin(String vin) throws SQLException;
 

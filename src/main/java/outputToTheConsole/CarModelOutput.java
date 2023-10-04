@@ -1,17 +1,17 @@
 package outputToTheConsole;
 
-import entity.Model;
-import service.ModelService;
-import service.impl.ModelServiceImpl;
+import entity.CarModel;
+import service.CarModelService;
+import service.impl.CarModelServiceImpl;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
-public class ModelOutput {
+public class CarModelOutput {
     public static void main(String[] args) throws SQLException {
-        ModelService modelService = new ModelServiceImpl();
+        CarModelService carModelService = new CarModelServiceImpl();
         Scanner scanner = new Scanner(System.in);
 
         // Основное меню
@@ -31,10 +31,10 @@ public class ModelOutput {
                 System.exit(0);
 
             } else if (userCommand.equals("1")) { // Показать все модели
-                List<Model> modelList = modelService.getAllModels();
+                List<CarModel> carModelList = carModelService.getAllCarModels();
 
-                for (Model model : modelList) {
-                    System.out.println(model);
+                for (CarModel carModel : carModelList) {
+                    System.out.println(carModel);
                 }
                 System.out.println();
 
@@ -57,19 +57,19 @@ public class ModelOutput {
                         System.out.println("Enter the model's id:");
                         UUID id = UUID.fromString(scanner.nextLine());
 
-                        Model model = modelService.getModelById(id);
+                        CarModel carModel = carModelService.getCarModelByModelId(id);
 
-                        System.out.println(model);
+                        System.out.println(carModel);
                         System.out.println();
 
                     } else if (userCommand.equals("2")) { // Выборка по названию
                         System.out.println("Enter the name:");
                         String name = scanner.nextLine();
 
-                        List<Model> modelList = modelService.getModelByName(name);
+                        List<CarModel> carModelList = carModelService.getCarModelByModelName(name);
 
-                        for (Model model : modelList) {
-                            System.out.println(model);
+                        for (CarModel carModel : carModelList) {
+                            System.out.println(carModel);
                         }
                         System.out.println();
 
@@ -77,10 +77,10 @@ public class ModelOutput {
                         System.out.println("Enter the completion's id:");
                         UUID idCompletion = UUID.fromString(scanner.nextLine());
 
-                        List<Model> modelList = modelService.getModelByCompletionId(idCompletion);
+                        List<CarModel> carModelList = carModelService.getCarModelByCompletionId(idCompletion);
 
-                        for (Model model : modelList) {
-                            System.out.println(model);
+                        for (CarModel carModel : carModelList) {
+                            System.out.println(carModel);
                         }
                         System.out.println();
 
@@ -95,11 +95,11 @@ public class ModelOutput {
                 System.out.println("Enter the completion's id of the new model:");
                 UUID idCompletion = UUID.fromString(scanner.nextLine());
 
-                List<Model> modelList = modelService.create(name, idCompletion);
+                List<CarModel> carModelList = carModelService.create(name, idCompletion);
 
                 System.out.println("New model's record has been created:");
-                for (Model model : modelList) {
-                    System.out.println(model);
+                for (CarModel carModel : carModelList) {
+                    System.out.println(carModel);
                 }
                 System.out.println();
 
@@ -111,11 +111,11 @@ public class ModelOutput {
                 System.out.println("Enter a new completion's id for the model's record to edit:");
                 UUID idCompletion = UUID.fromString(scanner.nextLine());
 
-                List<Model> modelList = modelService.update(id, name, idCompletion);
+                List<CarModel> carModelList = carModelService.update(id, name, idCompletion);
 
                 System.out.println("The model's record has been changed:");
-                for (Model model : modelList) {
-                    System.out.println(model);
+                for (CarModel carModel : carModelList) {
+                    System.out.println(carModel);
                 }
                 System.out.println();
 
@@ -123,11 +123,11 @@ public class ModelOutput {
                 System.out.println("Enter the model's id:");
                 UUID id = UUID.fromString(scanner.nextLine());
 
-                List<Model> modelList = modelService.delete(id);
+                List<CarModel> carModelList = carModelService.delete(id);
 
                 System.out.println("The model's record has been deleted:");
-                for (Model model : modelList) {
-                    System.out.println(model);
+                for (CarModel carModel : carModelList) {
+                    System.out.println(carModel);
                 }
                 System.out.println();
 

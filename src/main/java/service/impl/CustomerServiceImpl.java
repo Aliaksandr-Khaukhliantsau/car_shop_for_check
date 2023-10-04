@@ -18,13 +18,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-//    public Customer getCustomerById(String customerId) throws SQLException {
-    public Customer getCustomerById(UUID customerId) throws SQLException {
-        ResultSet resultSet = customerRepository.getById(customerId);
+    public Customer getCustomerByCustomerId(UUID customerId) throws SQLException {
+        ResultSet resultSet = customerRepository.getCustomerByCustomerId(customerId);
         Customer customer = new Customer();
 
         while (resultSet.next()) {
-//            customer.setCustomerId(resultSet.getString("id"));
             customer.setCustomerId(UUID.fromString(resultSet.getString("id")));
             customer.setFirstName(resultSet.getString("firstname"));
             customer.setMiddleName(resultSet.getString("middlename"));
@@ -35,12 +33,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> getCustomerByFirstName(String firstName) throws SQLException {
-        ResultSet resultSet = customerRepository.getByFirstName(firstName);
+        ResultSet resultSet = customerRepository.getCustomerByFirstName(firstName);
         List<Customer> customerList = new ArrayList<>();
 
         while (resultSet.next()) {
             Customer customer = new Customer();
-//            customer.setCustomerId(resultSet.getString("id"));
             customer.setCustomerId(UUID.fromString(resultSet.getString("id")));
             customer.setFirstName(resultSet.getString("firstname"));
             customer.setMiddleName(resultSet.getString("middlename"));
@@ -53,12 +50,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> getCustomerByMiddleName(String middleName) throws SQLException {
-        ResultSet resultSet = customerRepository.getByMiddleName(middleName);
+        ResultSet resultSet = customerRepository.getCustomerByMiddleName(middleName);
         List<Customer> customerList = new ArrayList<>();
 
         while (resultSet.next()) {
             Customer customer = new Customer();
-//            customer.setCustomerId(resultSet.getString("id"));
             customer.setCustomerId(UUID.fromString(resultSet.getString("id")));
             customer.setFirstName(resultSet.getString("firstname"));
             customer.setMiddleName(resultSet.getString("middlename"));
@@ -71,12 +67,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> getCustomerByLastName(String lastName) throws SQLException {
-        ResultSet resultSet = customerRepository.getByLastName(lastName);
+        ResultSet resultSet = customerRepository.getCustomerByLastName(lastName);
         List<Customer> customerList = new ArrayList<>();
 
         while (resultSet.next()) {
             Customer customer = new Customer();
-//            customer.setCustomerId(resultSet.getString("id"));
             customer.setCustomerId(UUID.fromString(resultSet.getString("id")));
             customer.setFirstName(resultSet.getString("firstname"));
             customer.setMiddleName(resultSet.getString("middlename"));
@@ -94,7 +89,6 @@ public class CustomerServiceImpl implements CustomerService {
 
         while (resultSet.next()) {
             Customer customer = new Customer();
-//            customer.setCustomerId(resultSet.getString("id"));
             customer.setCustomerId(UUID.fromString(resultSet.getString("id")));
             customer.setFirstName(resultSet.getString("firstname"));
             customer.setMiddleName(resultSet.getString("middlename"));
@@ -105,57 +99,68 @@ public class CustomerServiceImpl implements CustomerService {
         return customerList;
     }
 
+//    @Override
+//    public List<Customer> create(String firstName, String middleName, String lastName) throws SQLException {
+//        ResultSet resultSet = customerRepository.create(firstName, middleName, lastName);
+//        List<Customer> customerList = new ArrayList<>();
+//
+//        while (resultSet.next()) {
+//            Customer customer = new Customer();
+//            customer.setCustomerId(UUID.fromString(resultSet.getString("id")));
+//            customer.setFirstName(resultSet.getString("firstname"));
+//            customer.setMiddleName(resultSet.getString("middlename"));
+//            customer.setLastName(resultSet.getString("lastname"));
+//
+//            customerList.add(customer);
+//        }
+//        return customerList;
+//    }
+//
+//    @Override
+//    public List<Customer> update(UUID customerId, String firstName, String middleName, String lastName) throws SQLException {
+//        ResultSet resultSet = customerRepository.update(customerId, firstName, middleName, lastName);
+//        List<Customer> customerList = new ArrayList<>();
+//
+//        while (resultSet.next()) {
+//            Customer customer = new Customer();
+//            customer.setCustomerId(UUID.fromString(resultSet.getString("id")));
+//            customer.setFirstName(resultSet.getString("firstname"));
+//            customer.setMiddleName(resultSet.getString("middlename"));
+//            customer.setLastName(resultSet.getString("lastname"));
+//
+//            customerList.add(customer);
+//        }
+//        return customerList;
+//    }
+//
+//    @Override
+//    public List<Customer> delete(UUID customerId) throws SQLException {
+//        ResultSet resultSet = customerRepository.delete(customerId);
+//        List<Customer> customerList = new ArrayList<>();
+//
+//        while (resultSet.next()) {
+//            Customer customer = new Customer();
+//            customer.setCustomerId(UUID.fromString(resultSet.getString("id")));
+//            customer.setFirstName(resultSet.getString("firstname"));
+//            customer.setMiddleName(resultSet.getString("middlename"));
+//            customer.setLastName(resultSet.getString("lastname"));
+//
+//            customerList.add(customer);
+//        }
+//        return customerList;
+//    }
     @Override
-    public List<Customer> create(String firstName, String middleName, String lastName) throws SQLException {
-        ResultSet resultSet = customerRepository.create(firstName, middleName, lastName);
-        List<Customer> customerList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            Customer customer = new Customer();
-//            customer.setCustomerId(resultSet.getString("id"));
-            customer.setCustomerId(UUID.fromString(resultSet.getString("id")));
-            customer.setFirstName(resultSet.getString("firstname"));
-            customer.setMiddleName(resultSet.getString("middlename"));
-            customer.setLastName(resultSet.getString("lastname"));
-
-            customerList.add(customer);
-        }
-        return customerList;
+    public void create(String firstName, String middleName, String lastName) throws SQLException {
+        customerRepository.create(firstName, middleName, lastName);
     }
 
     @Override
-    public List<Customer> update(String id, String firstName, String middleName, String lastName) throws SQLException {
-        ResultSet resultSet = customerRepository.update(id, firstName, middleName, lastName);
-        List<Customer> customerList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            Customer customer = new Customer();
-//            customer.setCustomerId(resultSet.getString("id"));
-            customer.setCustomerId(UUID.fromString(resultSet.getString("id")));
-            customer.setFirstName(resultSet.getString("firstname"));
-            customer.setMiddleName(resultSet.getString("middlename"));
-            customer.setLastName(resultSet.getString("lastname"));
-
-            customerList.add(customer);
-        }
-        return customerList;
+    public void update(UUID customerId, String firstName, String middleName, String lastName) throws SQLException {
+        customerRepository.update(customerId, firstName, middleName, lastName);
     }
 
     @Override
-    public List<Customer> delete(String id) throws SQLException {
-        ResultSet resultSet = customerRepository.delete(id);
-        List<Customer> customerList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            Customer customer = new Customer();
-//            customer.setCustomerId(resultSet.getString("id"));
-            customer.setCustomerId(UUID.fromString(resultSet.getString("id")));
-            customer.setFirstName(resultSet.getString("firstname"));
-            customer.setMiddleName(resultSet.getString("middlename"));
-            customer.setLastName(resultSet.getString("lastname"));
-
-            customerList.add(customer);
-        }
-        return customerList;
+    public void delete(UUID customerId) throws SQLException {
+        customerRepository.delete(customerId);
     }
 }

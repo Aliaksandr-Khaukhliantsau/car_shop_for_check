@@ -1,17 +1,17 @@
 package outputToTheConsole;
 
-import entity.Order;
-import service.OrderService;
-import service.impl.OrderServiceImpl;
+import entity.Purchase;
+import service.PurchaseService;
+import service.impl.PurchaseServiceImpl;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
-public class OrderOutput {
+public class PurchaseOutput {
     public static void main(String[] args) throws SQLException {
-        OrderService orderService = new OrderServiceImpl();
+        PurchaseService purchaseService = new PurchaseServiceImpl();
         Scanner scanner = new Scanner(System.in);
 
         // Основное меню
@@ -33,10 +33,10 @@ public class OrderOutput {
 
                 // Показать все заказы
             } else if (userCommand.equals("1")) {
-                List<Order> orderList = orderService.getAllOrders();
+                List<Purchase> purchaseList = purchaseService.getAllPurchases();
 
-                for (Order order : orderList) {
-                    System.out.println(order);
+                for (Purchase purchase : purchaseList) {
+                    System.out.println(purchase);
                 }
                 System.out.println();
 
@@ -64,10 +64,10 @@ public class OrderOutput {
                         System.out.println("Enter the order's id:");
                         String OrderId = scanner.nextLine();
 
-                        List<Order> orderList = orderService.getOrderByOrderId(OrderId);
+                        List<Purchase> purchaseList = purchaseService.getPurchaseByPurchaseId(OrderId);
 
-                        for (Order order : orderList) {
-                            System.out.println(order);
+                        for (Purchase purchase : purchaseList) {
+                            System.out.println(purchase);
                         }
                         System.out.println();
 
@@ -76,10 +76,10 @@ public class OrderOutput {
                         System.out.println("Enter the order's number:");
                         String OrderNumber = scanner.nextLine();
 
-                        List<Order> orderList = orderService.getOrderByOrderNumber(OrderNumber);
+                        List<Purchase> purchaseList = purchaseService.getPurchaseByPurchaseNumber(OrderNumber);
 
-                        for (Order order : orderList) {
-                            System.out.println(order);
+                        for (Purchase purchase : purchaseList) {
+                            System.out.println(purchase);
                         }
                         System.out.println();
 
@@ -88,10 +88,10 @@ public class OrderOutput {
                         System.out.println("Enter the customer's id:");
                         UUID customerId = UUID.fromString(scanner.nextLine());
 
-                        List<Order> orderList = orderService.getOrderByCustomerId(customerId);
+                        List<Purchase> purchaseList = purchaseService.getPurchaseByCustomerId(customerId);
 
-                        for (Order order : orderList) {
-                            System.out.println(order);
+                        for (Purchase purchase : purchaseList) {
+                            System.out.println(purchase);
                         }
                         System.out.println();
 
@@ -100,10 +100,10 @@ public class OrderOutput {
                         System.out.println("Enter the car's id:");
                         UUID carId = UUID.fromString(scanner.nextLine());
 
-                        List<Order> orderList = orderService.getOrderByCarId(carId);
+                        List<Purchase> purchaseList = purchaseService.getPurchaseByCarId(carId);
 
-                        for (Order order : orderList) {
-                            System.out.println(order);
+                        for (Purchase purchase : purchaseList) {
+                            System.out.println(purchase);
                         }
                         System.out.println();
 
@@ -119,11 +119,11 @@ public class OrderOutput {
                 System.out.println("Enter the car's id of the new order:");
                 UUID idCar = UUID.fromString(scanner.nextLine());
 
-                List<Order> orderList = orderService.create(idCustomer, idCar);
+                List<Purchase> purchaseList = purchaseService.create(idCustomer, idCar);
 
                 System.out.println("New order's record has been created:");
-                for (Order order : orderList) {
-                    System.out.println(order);
+                for (Purchase purchase : purchaseList) {
+                    System.out.println(purchase);
                 }
                 System.out.println();
 
@@ -136,11 +136,11 @@ public class OrderOutput {
                 System.out.println("Enter a new car's id for the order's record to edit:");
                 UUID idCar = UUID.fromString(scanner.nextLine());
 
-                List<Order> orderList = orderService.update(id, idCustomer, idCar);
+                List<Purchase> purchaseList = purchaseService.update(id, idCustomer, idCar);
 
                 System.out.println("The order's record has been changed:");
-                for (Order order : orderList) {
-                    System.out.println(order);
+                for (Purchase purchase : purchaseList) {
+                    System.out.println(purchase);
                 }
                 System.out.println();
 
@@ -149,11 +149,11 @@ public class OrderOutput {
                 System.out.println("Enter the order's id:");
                 UUID id = UUID.fromString(scanner.nextLine());
 
-                List<Order> orderList = orderService.delete(id);
+                List<Purchase> purchaseList = purchaseService.delete(id);
 
                 System.out.println("The order's record has been deleted:");
-                for (Order order : orderList) {
-                    System.out.println(order);
+                for (Purchase purchase : purchaseList) {
+                    System.out.println(purchase);
                 }
                 System.out.println();
 

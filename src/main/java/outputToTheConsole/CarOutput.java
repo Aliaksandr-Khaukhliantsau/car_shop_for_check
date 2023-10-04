@@ -56,7 +56,7 @@ public class CarOutput {
                         System.out.println("Enter the car's id:");
                         UUID carId = UUID.fromString(scanner.nextLine());
 
-                        Car car = carService.getCarById(carId);
+                        Car car = carService.getCarByCarId(carId);
 
                         System.out.println(car);
                         System.out.println();

@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CustomerService {
-
-    Customer getCustomerById(UUID customerId) throws SQLException;
+    Customer getCustomerByCustomerId(UUID customerId) throws SQLException;
 
     List<Customer> getCustomerByFirstName(String firstName) throws SQLException;
 
@@ -18,9 +17,15 @@ public interface CustomerService {
 
     List<Customer> getAllCustomers() throws SQLException;
 
-    List<Customer> create(String firstName, String middleName, String lastName) throws SQLException;
+//    List<Customer> create(String firstName, String middleName, String lastName) throws SQLException;
+//
+//    List<Customer> update(UUID customerId, String firstName, String middleName, String lastName) throws SQLException;
+//
+//    List<Customer> delete(UUID customerId) throws SQLException;
 
-    List<Customer> update(String id, String firstName, String middleName, String lastName) throws SQLException;
+    void create(String firstName, String middleName, String lastName) throws SQLException;
 
-    List<Customer> delete(String id) throws SQLException;
+    void update(UUID customerId, String firstName, String middleName, String lastName) throws SQLException;
+
+    void delete(UUID customerId) throws SQLException;
 }

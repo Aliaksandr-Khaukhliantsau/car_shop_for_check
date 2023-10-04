@@ -1,51 +1,52 @@
 package entity;
 
 import java.util.List;
+import java.util.UUID;
 
 public class Completion {
-    private String id;
-    private String name;
-    private List<Option> options;
+    private UUID completionId;
+    private String completionName;
+    private List<CarOption> carOptions;
 
     public Completion() {
     }
 
-    public Completion(String id, String name, List<Option> options) {
-        this.id = id;
-        this.name = name;
-        this.options = options;
+    public Completion(UUID completionId, String completionName, List<CarOption> carOptions) {
+        this.completionId = completionId;
+        this.completionName = completionName;
+        this.carOptions = carOptions;
     }
 
-    public String getId() {
-        return id;
+    public UUID getCompletionId() {
+        return completionId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCompletionId(UUID completionId) {
+        this.completionId = completionId;
     }
 
-    public String getName() {
-        return name;
+    public String getCompletionName() {
+        return completionName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCompletionName(String completionName) {
+        this.completionName = completionName;
     }
 
-    public List<Option> getOptions() {
-        return options;
+    public List<CarOption> getCarOptions() {
+        return carOptions;
     }
 
-    public void setOptions(List<Option> options) {
-        this.options = options;
+    public void setCarOptions(List<CarOption> carOptions) {
+        this.carOptions = carOptions;
     }
 
     @Override
     public String toString() {
         return "Completion{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", options=" + options +
+                "completionId=" + completionId +
+                ", completionName='" + completionName + '\'' +
+                ", carOptions=" + carOptions +
                 '}';
     }
 }

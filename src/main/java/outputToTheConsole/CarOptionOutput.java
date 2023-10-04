@@ -1,16 +1,16 @@
 package outputToTheConsole;
 
-import entity.Option;
-import service.OptionService;
-import service.impl.OptionServiceImpl;
+import entity.CarOption;
+import service.CarOptionService;
+import service.impl.CarOptionServiceImpl;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
-public class OptionOutput {
+public class CarOptionOutput {
     public static void main(String[] args) throws SQLException {
-        OptionService optionService = new OptionServiceImpl();
+        CarOptionService carOptionService = new CarOptionServiceImpl();
         Scanner scanner = new Scanner(System.in);
 
         // Основное меню
@@ -30,10 +30,10 @@ public class OptionOutput {
                 System.exit(0);
 
             } else if (userCommand.equals("1")) { // Показать все опции
-                List<Option> optionList = optionService.getAllOptions();
+                List<CarOption> carOptionList = carOptionService.getAllCarOptions();
 
-                for (Option option : optionList) {
-                    System.out.println(option);
+                for (CarOption carOption : carOptionList) {
+                    System.out.println(carOption);
                 }
                 System.out.println();
 
@@ -55,10 +55,10 @@ public class OptionOutput {
                         System.out.println("Enter the id:");
                         String id = scanner.nextLine();
 
-                        List<Option> optionList = optionService.getById(id);
+                        List<CarOption> carOptionList = carOptionService.getCarOptionByOptionId(id);
 
-                        for (Option option : optionList) {
-                            System.out.println(option);
+                        for (CarOption carOption : carOptionList) {
+                            System.out.println(carOption);
                         }
                         System.out.println();
 
@@ -66,10 +66,10 @@ public class OptionOutput {
                         System.out.println("Enter the name:");
                         String name = scanner.nextLine();
 
-                        List<Option> optionList = optionService.getByName(name);
+                        List<CarOption> carOptionList = carOptionService.getCarOptionByOptionName(name);
 
-                        for (Option option : optionList) {
-                            System.out.println(option);
+                        for (CarOption carOption : carOptionList) {
+                            System.out.println(carOption);
                         }
                         System.out.println();
 
@@ -82,11 +82,11 @@ public class OptionOutput {
                 System.out.println("Enter the name of the new option:");
                 String name = scanner.nextLine();
 
-                List<Option> optionList = optionService.create(name);
+                List<CarOption> carOptionList = carOptionService.create(name);
 
                 System.out.println("New option's record has been created:");
-                for (Option option : optionList) {
-                    System.out.println(option);
+                for (CarOption carOption : carOptionList) {
+                    System.out.println(carOption);
                 }
                 System.out.println();
 
@@ -96,11 +96,11 @@ public class OptionOutput {
                 System.out.println("Enter a new name for the option's record to edit:");
                 String name = scanner.nextLine();
 
-                List<Option> optionList = optionService.update(id, name);
+                List<CarOption> carOptionList = carOptionService.update(id, name);
 
                 System.out.println("The option's record has been changed:");
-                for (Option option : optionList) {
-                    System.out.println(option);
+                for (CarOption carOption : carOptionList) {
+                    System.out.println(carOption);
                 }
                 System.out.println();
 
@@ -108,11 +108,11 @@ public class OptionOutput {
                 System.out.println("Enter the option's id:");
                 String id = scanner.nextLine();
 
-                List<Option> optionList = optionService.delete(id);
+                List<CarOption> carOptionList = carOptionService.delete(id);
 
                 System.out.println("The option's record has been deleted:");
-                for (Option option : optionList) {
-                    System.out.println(option);
+                for (CarOption carOption : carOptionList) {
+                    System.out.println(carOption);
                 }
                 System.out.println();
 

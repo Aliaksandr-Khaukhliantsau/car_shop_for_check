@@ -4,7 +4,7 @@ import entity.Car;
 import repository.CarRepository;
 import repository.impl.CarRepositoryImpl;
 import service.CarService;
-import service.ModelService;
+import service.CarModelService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,8 +19,8 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car getCarById(UUID carId) throws SQLException {
-        ResultSet resultSet = carRepository.getCarById(carId);
+    public Car getCarByCarId(UUID carId) throws SQLException {
+        ResultSet resultSet = carRepository.getCarByCarId(carId);
 
         Car car = new Car();
 
@@ -28,8 +28,8 @@ public class CarServiceImpl implements CarService {
             car.setCarId(UUID.fromString(resultSet.getString("id")));
             car.setVin(resultSet.getString("vin"));
             UUID modelId = UUID.fromString(resultSet.getString("idmodel"));
-            ModelService modelService = new ModelServiceImpl();
-            car.setModel(modelService.getModelById(modelId));
+            CarModelService carModelService = new CarModelServiceImpl();
+            car.setCarModel(carModelService.getCarModelByModelId(modelId));
         }
         return car;
     }
@@ -44,8 +44,8 @@ public class CarServiceImpl implements CarService {
             car.setCarId(UUID.fromString(resultSet.getString("id")));
             car.setVin(resultSet.getString("vin"));
             UUID modelId = UUID.fromString(resultSet.getString("idmodel"));
-            ModelService modelService = new ModelServiceImpl();
-            car.setModel(modelService.getModelById(modelId));
+            CarModelService carModelService = new CarModelServiceImpl();
+            car.setCarModel(carModelService.getCarModelByModelId(modelId));
 
             carList.add(car);
         }
@@ -61,8 +61,8 @@ public class CarServiceImpl implements CarService {
             Car car = new Car();
             car.setCarId(UUID.fromString(resultSet.getString("id")));
             car.setVin(resultSet.getString("vin"));
-            ModelService modelService = new ModelServiceImpl();
-            car.setModel(modelService.getModelById(modelId));
+            CarModelService carModelService = new CarModelServiceImpl();
+            car.setCarModel(carModelService.getCarModelByModelId(modelId));
 
             carList.add(car);
         }
@@ -79,8 +79,8 @@ public class CarServiceImpl implements CarService {
             car.setCarId(UUID.fromString(resultSet.getString("id")));
             car.setVin(resultSet.getString("vin"));
             UUID modelId = UUID.fromString(resultSet.getString("idmodel"));
-            ModelService modelService = new ModelServiceImpl();
-            car.setModel(modelService.getModelById(modelId));
+            CarModelService carModelService = new CarModelServiceImpl();
+            car.setCarModel(carModelService.getCarModelByModelId(modelId));
 
             carList.add(car); // cars никаких лист
         }
@@ -96,8 +96,8 @@ public class CarServiceImpl implements CarService {
             Car car = new Car();
             car.setCarId(UUID.fromString(resultSet.getString("id")));
             car.setVin(resultSet.getString("vin"));
-            ModelService modelService = new ModelServiceImpl();
-            car.setModel(modelService.getModelById(modelId));
+            CarModelService carModelService = new CarModelServiceImpl();
+            car.setCarModel(carModelService.getCarModelByModelId(modelId));
 
             carList.add(car);
         }
@@ -113,8 +113,8 @@ public class CarServiceImpl implements CarService {
             Car car = new Car();
             car.setCarId(UUID.fromString(resultSet.getString("id"))); // название в бд привести в порядок
             car.setVin(resultSet.getString("vin"));
-            ModelService modelService = new ModelServiceImpl();
-            car.setModel(modelService.getModelById(modelId));
+            CarModelService carModelService = new CarModelServiceImpl();
+            car.setCarModel(carModelService.getCarModelByModelId(modelId));
 
             carList.add(car);
         }
@@ -131,8 +131,8 @@ public class CarServiceImpl implements CarService {
             car.setCarId(UUID.fromString(resultSet.getString("id")));
             car.setVin(resultSet.getString("vin"));
             UUID modelId = UUID.fromString(resultSet.getString("idmodel"));
-            ModelService modelService = new ModelServiceImpl();
-            car.setModel(modelService.getModelById(modelId));
+            CarModelService carModelService = new CarModelServiceImpl();
+            car.setCarModel(carModelService.getCarModelByModelId(modelId));
 
             carList.add(car);
         }
