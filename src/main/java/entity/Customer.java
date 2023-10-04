@@ -3,8 +3,7 @@ package entity;
 import java.util.UUID;
 
 public class Customer {
-    //    private String customerId;//UUID in all id`s !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    private UUID customerId;//UUID in all id`s !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private UUID customerId;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -12,7 +11,6 @@ public class Customer {
     public Customer() {
     }
 
-    //    public Customer(String customerId, String firstName, String middleName, String lastName) {
     public Customer(UUID customerId, String firstName, String middleName, String lastName) {
         this.customerId = customerId;
         this.firstName = firstName;

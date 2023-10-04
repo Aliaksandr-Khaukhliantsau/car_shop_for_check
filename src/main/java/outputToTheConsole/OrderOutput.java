@@ -14,7 +14,8 @@ public class OrderOutput {
         OrderService orderService = new OrderServiceImpl();
         Scanner scanner = new Scanner(System.in);
 
-        while (true) { // Основное меню
+        // Основное меню
+        while (true) {
             System.out.println("1 - Show all orders");
             System.out.println("2 - Show orders by the sample");
             System.out.println("3 - Create a new order");
@@ -24,12 +25,14 @@ public class OrderOutput {
 
             String userCommand = scanner.nextLine();
 
-            if (userCommand.equals("0")) { // Выход из программы и освобождение ресурсов
+            // Выход из программы и освобождение ресурсов
+            if (userCommand.equals("0")) {
                 System.out.println("Exit from program.");
                 scanner.close();
                 System.exit(0);
 
-            } else if (userCommand.equals("1")) { // Показать все заказы
+                // Показать все заказы
+            } else if (userCommand.equals("1")) {
                 List<Order> orderList = orderService.getAllOrders();
 
                 for (Order order : orderList) {
@@ -37,23 +40,27 @@ public class OrderOutput {
                 }
                 System.out.println();
 
-            } else if (userCommand.equals("2")) { // Показать заказы по выборке
+                // Показать заказы по выборке
+            } else if (userCommand.equals("2")) {
 
-                while (true) { // Меню выборки
+                // Меню выборки
+                while (true) {
                     System.out.println("Select a sample:");
-                    System.out.println("1 - id");
-                    System.out.println("2 - Number");
+                    System.out.println("1 - Order's id");
+                    System.out.println("2 - Order's number");
                     System.out.println("3 - Customer's id");
                     System.out.println("4 - Car's id");
                     System.out.println("0 - Back to the previous menu");
 
                     userCommand = scanner.nextLine();
 
-                    if (userCommand.equals("0")) { // Выход в предыдущее меню
+                    // Выход в предыдущее меню
+                    if (userCommand.equals("0")) {
                         System.out.println("Exit to the previous menu.\n");
                         break;
 
-                    } else if (userCommand.equals("1")) { // Выборка по id
+                        // Выборка по id заказа
+                    } else if (userCommand.equals("1")) {
                         System.out.println("Enter the order's id:");
                         String OrderId = scanner.nextLine();
 
@@ -64,8 +71,9 @@ public class OrderOutput {
                         }
                         System.out.println();
 
-                    } else if (userCommand.equals("2")) { // Выборка по номеру заказа
-                        System.out.println("Enter the number:");
+                        // Выборка по номеру заказа
+                    } else if (userCommand.equals("2")) {
+                        System.out.println("Enter the order's number:");
                         String OrderNumber = scanner.nextLine();
 
                         List<Order> orderList = orderService.getOrderByOrderNumber(OrderNumber);
@@ -75,20 +83,22 @@ public class OrderOutput {
                         }
                         System.out.println();
 
-                    } else if (userCommand.equals("3")) { // Выборка по id клиента
+                        // Выборка по id клиента
+                    } else if (userCommand.equals("3")) {
                         System.out.println("Enter the customer's id:");
-                        String customerId = scanner.nextLine();
+                        UUID customerId = UUID.fromString(scanner.nextLine());
 
-                        List<Order> orderList = orderService.getOrderByCustomerId(UUID.fromString(customerId));
+                        List<Order> orderList = orderService.getOrderByCustomerId(customerId);
 
                         for (Order order : orderList) {
                             System.out.println(order);
                         }
                         System.out.println();
 
-                    } else if (userCommand.equals("4")) { // Выборка по id автомобиля
+                        // Выборка по id автомобиля
+                    } else if (userCommand.equals("4")) {
                         System.out.println("Enter the car's id:");
-                        String carId = scanner.nextLine();
+                        UUID carId = UUID.fromString(scanner.nextLine());
 
                         List<Order> orderList = orderService.getOrderByCarId(carId);
 
@@ -102,12 +112,12 @@ public class OrderOutput {
                     }
                 }
 
-            } else if (userCommand.equals("3")) { // Создать новый заказ
+                // Создать новый заказ
+            } else if (userCommand.equals("3")) {
                 System.out.println("Enter the customer's id of the new order:");
                 UUID idCustomer = UUID.fromString(scanner.nextLine());
-//                String idCustomer = scanner.nextLine();
                 System.out.println("Enter the car's id of the new order:");
-                String idCar = scanner.nextLine();
+                UUID idCar = UUID.fromString(scanner.nextLine());
 
                 List<Order> orderList = orderService.create(idCustomer, idCar);
 
@@ -117,14 +127,14 @@ public class OrderOutput {
                 }
                 System.out.println();
 
-            } else if (userCommand.equals("4")) { // Изменить заказ
+                // Изменить заказ
+            } else if (userCommand.equals("4")) {
                 System.out.println("Enter the order's id:");
-                String id = scanner.nextLine();
+                UUID id = UUID.fromString(scanner.nextLine());
                 System.out.println("Enter a new customer's id for the order's record to edit:");
-//                String idCustomer = scanner.nextLine();
                 UUID idCustomer = UUID.fromString(scanner.nextLine());
                 System.out.println("Enter a new car's id for the order's record to edit:");
-                String idCar = scanner.nextLine();
+                UUID idCar = UUID.fromString(scanner.nextLine());
 
                 List<Order> orderList = orderService.update(id, idCustomer, idCar);
 
@@ -134,9 +144,10 @@ public class OrderOutput {
                 }
                 System.out.println();
 
-            } else if (userCommand.equals("5")) { // Удалить заказ
+                // Удалить заказ
+            } else if (userCommand.equals("5")) {
                 System.out.println("Enter the order's id:");
-                String id = scanner.nextLine();
+                UUID id = UUID.fromString(scanner.nextLine());
 
                 List<Order> orderList = orderService.delete(id);
 

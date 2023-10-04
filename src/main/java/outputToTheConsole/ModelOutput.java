@@ -7,6 +7,7 @@ import service.impl.ModelServiceImpl;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class ModelOutput {
     public static void main(String[] args) throws SQLException {
@@ -54,20 +55,18 @@ public class ModelOutput {
 
                     } else if (userCommand.equals("1")) { // Выборка по id
                         System.out.println("Enter the model's id:");
-                        String id = scanner.nextLine();
+                        UUID id = UUID.fromString(scanner.nextLine());
 
-                        List<Model> modelList = modelService.getById(id);
+                        Model model = modelService.getModelById(id);
 
-                        for (Model model : modelList) {
-                            System.out.println(model);
-                        }
+                        System.out.println(model);
                         System.out.println();
 
                     } else if (userCommand.equals("2")) { // Выборка по названию
                         System.out.println("Enter the name:");
                         String name = scanner.nextLine();
 
-                        List<Model> modelList = modelService.getByName(name);
+                        List<Model> modelList = modelService.getModelByName(name);
 
                         for (Model model : modelList) {
                             System.out.println(model);
@@ -76,9 +75,9 @@ public class ModelOutput {
 
                     } else if (userCommand.equals("3")) { // Выборка по id комплектации
                         System.out.println("Enter the completion's id:");
-                        String idCompletion = scanner.nextLine();
+                        UUID idCompletion = UUID.fromString(scanner.nextLine());
 
-                        List<Model> modelList = modelService.getByIdCompletion(idCompletion);
+                        List<Model> modelList = modelService.getModelByCompletionId(idCompletion);
 
                         for (Model model : modelList) {
                             System.out.println(model);
@@ -94,7 +93,7 @@ public class ModelOutput {
                 System.out.println("Enter the name of the new model:");
                 String name = scanner.nextLine();
                 System.out.println("Enter the completion's id of the new model:");
-                String idCompletion = scanner.nextLine();
+                UUID idCompletion = UUID.fromString(scanner.nextLine());
 
                 List<Model> modelList = modelService.create(name, idCompletion);
 
@@ -106,11 +105,11 @@ public class ModelOutput {
 
             } else if (userCommand.equals("4")) { // Изменить модель
                 System.out.println("Enter the model's id:");
-                String id = scanner.nextLine();
+                UUID id = UUID.fromString(scanner.nextLine());
                 System.out.println("Enter a new name for the model's record to edit:");
                 String name = scanner.nextLine();
                 System.out.println("Enter a new completion's id for the model's record to edit:");
-                String idCompletion = scanner.nextLine();
+                UUID idCompletion = UUID.fromString(scanner.nextLine());
 
                 List<Model> modelList = modelService.update(id, name, idCompletion);
 
@@ -122,7 +121,7 @@ public class ModelOutput {
 
             } else if (userCommand.equals("5")) { // Удалить модель
                 System.out.println("Enter the model's id:");
-                String id = scanner.nextLine();
+                UUID id = UUID.fromString(scanner.nextLine());
 
                 List<Model> modelList = modelService.delete(id);
 

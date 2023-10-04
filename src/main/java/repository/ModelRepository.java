@@ -2,20 +2,21 @@ package repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
 
 public interface ModelRepository {
 
-    ResultSet getById(String id) throws SQLException;
+    ResultSet getById(UUID modelId) throws SQLException;
 
     ResultSet getByName(String name) throws SQLException;
 
-    ResultSet getByIdCompletion(String idCompletion) throws SQLException;
+    ResultSet getByIdCompletion(UUID completionId) throws SQLException;
 
     ResultSet getAllModels() throws SQLException;
 
-    ResultSet create(String name, String idCompletion) throws SQLException;
+    ResultSet create(String name, UUID completionId) throws SQLException;
 
-    ResultSet update(String id, String name, String idCompletion) throws SQLException;
+    ResultSet update(UUID modelId, String modelName, UUID completionId) throws SQLException;
 
-    ResultSet delete(String id) throws SQLException;
+    ResultSet delete(UUID modelId) throws SQLException;
 }

@@ -4,20 +4,21 @@ import entity.Model;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 
 public interface ModelService {
 
-    List<Model> getById(String id) throws SQLException;
+    Model getModelById(UUID modelId) throws SQLException;
 
-    List<Model> getByName(String name) throws SQLException;
+    List<Model> getModelByName(String modelName) throws SQLException;
 
-    List<Model> getByIdCompletion(String idCompletion) throws SQLException;
+    List<Model> getModelByCompletionId(UUID completionId) throws SQLException;
 
     List<Model> getAllModels() throws SQLException;
 
-    List<Model> create(String name, String idCompletion) throws SQLException;
+    List<Model> create(String modelName, UUID completionId) throws SQLException;
 
-    List<Model> update(String id, String name, String idCompletion) throws SQLException;
+    List<Model> update(UUID modelId, String modelName, UUID completionId) throws SQLException;
 
-    List<Model> delete(String id) throws SQLException;
+    List<Model> delete(UUID modelId) throws SQLException;
 }

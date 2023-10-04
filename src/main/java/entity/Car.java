@@ -1,25 +1,28 @@
 package entity;
+
+import java.util.UUID;
+
 // Во всех классах подключаешь ломбок.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 public class Car {
-    private String id;
+    private UUID carId;
     private String vin;
-    private String idModel;
+    private Model model;
 
     public Car() {
     }
 
-    public Car(String id, String vin, String idModel) {
-        this.id = id;
+    public Car(UUID carId, String vin, Model model) {
+        this.carId = carId;
         this.vin = vin;
-        this.idModel = idModel;
+        this.model = model;
     }
 
-    public String getId() {
-        return id;
+    public UUID getCarId() {
+        return carId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCarId(UUID carId) {
+        this.carId = carId;
     }
 
     public String getVin() {
@@ -30,20 +33,20 @@ public class Car {
         this.vin = vin;
     }
 
-    public String getIdModel() {
-        return idModel;
+    public Model getModel() {
+        return model;
     }
 
-    public void setIdModel(String idModel) {
-        this.idModel = idModel;
+    public void setModel(Model model) {
+        this.model = model;
     }
 
     @Override
     public String toString() {
         return "Car{" +
-                "id='" + id + '\'' +
+                "carId=" + carId +
                 ", vin='" + vin + '\'' +
-                ", idModel='" + idModel + '\'' +
+                ", model=" + model +
                 '}';
     }
 }

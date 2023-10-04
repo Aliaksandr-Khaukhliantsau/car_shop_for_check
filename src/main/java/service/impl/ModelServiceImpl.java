@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ModelServiceImpl implements ModelService {
     ModelRepository modelRepository = new ModelRepositoryImpl();
@@ -17,8 +18,22 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public List<Model> getById(String id) throws SQLException {
-        ResultSet resultSet = modelRepository.getById(id);
+    public Model getModelById(UUID modelId) throws SQLException {
+        ResultSet resultSet = modelRepository.getById(modelId);
+        Model model = new Model();
+
+        while (resultSet.next()) {
+            model.setId(resultSet.getString("id"));
+            model.setName(resultSet.getString("name"));
+            model.setIdCompletion(resultSet.getString("idcompletion"));
+
+        }
+        return model;
+    }
+
+    @Override
+    public List<Model> getModelByName(String modelName) throws SQLException {
+        ResultSet resultSet = modelRepository.getByName(modelName);
         List<Model> modelList = new ArrayList<>();
 
         while (resultSet.next()) {
@@ -33,24 +48,8 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public List<Model> getByName(String name) throws SQLException {
-        ResultSet resultSet = modelRepository.getByName(name);
-        List<Model> modelList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            Model model = new Model();
-            model.setId(resultSet.getString("id"));
-            model.setName(resultSet.getString("name"));
-            model.setIdCompletion(resultSet.getString("idcompletion"));
-
-            modelList.add(model);
-        }
-        return modelList;
-    }
-
-    @Override
-    public List<Model> getByIdCompletion(String idCompletion) throws SQLException {
-        ResultSet resultSet = modelRepository.getByIdCompletion(idCompletion);
+    public List<Model> getModelByCompletionId(UUID completionId) throws SQLException {
+        ResultSet resultSet = modelRepository.getByIdCompletion(completionId);
         List<Model> modelList = new ArrayList<>();
 
         while (resultSet.next()) {
@@ -81,8 +80,8 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public List<Model> create(String name, String idCompletion) throws SQLException {
-        ResultSet resultSet = modelRepository.create(name, idCompletion);
+    public List<Model> create(String modelName, UUID completionId) throws SQLException {
+        ResultSet resultSet = modelRepository.create(modelName, completionId);
         List<Model> modelList = new ArrayList<>();
 
         while (resultSet.next()) {
@@ -97,8 +96,8 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public List<Model> update(String id, String name, String idCompletion) throws SQLException {
-        ResultSet resultSet = modelRepository.update(id, name, idCompletion);
+    public List<Model> update(UUID modelId, String modelName, UUID completionId) throws SQLException {
+        ResultSet resultSet = modelRepository.update(modelId, modelName, completionId);
         List<Model> modelList = new ArrayList<>();
 
         while (resultSet.next()) {
@@ -113,8 +112,8 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public List<Model> delete(String id) throws SQLException {
-        ResultSet resultSet = modelRepository.delete(id);
+    public List<Model> delete(UUID modelId) throws SQLException {
+        ResultSet resultSet = modelRepository.delete(modelId);
         List<Model> modelList = new ArrayList<>();
 
         while (resultSet.next()) {

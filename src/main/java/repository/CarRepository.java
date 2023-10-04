@@ -2,20 +2,22 @@ package repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
+
 // java doc !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 public interface CarRepository {
     // Везде java doc по формату, образец в инете !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    ResultSet getById(String id) throws SQLException;
+    ResultSet getCarById(UUID carId) throws SQLException;
 
-    ResultSet getByVin(String vin) throws SQLException;
+    ResultSet getCarByVin(String vin) throws SQLException;
 
-    ResultSet getByIdModel(String idModel) throws SQLException;
+    ResultSet getCarByModelId(UUID modelId) throws SQLException;
 
     ResultSet getAllCars() throws SQLException;
 
-    ResultSet create(String vin, String idModel) throws SQLException;
+    ResultSet create(String vin, UUID modelId) throws SQLException;
 
-    ResultSet update(String id, String vin, String idModel) throws SQLException;
+    ResultSet update(UUID carId, String vin, UUID modelId) throws SQLException;
 
-    ResultSet delete(String id) throws SQLException;
+    ResultSet delete(UUID carId) throws SQLException;
 }

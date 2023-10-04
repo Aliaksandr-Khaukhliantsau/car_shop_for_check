@@ -3,6 +3,7 @@ package repository.impl;
 import repository.ModelRepository;
 
 import java.sql.*;
+import java.util.UUID;
 
 public class ModelRepositoryImpl implements ModelRepository {
     private static final String POSTGRES_URL = "jdbc:postgresql://localhost:5432/car_shop";
@@ -16,9 +17,9 @@ public class ModelRepositoryImpl implements ModelRepository {
     }
 
     @Override
-    public ResultSet getById(String id) throws SQLException {
+    public ResultSet getById(UUID modelId) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_SHOW_MODELS_BY_ID = "SELECT * FROM models WHERE id = " + "'" + id + "'" + " ORDER BY name ASC;";
+        String SQL_SHOW_MODELS_BY_ID = "SELECT * FROM models WHERE id = " + "'" + modelId + "'" + " ORDER BY name ASC;";
         // prepare statement, строки в константы.
         ResultSet resultSet = statement.executeQuery(SQL_SHOW_MODELS_BY_ID);
 //        statement.close(); не должно быть ничего закоменченого, край ToDo
@@ -36,9 +37,9 @@ public class ModelRepositoryImpl implements ModelRepository {
     }
 
     @Override
-    public ResultSet getByIdCompletion(String idCompletion) throws SQLException {
+    public ResultSet getByIdCompletion(UUID completionId) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_SHOW_MODELS_BY_ID_COMPLETION = "SELECT * FROM models WHERE idcompletion = " + "'" + idCompletion + "'" + " ORDER BY name ASC;";
+        String SQL_SHOW_MODELS_BY_ID_COMPLETION = "SELECT * FROM models WHERE idcompletion = " + "'" + completionId + "'" + " ORDER BY name ASC;";
         ResultSet resultSet = statement.executeQuery(SQL_SHOW_MODELS_BY_ID_COMPLETION);
 //        statement.close();
         return resultSet;
@@ -53,27 +54,27 @@ public class ModelRepositoryImpl implements ModelRepository {
     }
 
     @Override
-    public ResultSet create(String name, String idCompletion) throws SQLException {
+    public ResultSet create(String name, UUID completionId) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_ADD_A_NEW_MODEL = "INSERT INTO models (name, idcompletion) VALUES ('" + name + "', '" + idCompletion + "') RETURNING *;";
+        String SQL_ADD_A_NEW_MODEL = "INSERT INTO models (name, idcompletion) VALUES ('" + name + "', '" + completionId + "') RETURNING *;";
         ResultSet resultSet = statement.executeQuery(SQL_ADD_A_NEW_MODEL);
 //        statement.close();
         return resultSet;
     }
 
     @Override
-    public ResultSet update(String id, String name, String idCompletion) throws SQLException {
+    public ResultSet update(UUID modelId, String modelName, UUID completionId) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_CHANGE_A_MODEL = "UPDATE models SET name = '" + name + "', idcompletion = '" + idCompletion + "' WHERE id = '" + id + "' RETURNING *;";
+        String SQL_CHANGE_A_MODEL = "UPDATE models SET name = '" + modelName + "', idcompletion = '" + completionId + "' WHERE id = '" + modelId + "' RETURNING *;";
         ResultSet resultSet = statement.executeQuery(SQL_CHANGE_A_MODEL);
 //        statement.close();
         return resultSet;
     }
 
     @Override
-    public ResultSet delete(String id) throws SQLException {
+    public ResultSet delete(UUID modelId) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_DELETE_A_MODEL = "DELETE FROM models WHERE id = '" + id + "' RETURNING *;";
+        String SQL_DELETE_A_MODEL = "DELETE FROM models WHERE id = '" + modelId + "' RETURNING *;";
         ResultSet resultSet = statement.executeQuery(SQL_DELETE_A_MODEL);
 //        statement.close();
         return resultSet;

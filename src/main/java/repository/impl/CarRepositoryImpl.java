@@ -3,6 +3,7 @@ package repository.impl;
 import repository.CarRepository;
 
 import java.sql.*;
+import java.util.UUID;
 
 public class CarRepositoryImpl implements CarRepository {
     // настройки подключения к бд должны быть в 1 месте, в файле .properties.
@@ -17,16 +18,16 @@ public class CarRepositoryImpl implements CarRepository {
     }
 
     @Override
-    public ResultSet getById(String id) throws SQLException {
+    public ResultSet getCarById(UUID carId) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_SHOW_CARS_BY_ID = "SELECT * FROM cars WHERE id = " + "'" + id + "'" + " ORDER BY vin ASC;";
+        String SQL_SHOW_CARS_BY_ID = "SELECT * FROM cars WHERE id = " + "'" + carId + "'" + " ORDER BY vin ASC;";
         ResultSet resultSet = statement.executeQuery(SQL_SHOW_CARS_BY_ID);
 //        statement.close();
         return resultSet;
     }
 
     @Override
-    public ResultSet getByVin(String vin) throws SQLException {
+    public ResultSet getCarByVin(String vin) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_SHOW_CARS_BY_VIN = "SELECT * FROM cars WHERE vin = " + "'" + vin + "'" + " ORDER BY vin ASC;";
         ResultSet resultSet = statement.executeQuery(SQL_SHOW_CARS_BY_VIN);
@@ -35,9 +36,9 @@ public class CarRepositoryImpl implements CarRepository {
     }
 
     @Override
-    public ResultSet getByIdModel(String idModel) throws SQLException {
+    public ResultSet getCarByModelId(UUID modelId) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_SHOW_CARS_BY_ID_MODEL = "SELECT * FROM cars WHERE idmodel = " + "'" + idModel + "'" + " ORDER BY vin ASC;";
+        String SQL_SHOW_CARS_BY_ID_MODEL = "SELECT * FROM cars WHERE idmodel = " + "'" + modelId + "'" + " ORDER BY vin ASC;";
         ResultSet resultSet = statement.executeQuery(SQL_SHOW_CARS_BY_ID_MODEL);
 //        statement.close();
         return resultSet;
@@ -52,27 +53,27 @@ public class CarRepositoryImpl implements CarRepository {
     }
 
     @Override
-    public ResultSet create(String vin, String idModel) throws SQLException {
+    public ResultSet create(String vin, UUID modelId) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_ADD_A_NEW_CAR = "INSERT INTO cars (vin, idmodel) VALUES ('" + vin + "', '" + idModel + "') RETURNING *;";
+        String SQL_ADD_A_NEW_CAR = "INSERT INTO cars (vin, idmodel) VALUES ('" + vin + "', '" + modelId + "') RETURNING *;";
         ResultSet resultSet = statement.executeQuery(SQL_ADD_A_NEW_CAR);
 //        statement.close();
         return resultSet;
     }
 
     @Override
-    public ResultSet update(String id, String vin, String idModel) throws SQLException {
+    public ResultSet update(UUID carId, String vin, UUID modelId) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_CHANGE_A_CAR = "UPDATE cars SET vin = '" + vin + "', idmodel = '" + idModel + "' WHERE id = '" + id + "' RETURNING *;";
+        String SQL_CHANGE_A_CAR = "UPDATE cars SET vin = '" + vin + "', idmodel = '" + modelId + "' WHERE id = '" + carId + "' RETURNING *;";
         ResultSet resultSet = statement.executeQuery(SQL_CHANGE_A_CAR);
 //        statement.close();
         return resultSet;
     }
 
     @Override
-    public ResultSet delete(String id) throws SQLException {
+    public ResultSet delete(UUID carId) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_DELETE_A_CAR = "DELETE FROM cars WHERE id = '" + id + "' RETURNING *;";
+        String SQL_DELETE_A_CAR = "DELETE FROM cars WHERE id = '" + carId + "' RETURNING *;";
         ResultSet resultSet = statement.executeQuery(SQL_DELETE_A_CAR);
 //        statement.close();
         return resultSet;

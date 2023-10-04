@@ -1,6 +1,5 @@
 package service.impl;
 
-import entity.Car;
 import entity.Customer;
 import entity.Order;
 import repository.OrderRepository;
@@ -28,13 +27,12 @@ public class OrderServiceImpl implements OrderService {
 
         while (resultSet.next()) {
             Order order = new Order();
-            order.setOrderId(resultSet.getString("id"));
+            order.setOrderId(UUID.fromString(resultSet.getString("id")));
             order.setOrderNumber(resultSet.getInt("number"));
-//            String customerId = resultSet.getString("idcustomer");
             UUID customerId = UUID.fromString(resultSet.getString("idcustomer"));
             CustomerService customerService = new CustomerServiceImpl();
             order.setCustomer(customerService.getCustomerById(customerId));
-            String carId = resultSet.getString("idcar");
+            UUID carId = UUID.fromString(resultSet.getString("idcar"));
             CarService carService = new CarServiceImpl();
             order.setCar(carService.getCarById(carId));
 
@@ -50,13 +48,12 @@ public class OrderServiceImpl implements OrderService {
 
         while (resultSet.next()) {
             Order order = new Order();
-            order.setOrderId(resultSet.getString("id"));
+            order.setOrderId(UUID.fromString(resultSet.getString("id")));
             order.setOrderNumber(resultSet.getInt("number"));
-//            String customerId = resultSet.getString("idcustomer");
             UUID customerId = UUID.fromString(resultSet.getString("idcustomer"));
             CustomerService customerService = new CustomerServiceImpl();
             order.setCustomer(customerService.getCustomerById(customerId));
-            String carId = resultSet.getString("idcar");
+            UUID carId = UUID.fromString(resultSet.getString("idcar"));
             CarService carService = new CarServiceImpl();
             order.setCar(carService.getCarById(carId));
 
@@ -66,18 +63,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-//    public List<Order> getOrderByCustomerId(String customerId) throws SQLException {
     public List<Order> getOrderByCustomerId(UUID customerId) throws SQLException {
         ResultSet resultSet = orderRepository.getByIdCustomer(customerId);
         List<Order> orderList = new ArrayList<>();
 
         while (resultSet.next()) {
             Order order = new Order();
-            order.setOrderId(resultSet.getString("id"));
+            order.setOrderId(UUID.fromString(resultSet.getString("id")));
             order.setOrderNumber(resultSet.getInt("number"));
             CustomerService customerService = new CustomerServiceImpl();
             order.setCustomer(customerService.getCustomerById(customerId));
-            String carId = resultSet.getString("idcar");
+            UUID carId = UUID.fromString(resultSet.getString("idcar"));
             CarService carService = new CarServiceImpl();
             order.setCar(carService.getCarById(carId));
 
@@ -93,13 +89,12 @@ public class OrderServiceImpl implements OrderService {
 
         while (resultSet.next()) {
             Order order = new Order();
-            order.setOrderId(resultSet.getString("id"));
+            order.setOrderId(UUID.fromString(resultSet.getString("id")));
             order.setOrderNumber(resultSet.getInt("number"));
-//            String customerId = resultSet.getString("idcustomer");
             UUID customerId = UUID.fromString(resultSet.getString("idcustomer"));
             CustomerService customerService = new CustomerServiceImpl();
             order.setCustomer(customerService.getCustomerById(customerId));
-            String carId = resultSet.getString("idcar");
+            UUID carId = UUID.fromString(resultSet.getString("idcar"));
             CarService carService = new CarServiceImpl();
             order.setCar(carService.getCarById(carId));
 
@@ -109,16 +104,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getOrderByCarId(String carId) throws SQLException {
+    public List<Order> getOrderByCarId(UUID carId) throws SQLException {
         ResultSet resultSet = orderRepository.getByIdCar(carId);
         List<Order> orderList = new ArrayList<>();
 
         while (resultSet.next()) {
             Order order = new Order();
-            order.setOrderId(resultSet.getString("id"));
+            order.setOrderId(UUID.fromString(resultSet.getString("id")));
             order.setOrderNumber(resultSet.getInt("number"));
             CustomerService customerService = new CustomerServiceImpl();
-//            String customerId = resultSet.getString("idcustomer");
             UUID customerId = UUID.fromString(resultSet.getString("idcustomer"));
             order.setCustomer(customerService.getCustomerById(customerId));
             CarService carService = new CarServiceImpl();
@@ -128,28 +122,6 @@ public class OrderServiceImpl implements OrderService {
         }
         return orderList;
     }
-
-//    @Override
-//    public List<Order> getOrderByCar(Car car) throws SQLException {
-//        ResultSet resultSet = orderRepository.getByIdCustomer(car.getId());
-//        List<Order> orderList = new ArrayList<>();
-//
-//        while (resultSet.next()) {
-//            Order order = new Order();
-//            order.setOrderId(resultSet.getString("id"));
-//            order.setOrderNumber(resultSet.getInt("number"));
-////            String customerId = resultSet.getString("idcustomer");
-//            UUID customerId = UUID.fromString(resultSet.getString("idcustomer"));
-//            CustomerService customerService = new CustomerServiceImpl();
-//            order.setCustomer(customerService.getCustomerById(customerId));
-//            String carId = resultSet.getString("idcar");
-//            CarService carService = new CarServiceImpl();
-//            order.setCar(carService.getCarById(carId));
-//
-//            orderList.add(order);
-//        }
-//        return orderList;
-//    }
 
     @Override
     public List<Order> getAllOrders() throws SQLException {
@@ -158,13 +130,12 @@ public class OrderServiceImpl implements OrderService {
 
         while (resultSet.next()) {
             Order order = new Order();
-            order.setOrderId(resultSet.getString("id"));
+            order.setOrderId(UUID.fromString(resultSet.getString("id")));
             order.setOrderNumber(resultSet.getInt("number"));
-//            String customerId = resultSet.getString("idcustomer");
             UUID customerId = UUID.fromString(resultSet.getString("idcustomer"));
             CustomerService customerService = new CustomerServiceImpl();
             order.setCustomer(customerService.getCustomerById(customerId));
-            String carId = resultSet.getString("idcar");
+            UUID carId = UUID.fromString(resultSet.getString("idcar"));
             CarService carService = new CarServiceImpl();
             order.setCar(carService.getCarById(carId));
 
@@ -174,14 +145,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-//    public List<Order> create(String customerId, String carId) throws SQLException {
-    public List<Order> create(UUID customerId, String carId) throws SQLException {
+    public List<Order> create(UUID customerId, UUID carId) throws SQLException {
         ResultSet resultSet = orderRepository.create(customerId, carId);
         List<Order> orderList = new ArrayList<>();
 
         while (resultSet.next()) {
             Order order = new Order();
-            order.setOrderId(resultSet.getString("id"));
+            order.setOrderId(UUID.fromString(resultSet.getString("id")));
             order.setOrderNumber(resultSet.getInt("number"));
             CustomerService customerService = new CustomerServiceImpl();
             order.setCustomer(customerService.getCustomerById(customerId));
@@ -193,36 +163,14 @@ public class OrderServiceImpl implements OrderService {
         return orderList;
     }
 
-//    @Override
-//    public List<Order> create(Customer customer, Car car) throws SQLException {
-//        ResultSet resultSet = orderRepository.create(customer.getId(), car.getId());
-//        List<Order> orderList = new ArrayList<>();
-//
-//        while (resultSet.next()) {
-//            Order order = new Order();
-//            order.setOrderId(resultSet.getString("id"));
-//            order.setOrderNumber(resultSet.getInt("number"));
-//            String idCustomer = resultSet.getString("idcustomer");
-//            CustomerService customerService = new CustomerServiceImpl();
-//            order.setCustomer(customerService.getCustomerById(idCustomer));
-//            String idCar = resultSet.getString("idcar");
-//            CarService carService = new CarServiceImpl();
-//            order.setCar(carService.getCarById(idCar));
-//
-//            orderList.add(order);
-//        }
-//        return orderList;
-//    }
-
     @Override
-//    public List<Order> update(String orderId, String customerId, String carId) throws SQLException {
-    public List<Order> update(String orderId, UUID customerId, String carId) throws SQLException {
+    public List<Order> update(UUID orderId, UUID customerId, UUID carId) throws SQLException {
         ResultSet resultSet = orderRepository.update(orderId, customerId, carId);
         List<Order> orderList = new ArrayList<>();
 
         while (resultSet.next()) {
             Order order = new Order();
-            order.setOrderId(resultSet.getString("id"));
+            order.setOrderId(UUID.fromString(resultSet.getString("id")));
             order.setOrderNumber(resultSet.getInt("number"));
             CustomerService customerService = new CustomerServiceImpl();
             order.setCustomer(customerService.getCustomerById(customerId));
@@ -234,41 +182,19 @@ public class OrderServiceImpl implements OrderService {
         return orderList;
     }
 
-//    @Override
-//    public List<Order> update(String orderId, Customer customer, Car car) throws SQLException {
-//        ResultSet resultSet = orderRepository.update(orderId, customer.getId(), car.getId());
-//        List<Order> orderList = new ArrayList<>();
-//
-//        while (resultSet.next()) {
-//            Order order = new Order();
-//            order.setOrderId(resultSet.getString("id"));
-//            order.setOrderNumber(resultSet.getInt("number"));
-//            String idCustomer = resultSet.getString("idcustomer");
-//            CustomerService customerService = new CustomerServiceImpl();
-//            order.setCustomer(customerService.getCustomerById(idCustomer));
-//            String idCar = resultSet.getString("idcar");
-//            CarService carService = new CarServiceImpl();
-//            order.setCar(carService.getCarById(idCar));
-//
-//            orderList.add(order);
-//        }
-//        return orderList;
-//    }
-
     @Override
-    public List<Order> delete(String orderId) throws SQLException {
+    public List<Order> delete(UUID orderId) throws SQLException {
         ResultSet resultSet = orderRepository.delete(orderId);
         List<Order> orderList = new ArrayList<>();
 
         while (resultSet.next()) {
             Order order = new Order();
-            order.setOrderId(resultSet.getString("id"));
+            order.setOrderId(UUID.fromString(resultSet.getString("id")));
             order.setOrderNumber(resultSet.getInt("number"));
-//            String idCustomer = resultSet.getString("idcustomer");
             UUID customerId = UUID.fromString(resultSet.getString("idcustomer"));
             CustomerService customerService = new CustomerServiceImpl();
             order.setCustomer(customerService.getCustomerById(customerId));
-            String carId = resultSet.getString("idcar");
+            UUID carId = UUID.fromString(resultSet.getString("idcar"));
             CarService carService = new CarServiceImpl();
             order.setCar(carService.getCarById(carId));
 

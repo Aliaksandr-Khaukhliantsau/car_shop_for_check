@@ -1,36 +1,37 @@
 package entity;
 
+import java.util.UUID;
+
 public class Order {
-    private String OrderId;
-    private int OrderNumber;
+    private UUID orderId;
+    private int orderNumber;
     private Customer customer;
     private Car car;
 
     public Order() {
     }
 
-
-    public Order(String OrderId, int OrderNumber, Customer customer, Car car) {
-        this.OrderId = OrderId;
-        this.OrderNumber = OrderNumber;
+    public Order(UUID orderId, int orderNumber, Customer customer, Car car) {
+        this.orderId = orderId;
+        this.orderNumber = orderNumber;
         this.customer = customer;
         this.car = car;
     }
 
-    public String getOrderId() {
-        return OrderId;
+    public UUID getOrderId() {
+        return orderId;
     }
 
-    public void setOrderId(String orderId) {
-        this.OrderId = orderId;
+    public void setOrderId(UUID orderId) {
+        this.orderId = orderId;
     }
 
     public int getOrderNumber() {
-        return OrderNumber;
+        return orderNumber;
     }
 
     public void setOrderNumber(int orderNumber) {
-        this.OrderNumber = orderNumber;
+        this.orderNumber = orderNumber;
     }
 
     public Customer getCustomer() {
@@ -52,8 +53,8 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "OrderId='" + OrderId + '\'' +
-                ", OrderNumber=" + OrderNumber +
+                "orderId=" + orderId +
+                ", orderNumber=" + orderNumber +
                 ", customer=" + customer +
                 ", car=" + car +
                 '}';
