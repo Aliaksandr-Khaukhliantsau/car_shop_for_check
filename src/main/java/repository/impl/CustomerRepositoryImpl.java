@@ -60,33 +60,6 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return resultSet;
     }
 
-//    @Override
-//    public ResultSet create(String firstName, String middleName, String lastName) throws SQLException {
-//        Statement statement = connection.createStatement();
-//        String SQL_ADD_A_NEW_CUSTOMER = "INSERT INTO customers (firstname, middlename, lastname) VALUES ('" + firstName + "', '" + middleName + "', '" + lastName + "') RETURNING *;";
-//        ResultSet resultSet = statement.executeQuery(SQL_ADD_A_NEW_CUSTOMER);
-////        statement.close();
-//        return resultSet;
-//    }
-//
-//    @Override
-//    public ResultSet update(UUID customerId, String firstName, String middleName, String lastName) throws SQLException {
-//        Statement statement = connection.createStatement();
-//        String SQL_CHANGE_A_CUSTOMER = "UPDATE customers SET firstname = '" + firstName + "', middlename = '" + middleName + "', lastname = '" + lastName + "' WHERE id = '" + customerId + "' RETURNING *;";
-//        ResultSet resultSet = statement.executeQuery(SQL_CHANGE_A_CUSTOMER);
-////        statement.close();
-//        return resultSet;
-//    }
-//
-//    @Override
-//    public ResultSet delete(UUID customerId) throws SQLException {
-//        Statement statement = connection.createStatement();
-//        String SQL_DELETE_A_CUSTOMER = "DELETE FROM customers WHERE id = '" + customerId + "' RETURNING *;";
-//        ResultSet resultSet = statement.executeQuery(SQL_DELETE_A_CUSTOMER);
-////        statement.close();
-//        return resultSet;
-//    }
-
     @Override
     public void create(String firstName, String middleName, String lastName) throws SQLException {
         Statement statement = connection.createStatement();
@@ -109,6 +82,5 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         String SQL_DELETE_A_CUSTOMER = "DELETE FROM customers WHERE id = '" + customerId + "' RETURNING *;";
         statement.executeQuery(SQL_DELETE_A_CUSTOMER);
         statement.close();
-
     }
 }

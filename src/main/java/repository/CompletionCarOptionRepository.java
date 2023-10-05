@@ -11,7 +11,7 @@ public interface CompletionCarOptionRepository {
 
     ResultSet getAllCompletionCarOptions() throws SQLException;
 
-    ResultSet create(UUID completionId, UUID optionId) throws SQLException;
+    void create(UUID completionId, UUID optionId) throws SQLException;
 
-    ResultSet delete(UUID completionId, UUID optionId) throws SQLException;
+    void delete(UUID completionId, UUID optionId) throws SQLException;
 }

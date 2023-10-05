@@ -16,11 +16,11 @@ public class PurchaseOutput {
 
         // Основное меню
         while (true) {
-            System.out.println("1 - Show all orders");
-            System.out.println("2 - Show orders by the sample");
-            System.out.println("3 - Create a new order");
-            System.out.println("4 - Change an order");
-            System.out.println("5 - Delete an order");
+            System.out.println("1 - Show all purchases");
+            System.out.println("2 - Show purchases by the sample");
+            System.out.println("3 - Create a new purchase");
+            System.out.println("4 - Change an purchase");
+            System.out.println("5 - Delete an purchase");
             System.out.println("0 - Exit");
 
             String userCommand = scanner.nextLine();
@@ -46,8 +46,8 @@ public class PurchaseOutput {
                 // Меню выборки
                 while (true) {
                     System.out.println("Select a sample:");
-                    System.out.println("1 - Order's id");
-                    System.out.println("2 - Order's number");
+                    System.out.println("1 - Purchase's id");
+                    System.out.println("2 - Purchase's number");
                     System.out.println("3 - Customer's id");
                     System.out.println("4 - Car's id");
                     System.out.println("0 - Back to the previous menu");
@@ -61,26 +61,22 @@ public class PurchaseOutput {
 
                         // Выборка по id заказа
                     } else if (userCommand.equals("1")) {
-                        System.out.println("Enter the order's id:");
-                        String OrderId = scanner.nextLine();
+                        System.out.println("Enter the purchase's id:");
+                        UUID purchaseId = UUID.fromString(scanner.nextLine());
 
-                        List<Purchase> purchaseList = purchaseService.getPurchaseByPurchaseId(OrderId);
+                        Purchase purchase = purchaseService.getPurchaseByPurchaseId(purchaseId);
 
-                        for (Purchase purchase : purchaseList) {
-                            System.out.println(purchase);
-                        }
+                        System.out.println(purchase);
                         System.out.println();
 
                         // Выборка по номеру заказа
                     } else if (userCommand.equals("2")) {
-                        System.out.println("Enter the order's number:");
-                        String OrderNumber = scanner.nextLine();
+                        System.out.println("Enter the purchase's number:");
+                        String purchaseNumber = scanner.nextLine();
 
-                        List<Purchase> purchaseList = purchaseService.getPurchaseByPurchaseNumber(OrderNumber);
+                        Purchase purchase = purchaseService.getPurchaseByPurchaseNumber(purchaseNumber);
 
-                        for (Purchase purchase : purchaseList) {
-                            System.out.println(purchase);
-                        }
+                        System.out.println(purchase);
                         System.out.println();
 
                         // Выборка по id клиента
@@ -114,47 +110,38 @@ public class PurchaseOutput {
 
                 // Создать новый заказ
             } else if (userCommand.equals("3")) {
-                System.out.println("Enter the customer's id of the new order:");
-                UUID idCustomer = UUID.fromString(scanner.nextLine());
-                System.out.println("Enter the car's id of the new order:");
-                UUID idCar = UUID.fromString(scanner.nextLine());
+                System.out.println("Enter the customer's id of the new purchase:");
+                UUID customerId = UUID.fromString(scanner.nextLine());
+                System.out.println("Enter the car's id of the new purchase:");
+                UUID carId = UUID.fromString(scanner.nextLine());
 
-                List<Purchase> purchaseList = purchaseService.create(idCustomer, idCar);
+                purchaseService.create(customerId, carId);
 
-                System.out.println("New order's record has been created:");
-                for (Purchase purchase : purchaseList) {
-                    System.out.println(purchase);
-                }
+                System.out.println("New purchase's record has been created.");
                 System.out.println();
 
                 // Изменить заказ
             } else if (userCommand.equals("4")) {
-                System.out.println("Enter the order's id:");
-                UUID id = UUID.fromString(scanner.nextLine());
-                System.out.println("Enter a new customer's id for the order's record to edit:");
-                UUID idCustomer = UUID.fromString(scanner.nextLine());
-                System.out.println("Enter a new car's id for the order's record to edit:");
-                UUID idCar = UUID.fromString(scanner.nextLine());
+                System.out.println("Enter the purchase's id:");
+                UUID purchaseId = UUID.fromString(scanner.nextLine());
+                System.out.println("Enter a new customer's id for the purchase's record to edit:");
+                UUID customerId = UUID.fromString(scanner.nextLine());
+                System.out.println("Enter a new car's id for the purchase's record to edit:");
+                UUID carId = UUID.fromString(scanner.nextLine());
 
-                List<Purchase> purchaseList = purchaseService.update(id, idCustomer, idCar);
+                purchaseService.update(purchaseId, customerId, carId);
 
-                System.out.println("The order's record has been changed:");
-                for (Purchase purchase : purchaseList) {
-                    System.out.println(purchase);
-                }
+                System.out.println("The purchase's record has been changed.");
                 System.out.println();
 
                 // Удалить заказ
             } else if (userCommand.equals("5")) {
-                System.out.println("Enter the order's id:");
-                UUID id = UUID.fromString(scanner.nextLine());
+                System.out.println("Enter the purchase's id:");
+                UUID purchaseId = UUID.fromString(scanner.nextLine());
 
-                List<Purchase> purchaseList = purchaseService.delete(id);
+                purchaseService.delete(purchaseId);
 
-                System.out.println("The order's record has been deleted:");
-                for (Purchase purchase : purchaseList) {
-                    System.out.println(purchase);
-                }
+                System.out.println("The purchase's record has been deleted.");
                 System.out.println();
 
             } else {

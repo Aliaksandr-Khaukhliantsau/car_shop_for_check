@@ -14,9 +14,9 @@ public interface CarRepository {
 
     ResultSet getAllCars() throws SQLException;
 
-    ResultSet create(String vin, UUID modelId) throws SQLException;
+    void create(String vin, UUID modelId) throws SQLException;
 
-    ResultSet update(UUID carId, String vin, UUID modelId) throws SQLException;
+    void update(UUID carId, String vin, UUID modelId) throws SQLException;
 
-    ResultSet delete(UUID carId) throws SQLException;
+    void delete(UUID carId) throws SQLException;
 }

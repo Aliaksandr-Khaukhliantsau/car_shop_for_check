@@ -5,15 +5,15 @@ import java.util.UUID;
 public class CarModel {
     private UUID modelId;
     private String modelName;
-    private UUID completionId;
+    private Completion completion;
 
     public CarModel() {
     }
 
-    public CarModel(UUID modelId, String modelName, UUID completionId) {
+    public CarModel(UUID modelId, String modelName, Completion completion) {
         this.modelId = modelId;
         this.modelName = modelName;
-        this.completionId = completionId;
+        this.completion = completion;
     }
 
     public UUID getModelId() {
@@ -32,12 +32,12 @@ public class CarModel {
         this.modelName = modelName;
     }
 
-    public UUID getCompletionId() {
-        return completionId;
+    public Completion getCompletion() {
+        return completion;
     }
 
-    public void setCompletionId(UUID completionId) {
-        this.completionId = completionId;
+    public void setCompletion(Completion completion) {
+        this.completion = completion;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class CarModel {
         return "CarModel{" +
                 "modelId=" + modelId +
                 ", modelName='" + modelName + '\'' +
-                ", completionId=" + completionId +
+                ", completion=" + completion +
                 '}';
     }
 }

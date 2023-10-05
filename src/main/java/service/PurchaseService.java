@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PurchaseService {
-    List<Purchase> getPurchaseByPurchaseId(UUID purchaseId) throws SQLException;
+    Purchase getPurchaseByPurchaseId(UUID purchaseId) throws SQLException;
 
-    List<Purchase> getPurchaseByPurchaseNumber(String purchaseNumber) throws SQLException;
+    Purchase getPurchaseByPurchaseNumber(String purchaseNumber) throws SQLException;
 
     List<Purchase> getPurchaseByCustomerId(UUID CustomerId) throws SQLException;
 
@@ -23,9 +23,9 @@ public interface PurchaseService {
 
     List<Purchase> getAllPurchases() throws SQLException;
 
-    List<Purchase> create(UUID customerId, UUID carId) throws SQLException;
+    void create(UUID customerId, UUID carId) throws SQLException;
 
-    List<Purchase> update(UUID purchaseId, UUID customerId, UUID carId) throws SQLException;
+    void update(UUID purchaseId, UUID customerId, UUID carId) throws SQLException;
 
-    List<Purchase> delete(UUID purchaseId) throws SQLException;
+    void delete(UUID purchaseId) throws SQLException;
 }

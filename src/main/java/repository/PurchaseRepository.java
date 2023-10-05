@@ -15,9 +15,9 @@ public interface PurchaseRepository {
 
     ResultSet getAllPurchases() throws SQLException;
 
-    ResultSet create(UUID customerId, UUID carId) throws SQLException;
+    void create(UUID customerId, UUID carId) throws SQLException;
 
-    ResultSet update(UUID purchaseId, UUID customerId, UUID carId) throws SQLException;
+    void update(UUID purchaseId, UUID customerId, UUID carId) throws SQLException;
 
-    ResultSet delete(UUID purchaseId) throws SQLException;
+    void delete(UUID purchaseId) throws SQLException;
 }

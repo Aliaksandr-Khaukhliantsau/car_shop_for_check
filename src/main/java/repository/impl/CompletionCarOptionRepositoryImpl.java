@@ -43,20 +43,18 @@ public class CompletionCarOptionRepositoryImpl implements CompletionCarOptionRep
     }
 
     @Override
-    public ResultSet create(UUID completionId, UUID optionId) throws SQLException {
+    public void create(UUID completionId, UUID optionId) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_ADD_A_NEW_COMPLETION_OPTION = "INSERT INTO completionsoptions (idcompletion, idoption) VALUES ('" + completionId + "', '" + optionId + "') RETURNING *;";
-        ResultSet resultSet = statement.executeQuery(SQL_ADD_A_NEW_COMPLETION_OPTION);
-//        statement.close();
-        return resultSet;
+        statement.executeQuery(SQL_ADD_A_NEW_COMPLETION_OPTION);
+        statement.close();
     }
 
     @Override
-    public ResultSet delete(UUID completionId, UUID optionId) throws SQLException {
+    public void delete(UUID completionId, UUID optionId) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_DELETE_A_COMPLETION_OPTION = "DELETE FROM completionsoptions WHERE idcompletion = '" + completionId + "' AND idoption = '" + optionId + "' RETURNING *;";
-        ResultSet resultSet = statement.executeQuery(SQL_DELETE_A_COMPLETION_OPTION);
-//        statement.close();
-        return resultSet;
+        statement.executeQuery(SQL_DELETE_A_COMPLETION_OPTION);
+        statement.close();
     }
 }

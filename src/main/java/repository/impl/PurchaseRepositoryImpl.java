@@ -61,29 +61,26 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
     }
 
     @Override
-    public ResultSet create(UUID customerId, UUID carId) throws SQLException {
+    public void create(UUID customerId, UUID carId) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_ADD_A_NEW_ORDER = "INSERT INTO orders (idcustomer, idcar) VALUES ('" + customerId + "', '" + carId + "') RETURNING *;";
-        ResultSet resultSet = statement.executeQuery(SQL_ADD_A_NEW_ORDER);
-//        statement.close();
-        return resultSet;
+        statement.executeQuery(SQL_ADD_A_NEW_ORDER);
+        statement.close();
     }
 
     @Override
-    public ResultSet update(UUID purchaseId, UUID customerId, UUID carId) throws SQLException {
+    public void update(UUID purchaseId, UUID customerId, UUID carId) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_CHANGE_AN_ORDER = "UPDATE orders SET idcustomer = '" + customerId + "', idcar = '" + carId + "' WHERE id = '" + purchaseId + "' RETURNING *;";
-        ResultSet resultSet = statement.executeQuery(SQL_CHANGE_AN_ORDER);
-//        statement.close();
-        return resultSet;
+        statement.executeQuery(SQL_CHANGE_AN_ORDER);
+        statement.close();
     }
 
     @Override
-    public ResultSet delete(UUID purchaseId) throws SQLException {
+    public void delete(UUID purchaseId) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_DELETE_AN_ORDER = "DELETE FROM orders WHERE id = '" + purchaseId + "' RETURNING *;";
-        ResultSet resultSet = statement.executeQuery(SQL_DELETE_AN_ORDER);
-//        statement.close();
-        return resultSet;
+        statement.executeQuery(SQL_DELETE_AN_ORDER);
+        statement.close();
     }
 }

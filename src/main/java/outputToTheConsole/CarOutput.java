@@ -65,16 +65,13 @@ public class CarOutput {
                         System.out.println("Enter the VIN:");
                         String vin = scanner.nextLine();
 
-                        List<Car> carList = carService.getCarByVin(vin);
+                        Car car = carService.getCarByVin(vin);
 
-                        for (Car car : carList) {
-                            System.out.println(car);
-                        }
+                        System.out.println(car);
                         System.out.println();
 
                     } else if (userCommand.equals("3")) { // Выборка по id модели
                         System.out.println("Enter the model's id:");
-//                        String modelId = scanner.nextLine();
                         UUID modelId = UUID.fromString(scanner.nextLine());
 
                         List<Car> carList = carService.getCarByModelId(modelId);
@@ -94,45 +91,32 @@ public class CarOutput {
                 String vin = scanner.nextLine();
                 System.out.println("Enter the model's id of the new car:");
                 UUID modelId = UUID.fromString(scanner.nextLine());
-//                String modelId = scanner.nextLine();
 
-                List<Car> carList = carService.create(vin, modelId);
+                carService.create(vin, modelId);
 
-                System.out.println("New car's record has been created:");
-                for (Car car : carList) {
-                    System.out.println(car);
-                }
+                System.out.println("New car's record has been created.");
                 System.out.println();
 
             } else if (userCommand.equals("4")) { // Изменить автомобиль
                 System.out.println("Enter the car's id:");
-//                String id = scanner.nextLine();
                 UUID carId = UUID.fromString(scanner.nextLine());
                 System.out.println("Enter a new VIN for the car's record to edit:");
                 String vin = scanner.nextLine();
                 System.out.println("Enter a new model's id for the car's record to edit:");
                 UUID modelId = UUID.fromString(scanner.nextLine());
-//                String modelId = scanner.nextLine();
 
-                List<Car> carList = carService.update(carId, vin, modelId);
+                carService.update(carId, vin, modelId);
 
-                System.out.println("The car's record has been changed:");
-                for (Car car : carList) {
-                    System.out.println(car);
-                }
+                System.out.println("The car's record has been changed.");
                 System.out.println();
 
             } else if (userCommand.equals("5")) { // Удалить автомобиль
                 System.out.println("Enter the car's id:");
                 UUID carId = UUID.fromString(scanner.nextLine());
-//                String id = scanner.nextLine();
 
-                List<Car> carList = carService.delete(carId);
+                carService.delete(carId);
 
-                System.out.println("The car's record has been deleted:");
-                for (Car car : carList) {
-                    System.out.println(car);
-                }
+                System.out.println("The car's record has been deleted.");
                 System.out.println();
 
             } else {

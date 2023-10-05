@@ -53,29 +53,26 @@ public class CarRepositoryImpl implements CarRepository {
     }
 
     @Override
-    public ResultSet create(String vin, UUID modelId) throws SQLException {
+    public void create(String vin, UUID modelId) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_ADD_A_NEW_CAR = "INSERT INTO cars (vin, idmodel) VALUES ('" + vin + "', '" + modelId + "') RETURNING *;";
-        ResultSet resultSet = statement.executeQuery(SQL_ADD_A_NEW_CAR);
-//        statement.close();
-        return resultSet;
+        statement.executeQuery(SQL_ADD_A_NEW_CAR);
+        statement.close();
     }
 
     @Override
-    public ResultSet update(UUID carId, String vin, UUID modelId) throws SQLException {
+    public void update(UUID carId, String vin, UUID modelId) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_CHANGE_A_CAR = "UPDATE cars SET vin = '" + vin + "', idmodel = '" + modelId + "' WHERE id = '" + carId + "' RETURNING *;";
-        ResultSet resultSet = statement.executeQuery(SQL_CHANGE_A_CAR);
-//        statement.close();
-        return resultSet;
+        statement.executeQuery(SQL_CHANGE_A_CAR);
+        statement.close();
     }
 
     @Override
-    public ResultSet delete(UUID carId) throws SQLException {
+    public void delete(UUID carId) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_DELETE_A_CAR = "DELETE FROM cars WHERE id = '" + carId + "' RETURNING *;";
-        ResultSet resultSet = statement.executeQuery(SQL_DELETE_A_CAR);
-//        statement.close();
-        return resultSet;
+        statement.executeQuery(SQL_DELETE_A_CAR);
+        statement.close();
     }
 }

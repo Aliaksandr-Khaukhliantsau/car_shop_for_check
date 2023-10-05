@@ -15,9 +15,9 @@ public interface CarModelService {
 
     List<CarModel> getAllCarModels() throws SQLException;
 
-    List<CarModel> create(String modelName, UUID completionId) throws SQLException;
+    void create(String modelName, UUID completionId) throws SQLException;
 
-    List<CarModel> update(UUID modelId, String modelName, UUID completionId) throws SQLException;
+    void update(UUID modelId, String modelName, UUID completionId) throws SQLException;
 
-    List<CarModel> delete(UUID modelId) throws SQLException;
+    void delete(UUID modelId) throws SQLException;
 }

@@ -18,33 +18,27 @@ public class CarOptionServiceImpl implements CarOptionService {
     }
 
     @Override
-    public List<CarOption> getCarOptionByOptionId(UUID optionId) throws SQLException {
+    public CarOption getCarOptionByOptionId(UUID optionId) throws SQLException {
         ResultSet resultSet = carOptionRepository.getCarOptionByOptionId(optionId);
-        List<CarOption> carOptionList = new ArrayList<>();
+        CarOption carOption = new CarOption();
 
         while (resultSet.next()) {
-            CarOption carOption = new CarOption();
-            carOption.setOptionId(resultSet.getString("id"));
+            carOption.setOptionId(UUID.fromString(resultSet.getString("id")));
             carOption.setOptionName(resultSet.getString("name"));
-
-            carOptionList.add(carOption);
         }
-        return carOptionList;
+        return carOption;
     }
 
     @Override
-    public List<CarOption> getCarOptionByOptionName(String optionName) throws SQLException {
+    public CarOption getCarOptionByOptionName(String optionName) throws SQLException {
         ResultSet resultSet = carOptionRepository.getCarOptionByOptionName(optionName);
-        List<CarOption> carOptionList = new ArrayList<>();
+        CarOption carOption = new CarOption();
 
         while (resultSet.next()) {
-            CarOption carOption = new CarOption();
-            carOption.setOptionId(resultSet.getString("id"));
+            carOption.setOptionId(UUID.fromString(resultSet.getString("id")));
             carOption.setOptionName(resultSet.getString("name"));
-
-            carOptionList.add(carOption);
         }
-        return carOptionList;
+        return carOption;
     }
 
     @Override
@@ -54,7 +48,7 @@ public class CarOptionServiceImpl implements CarOptionService {
 
         while (resultSet.next()) {
             CarOption carOption = new CarOption();
-            carOption.setOptionId(resultSet.getString("id"));
+            carOption.setOptionId(UUID.fromString(resultSet.getString("id")));
             carOption.setOptionName(resultSet.getString("name"));
 
             carOptionList.add(carOption);
@@ -63,47 +57,17 @@ public class CarOptionServiceImpl implements CarOptionService {
     }
 
     @Override
-    public List<CarOption> create(String optionName) throws SQLException {
-        ResultSet resultSet = carOptionRepository.create(optionName);
-        List<CarOption> carOptionList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            CarOption carOption = new CarOption();
-            carOption.setOptionId(resultSet.getString("id"));
-            carOption.setOptionName(resultSet.getString("name"));
-
-            carOptionList.add(carOption);
-        }
-        return carOptionList;
+    public void create(String optionName) throws SQLException {
+        carOptionRepository.create(optionName);
     }
 
     @Override
-    public List<CarOption> update(UUID optionId, String optionName) throws SQLException {
-        ResultSet resultSet = carOptionRepository.update(optionId, optionName);
-        List<CarOption> carOptionList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            CarOption carOption = new CarOption();
-            carOption.setOptionId(resultSet.getString("id"));
-            carOption.setOptionName(resultSet.getString("name"));
-
-            carOptionList.add(carOption);
-        }
-        return carOptionList;
+    public void update(UUID optionId, String optionName) throws SQLException {
+        carOptionRepository.update(optionId, optionName);
     }
 
     @Override
-    public List<CarOption> delete(UUID optionId) throws SQLException {
-        ResultSet resultSet = carOptionRepository.delete(optionId);
-        List<CarOption> carOptionList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            CarOption carOption = new CarOption();
-            carOption.setOptionId(resultSet.getString("id"));
-            carOption.setOptionName(resultSet.getString("name"));
-
-            carOptionList.add(carOption);
-        }
-        return carOptionList;
+    public void delete(UUID optionId) throws SQLException {
+        carOptionRepository.delete(optionId);
     }
 }

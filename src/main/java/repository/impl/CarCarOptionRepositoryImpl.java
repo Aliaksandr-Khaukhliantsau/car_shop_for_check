@@ -43,29 +43,26 @@ public class CarCarOptionRepositoryImpl implements CarOptionRepository {
     }
 
     @Override
-    public ResultSet create(String optionName) throws SQLException {
+    public void create(String optionName) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_ADD_A_NEW_OPTION = "INSERT INTO options (name) VALUES ('" + optionName + "') RETURNING *;";
-        ResultSet resultSet = statement.executeQuery(SQL_ADD_A_NEW_OPTION);
-//        statement.close();
-        return resultSet;
+        statement.executeQuery(SQL_ADD_A_NEW_OPTION);
+        statement.close();
     }
 
     @Override
-    public ResultSet update(UUID optionId, String optionName) throws SQLException {
+    public void update(UUID optionId, String optionName) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_CHANGE_AN_OPTION = "UPDATE options SET name = '" + optionName + "' WHERE id = '" + optionId + "' RETURNING *;";
-        ResultSet resultSet = statement.executeQuery(SQL_CHANGE_AN_OPTION);
-//        statement.close();
-        return resultSet;
+        statement.executeQuery(SQL_CHANGE_AN_OPTION);
+        statement.close();
     }
 
     @Override
-    public ResultSet delete(UUID optionId) throws SQLException {
+    public void delete(UUID optionId) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_DELETE_AN_OPTION = "DELETE FROM options WHERE id = '" + optionId + "' RETURNING *;";
-        ResultSet resultSet = statement.executeQuery(SQL_DELETE_AN_OPTION);
-//        statement.close();
-        return resultSet;
+        statement.executeQuery(SQL_DELETE_AN_OPTION);
+        statement.close();
     }
 }

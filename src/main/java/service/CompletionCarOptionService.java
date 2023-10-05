@@ -13,7 +13,7 @@ public interface CompletionCarOptionService {
 
     List<CompletionCarOption> getAllCompletionCarOptions() throws SQLException;
 
-    List<CompletionCarOption> create(UUID completionId, UUID optionId) throws SQLException;
+    void create(UUID completionId, UUID optionId) throws SQLException;
 
-    List<CompletionCarOption> delete(UUID completionId, UUID optionId) throws SQLException;
+    void delete(UUID completionId, UUID optionId) throws SQLException;
 }

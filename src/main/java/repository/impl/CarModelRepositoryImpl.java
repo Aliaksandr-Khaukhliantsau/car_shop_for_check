@@ -54,29 +54,26 @@ public class CarModelRepositoryImpl implements CarModelRepository {
     }
 
     @Override
-    public ResultSet create(String modelName, UUID completionId) throws SQLException {
+    public void create(String modelName, UUID completionId) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_ADD_A_NEW_MODEL = "INSERT INTO models (name, idcompletion) VALUES ('" + modelName + "', '" + completionId + "') RETURNING *;";
-        ResultSet resultSet = statement.executeQuery(SQL_ADD_A_NEW_MODEL);
-//        statement.close();
-        return resultSet;
+        statement.executeQuery(SQL_ADD_A_NEW_MODEL);
+        statement.close();
     }
 
     @Override
-    public ResultSet update(UUID modelId, String modelName, UUID completionId) throws SQLException {
+    public void update(UUID modelId, String modelName, UUID completionId) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_CHANGE_A_MODEL = "UPDATE models SET name = '" + modelName + "', idcompletion = '" + completionId + "' WHERE id = '" + modelId + "' RETURNING *;";
-        ResultSet resultSet = statement.executeQuery(SQL_CHANGE_A_MODEL);
-//        statement.close();
-        return resultSet;
+        statement.executeQuery(SQL_CHANGE_A_MODEL);
+        statement.close();
     }
 
     @Override
-    public ResultSet delete(UUID modelId) throws SQLException {
+    public void delete(UUID modelId) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_DELETE_A_MODEL = "DELETE FROM models WHERE id = '" + modelId + "' RETURNING *;";
-        ResultSet resultSet = statement.executeQuery(SQL_DELETE_A_MODEL);
-//        statement.close();
-        return resultSet;
+        statement.executeQuery(SQL_DELETE_A_MODEL);
+        statement.close();
     }
 }

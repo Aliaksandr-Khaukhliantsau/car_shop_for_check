@@ -118,12 +118,8 @@ public class CustomerOutput {
                 String lastName = scanner.nextLine();
 
                 customerService.create(firstName, middleName, lastName);
-//                List<Customer> customerList = customerService.create(firstName, middleName, lastName);
 
-                System.out.println("New customer's record has been created:");
-//                for (Customer customer : customerList) {
-//                    System.out.println(customer);
-//                }
+                System.out.println("New customer's record has been created.");
                 System.out.println();
 
                 // Изменить клиента
@@ -137,13 +133,9 @@ public class CustomerOutput {
                 System.out.println("Enter a new last name for the customer's record to edit:");
                 String lastName = scanner.nextLine();
 
-//                List<Customer> customerList = customerService.update(customerId, firstName, middleName, lastName);
                 customerService.update(customerId, firstName, middleName, lastName);
 
-                System.out.println("The customer's record has been changed:");
-//                for (Customer customer : customerList) {
-//                    System.out.println(customer);
-//                }
+                System.out.println("The customer's record has been changed.");
                 System.out.println();
 
                 // Удалить клиента
@@ -151,13 +143,9 @@ public class CustomerOutput {
                 System.out.println("Enter the customer's id:");
                 UUID customerId = UUID.fromString(scanner.nextLine());
 
-//                List<Customer> customerList = customerService.delete(customerId);
                 customerService.delete(customerId);
 
-                System.out.println("The customer's record has been deleted:");
-//                for (Customer customer : customerList) {
-//                    System.out.println(customer);
-//                }
+                System.out.println("The customer's record has been deleted.");
                 System.out.println();
 
             } else {

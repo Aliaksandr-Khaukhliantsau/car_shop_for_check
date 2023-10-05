@@ -3,8 +3,8 @@ package service.impl;
 import entity.Car;
 import repository.CarRepository;
 import repository.impl.CarRepositoryImpl;
-import service.CarService;
 import service.CarModelService;
+import service.CarService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,21 +35,18 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> getCarByVin(String vin) throws SQLException {
+    public Car getCarByVin(String vin) throws SQLException {
         ResultSet resultSet = carRepository.getCarByVin(vin);
-        List<Car> carList = new ArrayList<>();
+        Car car = new Car();
 
         while (resultSet.next()) {
-            Car car = new Car();
             car.setCarId(UUID.fromString(resultSet.getString("id")));
             car.setVin(resultSet.getString("vin"));
             UUID modelId = UUID.fromString(resultSet.getString("idmodel"));
             CarModelService carModelService = new CarModelServiceImpl();
             car.setCarModel(carModelService.getCarModelByModelId(modelId));
-
-            carList.add(car);
         }
-        return carList;
+        return car;
     }
 
     @Override
@@ -88,54 +85,17 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> create(String vin, UUID modelId) throws SQLException {
-        ResultSet resultSet = carRepository.create(vin, modelId);
-        List<Car> carList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            Car car = new Car();
-            car.setCarId(UUID.fromString(resultSet.getString("id")));
-            car.setVin(resultSet.getString("vin"));
-            CarModelService carModelService = new CarModelServiceImpl();
-            car.setCarModel(carModelService.getCarModelByModelId(modelId));
-
-            carList.add(car);
-        }
-        return carList;
+    public void create(String vin, UUID modelId) throws SQLException {
+        carRepository.create(vin, modelId);
     }
 
     @Override
-    public List<Car> update(UUID carId, String vin, UUID modelId) throws SQLException {
-        ResultSet resultSet = carRepository.update(carId, vin, modelId);
-        List<Car> carList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            Car car = new Car();
-            car.setCarId(UUID.fromString(resultSet.getString("id"))); // название в бд привести в порядок
-            car.setVin(resultSet.getString("vin"));
-            CarModelService carModelService = new CarModelServiceImpl();
-            car.setCarModel(carModelService.getCarModelByModelId(modelId));
-
-            carList.add(car);
-        }
-        return carList;
+    public void update(UUID carId, String vin, UUID modelId) throws SQLException {
+        carRepository.update(carId, vin, modelId);
     }
 
     @Override
-    public List<Car> delete(UUID carId) throws SQLException {
-        ResultSet resultSet = carRepository.delete(carId);
-        List<Car> carList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            Car car = new Car();
-            car.setCarId(UUID.fromString(resultSet.getString("id")));
-            car.setVin(resultSet.getString("vin"));
-            UUID modelId = UUID.fromString(resultSet.getString("idmodel"));
-            CarModelService carModelService = new CarModelServiceImpl();
-            car.setCarModel(carModelService.getCarModelByModelId(modelId));
-
-            carList.add(car);
-        }
-        return carList;
+    public void delete(UUID carId) throws SQLException {
+        carRepository.delete(carId);
     }
 }

@@ -4,6 +4,7 @@ import entity.CarModel;
 import repository.CarModelRepository;
 import repository.impl.CarModelRepositoryImpl;
 import service.CarModelService;
+import service.CompletionService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,9 +24,11 @@ public class CarModelServiceImpl implements CarModelService {
         CarModel carModel = new CarModel();
 
         while (resultSet.next()) {
-            carModel.setModelId(resultSet.getString("id"));
+            carModel.setModelId(UUID.fromString(resultSet.getString("id")));
             carModel.setModelName(resultSet.getString("name"));
-            carModel.setCompletionId(resultSet.getString("idcompletion"));
+            UUID completionId = UUID.fromString(resultSet.getString("idcompletion"));
+            CompletionService completionService = new CompletionServiceImpl();
+            carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
 
         }
         return carModel;
@@ -38,9 +41,11 @@ public class CarModelServiceImpl implements CarModelService {
 
         while (resultSet.next()) {
             CarModel carModel = new CarModel();
-            carModel.setModelId(resultSet.getString("id"));
+            carModel.setModelId(UUID.fromString(resultSet.getString("id")));
             carModel.setModelName(resultSet.getString("name"));
-            carModel.setCompletionId(resultSet.getString("idcompletion"));
+            UUID completionId = UUID.fromString(resultSet.getString("idcompletion"));
+            CompletionService completionService = new CompletionServiceImpl();
+            carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
 
             carModelList.add(carModel);
         }
@@ -54,9 +59,10 @@ public class CarModelServiceImpl implements CarModelService {
 
         while (resultSet.next()) {
             CarModel carModel = new CarModel();
-            carModel.setModelId(resultSet.getString("id"));
+            carModel.setModelId(UUID.fromString(resultSet.getString("id")));
             carModel.setModelName(resultSet.getString("name"));
-            carModel.setCompletionId(resultSet.getString("idcompletion"));
+            CompletionService completionService = new CompletionServiceImpl();
+            carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
 
             carModelList.add(carModel);
         }
@@ -70,9 +76,11 @@ public class CarModelServiceImpl implements CarModelService {
 
         while (resultSet.next()) {
             CarModel carModel = new CarModel();
-            carModel.setModelId(resultSet.getString("id"));
+            carModel.setModelId(UUID.fromString(resultSet.getString("id")));
             carModel.setModelName(resultSet.getString("name"));
-            carModel.setCompletionId(resultSet.getString("idcompletion"));
+            UUID completionId = UUID.fromString(resultSet.getString("idcompletion"));
+            CompletionService completionService = new CompletionServiceImpl();
+            carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
 
             carModelList.add(carModel);
         }
@@ -80,50 +88,17 @@ public class CarModelServiceImpl implements CarModelService {
     }
 
     @Override
-    public List<CarModel> create(String modelName, UUID completionId) throws SQLException {
-        ResultSet resultSet = carModelRepository.create(modelName, completionId);
-        List<CarModel> carModelList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            CarModel carModel = new CarModel();
-            carModel.setModelId(resultSet.getString("id"));
-            carModel.setModelName(resultSet.getString("name"));
-            carModel.setCompletionId(resultSet.getString("idcompletion"));
-
-            carModelList.add(carModel);
-        }
-        return carModelList;
+    public void create(String modelName, UUID completionId) throws SQLException {
+        carModelRepository.create(modelName, completionId);
     }
 
     @Override
-    public List<CarModel> update(UUID modelId, String modelName, UUID completionId) throws SQLException {
-        ResultSet resultSet = carModelRepository.update(modelId, modelName, completionId);
-        List<CarModel> carModelList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            CarModel carModel = new CarModel();
-            carModel.setModelId(resultSet.getString("id"));
-            carModel.setModelName(resultSet.getString("name"));
-            carModel.setCompletionId(resultSet.getString("idcompletion"));
-
-            carModelList.add(carModel);
-        }
-        return carModelList;
+    public void update(UUID modelId, String modelName, UUID completionId) throws SQLException {
+        carModelRepository.update(modelId, modelName, completionId);
     }
 
     @Override
-    public List<CarModel> delete(UUID modelId) throws SQLException {
-        ResultSet resultSet = carModelRepository.delete(modelId);
-        List<CarModel> carModelList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            CarModel carModel = new CarModel();
-            carModel.setModelId(resultSet.getString("id"));
-            carModel.setModelName(resultSet.getString("name"));
-            carModel.setCompletionId(resultSet.getString("idcompletion"));
-
-            carModelList.add(carModel);
-        }
-        return carModelList;
+    public void delete(UUID modelId) throws SQLException {
+        carModelRepository.delete(modelId);
     }
 }

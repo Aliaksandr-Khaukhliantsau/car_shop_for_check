@@ -7,15 +7,15 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CarOptionService {
-    List<CarOption> getCarOptionByOptionId(UUID optionId) throws SQLException;
+    CarOption getCarOptionByOptionId(UUID optionId) throws SQLException;
 
-    List<CarOption> getCarOptionByOptionName(String optionName) throws SQLException;
+    CarOption getCarOptionByOptionName(String optionName) throws SQLException;
 
     List<CarOption> getAllCarOptions() throws SQLException;
 
-    List<CarOption> create(String optionName) throws SQLException;
+    void create(String optionName) throws SQLException;
 
-    List<CarOption> update(UUID optionId, String optionName) throws SQLException;
+    void update(UUID optionId, String optionName) throws SQLException;
 
-    List<CarOption> delete(UUID optionId) throws SQLException;
+    void delete(UUID optionId) throws SQLException;
 }

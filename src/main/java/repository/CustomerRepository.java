@@ -15,12 +15,6 @@ public interface CustomerRepository {
 
     ResultSet getAllCustomers() throws SQLException;
 
-//    ResultSet create(String firstName, String lastName, String middleName) throws SQLException;
-//
-//    ResultSet update(UUID customerId, String firstName, String lastName, String middleName) throws SQLException;
-//
-//    ResultSet delete(UUID customerId) throws SQLException;
-
     void create(String firstName, String lastName, String middleName) throws SQLException;
 
     void update(UUID customerId, String firstName, String lastName, String middleName) throws SQLException;

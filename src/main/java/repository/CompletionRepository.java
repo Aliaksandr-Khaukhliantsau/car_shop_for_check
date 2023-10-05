@@ -11,9 +11,9 @@ public interface CompletionRepository {
 
     ResultSet getAllCompletions() throws SQLException;
 
-    ResultSet create(String completionName) throws SQLException;
+    void create(String completionName) throws SQLException;
 
-    ResultSet update(UUID completionId, String completionName) throws SQLException;
+    void update(UUID completionId, String completionName) throws SQLException;
 
-    ResultSet delete(UUID completionId) throws SQLException;
+    void delete(UUID completionId) throws SQLException;
 }

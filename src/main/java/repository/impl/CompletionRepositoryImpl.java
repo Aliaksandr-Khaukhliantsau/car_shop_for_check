@@ -43,29 +43,26 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     }
 
     @Override
-    public ResultSet create(String completionName) throws SQLException {
+    public void create(String completionName) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_ADD_A_NEW_COMPLETION = "INSERT INTO completions (name) VALUES ('" + completionName + "') RETURNING *;";
-        ResultSet resultSet = statement.executeQuery(SQL_ADD_A_NEW_COMPLETION);
-//        statement.close();
-        return resultSet;
+        statement.executeQuery(SQL_ADD_A_NEW_COMPLETION);
+        statement.close();
     }
 
     @Override
-    public ResultSet update(UUID completionId, String completionName) throws SQLException {
+    public void update(UUID completionId, String completionName) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_CHANGE_A_COMPLETION = "UPDATE completions SET name = '" + completionName + "' WHERE id = '" + completionId + "' RETURNING *;";
-        ResultSet resultSet = statement.executeQuery(SQL_CHANGE_A_COMPLETION);
-//        statement.close();
-        return resultSet;
+        statement.executeQuery(SQL_CHANGE_A_COMPLETION);
+        statement.close();
     }
 
     @Override
-    public ResultSet delete(UUID completionId) throws SQLException {
+    public void delete(UUID completionId) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_DELETE_A_COMPLETION = "DELETE FROM completions WHERE id = '" + completionId + "' RETURNING *;";
-        ResultSet resultSet = statement.executeQuery(SQL_DELETE_A_COMPLETION);
-//        statement.close();
-        return resultSet;
+        statement.executeQuery(SQL_DELETE_A_COMPLETION);
+        statement.close();
     }
 }

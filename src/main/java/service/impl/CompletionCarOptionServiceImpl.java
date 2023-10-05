@@ -24,8 +24,8 @@ public class CompletionCarOptionServiceImpl implements CompletionCarOptionServic
 
         while (resultSet.next()) {
             CompletionCarOption completionCarOption = new CompletionCarOption();
-            completionCarOption.setCompletionId(resultSet.getString("idcompletion"));
-            completionCarOption.setOptionId(resultSet.getString("idoption"));
+            completionCarOption.setCompletionId(UUID.fromString(resultSet.getString("idcompletion")));
+            completionCarOption.setOptionId(UUID.fromString(resultSet.getString("idoption")));
 
             completionCarOptionList.add(completionCarOption);
         }
@@ -39,8 +39,8 @@ public class CompletionCarOptionServiceImpl implements CompletionCarOptionServic
 
         while (resultSet.next()) {
             CompletionCarOption completionCarOption = new CompletionCarOption();
-            completionCarOption.setCompletionId(resultSet.getString("idcompletion"));
-            completionCarOption.setOptionId(resultSet.getString("idoption"));
+            completionCarOption.setCompletionId(UUID.fromString(resultSet.getString("idcompletion")));
+            completionCarOption.setOptionId(UUID.fromString(resultSet.getString("idoption")));
 
             completionCarOptionList.add(completionCarOption);
         }
@@ -54,8 +54,8 @@ public class CompletionCarOptionServiceImpl implements CompletionCarOptionServic
 
         while (resultSet.next()) {
             CompletionCarOption completionCarOption = new CompletionCarOption();
-            completionCarOption.setCompletionId(resultSet.getString("idcompletion"));
-            completionCarOption.setOptionId(resultSet.getString("idoption"));
+            completionCarOption.setCompletionId(UUID.fromString(resultSet.getString("idcompletion")));
+            completionCarOption.setOptionId(UUID.fromString(resultSet.getString("idoption")));
 
             completionCarOptionList.add(completionCarOption);
         }
@@ -63,32 +63,12 @@ public class CompletionCarOptionServiceImpl implements CompletionCarOptionServic
     }
 
     @Override
-    public List<CompletionCarOption> create(UUID completionId, UUID optionId) throws SQLException {
-        ResultSet resultSet = completionCarOptionRepository.create(completionId, optionId);
-        List<CompletionCarOption> completionCarOptionList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            CompletionCarOption completionCarOption = new CompletionCarOption();
-            completionCarOption.setCompletionId(resultSet.getString("idcompletion"));
-            completionCarOption.setOptionId(resultSet.getString("idoption"));
-
-            completionCarOptionList.add(completionCarOption);
-        }
-        return completionCarOptionList;
+    public void create(UUID completionId, UUID optionId) throws SQLException {
+        completionCarOptionRepository.create(completionId, optionId);
     }
 
     @Override
-    public List<CompletionCarOption> delete(UUID completionId, UUID optionId) throws SQLException {
-        ResultSet resultSet = completionCarOptionRepository.delete(completionId, optionId);
-        List<CompletionCarOption> completionCarOptionList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            CompletionCarOption completionCarOption = new CompletionCarOption();
-            completionCarOption.setCompletionId(resultSet.getString("idcompletion"));
-            completionCarOption.setOptionId(resultSet.getString("idoption"));
-
-            completionCarOptionList.add(completionCarOption);
-        }
-        return completionCarOptionList;
+    public void delete(UUID completionId, UUID optionId) throws SQLException {
+        completionCarOptionRepository.delete(completionId, optionId);
     }
 }

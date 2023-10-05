@@ -11,9 +11,9 @@ public interface CarOptionRepository {
 
     ResultSet getAllCarOptions() throws SQLException;
 
-    ResultSet create(String optionName) throws SQLException;
+    void create(String optionName) throws SQLException;
 
-    ResultSet update(UUID optionId, String optionName) throws SQLException;
+    void update(UUID optionId, String optionName) throws SQLException;
 
-    ResultSet delete(UUID optionId) throws SQLException;
+    void delete(UUID optionId) throws SQLException;
 }

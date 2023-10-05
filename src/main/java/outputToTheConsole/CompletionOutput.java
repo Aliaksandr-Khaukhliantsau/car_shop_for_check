@@ -7,6 +7,7 @@ import service.impl.CompletionServiceImpl;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class CompletionOutput {
     public static void main(String[] args) throws SQLException {
@@ -24,12 +25,14 @@ public class CompletionOutput {
 
             String userCommand = scanner.nextLine();
 
-            if (userCommand.equals("0")) { // Выход из программы и освобождение ресурсов
+            // Выход из программы и освобождение ресурсов
+            if (userCommand.equals("0")) {
                 System.out.println("Exit from program.");
                 scanner.close();
                 System.exit(0);
 
-            } else if (userCommand.equals("1")) { // Показать все комплектации
+                // Показать все комплектации
+            } else if (userCommand.equals("1")) {
                 List<Completion> completionList = completionService.getAllCompletions();
 
                 for (Completion completion : completionList) {
@@ -37,40 +40,40 @@ public class CompletionOutput {
                 }
                 System.out.println();
 
-            } else if (userCommand.equals("2")) { // Показать комплектации по выборке
+                // Показать комплектации по выборке
+            } else if (userCommand.equals("2")) {
                 // Меню выборки
                 while (true) {
                     System.out.println("Select a sample:");
-                    System.out.println("1 - id");
-                    System.out.println("2 - Name");
+                    System.out.println("1 - Completion's id");
+                    System.out.println("2 - Completion's name");
                     System.out.println("0 - Back to the previous menu");
 
                     userCommand = scanner.nextLine();
 
-                    if (userCommand.equals("0")) { // Выход в предыдущее меню
+                    // Выход в предыдущее меню
+                    if (userCommand.equals("0")) {
                         System.out.println("Exit to the previous menu.\n");
                         break;
 
-                    } else if (userCommand.equals("1")) { // Выборка по id
-                        System.out.println("Enter the id:");
-                        String id = scanner.nextLine();
+                        // Выборка по id
+                    } else if (userCommand.equals("1")) {
+                        System.out.println("Enter the completion's id:");
+                        UUID completionId = UUID.fromString(scanner.nextLine());
 
-                        List<Completion> completionList = completionService.getCompletionByCompletionId(id);
+                        Completion completion = completionService.getCompletionByCompletionId(completionId);
 
-                        for (Completion completion : completionList) {
-                            System.out.println(completion);
-                        }
+                        System.out.println(completion);
                         System.out.println();
 
-                    } else if (userCommand.equals("2")) { // Выборка по названию
-                        System.out.println("Enter the name:");
-                        String name = scanner.nextLine();
+                        // Выборка по названию
+                    } else if (userCommand.equals("2")) {
+                        System.out.println("Enter the completion's name:");
+                        String completionName = scanner.nextLine();
 
-                        List<Completion> completionList = completionService.getCompletionByCompletionName(name);
+                        Completion completion = completionService.getCompletionByCompletionName(completionName);
 
-                        for (Completion completion : completionList) {
-                            System.out.println(completion);
-                        }
+                        System.out.println(completion);
                         System.out.println();
 
                     } else {
@@ -78,42 +81,36 @@ public class CompletionOutput {
                     }
                 }
 
-            } else if (userCommand.equals("3")) { // Создать новую комплектацию
-                System.out.println("Enter the name of the new completion:");
-                String name = scanner.nextLine();
+                // Создать новую комплектацию
+            } else if (userCommand.equals("3")) {
+                System.out.println("Enter the completion's name of the new completion:");
+                String completionName = scanner.nextLine();
 
-                List<Completion> completionList = completionService.create(name);
+                completionService.create(completionName);
 
                 System.out.println("New completion's record has been created:");
-                for (Completion completion : completionList) {
-                    System.out.println(completion);
-                }
                 System.out.println();
 
-            } else if (userCommand.equals("4")) { // Изменить комплектацию
+                // Изменить комплектацию
+            } else if (userCommand.equals("4")) {
                 System.out.println("Enter the completion's id:");
-                String id = scanner.nextLine();
+                UUID completionId = UUID.fromString(scanner.nextLine());
                 System.out.println("Enter a new name for the completion's record to edit:");
-                String name = scanner.nextLine();
+                String completionName = scanner.nextLine();
 
-                List<Completion> completionList = completionService.update(id, name);
+                completionService.update(completionId, completionName);
 
                 System.out.println("The completion's record has been changed:");
-                for (Completion completion : completionList) {
-                    System.out.println(completion);
-                }
                 System.out.println();
 
-            } else if (userCommand.equals("5")) { // Удалить комплектацию
+                // Удалить комплектацию
+            } else if (userCommand.equals("5")) {
                 System.out.println("Enter the completion's id:");
-                String id = scanner.nextLine();
+                UUID completionId = UUID.fromString(scanner.nextLine());
 
-                List<Completion> completionList = completionService.delete(id);
+                completionService.delete(completionId);
 
                 System.out.println("The completion's record has been deleted:");
-                for (Completion completion : completionList) {
-                    System.out.println(completion);
-                }
                 System.out.println();
 
             } else {

@@ -7,6 +7,7 @@ import service.impl.CompletionCarOptionServiceImpl;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class CompletionCarOptionOutput {
     public static void main(String[] args) throws SQLException {
@@ -15,20 +16,22 @@ public class CompletionCarOptionOutput {
 
         // Основное меню
         while (true) {
-            System.out.println("1 - Show all completionsoptions");
-            System.out.println("2 - Show completionsoptions by the sample");
-            System.out.println("3 - Create a new completionoption");
-            System.out.println("4 - Delete a completionoption");
+            System.out.println("1 - Show all completionscaroptions");
+            System.out.println("2 - Show completionscaroptions by the sample");
+            System.out.println("3 - Create a new completionscaroption");
+            System.out.println("4 - Delete a completionscaroption");
             System.out.println("0 - Exit");
 
             String userCommand = scanner.nextLine();
 
-            if (userCommand.equals("0")) { // Выход из программы и освобождение ресурсов
+            // Выход из программы и освобождение ресурсов
+            if (userCommand.equals("0")) {
                 System.out.println("Exit from program.");
                 scanner.close();
                 System.exit(0);
 
-            } else if (userCommand.equals("1")) { // Показать все completionsoptions
+                // Показать все completionscaroptions
+            } else if (userCommand.equals("1")) {
                 List<CompletionCarOption> completionCarOptionList = completionCarOptionService.getAllCompletionCarOptions();
 
                 for (CompletionCarOption completionCarOption : completionCarOptionList) {
@@ -36,7 +39,8 @@ public class CompletionCarOptionOutput {
                 }
                 System.out.println();
 
-            } else if (userCommand.equals("2")) { // Показать опции по выборке
+                // Показать опции по выборке
+            } else if (userCommand.equals("2")) {
                 // Меню выборки
                 while (true) {
                     System.out.println("Select a sample:");
@@ -46,26 +50,29 @@ public class CompletionCarOptionOutput {
 
                     userCommand = scanner.nextLine();
 
-                    if (userCommand.equals("0")) { // Выход в предыдущее меню
+                    // Выход в предыдущее меню
+                    if (userCommand.equals("0")) {
                         System.out.println("Exit to the previous menu.\n");
                         break;
 
-                    } else if (userCommand.equals("1")) { // Выборка по id комплектации
+                        // Выборка по id комплектации
+                    } else if (userCommand.equals("1")) {
                         System.out.println("Enter the customer's id:");
-                        String idCompletion = scanner.nextLine();
+                        UUID completionId = UUID.fromString(scanner.nextLine());
 
-                        List<CompletionCarOption> completionCarOptionList = completionCarOptionService.getCompletionCarOptionByCompletionId(idCompletion);
+                        List<CompletionCarOption> completionCarOptionList = completionCarOptionService.getCompletionCarOptionByCompletionId(completionId);
 
                         for (CompletionCarOption completionCarOption : completionCarOptionList) {
                             System.out.println(completionCarOption);
                         }
                         System.out.println();
 
-                    } else if (userCommand.equals("2")) { // Выборка по id опции
+                        // Выборка по id опции
+                    } else if (userCommand.equals("2")) {
                         System.out.println("Enter the option's id:");
-                        String idOption = scanner.nextLine();
+                        UUID optionId = UUID.fromString(scanner.nextLine());
 
-                        List<CompletionCarOption> completionCarOptionList = completionCarOptionService.getCompletionCarOptionByOptionId(idOption);
+                        List<CompletionCarOption> completionCarOptionList = completionCarOptionService.getCompletionCarOptionByOptionId(optionId);
 
                         for (CompletionCarOption completionCarOption : completionCarOptionList) {
                             System.out.println(completionCarOption);
@@ -77,32 +84,28 @@ public class CompletionCarOptionOutput {
                     }
                 }
 
-            } else if (userCommand.equals("3")) { // Создать новый completiosoption
-                System.out.println("Enter the completion's id of the new completiosoption:");
-                String idCompletion = scanner.nextLine();
-                System.out.println("Enter the option's id of the new completiosoption:");
-                String idOption = scanner.nextLine();
+                // Создать новый completionscaroption
+            } else if (userCommand.equals("3")) {
+                System.out.println("Enter the completion's id of the new completioscaroption:");
+                UUID completionId = UUID.fromString(scanner.nextLine());
+                System.out.println("Enter the option's id of the new completioscaroption:");
+                UUID optionId = UUID.fromString(scanner.nextLine());
 
-                List<CompletionCarOption> completionCarOptionList = completionCarOptionService.create(idCompletion, idOption);
+                completionCarOptionService.create(completionId, optionId);
 
-                System.out.println("New completiosoption's record has been created:");
-                for (CompletionCarOption completionCarOption : completionCarOptionList) {
-                    System.out.println(completionCarOption);
-                }
+                System.out.println("New completioscaroption's record has been created.");
                 System.out.println();
 
-            } else if (userCommand.equals("4")) { // Удалить completiosoption
+                // Удалить completiosoption
+            } else if (userCommand.equals("4")) {
                 System.out.println("Enter the completion's id:");
-                String idCompletion = scanner.nextLine();
+                UUID completionId = UUID.fromString(scanner.nextLine());
                 System.out.println("Enter the option's id:");
-                String idOption = scanner.nextLine();
+                UUID optionId = UUID.fromString(scanner.nextLine());
 
-                List<CompletionCarOption> completionCarOptionList = completionCarOptionService.delete(idCompletion, idOption);
+                completionCarOptionService.delete(completionId, optionId);
 
-                System.out.println("The completiosoption's record has been deleted:");
-                for (CompletionCarOption completionCarOption : completionCarOptionList) {
-                    System.out.println(completionCarOption);
-                }
+                System.out.println("The completioscaroption's record has been deleted.");
                 System.out.println();
 
             } else {

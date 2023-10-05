@@ -7,6 +7,7 @@ import service.impl.CarOptionServiceImpl;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class CarOptionOutput {
     public static void main(String[] args) throws SQLException {
@@ -24,12 +25,14 @@ public class CarOptionOutput {
 
             String userCommand = scanner.nextLine();
 
-            if (userCommand.equals("0")) { // Выход из программы и освобождение ресурсов
+            // Выход из программы и освобождение ресурсов
+            if (userCommand.equals("0")) {
                 System.out.println("Exit from program.");
                 scanner.close();
                 System.exit(0);
 
-            } else if (userCommand.equals("1")) { // Показать все опции
+                // Показать все опции
+            } else if (userCommand.equals("1")) {
                 List<CarOption> carOptionList = carOptionService.getAllCarOptions();
 
                 for (CarOption carOption : carOptionList) {
@@ -37,40 +40,40 @@ public class CarOptionOutput {
                 }
                 System.out.println();
 
-            } else if (userCommand.equals("2")) { // Показать опции по выборке
+                // Показать опции по выборке
+            } else if (userCommand.equals("2")) {
                 // Меню выборки
                 while (true) {
                     System.out.println("Select a sample:");
-                    System.out.println("1 - id");
+                    System.out.println("1 - Option's id");
                     System.out.println("2 - Name");
                     System.out.println("0 - Back to the previous menu");
 
                     userCommand = scanner.nextLine();
 
-                    if (userCommand.equals("0")) { // Выход в предыдущее меню
+                    // Выход в предыдущее меню
+                    if (userCommand.equals("0")) {
                         System.out.println("Exit to the previous menu.\n");
                         break;
 
-                    } else if (userCommand.equals("1")) { // Выборка по id
-                        System.out.println("Enter the id:");
-                        String id = scanner.nextLine();
+                        // Выборка по optionId
+                    } else if (userCommand.equals("1")) {
+                        System.out.println("Enter the option's id:");
+                        UUID optionId = UUID.fromString(scanner.nextLine());
 
-                        List<CarOption> carOptionList = carOptionService.getCarOptionByOptionId(id);
+                        CarOption carOption = carOptionService.getCarOptionByOptionId(optionId);
 
-                        for (CarOption carOption : carOptionList) {
-                            System.out.println(carOption);
-                        }
+                        System.out.println(carOption);
                         System.out.println();
 
-                    } else if (userCommand.equals("2")) { // Выборка по названию
-                        System.out.println("Enter the name:");
-                        String name = scanner.nextLine();
+                        // Выборка по названию
+                    } else if (userCommand.equals("2")) {
+                        System.out.println("Enter the option's name:");
+                        String optionName = scanner.nextLine();
 
-                        List<CarOption> carOptionList = carOptionService.getCarOptionByOptionName(name);
+                        CarOption carOption = carOptionService.getCarOptionByOptionName(optionName);
 
-                        for (CarOption carOption : carOptionList) {
-                            System.out.println(carOption);
-                        }
+                        System.out.println(carOption);
                         System.out.println();
 
                     } else {
@@ -78,42 +81,36 @@ public class CarOptionOutput {
                     }
                 }
 
-            } else if (userCommand.equals("3")) { // Создать новую опцию
-                System.out.println("Enter the name of the new option:");
-                String name = scanner.nextLine();
+                // Создать новую опцию
+            } else if (userCommand.equals("3")) {
+                System.out.println("Enter the option's name of the new option:");
+                String optionName = scanner.nextLine();
 
-                List<CarOption> carOptionList = carOptionService.create(name);
+                carOptionService.create(optionName);
 
-                System.out.println("New option's record has been created:");
-                for (CarOption carOption : carOptionList) {
-                    System.out.println(carOption);
-                }
+                System.out.println("New option's record has been created.");
                 System.out.println();
 
-            } else if (userCommand.equals("4")) { // Изменить опцию
+                // Изменить опцию
+            } else if (userCommand.equals("4")) {
                 System.out.println("Enter the option's id:");
-                String id = scanner.nextLine();
+                UUID optionId = UUID.fromString(scanner.nextLine());
                 System.out.println("Enter a new name for the option's record to edit:");
-                String name = scanner.nextLine();
+                String optionName = scanner.nextLine();
 
-                List<CarOption> carOptionList = carOptionService.update(id, name);
+                carOptionService.update(optionId, optionName);
 
-                System.out.println("The option's record has been changed:");
-                for (CarOption carOption : carOptionList) {
-                    System.out.println(carOption);
-                }
+                System.out.println("The option's record has been changed.");
                 System.out.println();
 
-            } else if (userCommand.equals("5")) { // Удалить опцию
+                // Удалить опцию
+            } else if (userCommand.equals("5")) {
                 System.out.println("Enter the option's id:");
-                String id = scanner.nextLine();
+                UUID optionId = UUID.fromString(scanner.nextLine());
 
-                List<CarOption> carOptionList = carOptionService.delete(id);
+                carOptionService.delete(optionId);
 
-                System.out.println("The option's record has been deleted:");
-                for (CarOption carOption : carOptionList) {
-                    System.out.println(carOption);
-                }
+                System.out.println("The option's record has been deleted.");
                 System.out.println();
 
             } else {

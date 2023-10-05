@@ -17,12 +17,6 @@ public interface CustomerService {
 
     List<Customer> getAllCustomers() throws SQLException;
 
-//    List<Customer> create(String firstName, String middleName, String lastName) throws SQLException;
-//
-//    List<Customer> update(UUID customerId, String firstName, String middleName, String lastName) throws SQLException;
-//
-//    List<Customer> delete(UUID customerId) throws SQLException;
-
     void create(String firstName, String middleName, String lastName) throws SQLException;
 
     void update(UUID customerId, String firstName, String middleName, String lastName) throws SQLException;
