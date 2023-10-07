@@ -1,8 +1,10 @@
 package service.impl;
 
+import entity.CarOption;
 import entity.Completion;
 import repository.CompletionRepository;
 import repository.impl.CompletionRepositoryImpl;
+import service.CarOptionService;
 import service.CompletionService;
 
 import java.sql.ResultSet;
@@ -25,6 +27,10 @@ public class CompletionServiceImpl implements CompletionService {
         while (resultSet.next()) {
             completion.setCompletionId(UUID.fromString(resultSet.getString("id")));
             completion.setCompletionName(resultSet.getString("name"));
+            CarOptionService carOptionService = new CarOptionServiceImpl();
+            List<CarOption> carOptionList = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("id")));
+            completion.setCarOptions(carOptionList);
+
         }
         return completion;
     }
@@ -37,6 +43,9 @@ public class CompletionServiceImpl implements CompletionService {
         while (resultSet.next()) {
             completion.setCompletionId(UUID.fromString(resultSet.getString("id")));
             completion.setCompletionName(resultSet.getString("name"));
+            CarOptionService carOptionService = new CarOptionServiceImpl();
+            List<CarOption> carOptionList = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("id")));
+            completion.setCarOptions(carOptionList);
         }
         return completion;
     }
@@ -50,6 +59,9 @@ public class CompletionServiceImpl implements CompletionService {
             Completion completion = new Completion();
             completion.setCompletionId(UUID.fromString(resultSet.getString("id")));
             completion.setCompletionName(resultSet.getString("name"));
+            CarOptionService carOptionService = new CarOptionServiceImpl();
+            List<CarOption> carOptionList = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("id")));
+            completion.setCarOptions(carOptionList);
 
             completionList.add(completion);
         }
@@ -69,5 +81,19 @@ public class CompletionServiceImpl implements CompletionService {
     @Override
     public void delete(UUID CompletionId) throws SQLException {
         completionRepository.delete(CompletionId);
+    }
+
+//    @Override
+//    public void addCarOption(Completion completion, UUID optionId) throws SQLException {
+//        completionRepository.addCarOption(completion.getCompletionId(), optionId);
+//        CarOptionService carOptionService = new CarOptionServiceImpl();
+//        CarOption carOption = carOptionService.getCarOptionByOptionId(optionId);
+//        completion.addCarOption(carOption);
+//
+//    }
+
+    @Override
+    public void addCarOption(UUID completionId, UUID optionId) throws SQLException {
+        completionRepository.addCarOption(completionId, optionId);
     }
 }

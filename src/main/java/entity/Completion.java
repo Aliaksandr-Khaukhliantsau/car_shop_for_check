@@ -1,5 +1,6 @@
 package entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,6 +40,15 @@ public class Completion {
 
     public void setCarOptions(List<CarOption> carOptions) {
         this.carOptions = carOptions;
+    }
+
+    public void addCarOption(CarOption carOption) {
+        if (this.carOptions != null) {
+            this.carOptions.add(carOption);
+        } else {
+            this.carOptions = new ArrayList<>();
+            this.carOptions.add(carOption);
+        }
     }
 
     @Override

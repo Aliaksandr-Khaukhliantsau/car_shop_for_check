@@ -11,6 +11,8 @@ public interface CarOptionService {
 
     CarOption getCarOptionByOptionName(String optionName) throws SQLException;
 
+    List<CarOption> getCarOptionsByCompletionId(UUID completionId) throws SQLException;
+
     List<CarOption> getAllCarOptions() throws SQLException;
 
     void create(String optionName) throws SQLException;

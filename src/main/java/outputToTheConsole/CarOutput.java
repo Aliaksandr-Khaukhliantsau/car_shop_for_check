@@ -24,12 +24,14 @@ public class CarOutput {
 
             String userCommand = scanner.nextLine();
 
-            if (userCommand.equals("0")) { // Выход из программы и освобождение ресурсов
+            // Выход из программы и освобождение ресурсов
+            if (userCommand.equals("0")) {
                 System.out.println("Exit from program.");
                 scanner.close();
                 System.exit(0);
 
-            } else if (userCommand.equals("1")) { // Показать все автомобили
+                // Показать все автомобили
+            } else if (userCommand.equals("1")) {
                 List<Car> carList = carService.getAllCars();
 
                 for (Car car : carList) {
@@ -37,22 +39,26 @@ public class CarOutput {
                 }
                 System.out.println();
 
-            } else if (userCommand.equals("2")) { // Показать автомобиль по выборке
+                // Показать автомобиль по выборке
+            } else if (userCommand.equals("2")) {
 
-                while (true) { // Меню выборки
+                // Меню выборки
+                while (true) {
                     System.out.println("Select a sample:");
-                    System.out.println("1 - id");
+                    System.out.println("1 - Car's id");
                     System.out.println("2 - VIN");
                     System.out.println("3 - Model's id");
                     System.out.println("0 - Back to the previous menu");
 
                     userCommand = scanner.nextLine();
 
-                    if (userCommand.equals("0")) { // Выход в предыдущее меню
+                    // Выход в предыдущее меню
+                    if (userCommand.equals("0")) {
                         System.out.println("Exit to the previous menu.\n");
                         break;
 
-                    } else if (userCommand.equals("1")) { // Выборка по id
+                        // Выборка по id автомобиля
+                    } else if (userCommand.equals("1")) {
                         System.out.println("Enter the car's id:");
                         UUID carId = UUID.fromString(scanner.nextLine());
 
@@ -61,7 +67,8 @@ public class CarOutput {
                         System.out.println(car);
                         System.out.println();
 
-                    } else if (userCommand.equals("2")) { // Выборка по VIN
+                        // Выборка по VIN
+                    } else if (userCommand.equals("2")) {
                         System.out.println("Enter the VIN:");
                         String vin = scanner.nextLine();
 
@@ -70,7 +77,8 @@ public class CarOutput {
                         System.out.println(car);
                         System.out.println();
 
-                    } else if (userCommand.equals("3")) { // Выборка по id модели
+                        // Выборка по id модели
+                    } else if (userCommand.equals("3")) {
                         System.out.println("Enter the model's id:");
                         UUID modelId = UUID.fromString(scanner.nextLine());
 
@@ -86,7 +94,8 @@ public class CarOutput {
                     }
                 }
 
-            } else if (userCommand.equals("3")) { // Создать новый автомобиль
+                // Создать новый автомобиль
+            } else if (userCommand.equals("3")) {
                 System.out.println("Enter the VIN of the new car:");
                 String vin = scanner.nextLine();
                 System.out.println("Enter the model's id of the new car:");
@@ -97,7 +106,8 @@ public class CarOutput {
                 System.out.println("New car's record has been created.");
                 System.out.println();
 
-            } else if (userCommand.equals("4")) { // Изменить автомобиль
+                // Изменить автомобиль
+            } else if (userCommand.equals("4")) {
                 System.out.println("Enter the car's id:");
                 UUID carId = UUID.fromString(scanner.nextLine());
                 System.out.println("Enter a new VIN for the car's record to edit:");
@@ -110,7 +120,8 @@ public class CarOutput {
                 System.out.println("The car's record has been changed.");
                 System.out.println();
 
-            } else if (userCommand.equals("5")) { // Удалить автомобиль
+                // Удалить автомобиль
+            } else if (userCommand.equals("5")) {
                 System.out.println("Enter the car's id:");
                 UUID carId = UUID.fromString(scanner.nextLine());
 

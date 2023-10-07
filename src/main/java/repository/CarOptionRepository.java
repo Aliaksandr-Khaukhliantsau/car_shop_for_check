@@ -9,6 +9,8 @@ public interface CarOptionRepository {
 
     ResultSet getCarOptionByOptionName(String optionName) throws SQLException;
 
+    ResultSet getCarOptionsByCompletionId(UUID completionId) throws SQLException;
+
     ResultSet getAllCarOptions() throws SQLException;
 
     void create(String optionName) throws SQLException;

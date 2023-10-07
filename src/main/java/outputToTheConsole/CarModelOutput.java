@@ -45,8 +45,8 @@ public class CarModelOutput {
                 // Меню выборки
                 while (true) {
                     System.out.println("Select a sample:");
-                    System.out.println("1 - id");
-                    System.out.println("2 - Name");
+                    System.out.println("1 - Model's id");
+                    System.out.println("2 - Model's name");
                     System.out.println("3 - Completion's id");
                     System.out.println("0 - Back to the previous menu");
 
@@ -60,19 +60,19 @@ public class CarModelOutput {
                         // Выборка по id
                     } else if (userCommand.equals("1")) {
                         System.out.println("Enter the model's id:");
-                        UUID id = UUID.fromString(scanner.nextLine());
+                        UUID modelId = UUID.fromString(scanner.nextLine());
 
-                        CarModel carModel = carModelService.getCarModelByModelId(id);
+                        CarModel carModel = carModelService.getCarModelByModelId(modelId);
 
                         System.out.println(carModel);
                         System.out.println();
 
                         // Выборка по названию
                     } else if (userCommand.equals("2")) {
-                        System.out.println("Enter the name:");
-                        String name = scanner.nextLine();
+                        System.out.println("Enter the model's name:");
+                        String modelName = scanner.nextLine();
 
-                        List<CarModel> carModelList = carModelService.getCarModelByModelName(name);
+                        List<CarModel> carModelList = carModelService.getCarModelByModelName(modelName);
 
                         for (CarModel carModel : carModelList) {
                             System.out.println(carModel);
@@ -82,9 +82,9 @@ public class CarModelOutput {
                         // Выборка по id комплектации
                     } else if (userCommand.equals("3")) {
                         System.out.println("Enter the completion's id:");
-                        UUID idCompletion = UUID.fromString(scanner.nextLine());
+                        UUID completionId = UUID.fromString(scanner.nextLine());
 
-                        List<CarModel> carModelList = carModelService.getCarModelByCompletionId(idCompletion);
+                        List<CarModel> carModelList = carModelService.getCarModelByCompletionId(completionId);
 
                         for (CarModel carModel : carModelList) {
                             System.out.println(carModel);
@@ -99,11 +99,11 @@ public class CarModelOutput {
                 // Создать новую модель
             } else if (userCommand.equals("3")) {
                 System.out.println("Enter the name of the new model:");
-                String name = scanner.nextLine();
+                String modelName = scanner.nextLine();
                 System.out.println("Enter the completion's id of the new model:");
-                UUID idCompletion = UUID.fromString(scanner.nextLine());
+                UUID completionId = UUID.fromString(scanner.nextLine());
 
-                carModelService.create(name, idCompletion);
+                carModelService.create(modelName, completionId);
 
                 System.out.println("New model's record has been created.");
                 System.out.println();
@@ -111,13 +111,13 @@ public class CarModelOutput {
                 // Изменить модель
             } else if (userCommand.equals("4")) {
                 System.out.println("Enter the model's id:");
-                UUID id = UUID.fromString(scanner.nextLine());
+                UUID modelId = UUID.fromString(scanner.nextLine());
                 System.out.println("Enter a new name for the model's record to edit:");
-                String name = scanner.nextLine();
+                String modelName = scanner.nextLine();
                 System.out.println("Enter a new completion's id for the model's record to edit:");
-                UUID idCompletion = UUID.fromString(scanner.nextLine());
+                UUID completionId = UUID.fromString(scanner.nextLine());
 
-                carModelService.update(id, name, idCompletion);
+                carModelService.update(modelId, modelName, completionId);
 
                 System.out.println("The model's record has been changed.");
                 System.out.println();
@@ -125,9 +125,9 @@ public class CarModelOutput {
                 // Удалить модель
             } else if (userCommand.equals("5")) {
                 System.out.println("Enter the model's id:");
-                UUID id = UUID.fromString(scanner.nextLine());
+                UUID modelId = UUID.fromString(scanner.nextLine());
 
-                carModelService.delete(id);
+                carModelService.delete(modelId);
 
                 System.out.println("The model's record has been deleted.");
                 System.out.println();

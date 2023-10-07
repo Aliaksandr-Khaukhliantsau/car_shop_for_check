@@ -11,6 +11,8 @@ public interface CompletionRepository {
 
     ResultSet getAllCompletions() throws SQLException;
 
+    void addCarOption(UUID completionId, UUID optionId) throws SQLException;
+
     void create(String completionName) throws SQLException;
 
     void update(UUID completionId, String completionName) throws SQLException;

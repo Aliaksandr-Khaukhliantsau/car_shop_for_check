@@ -43,6 +43,14 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     }
 
     @Override
+    public void addCarOption(UUID completionId, UUID optionId) throws SQLException {
+        Statement statement = connection.createStatement();
+        String SQL_ADD_A_NEW_COMPLETION_OPTION = "INSERT INTO completionsoptions (idcompletion, idoption) VALUES ('" + completionId + "', '" + optionId + "') RETURNING *;";
+        statement.executeQuery(SQL_ADD_A_NEW_COMPLETION_OPTION);
+        statement.close();
+    }
+
+    @Override
     public void create(String completionName) throws SQLException {
         Statement statement = connection.createStatement();
         String SQL_ADD_A_NEW_COMPLETION = "INSERT INTO completions (name) VALUES ('" + completionName + "') RETURNING *;";

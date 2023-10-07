@@ -56,7 +56,7 @@ public class CompletionOutput {
                         System.out.println("Exit to the previous menu.\n");
                         break;
 
-                        // Выборка по id
+                        // Выборка по completion's id
                     } else if (userCommand.equals("1")) {
                         System.out.println("Enter the completion's id:");
                         UUID completionId = UUID.fromString(scanner.nextLine());
@@ -93,15 +93,60 @@ public class CompletionOutput {
 
                 // Изменить комплектацию
             } else if (userCommand.equals("4")) {
-                System.out.println("Enter the completion's id:");
-                UUID completionId = UUID.fromString(scanner.nextLine());
-                System.out.println("Enter a new name for the completion's record to edit:");
-                String completionName = scanner.nextLine();
+                while (true) {
+                    System.out.println("1 - Change a completion's name");
+                    System.out.println("2 - Add an car's option to the completion");
+                    System.out.println("3 - Delete an car's option from the completion");
+                    System.out.println("0 - Back to the previous menu");
 
-                completionService.update(completionId, completionName);
+                    userCommand = scanner.nextLine();
 
-                System.out.println("The completion's record has been changed:");
-                System.out.println();
+                    // Выход в предыдущее меню
+                    if (userCommand.equals("0")) {
+                        System.out.println("Exit to the previous menu.\n");
+                        break;
+
+                        // изменить имя комплектации
+                    } else if (userCommand.equals("1")) {
+                        System.out.println("Enter the completion's id:");
+                        UUID completionId = UUID.fromString(scanner.nextLine());
+                        System.out.println("Enter a new name for the completion's record to edit:");
+                        String completionName = scanner.nextLine();
+
+                        completionService.update(completionId, completionName);
+                        System.out.println("The completion's name has been changed:");
+                        System.out.println();
+
+                        // добавить опцию
+                    } else if (userCommand.equals("2")) {
+                        System.out.println("Enter the completion's id:");
+                        UUID completionId = UUID.fromString(scanner.nextLine());
+                        System.out.println("Enter the option's id:");
+                        UUID optionId = UUID.fromString(scanner.nextLine());
+
+                        completionService.addCarOption(completionId, optionId);
+
+                        // удалить опцию
+                    } else if (userCommand.equals("3")) {
+                        System.out.println("Enter the completion's id:");
+                        UUID completionId = UUID.fromString(scanner.nextLine());
+                        System.out.println("Enter the option's id:");
+                        UUID optionId = UUID.fromString(scanner.nextLine());
+                        ///////////////////////////////
+
+                    } else {
+                        System.err.println("Unknown Command!\n");
+                    }
+                }
+//                System.out.println("Enter the completion's id:");
+//                UUID completionId = UUID.fromString(scanner.nextLine());
+//                System.out.println("Enter a new name for the completion's record to edit:");
+//                String completionName = scanner.nextLine();
+//
+//                completionService.update(completionId, completionName);
+//
+//                System.out.println("The completion's record has been changed:");
+//                System.out.println();
 
                 // Удалить комплектацию
             } else if (userCommand.equals("5")) {

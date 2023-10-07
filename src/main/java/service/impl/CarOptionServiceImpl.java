@@ -2,7 +2,7 @@ package service.impl;
 
 import entity.CarOption;
 import repository.CarOptionRepository;
-import repository.impl.CarCarOptionRepositoryImpl;
+import repository.impl.CarOptionRepositoryImpl;
 import service.CarOptionService;
 
 import java.sql.ResultSet;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class CarOptionServiceImpl implements CarOptionService {
-    CarOptionRepository carOptionRepository = new CarCarOptionRepositoryImpl();
+    CarOptionRepository carOptionRepository = new CarOptionRepositoryImpl();
 
     public CarOptionServiceImpl() throws SQLException {
     }
@@ -39,6 +39,21 @@ public class CarOptionServiceImpl implements CarOptionService {
             carOption.setOptionName(resultSet.getString("name"));
         }
         return carOption;
+    }
+
+    @Override
+    public List<CarOption> getCarOptionsByCompletionId(UUID completionId) throws SQLException {
+        ResultSet resultSet = carOptionRepository.getCarOptionsByCompletionId(completionId);
+        List<CarOption> carOptionList = new ArrayList<>();
+
+        while (resultSet.next()) {
+            CarOption carOption = new CarOption();
+            carOption.setOptionId(UUID.fromString(resultSet.getString("id")));
+            carOption.setOptionName(resultSet.getString("name"));
+
+            carOptionList.add(carOption);
+        }
+        return carOptionList;
     }
 
     @Override

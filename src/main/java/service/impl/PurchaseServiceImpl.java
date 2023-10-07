@@ -22,8 +22,8 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public Purchase getPurchaseByPurchaseId(UUID orderId) throws SQLException {
-        ResultSet resultSet = purchaseRepository.getPurchaseByPurchaseId(orderId);
+    public Purchase getPurchaseByPurchaseId(UUID purchaseId) throws SQLException {
+        ResultSet resultSet = purchaseRepository.getPurchaseByPurchaseId(purchaseId);
         Purchase purchase = new Purchase();
 
         while (resultSet.next()) {
@@ -40,8 +40,8 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public Purchase getPurchaseByPurchaseNumber(String orderNumber) throws SQLException {
-        ResultSet resultSet = purchaseRepository.getPurchaseByPurchaseNumber(orderNumber);
+    public Purchase getPurchaseByPurchaseNumber(String purchaseNumber) throws SQLException {
+        ResultSet resultSet = purchaseRepository.getPurchaseByPurchaseNumber(purchaseNumber);
         Purchase purchase = new Purchase();
 
         while (resultSet.next()) {
