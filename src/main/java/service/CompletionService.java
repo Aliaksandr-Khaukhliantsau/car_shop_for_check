@@ -13,9 +13,9 @@ public interface CompletionService {
 
     List<Completion> getAllCompletions() throws SQLException;
 
-    //    void addCarOption(Completion completion, UUID optionId) throws SQLException;
-
     void addCarOption(UUID CompletionId, UUID optionId) throws SQLException;
+
+    void deleteCarOption(UUID completionId, UUID optionId) throws SQLException;
 
     void create(String completionName) throws SQLException;
 

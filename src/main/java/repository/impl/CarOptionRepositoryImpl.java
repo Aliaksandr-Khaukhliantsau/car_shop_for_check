@@ -1,19 +1,17 @@
 package repository.impl;
 
 import repository.CarOptionRepository;
+import util.PropertiesUtil;
 
 import java.sql.*;
 import java.util.UUID;
 
 public class CarOptionRepositoryImpl implements CarOptionRepository {
-    private static final String POSTGRES_URL = "jdbc:postgresql://localhost:5432/car_shop";
-    private static final String POSTGRES_USER = "postgres";
-    private static final String POSTGRES_PASSWORD = "12345678";
     private static final String SQL_SHOW_ALL_OPTIONS = "SELECT * FROM options ORDER BY name ASC;";
     private final Connection connection;
 
     public CarOptionRepositoryImpl() throws SQLException {
-        connection = DriverManager.getConnection(POSTGRES_URL, POSTGRES_USER, POSTGRES_PASSWORD);
+        connection = DriverManager.getConnection(PropertiesUtil.get("postgres_url"), PropertiesUtil.get("postgres_user"), PropertiesUtil.get("postgres_password"));
     }
 
     @Override

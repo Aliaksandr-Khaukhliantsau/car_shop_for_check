@@ -51,6 +51,16 @@ public class CompletionServiceImpl implements CompletionService {
     }
 
     @Override
+    public void addCarOption(UUID completionId, UUID optionId) throws SQLException {
+        completionRepository.addCarOption(completionId, optionId);
+    }
+
+    @Override
+    public void deleteCarOption(UUID completionId, UUID optionId) throws SQLException {
+        completionRepository.deleteCarOption(completionId, optionId);
+    }
+
+    @Override
     public List<Completion> getAllCompletions() throws SQLException {
         ResultSet resultSet = completionRepository.getAllCompletions();
         List<Completion> completionList = new ArrayList<>();
@@ -81,19 +91,5 @@ public class CompletionServiceImpl implements CompletionService {
     @Override
     public void delete(UUID CompletionId) throws SQLException {
         completionRepository.delete(CompletionId);
-    }
-
-//    @Override
-//    public void addCarOption(Completion completion, UUID optionId) throws SQLException {
-//        completionRepository.addCarOption(completion.getCompletionId(), optionId);
-//        CarOptionService carOptionService = new CarOptionServiceImpl();
-//        CarOption carOption = carOptionService.getCarOptionByOptionId(optionId);
-//        completion.addCarOption(carOption);
-//
-//    }
-
-    @Override
-    public void addCarOption(UUID completionId, UUID optionId) throws SQLException {
-        completionRepository.addCarOption(completionId, optionId);
     }
 }

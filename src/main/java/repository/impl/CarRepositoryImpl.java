@@ -1,20 +1,17 @@
 package repository.impl;
 
 import repository.CarRepository;
+import util.PropertiesUtil;
 
 import java.sql.*;
 import java.util.UUID;
 
 public class CarRepositoryImpl implements CarRepository {
-    // настройки подключения к бд должны быть в 1 месте, в файле .properties.
-    private static final String POSTGRES_URL = "jdbc:postgresql://localhost:5432/car_shop";
-    private static final String POSTGRES_USER = "postgres";
-    private static final String POSTGRES_PASSWORD = "12345678";
     private static final String SQL_SHOW_ALL_CARS = "SELECT * FROM cars ORDER BY vin ASC;";
     private final Connection connection;
 
     public CarRepositoryImpl() throws SQLException {
-        connection = DriverManager.getConnection(POSTGRES_URL, POSTGRES_USER, POSTGRES_PASSWORD);
+        connection = DriverManager.getConnection(PropertiesUtil.get("postgres_url"), PropertiesUtil.get("postgres_user"), PropertiesUtil.get("postgres_password"));
     }
 
     @Override

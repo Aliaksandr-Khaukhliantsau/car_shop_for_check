@@ -13,6 +13,8 @@ public interface CompletionRepository {
 
     void addCarOption(UUID completionId, UUID optionId) throws SQLException;
 
+    void deleteCarOption(UUID completionId, UUID optionId) throws SQLException;
+
     void create(String completionName) throws SQLException;
 
     void update(UUID completionId, String completionName) throws SQLException;
