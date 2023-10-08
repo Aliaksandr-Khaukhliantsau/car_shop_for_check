@@ -46,7 +46,7 @@ public class CarOptionOutput {
                 while (true) {
                     System.out.println("Select a sample:");
                     System.out.println("1 - Option's id");
-                    System.out.println("2 - Name");
+                    System.out.println("2 - Option's name");
                     System.out.println("0 - Back to the previous menu");
 
                     userCommand = scanner.nextLine();
