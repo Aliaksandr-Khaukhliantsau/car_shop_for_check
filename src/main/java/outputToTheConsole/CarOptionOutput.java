@@ -33,9 +33,9 @@ public class CarOptionOutput {
 
                 // Показать все опции
             } else if (userCommand.equals("1")) {
-                List<CarOption> carOptionList = carOptionService.getAllCarOptions();
+                List<CarOption> carOptions = carOptionService.getAllCarOptions();
 
-                for (CarOption carOption : carOptionList) {
+                for (CarOption carOption : carOptions) {
                     System.out.println(carOption);
                 }
                 System.out.println();

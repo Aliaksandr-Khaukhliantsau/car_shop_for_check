@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.UUID;
 
 public class CarOptionRepositoryImpl implements CarOptionRepository {
-    private static final String SQL_SHOW_ALL_OPTIONS = "SELECT * FROM options ORDER BY name ASC;";
+    private static final String SQL_GET_ALL_CAR_OPTIONS = "SELECT * FROM options ORDER BY name ASC;";
     private final Connection connection;
 
     public CarOptionRepositoryImpl() throws SQLException {
@@ -17,8 +17,8 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
     @Override
     public ResultSet getCarOptionByOptionId(UUID optionId) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_SHOW_OPTIONS_BY_ID = "SELECT * FROM options WHERE id = " + "'" + optionId + "'" + " ORDER BY name ASC;";
-        ResultSet resultSet = statement.executeQuery(SQL_SHOW_OPTIONS_BY_ID);
+        String SQL_GET_CAR_OPTION_BY_OPTION_ID = "SELECT * FROM options WHERE id = " + "'" + optionId + "'" + " ORDER BY name ASC;";
+        ResultSet resultSet = statement.executeQuery(SQL_GET_CAR_OPTION_BY_OPTION_ID);
 //        statement.close();
         return resultSet;
     }
@@ -26,8 +26,8 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
     @Override
     public ResultSet getCarOptionByOptionName(String optionName) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_SHOW_OPTIONS_BY_NAME = "SELECT * FROM options WHERE name = " + "'" + optionName + "'" + " ORDER BY name ASC;";
-        ResultSet resultSet = statement.executeQuery(SQL_SHOW_OPTIONS_BY_NAME);
+        String SQL_GET_CAR_OPTION_BY_OPTION_NAME = "SELECT * FROM options WHERE name = " + "'" + optionName + "'" + " ORDER BY name ASC;";
+        ResultSet resultSet = statement.executeQuery(SQL_GET_CAR_OPTION_BY_OPTION_NAME);
 //        statement.close();
         return resultSet;
     }
@@ -35,8 +35,8 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
     @Override
     public ResultSet getCarOptionsByCompletionId(UUID completionId) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_SHOW_CAR_OPTIONS_BY_COMPLETION_ID = "SELECT * FROM completionsoptions JOIN options ON completionsoptions.idoption = public.options.id WHERE completionsoptions.idcompletion = '" + completionId + "' ORDER BY options.name ASC;";
-        ResultSet resultSet = statement.executeQuery(SQL_SHOW_CAR_OPTIONS_BY_COMPLETION_ID);
+        String SQL_GET_CAR_OPTIONS_BY_COMPLETION_ID = "SELECT * FROM completionsoptions JOIN options ON completionsoptions.idoption = public.options.id WHERE completionsoptions.idcompletion = '" + completionId + "' ORDER BY options.name ASC;";
+        ResultSet resultSet = statement.executeQuery(SQL_GET_CAR_OPTIONS_BY_COMPLETION_ID);
 //        statement.close();
         return resultSet;
     }
@@ -44,7 +44,7 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
     @Override
     public ResultSet getAllCarOptions() throws SQLException {
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(SQL_SHOW_ALL_OPTIONS);
+        ResultSet resultSet = statement.executeQuery(SQL_GET_ALL_CAR_OPTIONS);
 //        statement.close();
         return resultSet;
     }
@@ -52,24 +52,24 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
     @Override
     public void create(String optionName) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_ADD_A_NEW_OPTION = "INSERT INTO options (name) VALUES ('" + optionName + "') RETURNING *;";
-        statement.executeQuery(SQL_ADD_A_NEW_OPTION);
+        String SQL_CREATE_A_CAR_OPTION = "INSERT INTO options (name) VALUES ('" + optionName + "') RETURNING *;";
+        statement.executeQuery(SQL_CREATE_A_CAR_OPTION);
         statement.close();
     }
 
     @Override
     public void update(UUID optionId, String optionName) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_CHANGE_AN_OPTION = "UPDATE options SET name = '" + optionName + "' WHERE id = '" + optionId + "' RETURNING *;";
-        statement.executeQuery(SQL_CHANGE_AN_OPTION);
+        String SQL_UPDATE_A_CAR_OPTION = "UPDATE options SET name = '" + optionName + "' WHERE id = '" + optionId + "' RETURNING *;";
+        statement.executeQuery(SQL_UPDATE_A_CAR_OPTION);
         statement.close();
     }
 
     @Override
     public void delete(UUID optionId) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_DELETE_AN_OPTION = "DELETE FROM options WHERE id = '" + optionId + "' RETURNING *;";
-        statement.executeQuery(SQL_DELETE_AN_OPTION);
+        String SQL_DELETE_A_CAR_OPTION = "DELETE FROM options WHERE id = '" + optionId + "' RETURNING *;";
+        statement.executeQuery(SQL_DELETE_A_CAR_OPTION);
         statement.close();
     }
 }

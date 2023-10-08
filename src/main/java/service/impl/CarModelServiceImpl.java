@@ -37,7 +37,7 @@ public class CarModelServiceImpl implements CarModelService {
     @Override
     public List<CarModel> getCarModelByModelName(String modelName) throws SQLException {
         ResultSet resultSet = carModelRepository.getCarModelByModelName(modelName);
-        List<CarModel> carModelList = new ArrayList<>();
+        List<CarModel> carModels = new ArrayList<>();
 
         while (resultSet.next()) {
             CarModel carModel = new CarModel();
@@ -47,15 +47,15 @@ public class CarModelServiceImpl implements CarModelService {
             CompletionService completionService = new CompletionServiceImpl();
             carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
 
-            carModelList.add(carModel);
+            carModels.add(carModel);
         }
-        return carModelList;
+        return carModels;
     }
 
     @Override
     public List<CarModel> getCarModelByCompletionId(UUID completionId) throws SQLException {
         ResultSet resultSet = carModelRepository.getCarModelByCompletionId(completionId);
-        List<CarModel> carModelList = new ArrayList<>();
+        List<CarModel> carModels = new ArrayList<>();
 
         while (resultSet.next()) {
             CarModel carModel = new CarModel();
@@ -64,15 +64,15 @@ public class CarModelServiceImpl implements CarModelService {
             CompletionService completionService = new CompletionServiceImpl();
             carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
 
-            carModelList.add(carModel);
+            carModels.add(carModel);
         }
-        return carModelList;
+        return carModels;
     }
 
     @Override
     public List<CarModel> getAllCarModels() throws SQLException {
         ResultSet resultSet = carModelRepository.getAllCarModels();
-        List<CarModel> carModelList = new ArrayList<>();
+        List<CarModel> carModels = new ArrayList<>();
 
         while (resultSet.next()) {
             CarModel carModel = new CarModel();
@@ -82,9 +82,9 @@ public class CarModelServiceImpl implements CarModelService {
             CompletionService completionService = new CompletionServiceImpl();
             carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
 
-            carModelList.add(carModel);
+            carModels.add(carModel);
         }
-        return carModelList;
+        return carModels;
     }
 
     @Override

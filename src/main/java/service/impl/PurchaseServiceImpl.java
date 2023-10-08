@@ -60,7 +60,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     public List<Purchase> getPurchaseByCustomerId(UUID customerId) throws SQLException {
         ResultSet resultSet = purchaseRepository.getPurchaseByCustomerId(customerId);
-        List<Purchase> purchaseList = new ArrayList<>();
+        List<Purchase> purchases = new ArrayList<>();
 
         while (resultSet.next()) {
             Purchase purchase = new Purchase();
@@ -72,15 +72,15 @@ public class PurchaseServiceImpl implements PurchaseService {
             CarService carService = new CarServiceImpl();
             purchase.setCar(carService.getCarByCarId(carId));
 
-            purchaseList.add(purchase);
+            purchases.add(purchase);
         }
-        return purchaseList;
+        return purchases;
     }
 
     @Override
     public List<Purchase> getPurchaseByCarId(UUID carId) throws SQLException {
         ResultSet resultSet = purchaseRepository.getPurchaseByCarId(carId);
-        List<Purchase> purchaseList = new ArrayList<>();
+        List<Purchase> purchases = new ArrayList<>();
 
         while (resultSet.next()) {
             Purchase purchase = new Purchase();
@@ -92,15 +92,15 @@ public class PurchaseServiceImpl implements PurchaseService {
             CarService carService = new CarServiceImpl();
             purchase.setCar(carService.getCarByCarId(carId));
 
-            purchaseList.add(purchase);
+            purchases.add(purchase);
         }
-        return purchaseList;
+        return purchases;
     }
 
     @Override
     public List<Purchase> getPurchaseByCustomer(Customer customer) throws SQLException {
         ResultSet resultSet = purchaseRepository.getPurchaseByCustomerId(customer.getCustomerId());
-        List<Purchase> purchaseList = new ArrayList<>();
+        List<Purchase> purchases = new ArrayList<>();
 
         while (resultSet.next()) {
             Purchase purchase = new Purchase();
@@ -113,15 +113,15 @@ public class PurchaseServiceImpl implements PurchaseService {
             CarService carService = new CarServiceImpl();
             purchase.setCar(carService.getCarByCarId(carId));
 
-            purchaseList.add(purchase);
+            purchases.add(purchase);
         }
-        return purchaseList;
+        return purchases;
     }
 
     @Override
     public List<Purchase> getPurchaseByCar(Car car) throws SQLException {
         ResultSet resultSet = purchaseRepository.getPurchaseByCarId(car.getCarId());
-        List<Purchase> purchaseList = new ArrayList<>();
+        List<Purchase> purchases = new ArrayList<>();
 
         while (resultSet.next()) {
             Purchase purchase = new Purchase();
@@ -134,15 +134,15 @@ public class PurchaseServiceImpl implements PurchaseService {
             CarService carService = new CarServiceImpl();
             purchase.setCar(carService.getCarByCarId(carId));
 
-            purchaseList.add(purchase);
+            purchases.add(purchase);
         }
-        return purchaseList;
+        return purchases;
     }
 
     @Override
     public List<Purchase> getAllPurchases() throws SQLException {
         ResultSet resultSet = purchaseRepository.getAllPurchases();
-        List<Purchase> purchaseList = new ArrayList<>();
+        List<Purchase> purchases = new ArrayList<>();
 
         while (resultSet.next()) {
             Purchase purchase = new Purchase();
@@ -155,9 +155,9 @@ public class PurchaseServiceImpl implements PurchaseService {
             CarService carService = new CarServiceImpl();
             purchase.setCar(carService.getCarByCarId(carId));
 
-            purchaseList.add(purchase);
+            purchases.add(purchase);
         }
-        return purchaseList;
+        return purchases;
     }
 
     @Override

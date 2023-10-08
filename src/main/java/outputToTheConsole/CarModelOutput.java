@@ -33,9 +33,9 @@ public class CarModelOutput {
 
                 // Показать все модели
             } else if (userCommand.equals("1")) {
-                List<CarModel> carModelList = carModelService.getAllCarModels();
+                List<CarModel> carModels = carModelService.getAllCarModels();
 
-                for (CarModel carModel : carModelList) {
+                for (CarModel carModel : carModels) {
                     System.out.println(carModel);
                 }
                 System.out.println();
@@ -72,9 +72,9 @@ public class CarModelOutput {
                         System.out.println("Enter the model's name:");
                         String modelName = scanner.nextLine();
 
-                        List<CarModel> carModelList = carModelService.getCarModelByModelName(modelName);
+                        List<CarModel> carModels = carModelService.getCarModelByModelName(modelName);
 
-                        for (CarModel carModel : carModelList) {
+                        for (CarModel carModel : carModels) {
                             System.out.println(carModel);
                         }
                         System.out.println();
@@ -84,9 +84,9 @@ public class CarModelOutput {
                         System.out.println("Enter the completion's id:");
                         UUID completionId = UUID.fromString(scanner.nextLine());
 
-                        List<CarModel> carModelList = carModelService.getCarModelByCompletionId(completionId);
+                        List<CarModel> carModels = carModelService.getCarModelByCompletionId(completionId);
 
-                        for (CarModel carModel : carModelList) {
+                        for (CarModel carModel : carModels) {
                             System.out.println(carModel);
                         }
                         System.out.println();

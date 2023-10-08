@@ -33,9 +33,9 @@ public class CustomerOutput {
 
                 // Показать всех клинтов
             } else if (userCommand.equals("1")) {
-                List<Customer> customerList = customerService.getAllCustomers();
+                List<Customer> customers = customerService.getAllCustomers();
 
-                for (Customer customer : customerList) {
+                for (Customer customer : customers) {
                     System.out.println(customer);
                 }
                 System.out.println();
@@ -53,7 +53,8 @@ public class CustomerOutput {
 
                     userCommand = scanner.nextLine();
 
-                    if (userCommand.equals("0")) { // Выход в предыдущее меню
+                    // Выход в предыдущее меню
+                    if (userCommand.equals("0")) {
                         System.out.println("Exit to the previous menu.\n");
                         break;
 
@@ -72,9 +73,9 @@ public class CustomerOutput {
                         System.out.println("Enter the first name:");
                         String firstName = scanner.nextLine();
 
-                        List<Customer> customerList = customerService.getCustomerByFirstName(firstName);
+                        List<Customer> customers = customerService.getCustomerByFirstName(firstName);
 
-                        for (Customer customer : customerList) {
+                        for (Customer customer : customers) {
                             System.out.println(customer);
                         }
                         System.out.println();
@@ -84,9 +85,9 @@ public class CustomerOutput {
                         System.out.println("Enter the middle name:");
                         String middleName = scanner.nextLine();
 
-                        List<Customer> customerList = customerService.getCustomerByMiddleName(middleName);
+                        List<Customer> customers = customerService.getCustomerByMiddleName(middleName);
 
-                        for (Customer customer : customerList) {
+                        for (Customer customer : customers) {
                             System.out.println(customer);
                         }
                         System.out.println();
@@ -96,9 +97,9 @@ public class CustomerOutput {
                         System.out.println("Enter the last name:");
                         String lastName = scanner.nextLine();
 
-                        List<Customer> customerList = customerService.getCustomerByLastName(lastName);
+                        List<Customer> customers = customerService.getCustomerByLastName(lastName);
 
-                        for (Customer customer : customerList) {
+                        for (Customer customer : customers) {
                             System.out.println(customer);
                         }
                         System.out.println();

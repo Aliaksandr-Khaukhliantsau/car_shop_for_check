@@ -33,9 +33,9 @@ public class CompletionOutput {
 
                 // Показать все комплектации
             } else if (userCommand.equals("1")) {
-                List<Completion> completionList = completionService.getAllCompletions();
+                List<Completion> completions = completionService.getAllCompletions();
 
-                for (Completion completion : completionList) {
+                for (Completion completion : completions) {
                     System.out.println(completion);
                 }
                 System.out.println();

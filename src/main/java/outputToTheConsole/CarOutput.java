@@ -32,9 +32,9 @@ public class CarOutput {
 
                 // Показать все автомобили
             } else if (userCommand.equals("1")) {
-                List<Car> carList = carService.getAllCars();
+                List<Car> cars = carService.getAllCars();
 
-                for (Car car : carList) {
+                for (Car car : cars) {
                     System.out.println(car);
                 }
                 System.out.println();
@@ -82,9 +82,9 @@ public class CarOutput {
                         System.out.println("Enter the model's id:");
                         UUID modelId = UUID.fromString(scanner.nextLine());
 
-                        List<Car> carList = carService.getCarByModelId(modelId);
+                        List<Car> cars = carService.getCarByModelId(modelId);
 
-                        for (Car car : carList) {
+                        for (Car car : cars) {
                             System.out.println(car);
                         }
                         System.out.println();

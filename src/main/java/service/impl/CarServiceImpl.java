@@ -52,7 +52,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getCarByModelId(UUID modelId) throws SQLException {
         ResultSet resultSet = carRepository.getCarByModelId(modelId);
-        List<Car> carList = new ArrayList<>();
+        List<Car> cars = new ArrayList<>();
 
         while (resultSet.next()) {
             Car car = new Car();
@@ -61,15 +61,15 @@ public class CarServiceImpl implements CarService {
             CarModelService carModelService = new CarModelServiceImpl();
             car.setCarModel(carModelService.getCarModelByModelId(modelId));
 
-            carList.add(car);
+            cars.add(car);
         }
-        return carList;
+        return cars;
     }
 
     @Override
     public List<Car> getAllCars() throws SQLException {
         ResultSet resultSet = carRepository.getAllCars();
-        List<Car> carList = new ArrayList<>();
+        List<Car> cars = new ArrayList<>();
 
         while (resultSet.next()) {
             Car car = new Car();
@@ -79,9 +79,9 @@ public class CarServiceImpl implements CarService {
             CarModelService carModelService = new CarModelServiceImpl();
             car.setCarModel(carModelService.getCarModelByModelId(modelId));
 
-            carList.add(car); // cars никаких лист
+            cars.add(car);
         }
-        return carList;
+        return cars;
     }
 
     @Override

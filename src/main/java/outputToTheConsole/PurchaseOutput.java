@@ -33,9 +33,9 @@ public class PurchaseOutput {
 
                 // Показать все заказы
             } else if (userCommand.equals("1")) {
-                List<Purchase> purchaseList = purchaseService.getAllPurchases();
+                List<Purchase> purchases = purchaseService.getAllPurchases();
 
-                for (Purchase purchase : purchaseList) {
+                for (Purchase purchase : purchases) {
                     System.out.println(purchase);
                 }
                 System.out.println();
@@ -84,9 +84,9 @@ public class PurchaseOutput {
                         System.out.println("Enter the customer's id:");
                         UUID customerId = UUID.fromString(scanner.nextLine());
 
-                        List<Purchase> purchaseList = purchaseService.getPurchaseByCustomerId(customerId);
+                        List<Purchase> purchases = purchaseService.getPurchaseByCustomerId(customerId);
 
-                        for (Purchase purchase : purchaseList) {
+                        for (Purchase purchase : purchases) {
                             System.out.println(purchase);
                         }
                         System.out.println();
@@ -96,9 +96,9 @@ public class PurchaseOutput {
                         System.out.println("Enter the car's id:");
                         UUID carId = UUID.fromString(scanner.nextLine());
 
-                        List<Purchase> purchaseList = purchaseService.getPurchaseByCarId(carId);
+                        List<Purchase> purchases = purchaseService.getPurchaseByCarId(carId);
 
-                        for (Purchase purchase : purchaseList) {
+                        for (Purchase purchase : purchases) {
                             System.out.println(purchase);
                         }
                         System.out.println();

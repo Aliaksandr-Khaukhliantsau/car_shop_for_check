@@ -34,7 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<Customer> getCustomerByFirstName(String firstName) throws SQLException {
         ResultSet resultSet = customerRepository.getCustomerByFirstName(firstName);
-        List<Customer> customerList = new ArrayList<>();
+        List<Customer> customers = new ArrayList<>();
 
         while (resultSet.next()) {
             Customer customer = new Customer();
@@ -43,15 +43,15 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setMiddleName(resultSet.getString("middlename"));
             customer.setLastName(resultSet.getString("lastname"));
 
-            customerList.add(customer);
+            customers.add(customer);
         }
-        return customerList;
+        return customers;
     }
 
     @Override
     public List<Customer> getCustomerByMiddleName(String middleName) throws SQLException {
         ResultSet resultSet = customerRepository.getCustomerByMiddleName(middleName);
-        List<Customer> customerList = new ArrayList<>();
+        List<Customer> customers = new ArrayList<>();
 
         while (resultSet.next()) {
             Customer customer = new Customer();
@@ -60,15 +60,15 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setMiddleName(resultSet.getString("middlename"));
             customer.setLastName(resultSet.getString("lastname"));
 
-            customerList.add(customer);
+            customers.add(customer);
         }
-        return customerList;
+        return customers;
     }
 
     @Override
     public List<Customer> getCustomerByLastName(String lastName) throws SQLException {
         ResultSet resultSet = customerRepository.getCustomerByLastName(lastName);
-        List<Customer> customerList = new ArrayList<>();
+        List<Customer> customers = new ArrayList<>();
 
         while (resultSet.next()) {
             Customer customer = new Customer();
@@ -77,15 +77,15 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setMiddleName(resultSet.getString("middlename"));
             customer.setLastName(resultSet.getString("lastname"));
 
-            customerList.add(customer);
+            customers.add(customer);
         }
-        return customerList;
+        return customers;
     }
 
     @Override
     public List<Customer> getAllCustomers() throws SQLException {
         ResultSet resultSet = customerRepository.getAllCustomers();
-        List<Customer> customerList = new ArrayList<>();
+        List<Customer> customers = new ArrayList<>();
 
         while (resultSet.next()) {
             Customer customer = new Customer();
@@ -94,9 +94,9 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setMiddleName(resultSet.getString("middlename"));
             customer.setLastName(resultSet.getString("lastname"));
 
-            customerList.add(customer);
+            customers.add(customer);
         }
-        return customerList;
+        return customers;
     }
 
     @Override

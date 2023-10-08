@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.UUID;
 
 public class CustomerRepositoryImpl implements CustomerRepository {
-    private static final String SQL_SHOW_ALL_CUSTOMERS = "SELECT * FROM customers ORDER BY lastname ASC;";
+    private static final String SQL_GET_ALL_CUSTOMERS = "SELECT * FROM customers ORDER BY lastname ASC;";
     private final Connection connection;
 
     public CustomerRepositoryImpl() throws SQLException {
@@ -17,8 +17,8 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public ResultSet getCustomerByCustomerId(UUID customerId) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_SHOW_CUSTOMERS_BY_ID = "SELECT * FROM customers WHERE id = " + "'" + customerId + "'" + " ORDER BY lastname ASC;";
-        ResultSet resultSet = statement.executeQuery(SQL_SHOW_CUSTOMERS_BY_ID);
+        String SQL_GET_CUSTOMER_BY_CUSTOMER_ID = "SELECT * FROM customers WHERE id = " + "'" + customerId + "'" + " ORDER BY lastname ASC;";
+        ResultSet resultSet = statement.executeQuery(SQL_GET_CUSTOMER_BY_CUSTOMER_ID);
 //        statement.close();
         return resultSet;
     }
@@ -26,8 +26,8 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public ResultSet getCustomerByFirstName(String firstName) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_SHOW_CUSTOMERS_BY_FIRST_NAME = "SELECT * FROM customers WHERE firstname = " + "'" + firstName + "'" + " ORDER BY lastname ASC;";
-        ResultSet resultSet = statement.executeQuery(SQL_SHOW_CUSTOMERS_BY_FIRST_NAME);
+        String SQL_GET_CUSTOMER_BY_FIRST_NAME = "SELECT * FROM customers WHERE firstname = " + "'" + firstName + "'" + " ORDER BY lastname ASC;";
+        ResultSet resultSet = statement.executeQuery(SQL_GET_CUSTOMER_BY_FIRST_NAME);
 //        statement.close();
         return resultSet;
     }
@@ -35,8 +35,8 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public ResultSet getCustomerByMiddleName(String middleName) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_SHOW_CUSTOMERS_BY_MIDDLE_NAME = "SELECT * FROM customers WHERE middlename = '" + middleName + "' ORDER BY lastname ASC;";
-        ResultSet resultSet = statement.executeQuery(SQL_SHOW_CUSTOMERS_BY_MIDDLE_NAME);
+        String SQL_GET_CUSTOMER_BY_MIDDLE_NAME = "SELECT * FROM customers WHERE middlename = '" + middleName + "' ORDER BY lastname ASC;";
+        ResultSet resultSet = statement.executeQuery(SQL_GET_CUSTOMER_BY_MIDDLE_NAME);
 //        statement.close();
         return resultSet;
     }
@@ -44,8 +44,8 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public ResultSet getCustomerByLastName(String lastName) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_SHOW_CUSTOMERS_BY_LAST_NAME = "SELECT * FROM customers WHERE lastname = " + "'" + lastName + "'" + " ORDER BY lastname ASC;";
-        ResultSet resultSet = statement.executeQuery(SQL_SHOW_CUSTOMERS_BY_LAST_NAME);
+        String SQL_GET_CUSTOMER_BY_LAST_NAME = "SELECT * FROM customers WHERE lastname = " + "'" + lastName + "'" + " ORDER BY lastname ASC;";
+        ResultSet resultSet = statement.executeQuery(SQL_GET_CUSTOMER_BY_LAST_NAME);
 //        statement.close();
         return resultSet;
     }
@@ -53,7 +53,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public ResultSet getAllCustomers() throws SQLException {
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(SQL_SHOW_ALL_CUSTOMERS);
+        ResultSet resultSet = statement.executeQuery(SQL_GET_ALL_CUSTOMERS);
 //        statement.close();
         return resultSet;
     }
@@ -61,16 +61,16 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public void create(String firstName, String middleName, String lastName) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_ADD_A_NEW_CUSTOMER = "INSERT INTO customers (firstname, middlename, lastname) VALUES ('" + firstName + "', '" + middleName + "', '" + lastName + "') RETURNING *;";
-        statement.executeQuery(SQL_ADD_A_NEW_CUSTOMER);
+        String SQL_CREATE_A_CUSTOMER = "INSERT INTO customers (firstname, middlename, lastname) VALUES ('" + firstName + "', '" + middleName + "', '" + lastName + "') RETURNING *;";
+        statement.executeQuery(SQL_CREATE_A_CUSTOMER);
         statement.close();
     }
 
     @Override
     public void update(UUID customerId, String firstName, String middleName, String lastName) throws SQLException {
         Statement statement = connection.createStatement();
-        String SQL_CHANGE_A_CUSTOMER = "UPDATE customers SET firstname = '" + firstName + "', middlename = '" + middleName + "', lastname = '" + lastName + "' WHERE id = '" + customerId + "' RETURNING *;";
-        statement.executeQuery(SQL_CHANGE_A_CUSTOMER);
+        String SQL_UPDATE_A_CUSTOMER = "UPDATE customers SET firstname = '" + firstName + "', middlename = '" + middleName + "', lastname = '" + lastName + "' WHERE id = '" + customerId + "' RETURNING *;";
+        statement.executeQuery(SQL_UPDATE_A_CUSTOMER);
         statement.close();
     }
 

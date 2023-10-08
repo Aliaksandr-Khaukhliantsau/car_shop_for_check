@@ -44,31 +44,31 @@ public class CarOptionServiceImpl implements CarOptionService {
     @Override
     public List<CarOption> getCarOptionsByCompletionId(UUID completionId) throws SQLException {
         ResultSet resultSet = carOptionRepository.getCarOptionsByCompletionId(completionId);
-        List<CarOption> carOptionList = new ArrayList<>();
+        List<CarOption> carOptions = new ArrayList<>();
 
         while (resultSet.next()) {
             CarOption carOption = new CarOption();
             carOption.setOptionId(UUID.fromString(resultSet.getString("id")));
             carOption.setOptionName(resultSet.getString("name"));
 
-            carOptionList.add(carOption);
+            carOptions.add(carOption);
         }
-        return carOptionList;
+        return carOptions;
     }
 
     @Override
     public List<CarOption> getAllCarOptions() throws SQLException {
         ResultSet resultSet = carOptionRepository.getAllCarOptions();
-        List<CarOption> carOptionList = new ArrayList<>();
+        List<CarOption> carOptions = new ArrayList<>();
 
         while (resultSet.next()) {
             CarOption carOption = new CarOption();
             carOption.setOptionId(UUID.fromString(resultSet.getString("id")));
             carOption.setOptionName(resultSet.getString("name"));
 
-            carOptionList.add(carOption);
+            carOptions.add(carOption);
         }
-        return carOptionList;
+        return carOptions;
     }
 
     @Override

@@ -28,8 +28,8 @@ public class CompletionServiceImpl implements CompletionService {
             completion.setCompletionId(UUID.fromString(resultSet.getString("id")));
             completion.setCompletionName(resultSet.getString("name"));
             CarOptionService carOptionService = new CarOptionServiceImpl();
-            List<CarOption> carOptionList = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("id")));
-            completion.setCarOptions(carOptionList);
+            List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("id")));
+            completion.setCarOptions(carOptions);
 
         }
         return completion;
@@ -44,8 +44,8 @@ public class CompletionServiceImpl implements CompletionService {
             completion.setCompletionId(UUID.fromString(resultSet.getString("id")));
             completion.setCompletionName(resultSet.getString("name"));
             CarOptionService carOptionService = new CarOptionServiceImpl();
-            List<CarOption> carOptionList = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("id")));
-            completion.setCarOptions(carOptionList);
+            List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("id")));
+            completion.setCarOptions(carOptions);
         }
         return completion;
     }
@@ -63,19 +63,19 @@ public class CompletionServiceImpl implements CompletionService {
     @Override
     public List<Completion> getAllCompletions() throws SQLException {
         ResultSet resultSet = completionRepository.getAllCompletions();
-        List<Completion> completionList = new ArrayList<>();
+        List<Completion> completions = new ArrayList<>();
 
         while (resultSet.next()) {
             Completion completion = new Completion();
             completion.setCompletionId(UUID.fromString(resultSet.getString("id")));
             completion.setCompletionName(resultSet.getString("name"));
             CarOptionService carOptionService = new CarOptionServiceImpl();
-            List<CarOption> carOptionList = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("id")));
-            completion.setCarOptions(carOptionList);
+            List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("id")));
+            completion.setCarOptions(carOptions);
 
-            completionList.add(completion);
+            completions.add(completion);
         }
-        return completionList;
+        return completions;
     }
 
     @Override
