@@ -1,1 +1,0 @@
-SELECT * FROM options ORDER BY name ASC;

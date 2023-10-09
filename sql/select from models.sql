@@ -1,1 +1,0 @@
-SELECT * FROM models ORDER BY name ASC;

@@ -7,13 +7,13 @@ import java.sql.*;
 import java.util.UUID;
 
 public class CarModelRepositoryImpl implements CarModelRepository {
-    private static final String SQL_GET_CAR_MODEL_BY_MODEL_ID = "SELECT * FROM models WHERE id = ? ORDER BY name ASC;";
-    private static final String SQL_GET_CAR_MODEL_BY_MODEL_NAME = "SELECT * FROM models WHERE name = ? ORDER BY name ASC;";
-    private static final String SQL_GET_CAR_MODEL_BY_COMPLETION_ID = "SELECT * FROM models WHERE idcompletion = ? ORDER BY name ASC;";
-    private static final String SQL_GET_ALL_CAR_MODELS = "SELECT * FROM models ORDER BY name ASC;";
-    private static final String SQL_CREATE_A_CAR_MODEL = "INSERT INTO models (name, idcompletion) VALUES (?, ?) RETURNING *;";
-    private static final String SQL_UPDATE_A_CAR_MODEL = "UPDATE models SET name = ?, idcompletion = ? WHERE id = ? RETURNING *;";
-    private static final String SQL_DELETE_A_CAR_MODEL = "DELETE FROM models WHERE id = ? RETURNING *;";
+    private static final String SQL_GET_CAR_MODEL_BY_MODEL_ID = "SELECT * FROM carmodels WHERE modelid = ? ORDER BY modelname ASC;";
+    private static final String SQL_GET_CAR_MODEL_BY_MODEL_NAME = "SELECT * FROM carmodels WHERE modelname = ? ORDER BY modelname ASC;";
+    private static final String SQL_GET_CAR_MODEL_BY_COMPLETION_ID = "SELECT * FROM carmodels WHERE completionid = ? ORDER BY modelname ASC;";
+    private static final String SQL_GET_ALL_CAR_MODELS = "SELECT * FROM carmodels ORDER BY modelname ASC;";
+    private static final String SQL_CREATE_A_CAR_MODEL = "INSERT INTO carmodels (modelname, completionid) VALUES (?, ?) RETURNING *;";
+    private static final String SQL_UPDATE_A_CAR_MODEL = "UPDATE carmodels SET modelname = ?, completionid = ? WHERE modelid = ? RETURNING *;";
+    private static final String SQL_DELETE_A_CAR_MODEL = "DELETE FROM carmodels WHERE modelid = ? RETURNING *;";
     private final Connection connection;
 
     public CarModelRepositoryImpl() throws SQLException {

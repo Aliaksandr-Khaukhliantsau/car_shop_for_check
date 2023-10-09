@@ -25,9 +25,9 @@ public class CarServiceImpl implements CarService {
         Car car = new Car();
 
         while (resultSet.next()) {
-            car.setCarId(UUID.fromString(resultSet.getString("id")));
+            car.setCarId(UUID.fromString(resultSet.getString("carid")));
             car.setVin(resultSet.getString("vin"));
-            UUID modelId = UUID.fromString(resultSet.getString("idmodel"));
+            UUID modelId = UUID.fromString(resultSet.getString("modelid"));
             CarModelService carModelService = new CarModelServiceImpl();
             car.setCarModel(carModelService.getCarModelByModelId(modelId));
         }
@@ -40,9 +40,9 @@ public class CarServiceImpl implements CarService {
         Car car = new Car();
 
         while (resultSet.next()) {
-            car.setCarId(UUID.fromString(resultSet.getString("id")));
+            car.setCarId(UUID.fromString(resultSet.getString("carid")));
             car.setVin(resultSet.getString("vin"));
-            UUID modelId = UUID.fromString(resultSet.getString("idmodel"));
+            UUID modelId = UUID.fromString(resultSet.getString("modelid"));
             CarModelService carModelService = new CarModelServiceImpl();
             car.setCarModel(carModelService.getCarModelByModelId(modelId));
         }
@@ -56,7 +56,7 @@ public class CarServiceImpl implements CarService {
 
         while (resultSet.next()) {
             Car car = new Car();
-            car.setCarId(UUID.fromString(resultSet.getString("id")));
+            car.setCarId(UUID.fromString(resultSet.getString("carid")));
             car.setVin(resultSet.getString("vin"));
             CarModelService carModelService = new CarModelServiceImpl();
             car.setCarModel(carModelService.getCarModelByModelId(modelId));
@@ -73,9 +73,9 @@ public class CarServiceImpl implements CarService {
 
         while (resultSet.next()) {
             Car car = new Car();
-            car.setCarId(UUID.fromString(resultSet.getString("id")));
+            car.setCarId(UUID.fromString(resultSet.getString("carid")));
             car.setVin(resultSet.getString("vin"));
-            UUID modelId = UUID.fromString(resultSet.getString("idmodel"));
+            UUID modelId = UUID.fromString(resultSet.getString("modelid"));
             CarModelService carModelService = new CarModelServiceImpl();
             car.setCarModel(carModelService.getCarModelByModelId(modelId));
 

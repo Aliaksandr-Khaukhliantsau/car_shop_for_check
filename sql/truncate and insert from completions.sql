@@ -1,7 +1,7 @@
 TRUNCATE completions CASCADE;
 
 INSERT INTO completions
-(name)
+(completionname)
 VALUES 
 ('Базовая'),
 ('Стандартная'),

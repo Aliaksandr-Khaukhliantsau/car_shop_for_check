@@ -1,1 +1,1 @@
-SELECT * FROM completions ORDER BY name ASC;
+SELECT * FROM completions ORDER BY completionname ASC;

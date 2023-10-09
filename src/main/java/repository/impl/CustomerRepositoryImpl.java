@@ -7,14 +7,14 @@ import java.sql.*;
 import java.util.UUID;
 
 public class CustomerRepositoryImpl implements CustomerRepository {
-    private static final String SQL_GET_CUSTOMER_BY_CUSTOMER_ID = "SELECT * FROM customers WHERE id = ? ORDER BY lastname ASC;";
+    private static final String SQL_GET_CUSTOMER_BY_CUSTOMER_ID = "SELECT * FROM customers WHERE customerid = ? ORDER BY lastname ASC;";
     private static final String SQL_GET_CUSTOMER_BY_FIRST_NAME = "SELECT * FROM customers WHERE firstname = ? ORDER BY lastname ASC;";
     private static final String SQL_GET_CUSTOMER_BY_MIDDLE_NAME = "SELECT * FROM customers WHERE middlename = ? ORDER BY lastname ASC;";
     private static final String SQL_GET_CUSTOMER_BY_LAST_NAME = "SELECT * FROM customers WHERE lastname = ? ORDER BY lastname ASC;";
     private static final String SQL_GET_ALL_CUSTOMERS = "SELECT * FROM customers ORDER BY lastname ASC;";
     private static final String SQL_CREATE_A_CUSTOMER = "INSERT INTO customers (firstname, middlename, lastname) VALUES (?, ?, ?) RETURNING *;";
-    private static final String SQL_UPDATE_A_CUSTOMER = "UPDATE customers SET firstname = ?, middlename = ?, lastname = ? WHERE id = ? RETURNING *;";
-    private static final String SQL_DELETE_A_CUSTOMER = "DELETE FROM customers WHERE id = ? RETURNING *;";
+    private static final String SQL_UPDATE_A_CUSTOMER = "UPDATE customers SET firstname = ?, middlename = ?, lastname = ? WHERE customerid = ? RETURNING *;";
+    private static final String SQL_DELETE_A_CUSTOMER = "DELETE FROM customers WHERE customerid = ? RETURNING *;";
     private final Connection connection;
 
     public CustomerRepositoryImpl() throws SQLException {

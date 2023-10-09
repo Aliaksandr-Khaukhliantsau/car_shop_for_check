@@ -7,13 +7,13 @@ import java.sql.*;
 import java.util.UUID;
 
 public class CarOptionRepositoryImpl implements CarOptionRepository {
-    private static final String SQL_GET_CAR_OPTION_BY_OPTION_ID = "SELECT * FROM options WHERE id = ? ORDER BY name ASC;";
-    private static final String SQL_GET_CAR_OPTION_BY_OPTION_NAME = "SELECT * FROM options WHERE name = ? ORDER BY name ASC;";
-    private static final String SQL_GET_CAR_OPTIONS_BY_COMPLETION_ID = "SELECT * FROM completionsoptions JOIN options ON completionsoptions.idoption = public.options.id WHERE completionsoptions.idcompletion = ? ORDER BY options.name ASC;";
-    private static final String SQL_GET_ALL_CAR_OPTIONS = "SELECT * FROM options ORDER BY name ASC;";
-    private static final String SQL_CREATE_A_CAR_OPTION = "INSERT INTO options (name) VALUES (?) RETURNING *;";
-    private static final String SQL_UPDATE_A_CAR_OPTION = "UPDATE options SET name = ? WHERE id = ? RETURNING *;";
-    private static final String SQL_DELETE_A_CAR_OPTION = "DELETE FROM options WHERE id = ? RETURNING *;";
+    private static final String SQL_GET_CAR_OPTION_BY_OPTION_ID = "SELECT * FROM caroptions WHERE optionid = ? ORDER BY optionname ASC;";
+    private static final String SQL_GET_CAR_OPTION_BY_OPTION_NAME = "SELECT * FROM options WHERE name = ? ORDER BY optionname ASC;";
+    private static final String SQL_GET_CAR_OPTIONS_BY_COMPLETION_ID = "SELECT * FROM completionscaroptions JOIN caroptions ON completionscaroptions.optionid = caroptions.optionid WHERE completionscaroptions.completionid = ? ORDER BY caroptions.optionname ASC;";
+    private static final String SQL_GET_ALL_CAR_OPTIONS = "SELECT * FROM caroptions ORDER BY optionname ASC;";
+    private static final String SQL_CREATE_A_CAR_OPTION = "INSERT INTO caroptions (optionname) VALUES (?) RETURNING *;";
+    private static final String SQL_UPDATE_A_CAR_OPTION = "UPDATE caroptions SET optionname = ? WHERE optionid = ? RETURNING *;";
+    private static final String SQL_DELETE_A_CAR_OPTION = "DELETE FROM caroptions WHERE optionid = ? RETURNING *;";
     private final Connection connection;
 
     public CarOptionRepositoryImpl() throws SQLException {

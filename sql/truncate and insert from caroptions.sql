@@ -1,7 +1,7 @@
-TRUNCATE options CASCADE;
+TRUNCATE caroptions CASCADE;
 
-INSERT INTO options
-(name)
+INSERT INTO caroptions
+(optionname)
 VALUES 
 ('Подогрев сидений'),
 ('Гидравлическая подвеска'),

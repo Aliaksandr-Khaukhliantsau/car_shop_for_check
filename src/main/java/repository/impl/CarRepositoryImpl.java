@@ -7,13 +7,13 @@ import java.sql.*;
 import java.util.UUID;
 
 public class CarRepositoryImpl implements CarRepository {
-    private static final String SQL_GET_CAR_BY_CAR_ID = "SELECT * FROM cars WHERE id = ? ORDER BY vin ASC;";
+    private static final String SQL_GET_CAR_BY_CAR_ID = "SELECT * FROM cars WHERE carid = ? ORDER BY vin ASC;";
     private static final String SQL_GET_CAR_BY_VIN = "SELECT * FROM cars WHERE vin = ? ORDER BY vin ASC;";
-    private static final String SQL_GET_CAR_BY_MODEL_ID = "SELECT * FROM cars WHERE idmodel = ? ORDER BY vin ASC;";
+    private static final String SQL_GET_CAR_BY_MODEL_ID = "SELECT * FROM cars WHERE modelid = ? ORDER BY vin ASC;";
     private static final String SQL_GET_ALL_CARS = "SELECT * FROM cars ORDER BY vin ASC;";
-    private static final String SQL_CREATE_A_CAR = "INSERT INTO cars (vin, idmodel) VALUES (?, ?) RETURNING *;";
-    private static final String SQL_UPDATE_A_CAR = "UPDATE cars SET vin = ?, idmodel = ? WHERE id = ? RETURNING *;";
-    private static final String SQL_DELETE_A_CAR = "DELETE FROM cars WHERE id = ? RETURNING *;";
+    private static final String SQL_CREATE_A_CAR = "INSERT INTO cars (vin, modelid) VALUES (?, ?) RETURNING *;";
+    private static final String SQL_UPDATE_A_CAR = "UPDATE cars SET vin = ?, modelid = ? WHERE carid = ? RETURNING *;";
+    private static final String SQL_DELETE_A_CAR = "DELETE FROM cars WHERE carid = ? RETURNING *;";
     private final Connection connection;
 
     public CarRepositoryImpl() throws SQLException {

@@ -23,7 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = new Customer();
 
         while (resultSet.next()) {
-            customer.setCustomerId(UUID.fromString(resultSet.getString("id")));
+            customer.setCustomerId(UUID.fromString(resultSet.getString("customerid")));
             customer.setFirstName(resultSet.getString("firstname"));
             customer.setMiddleName(resultSet.getString("middlename"));
             customer.setLastName(resultSet.getString("lastname"));
@@ -38,7 +38,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         while (resultSet.next()) {
             Customer customer = new Customer();
-            customer.setCustomerId(UUID.fromString(resultSet.getString("id")));
+            customer.setCustomerId(UUID.fromString(resultSet.getString("customerid")));
             customer.setFirstName(resultSet.getString("firstname"));
             customer.setMiddleName(resultSet.getString("middlename"));
             customer.setLastName(resultSet.getString("lastname"));
@@ -55,7 +55,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         while (resultSet.next()) {
             Customer customer = new Customer();
-            customer.setCustomerId(UUID.fromString(resultSet.getString("id")));
+            customer.setCustomerId(UUID.fromString(resultSet.getString("customerid")));
             customer.setFirstName(resultSet.getString("firstname"));
             customer.setMiddleName(resultSet.getString("middlename"));
             customer.setLastName(resultSet.getString("lastname"));
@@ -72,7 +72,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         while (resultSet.next()) {
             Customer customer = new Customer();
-            customer.setCustomerId(UUID.fromString(resultSet.getString("id")));
+            customer.setCustomerId(UUID.fromString(resultSet.getString("customerid")));
             customer.setFirstName(resultSet.getString("firstname"));
             customer.setMiddleName(resultSet.getString("middlename"));
             customer.setLastName(resultSet.getString("lastname"));
@@ -89,7 +89,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         while (resultSet.next()) {
             Customer customer = new Customer();
-            customer.setCustomerId(UUID.fromString(resultSet.getString("id")));
+            customer.setCustomerId(UUID.fromString(resultSet.getString("customerid")));
             customer.setFirstName(resultSet.getString("firstname"));
             customer.setMiddleName(resultSet.getString("middlename"));
             customer.setLastName(resultSet.getString("lastname"));

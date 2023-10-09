@@ -1,0 +1,1 @@
+SELECT * FROM carmodels ORDER BY modelname ASC;
