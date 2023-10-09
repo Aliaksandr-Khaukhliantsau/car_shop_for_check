@@ -7,7 +7,13 @@ import java.sql.*;
 import java.util.UUID;
 
 public class CarRepositoryImpl implements CarRepository {
+    private static final String SQL_GET_CAR_BY_CAR_ID = "SELECT * FROM cars WHERE id = ? ORDER BY vin ASC;";
+    private static final String SQL_GET_CAR_BY_VIN = "SELECT * FROM cars WHERE vin = ? ORDER BY vin ASC;";
+    private static final String SQL_GET_CAR_BY_MODEL_ID = "SELECT * FROM cars WHERE idmodel = ? ORDER BY vin ASC;";
     private static final String SQL_GET_ALL_CARS = "SELECT * FROM cars ORDER BY vin ASC;";
+    private static final String SQL_CREATE_A_CAR = "INSERT INTO cars (vin, idmodel) VALUES (?, ?) RETURNING *;";
+    private static final String SQL_UPDATE_A_CAR = "UPDATE cars SET vin = ?, idmodel = ? WHERE id = ? RETURNING *;";
+    private static final String SQL_DELETE_A_CAR = "DELETE FROM cars WHERE id = ? RETURNING *;";
     private final Connection connection;
 
     public CarRepositoryImpl() throws SQLException {
@@ -16,60 +22,59 @@ public class CarRepositoryImpl implements CarRepository {
 
     @Override
     public ResultSet getCarByCarId(UUID carId) throws SQLException {
-        Statement statement = connection.createStatement();
-        String SQL_GET_CAR_BY_CAR_ID = "SELECT * FROM cars WHERE id = " + "'" + carId + "'" + " ORDER BY vin ASC;";
-        ResultSet resultSet = statement.executeQuery(SQL_GET_CAR_BY_CAR_ID);
-//        statement.close();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_BY_CAR_ID);
+        preparedStatement.setObject(1, carId);
+        ResultSet resultSet = preparedStatement.executeQuery();
         return resultSet;
     }
 
     @Override
     public ResultSet getCarByVin(String vin) throws SQLException {
-        Statement statement = connection.createStatement();
-        String SQL_GET_CAR_BY_VIN = "SELECT * FROM cars WHERE vin = " + "'" + vin + "'" + " ORDER BY vin ASC;";
-        ResultSet resultSet = statement.executeQuery(SQL_GET_CAR_BY_VIN);
-//        statement.close();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_BY_VIN);
+        preparedStatement.setString(1, vin);
+        ResultSet resultSet = preparedStatement.executeQuery();
         return resultSet;
     }
 
     @Override
     public ResultSet getCarByModelId(UUID modelId) throws SQLException {
-        Statement statement = connection.createStatement();
-        String SQL_GET_CAR_BY_MODEL_ID = "SELECT * FROM cars WHERE idmodel = " + "'" + modelId + "'" + " ORDER BY vin ASC;";
-        ResultSet resultSet = statement.executeQuery(SQL_GET_CAR_BY_MODEL_ID);
-//        statement.close();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_BY_MODEL_ID);
+        preparedStatement.setObject(1, modelId);
+        ResultSet resultSet = preparedStatement.executeQuery();
         return resultSet;
     }
 
     @Override
     public ResultSet getAllCars() throws SQLException {
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(SQL_GET_ALL_CARS);
-//        statement.close();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_CARS);
+        ResultSet resultSet = preparedStatement.executeQuery();
         return resultSet;
     }
 
     @Override
     public void create(String vin, UUID modelId) throws SQLException {
-        Statement statement = connection.createStatement();
-        String SQL_CREATE_A_CAR = "INSERT INTO cars (vin, idmodel) VALUES ('" + vin + "', '" + modelId + "') RETURNING *;";
-        statement.executeQuery(SQL_CREATE_A_CAR);
-        statement.close();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_A_CAR);
+        preparedStatement.setString(1, vin);
+        preparedStatement.setObject(2, modelId);
+        preparedStatement.executeQuery();
+        preparedStatement.close();
     }
 
     @Override
     public void update(UUID carId, String vin, UUID modelId) throws SQLException {
-        Statement statement = connection.createStatement();
-        String SQL_UPDATE_A_CAR = "UPDATE cars SET vin = '" + vin + "', idmodel = '" + modelId + "' WHERE id = '" + carId + "' RETURNING *;";
-        statement.executeQuery(SQL_UPDATE_A_CAR);
-        statement.close();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_A_CAR);
+        preparedStatement.setString(1, vin);
+        preparedStatement.setObject(2, modelId);
+        preparedStatement.setObject(3, carId);
+        preparedStatement.executeQuery();
+        preparedStatement.close();
     }
 
     @Override
     public void delete(UUID carId) throws SQLException {
-        Statement statement = connection.createStatement();
-        String SQL_DELETE_A_CAR = "DELETE FROM cars WHERE id = '" + carId + "' RETURNING *;";
-        statement.executeQuery(SQL_DELETE_A_CAR);
-        statement.close();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_CAR);
+        preparedStatement.setObject(1, carId);
+        preparedStatement.executeQuery();
+        preparedStatement.close();
     }
 }
