@@ -1,7 +1,7 @@
 TRUNCATE customers CASCADE;
 
 INSERT INTO customers 
-(firstname, middlename, lastname)
+(first_name, middle_name, last_name)
 VALUES 
 ('Иван', 'Иванович', 'Иванов'),
 ('Петр', 'Петрович', 'Петров'),

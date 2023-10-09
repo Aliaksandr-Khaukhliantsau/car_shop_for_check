@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.UUID;
 
 public class CustomerRepositoryImpl implements CustomerRepository {
-    private static final String SQL_GET_CUSTOMER_BY_CUSTOMER_ID = "SELECT * FROM customers WHERE customerid = ? ORDER BY lastname ASC;";
-    private static final String SQL_GET_CUSTOMER_BY_FIRST_NAME = "SELECT * FROM customers WHERE firstname = ? ORDER BY lastname ASC;";
-    private static final String SQL_GET_CUSTOMER_BY_MIDDLE_NAME = "SELECT * FROM customers WHERE middlename = ? ORDER BY lastname ASC;";
-    private static final String SQL_GET_CUSTOMER_BY_LAST_NAME = "SELECT * FROM customers WHERE lastname = ? ORDER BY lastname ASC;";
-    private static final String SQL_GET_ALL_CUSTOMERS = "SELECT * FROM customers ORDER BY lastname ASC;";
-    private static final String SQL_CREATE_A_CUSTOMER = "INSERT INTO customers (firstname, middlename, lastname) VALUES (?, ?, ?) RETURNING *;";
-    private static final String SQL_UPDATE_A_CUSTOMER = "UPDATE customers SET firstname = ?, middlename = ?, lastname = ? WHERE customerid = ? RETURNING *;";
-    private static final String SQL_DELETE_A_CUSTOMER = "DELETE FROM customers WHERE customerid = ? RETURNING *;";
+    private static final String SQL_GET_CUSTOMER_BY_CUSTOMER_ID = "SELECT * FROM customers WHERE customer_id = ? ORDER BY last_name ASC;";
+    private static final String SQL_GET_CUSTOMER_BY_FIRST_NAME = "SELECT * FROM customers WHERE first_name = ? ORDER BY last_name ASC;";
+    private static final String SQL_GET_CUSTOMER_BY_MIDDLE_NAME = "SELECT * FROM customers WHERE middle_name = ? ORDER BY last_name ASC;";
+    private static final String SQL_GET_CUSTOMER_BY_LAST_NAME = "SELECT * FROM customers WHERE last_name = ? ORDER BY last_name ASC;";
+    private static final String SQL_GET_ALL_CUSTOMERS = "SELECT * FROM customers ORDER BY last_name ASC;";
+    private static final String SQL_CREATE_A_CUSTOMER = "INSERT INTO customers (first_name, middle_name, last_name) VALUES (?, ?, ?) RETURNING *;";
+    private static final String SQL_UPDATE_A_CUSTOMER = "UPDATE customers SET first_name = ?, middle_name = ?, last_name = ? WHERE customer_id = ? RETURNING *;";
+    private static final String SQL_DELETE_A_CUSTOMER = "DELETE FROM customers WHERE customer_id = ? RETURNING *;";
     private final Connection connection;
 
     public CustomerRepositoryImpl() throws SQLException {
@@ -32,10 +32,10 @@ public class CustomerRepositoryImpl implements CustomerRepository {
             Customer customer = new Customer();
 
             while (resultSet.next()) {
-                customer.setCustomerId(UUID.fromString(resultSet.getString("customerid")));
-                customer.setFirstName(resultSet.getString("firstname"));
-                customer.setMiddleName(resultSet.getString("middlename"));
-                customer.setLastName(resultSet.getString("lastname"));
+                customer.setCustomerId(UUID.fromString(resultSet.getString("customer_id")));
+                customer.setFirstName(resultSet.getString("first_name"));
+                customer.setMiddleName(resultSet.getString("middle_name"));
+                customer.setLastName(resultSet.getString("last_name"));
             }
             return customer;
         }
@@ -50,10 +50,10 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
             while (resultSet.next()) {
                 Customer customer = new Customer();
-                customer.setCustomerId(UUID.fromString(resultSet.getString("customerid")));
-                customer.setFirstName(resultSet.getString("firstname"));
-                customer.setMiddleName(resultSet.getString("middlename"));
-                customer.setLastName(resultSet.getString("lastname"));
+                customer.setCustomerId(UUID.fromString(resultSet.getString("customer_id")));
+                customer.setFirstName(resultSet.getString("first_name"));
+                customer.setMiddleName(resultSet.getString("middle_name"));
+                customer.setLastName(resultSet.getString("last_name"));
                 customers.add(customer);
             }
             return customers;
@@ -69,10 +69,10 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
             while (resultSet.next()) {
                 Customer customer = new Customer();
-                customer.setCustomerId(UUID.fromString(resultSet.getString("customerid")));
-                customer.setFirstName(resultSet.getString("firstname"));
-                customer.setMiddleName(resultSet.getString("middlename"));
-                customer.setLastName(resultSet.getString("lastname"));
+                customer.setCustomerId(UUID.fromString(resultSet.getString("customer_id")));
+                customer.setFirstName(resultSet.getString("first_name"));
+                customer.setMiddleName(resultSet.getString("middle_name"));
+                customer.setLastName(resultSet.getString("last_name"));
 
                 customers.add(customer);
             }
@@ -89,10 +89,10 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
             while (resultSet.next()) {
                 Customer customer = new Customer();
-                customer.setCustomerId(UUID.fromString(resultSet.getString("customerid")));
-                customer.setFirstName(resultSet.getString("firstname"));
-                customer.setMiddleName(resultSet.getString("middlename"));
-                customer.setLastName(resultSet.getString("lastname"));
+                customer.setCustomerId(UUID.fromString(resultSet.getString("customer_id")));
+                customer.setFirstName(resultSet.getString("first_name"));
+                customer.setMiddleName(resultSet.getString("middle_name"));
+                customer.setLastName(resultSet.getString("last_name"));
 
                 customers.add(customer);
             }
@@ -108,10 +108,10 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
             while (resultSet.next()) {
                 Customer customer = new Customer();
-                customer.setCustomerId(UUID.fromString(resultSet.getString("customerid")));
-                customer.setFirstName(resultSet.getString("firstname"));
-                customer.setMiddleName(resultSet.getString("middlename"));
-                customer.setLastName(resultSet.getString("lastname"));
+                customer.setCustomerId(UUID.fromString(resultSet.getString("customer_id")));
+                customer.setFirstName(resultSet.getString("first_name"));
+                customer.setMiddleName(resultSet.getString("middle_name"));
+                customer.setLastName(resultSet.getString("last_name"));
 
                 customers.add(customer);
             }

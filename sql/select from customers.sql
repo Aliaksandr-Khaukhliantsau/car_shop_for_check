@@ -1,1 +1,1 @@
-SELECT * FROM customers ORDER BY lastname ASC;
+SELECT * FROM customers ORDER BY last_name ASC;
