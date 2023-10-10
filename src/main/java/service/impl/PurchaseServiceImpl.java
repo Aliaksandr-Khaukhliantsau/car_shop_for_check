@@ -27,12 +27,12 @@ public class PurchaseServiceImpl implements PurchaseService {
         Purchase purchase = new Purchase();
 
         while (resultSet.next()) {
-            purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchaseid")));
-            purchase.setPurchaseNumber(resultSet.getInt("purchasenumber"));
-            UUID customerId = UUID.fromString(resultSet.getString("customerid"));
+            purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchase_id")));
+            purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
+            UUID customerId = UUID.fromString(resultSet.getString("customer_id"));
             CustomerService customerService = new CustomerServiceImpl();
             purchase.setCustomer(customerService.getCustomerByCustomerId(customerId));
-            UUID carId = UUID.fromString(resultSet.getString("carid"));
+            UUID carId = UUID.fromString(resultSet.getString("car_id"));
             CarService carService = new CarServiceImpl();
             purchase.setCar(carService.getCarByCarId(carId));
         }
@@ -45,12 +45,12 @@ public class PurchaseServiceImpl implements PurchaseService {
         Purchase purchase = new Purchase();
 
         while (resultSet.next()) {
-            purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchaseid")));
-            purchase.setPurchaseNumber(resultSet.getInt("purchasenumber"));
-            UUID customerId = UUID.fromString(resultSet.getString("customerid"));
+            purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchase_id")));
+            purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
+            UUID customerId = UUID.fromString(resultSet.getString("customer_id"));
             CustomerService customerService = new CustomerServiceImpl();
             purchase.setCustomer(customerService.getCustomerByCustomerId(customerId));
-            UUID carId = UUID.fromString(resultSet.getString("carid"));
+            UUID carId = UUID.fromString(resultSet.getString("car_id"));
             CarService carService = new CarServiceImpl();
             purchase.setCar(carService.getCarByCarId(carId));
         }
@@ -64,11 +64,11 @@ public class PurchaseServiceImpl implements PurchaseService {
 
         while (resultSet.next()) {
             Purchase purchase = new Purchase();
-            purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchaseid")));
-            purchase.setPurchaseNumber(resultSet.getInt("purchasenumber"));
+            purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchase_id")));
+            purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
             CustomerService customerService = new CustomerServiceImpl();
             purchase.setCustomer(customerService.getCustomerByCustomerId(customerId));
-            UUID carId = UUID.fromString(resultSet.getString("carid"));
+            UUID carId = UUID.fromString(resultSet.getString("car_id"));
             CarService carService = new CarServiceImpl();
             purchase.setCar(carService.getCarByCarId(carId));
 
@@ -84,10 +84,10 @@ public class PurchaseServiceImpl implements PurchaseService {
 
         while (resultSet.next()) {
             Purchase purchase = new Purchase();
-            purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchaseid")));
-            purchase.setPurchaseNumber(resultSet.getInt("purchasenumber"));
+            purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchase_id")));
+            purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
             CustomerService customerService = new CustomerServiceImpl();
-            UUID customerId = UUID.fromString(resultSet.getString("customerid"));
+            UUID customerId = UUID.fromString(resultSet.getString("customer_id"));
             purchase.setCustomer(customerService.getCustomerByCustomerId(customerId));
             CarService carService = new CarServiceImpl();
             purchase.setCar(carService.getCarByCarId(carId));
@@ -104,12 +104,12 @@ public class PurchaseServiceImpl implements PurchaseService {
 
         while (resultSet.next()) {
             Purchase purchase = new Purchase();
-            purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchaseid")));
-            purchase.setPurchaseNumber(resultSet.getInt("purchasenumber"));
-            UUID customerId = UUID.fromString(resultSet.getString("customerid"));
+            purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchase_id")));
+            purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
+            UUID customerId = UUID.fromString(resultSet.getString("customer_id"));
             CustomerService customerService = new CustomerServiceImpl();
             purchase.setCustomer(customerService.getCustomerByCustomerId(customerId));
-            UUID carId = UUID.fromString(resultSet.getString("carid"));
+            UUID carId = UUID.fromString(resultSet.getString("car_id"));
             CarService carService = new CarServiceImpl();
             purchase.setCar(carService.getCarByCarId(carId));
 
@@ -125,12 +125,12 @@ public class PurchaseServiceImpl implements PurchaseService {
 
         while (resultSet.next()) {
             Purchase purchase = new Purchase();
-            purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchaseid")));
-            purchase.setPurchaseNumber(resultSet.getInt("purchasenumber"));
-            UUID customerId = UUID.fromString(resultSet.getString("customerid"));
+            purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchase_id")));
+            purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
+            UUID customerId = UUID.fromString(resultSet.getString("customer_id"));
             CustomerService customerService = new CustomerServiceImpl();
             purchase.setCustomer(customerService.getCustomerByCustomerId(customerId));
-            UUID carId = UUID.fromString(resultSet.getString("carid"));
+            UUID carId = UUID.fromString(resultSet.getString("car_id"));
             CarService carService = new CarServiceImpl();
             purchase.setCar(carService.getCarByCarId(carId));
 
@@ -146,12 +146,12 @@ public class PurchaseServiceImpl implements PurchaseService {
 
         while (resultSet.next()) {
             Purchase purchase = new Purchase();
-            purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchaseid")));
-            purchase.setPurchaseNumber(resultSet.getInt("purchasenumber"));
-            UUID customerId = UUID.fromString(resultSet.getString("customerid"));
+            purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchase_id")));
+            purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
+            UUID customerId = UUID.fromString(resultSet.getString("customer_id"));
             CustomerService customerService = new CustomerServiceImpl();
             purchase.setCustomer(customerService.getCustomerByCustomerId(customerId));
-            UUID carId = UUID.fromString(resultSet.getString("carid"));
+            UUID carId = UUID.fromString(resultSet.getString("car_id"));
             CarService carService = new CarServiceImpl();
             purchase.setCar(carService.getCarByCarId(carId));
 

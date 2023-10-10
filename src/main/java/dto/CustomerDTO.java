@@ -10,8 +10,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @ToString
 public class CustomerDTO {
-    private UUID customer_id;
-    private String first_name;
-    private String middle_name;
-    private String last_name;
+    private UUID customerId;
+    private String firstName;
+    private String middleName;
+    private String lastName;
 }

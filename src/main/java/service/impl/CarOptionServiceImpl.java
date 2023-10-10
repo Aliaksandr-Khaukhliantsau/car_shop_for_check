@@ -23,8 +23,8 @@ public class CarOptionServiceImpl implements CarOptionService {
         CarOption carOption = new CarOption();
 
         while (resultSet.next()) {
-            carOption.setOptionId(UUID.fromString(resultSet.getString("optionid")));
-            carOption.setOptionName(resultSet.getString("optionname"));
+            carOption.setOptionId(UUID.fromString(resultSet.getString("option_id")));
+            carOption.setOptionName(resultSet.getString("option_name"));
         }
         return carOption;
     }
@@ -35,8 +35,8 @@ public class CarOptionServiceImpl implements CarOptionService {
         CarOption carOption = new CarOption();
 
         while (resultSet.next()) {
-            carOption.setOptionId(UUID.fromString(resultSet.getString("optionid")));
-            carOption.setOptionName(resultSet.getString("optionname"));
+            carOption.setOptionId(UUID.fromString(resultSet.getString("option_id")));
+            carOption.setOptionName(resultSet.getString("option_name"));
         }
         return carOption;
     }
@@ -48,8 +48,8 @@ public class CarOptionServiceImpl implements CarOptionService {
 
         while (resultSet.next()) {
             CarOption carOption = new CarOption();
-            carOption.setOptionId(UUID.fromString(resultSet.getString("optionid")));
-            carOption.setOptionName(resultSet.getString("optionname"));
+            carOption.setOptionId(UUID.fromString(resultSet.getString("option_id")));
+            carOption.setOptionName(resultSet.getString("option_name"));
 
             carOptions.add(carOption);
         }
@@ -63,8 +63,8 @@ public class CarOptionServiceImpl implements CarOptionService {
 
         while (resultSet.next()) {
             CarOption carOption = new CarOption();
-            carOption.setOptionId(UUID.fromString(resultSet.getString("optionid")));
-            carOption.setOptionName(resultSet.getString("optionname"));
+            carOption.setOptionId(UUID.fromString(resultSet.getString("option_id")));
+            carOption.setOptionName(resultSet.getString("option_name"));
 
             carOptions.add(carOption);
         }

@@ -7,13 +7,13 @@ import java.sql.*;
 import java.util.UUID;
 
 public class CarModelRepositoryImpl implements CarModelRepository {
-    private static final String SQL_GET_CAR_MODEL_BY_MODEL_ID = "SELECT * FROM carmodels WHERE modelid = ? ORDER BY modelname ASC;";
-    private static final String SQL_GET_CAR_MODEL_BY_MODEL_NAME = "SELECT * FROM carmodels WHERE modelname = ? ORDER BY modelname ASC;";
-    private static final String SQL_GET_CAR_MODEL_BY_COMPLETION_ID = "SELECT * FROM carmodels WHERE completionid = ? ORDER BY modelname ASC;";
-    private static final String SQL_GET_ALL_CAR_MODELS = "SELECT * FROM carmodels ORDER BY modelname ASC;";
-    private static final String SQL_CREATE_A_CAR_MODEL = "INSERT INTO carmodels (modelname, completionid) VALUES (?, ?) RETURNING *;";
-    private static final String SQL_UPDATE_A_CAR_MODEL = "UPDATE carmodels SET modelname = ?, completionid = ? WHERE modelid = ? RETURNING *;";
-    private static final String SQL_DELETE_A_CAR_MODEL = "DELETE FROM carmodels WHERE modelid = ? RETURNING *;";
+    private static final String SQL_GET_CAR_MODEL_BY_MODEL_ID = "SELECT * FROM car_models WHERE model_id = ? ORDER BY model_name ASC;";
+    private static final String SQL_GET_CAR_MODEL_BY_MODEL_NAME = "SELECT * FROM car_models WHERE model_name = ? ORDER BY model_name ASC;";
+    private static final String SQL_GET_CAR_MODEL_BY_COMPLETION_ID = "SELECT * FROM car_models WHERE completion_id = ? ORDER BY model_name ASC;";
+    private static final String SQL_GET_ALL_CAR_MODELS = "SELECT * FROM car_models ORDER BY model_name ASC;";
+    private static final String SQL_CREATE_A_CAR_MODEL = "INSERT INTO car_models (model_name, completion_id) VALUES (?, ?) RETURNING *;";
+    private static final String SQL_UPDATE_A_CAR_MODEL = "UPDATE car_models SET model_name = ?, completion_id = ? WHERE model_id = ? RETURNING *;";
+    private static final String SQL_DELETE_A_CAR_MODEL = "DELETE FROM car_models WHERE model_id = ? RETURNING *;";
     private final Connection connection;
 
     public CarModelRepositoryImpl() throws SQLException {

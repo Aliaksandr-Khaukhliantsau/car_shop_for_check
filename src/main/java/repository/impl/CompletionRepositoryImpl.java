@@ -7,14 +7,14 @@ import java.sql.*;
 import java.util.UUID;
 
 public class CompletionRepositoryImpl implements CompletionRepository {
-    private static final String SQL_GET_COMPLETION_BY_COMPLETION_ID = "SELECT * FROM completions WHERE completionid = ? ORDER BY completionname ASC;";
-    private static final String SQL_GET_COMPLETION_BY_COMPLETION_NAME = "SELECT * FROM completions WHERE name = ? ORDER BY completionname ASC;";
-    private static final String SQL_GET_ALL_COMPLETIONS = "SELECT * FROM completions ORDER BY completionname ASC;";
-    private static final String SQL_ADD_A_CAR_OPTION = "INSERT INTO completionscaroptions (completionid, optionid) VALUES (?, ?) RETURNING *;";
-    private static final String SQL_DELETE_A_CAR_OPTION = "DELETE FROM completionscaroptions WHERE completionid = ? AND optionid = ? RETURNING *;";
-    private static final String SQL_CREATE_A_COMPLETION = "INSERT INTO completions (completionname) VALUES (?) RETURNING *;";
-    private static final String SQL_UPDATE_A_COMPLETION = "UPDATE completions SET completionname = ? WHERE completionid = ? RETURNING *;";
-    private static final String SQL_DELETE_A_COMPLETION = "DELETE FROM completions WHERE completionid = ? RETURNING *;";
+    private static final String SQL_GET_COMPLETION_BY_COMPLETION_ID = "SELECT * FROM completions WHERE completion_id = ? ORDER BY completion_name ASC;";
+    private static final String SQL_GET_COMPLETION_BY_COMPLETION_NAME = "SELECT * FROM completions WHERE completion_name = ? ORDER BY completion_name ASC;";
+    private static final String SQL_GET_ALL_COMPLETIONS = "SELECT * FROM completions ORDER BY completion_name ASC;";
+    private static final String SQL_ADD_A_CAR_OPTION = "INSERT INTO completions_car_options (completion_id, option_id) VALUES (?, ?) RETURNING *;";
+    private static final String SQL_DELETE_A_CAR_OPTION = "DELETE FROM completions_car_options WHERE completion_id = ? AND option_id = ? RETURNING *;";
+    private static final String SQL_CREATE_A_COMPLETION = "INSERT INTO completions (completion_name) VALUES (?) RETURNING *;";
+    private static final String SQL_UPDATE_A_COMPLETION = "UPDATE completions SET completion_name = ? WHERE completion_id = ? RETURNING *;";
+    private static final String SQL_DELETE_A_COMPLETION = "DELETE FROM completions WHERE completion_id = ? RETURNING *;";
     private final Connection connection;
 
     public CompletionRepositoryImpl() throws SQLException {

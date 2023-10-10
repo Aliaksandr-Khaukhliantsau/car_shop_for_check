@@ -24,9 +24,9 @@ public class CarModelServiceImpl implements CarModelService {
         CarModel carModel = new CarModel();
 
         while (resultSet.next()) {
-            carModel.setModelId(UUID.fromString(resultSet.getString("modelid")));
-            carModel.setModelName(resultSet.getString("modelname"));
-            UUID completionId = UUID.fromString(resultSet.getString("completionid"));
+            carModel.setModelId(UUID.fromString(resultSet.getString("model_id")));
+            carModel.setModelName(resultSet.getString("model_name"));
+            UUID completionId = UUID.fromString(resultSet.getString("completion_id"));
             CompletionService completionService = new CompletionServiceImpl();
             carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
 
@@ -41,9 +41,9 @@ public class CarModelServiceImpl implements CarModelService {
 
         while (resultSet.next()) {
             CarModel carModel = new CarModel();
-            carModel.setModelId(UUID.fromString(resultSet.getString("modelid")));
-            carModel.setModelName(resultSet.getString("modelname"));
-            UUID completionId = UUID.fromString(resultSet.getString("completionid"));
+            carModel.setModelId(UUID.fromString(resultSet.getString("model_id")));
+            carModel.setModelName(resultSet.getString("model_name"));
+            UUID completionId = UUID.fromString(resultSet.getString("completion_id"));
             CompletionService completionService = new CompletionServiceImpl();
             carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
 
@@ -59,8 +59,8 @@ public class CarModelServiceImpl implements CarModelService {
 
         while (resultSet.next()) {
             CarModel carModel = new CarModel();
-            carModel.setModelId(UUID.fromString(resultSet.getString("modelid")));
-            carModel.setModelName(resultSet.getString("modelname"));
+            carModel.setModelId(UUID.fromString(resultSet.getString("model_id")));
+            carModel.setModelName(resultSet.getString("model_name"));
             CompletionService completionService = new CompletionServiceImpl();
             carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
 
@@ -76,9 +76,9 @@ public class CarModelServiceImpl implements CarModelService {
 
         while (resultSet.next()) {
             CarModel carModel = new CarModel();
-            carModel.setModelId(UUID.fromString(resultSet.getString("modelid")));
-            carModel.setModelName(resultSet.getString("modelname"));
-            UUID completionId = UUID.fromString(resultSet.getString("completionid"));
+            carModel.setModelId(UUID.fromString(resultSet.getString("model_id")));
+            carModel.setModelName(resultSet.getString("model_name"));
+            UUID completionId = UUID.fromString(resultSet.getString("completion_id"));
             CompletionService completionService = new CompletionServiceImpl();
             carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
 

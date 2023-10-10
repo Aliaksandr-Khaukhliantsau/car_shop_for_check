@@ -25,10 +25,10 @@ public class CompletionServiceImpl implements CompletionService {
         Completion completion = new Completion();
 
         while (resultSet.next()) {
-            completion.setCompletionId(UUID.fromString(resultSet.getString("completionid")));
-            completion.setCompletionName(resultSet.getString("completionname"));
+            completion.setCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+            completion.setCompletionName(resultSet.getString("completion_name"));
             CarOptionService carOptionService = new CarOptionServiceImpl();
-            List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completionid")));
+            List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
             completion.setCarOptions(carOptions);
 
         }
@@ -41,10 +41,10 @@ public class CompletionServiceImpl implements CompletionService {
         Completion completion = new Completion();
 
         while (resultSet.next()) {
-            completion.setCompletionId(UUID.fromString(resultSet.getString("completionid")));
-            completion.setCompletionName(resultSet.getString("completionname"));
+            completion.setCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+            completion.setCompletionName(resultSet.getString("completion_name"));
             CarOptionService carOptionService = new CarOptionServiceImpl();
-            List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completionid")));
+            List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
             completion.setCarOptions(carOptions);
         }
         return completion;
@@ -67,10 +67,10 @@ public class CompletionServiceImpl implements CompletionService {
 
         while (resultSet.next()) {
             Completion completion = new Completion();
-            completion.setCompletionId(UUID.fromString(resultSet.getString("completionid")));
-            completion.setCompletionName(resultSet.getString("completionname"));
+            completion.setCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+            completion.setCompletionName(resultSet.getString("completion_name"));
             CarOptionService carOptionService = new CarOptionServiceImpl();
-            List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completionid")));
+            List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
             completion.setCarOptions(carOptions);
 
             completions.add(completion);

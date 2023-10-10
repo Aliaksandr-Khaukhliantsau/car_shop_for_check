@@ -7,14 +7,14 @@ import java.sql.*;
 import java.util.UUID;
 
 public class PurchaseRepositoryImpl implements PurchaseRepository {
-    private static final String SQL_GET_PURCHASE_BY_PURCHASE_ID = "SELECT * FROM purchases WHERE purchaseid = ? ORDER BY purchasenumber ASC;";
-    private static final String SQL_GET_PURCHASE_BY_PURCHASE_NUMBER = "SELECT * FROM purchases WHERE purchasenumber = ? ORDER BY purchasenumber ASC;";
-    private static final String SQL_GET_PURCHASE_BY_CUSTOMER_ID = "SELECT * FROM purchases WHERE customerid = ? ORDER BY purchasenumber ASC;";
-    private static final String SQL_GET_PURCHASE_BY_CAR_ID = "SELECT * FROM purchases WHERE carid = ? ORDER BY purchasenumber ASC;";
-    private static final String SQL_GET_ALL_PURCHASES = "SELECT * FROM purchases ORDER BY purchasenumber ASC;";
-    private static final String SQL_CREATE_A_PURCHASE = "INSERT INTO purchases (customerid, carid) VALUES (?, ?) RETURNING *;";
-    private static final String SQL_UPDATE_A_PURCHASE = "UPDATE purchases SET customerid = ?, carid = ? WHERE purchaseid = ? RETURNING *;";
-    private static final String SQL_DELETE_A_PURCHASE = "DELETE FROM purchases WHERE purchaseid = ? RETURNING *;";
+    private static final String SQL_GET_PURCHASE_BY_PURCHASE_ID = "SELECT * FROM purchases WHERE purchase_id = ? ORDER BY purchase_number ASC;";
+    private static final String SQL_GET_PURCHASE_BY_PURCHASE_NUMBER = "SELECT * FROM purchases WHERE purchase_number = ? ORDER BY purchase_number ASC;";
+    private static final String SQL_GET_PURCHASE_BY_CUSTOMER_ID = "SELECT * FROM purchases WHERE customer_id = ? ORDER BY purchase_number ASC;";
+    private static final String SQL_GET_PURCHASE_BY_CAR_ID = "SELECT * FROM purchases WHERE car_id = ? ORDER BY purchase_number ASC;";
+    private static final String SQL_GET_ALL_PURCHASES = "SELECT * FROM purchases ORDER BY purchase_number ASC;";
+    private static final String SQL_CREATE_A_PURCHASE = "INSERT INTO purchases (customer_id, car_id) VALUES (?, ?) RETURNING *;";
+    private static final String SQL_UPDATE_A_PURCHASE = "UPDATE purchases SET customer_id = ?, car_id = ? WHERE purchase_id = ? RETURNING *;";
+    private static final String SQL_DELETE_A_PURCHASE = "DELETE FROM purchases WHERE purchase_id = ? RETURNING *;";
     private final Connection connection;
 
     public PurchaseRepositoryImpl() throws SQLException {
