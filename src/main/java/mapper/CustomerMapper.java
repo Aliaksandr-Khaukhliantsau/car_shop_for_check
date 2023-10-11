@@ -1,6 +1,6 @@
 package mapper;
 
-import dto.CustomerDTO;
+import dto.CustomerDto;
 import entity.Customer;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -9,7 +9,7 @@ import org.mapstruct.factory.Mappers;
 public interface CustomerMapper {
     CustomerMapper INSTANCE = Mappers.getMapper(CustomerMapper.class);
 
-    CustomerDTO customerToCustomerDTO(Customer customer);
+    CustomerDto customerToCustomerDTO(Customer customer);
 
-    Customer customerDTOToCustomer(CustomerDTO customerDTO);
+    Customer customerDTOToCustomer(CustomerDto customerDTO);
 }

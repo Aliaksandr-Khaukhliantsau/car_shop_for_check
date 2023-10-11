@@ -20,4 +20,18 @@ public interface CarOptionService {
     void update(UUID optionId, String optionName) throws SQLException;
 
     void delete(UUID optionId) throws SQLException;
+
+//    CarOption getCarOptionByOptionId(UUID optionId) throws SQLException;
+//
+//    CarOption getCarOptionByOptionName(String optionName) throws SQLException;
+//
+//    List<CarOption> getCarOptionsByCompletionId(UUID completionId) throws SQLException;
+//
+//    List<CarOption> getAllCarOptions() throws SQLException;
+//
+//    void create(String optionName) throws SQLException;
+//
+//    void update(UUID optionId, String optionName) throws SQLException;
+//
+//    void delete(UUID optionId) throws SQLException;
 }

@@ -22,4 +22,19 @@ public interface CompletionService {
     void update(UUID CompletionId, String completionName) throws SQLException;
 
     void delete(UUID CompletionId) throws SQLException;
+//    Completion getCompletionByCompletionId(UUID completionId) throws SQLException;
+//
+//    Completion getCompletionByCompletionName(String completionName) throws SQLException;
+//
+//    List<Completion> getAllCompletions() throws SQLException;
+//
+//    void addCarOption(UUID CompletionId, UUID optionId) throws SQLException;
+//
+//    void deleteCarOption(UUID completionId, UUID optionId) throws SQLException;
+//
+//    void create(String completionName) throws SQLException;
+//
+//    void update(UUID CompletionId, String completionName) throws SQLException;
+//
+//    void delete(UUID CompletionId) throws SQLException;
 }

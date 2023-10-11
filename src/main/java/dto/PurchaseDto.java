@@ -9,9 +9,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class PurchaseDTO {
+public class PurchaseDto {
     private UUID purchaseId;
     private int purchaseNumber;
-    private CustomerDTO customer;
-    private CarDTO car;
+    private CustomerDto customer;
+    private CarDto car;
 }

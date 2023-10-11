@@ -1,5 +1,6 @@
 package service;
 
+import dto.CustomerDto;
 import entity.Customer;
 
 import java.sql.SQLException;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CustomerService {
+//    CustomerDto getCustomerByCustomerId(UUID customerId) throws SQLException;
     Customer getCustomerByCustomerId(UUID customerId) throws SQLException;
 
     List<Customer> getCustomerByFirstName(String firstName) throws SQLException;

@@ -1,6 +1,6 @@
-package EntityToDTO;
+package EntityToDto;
 
-import dto.CustomerDTO;
+import dto.CustomerDto;
 import entity.Customer;
 import mapper.CustomerMapper;
 import service.CustomerService;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.UUID;
 
-public class CustomerToCustomerDTO {
+public class CustomerToCustomerDto {
     public static void main(String[] args) throws SQLException {
         CustomerService customerService = new CustomerServiceImpl();
         Scanner scanner = new Scanner(System.in);
@@ -26,16 +26,16 @@ public class CustomerToCustomerDTO {
         System.out.println();
 
         // Преобразование в CustomerDTO
-        CustomerDTO customerDTO = CustomerMapper.INSTANCE.customerToCustomerDTO(customer);
+        CustomerDto customerDto = CustomerMapper.INSTANCE.customerToCustomerDTO(customer);
 
-        // Вывод customerDTO на консоль
-        System.out.println(customerDTO.getCustomerId());
-        System.out.println(customerDTO.getFirstName());
-        System.out.println(customerDTO.getMiddleName());
-        System.out.println(customerDTO.getLastName());
+        // Вывод customerDto на консоль
+        System.out.println(customerDto.getCustomerId());
+        System.out.println(customerDto.getFirstName());
+        System.out.println(customerDto.getMiddleName());
+        System.out.println(customerDto.getLastName());
         System.out.println();
 
-        // Вывод customerDTO на консоль через .toString
-        System.out.println(customerDTO);
+        // Вывод customerDto на консоль через .toString
+        System.out.println(customerDto);
     }
 }

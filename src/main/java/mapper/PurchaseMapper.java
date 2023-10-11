@@ -1,6 +1,6 @@
 package mapper;
 
-import dto.PurchaseDTO;
+import dto.PurchaseDto;
 import entity.Purchase;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,13 +12,13 @@ public interface PurchaseMapper {
 
     @Mapping(source = "customer", target = "customer")
     @Mapping(source = "car", target = "car")
-    PurchaseDTO purchaseToPurchaseDTO(Purchase purchase);
+    PurchaseDto purchaseToPurchaseDTO(Purchase purchase);
 
 //    CustomerDTO map(Customer customer);
 
 //    CarDTO map(Car car);
 
-    Purchase purchaseDTOToPurchase(PurchaseDTO purchaseDTO);
+    Purchase purchaseDTOToPurchase(PurchaseDto purchaseDTO);
 
 //    Customer mapDto(CustomerDTO customer);
 

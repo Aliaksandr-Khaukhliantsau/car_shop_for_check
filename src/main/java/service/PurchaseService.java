@@ -1,7 +1,5 @@
 package service;
 
-import entity.Car;
-import entity.Customer;
 import entity.Purchase;
 
 import java.sql.SQLException;
@@ -17,10 +15,6 @@ public interface PurchaseService {
 
     List<Purchase> getPurchaseByCarId(UUID carId) throws SQLException;
 
-    List<Purchase> getPurchaseByCustomer(Customer customer) throws SQLException;
-
-    List<Purchase> getPurchaseByCar(Car car) throws SQLException;
-
     List<Purchase> getAllPurchases() throws SQLException;
 
     void create(UUID customerId, UUID carId) throws SQLException;
@@ -28,4 +22,23 @@ public interface PurchaseService {
     void update(UUID purchaseId, UUID customerId, UUID carId) throws SQLException;
 
     void delete(UUID purchaseId) throws SQLException;
+//    Purchase getPurchaseByPurchaseId(UUID purchaseId) throws SQLException;
+//
+//    Purchase getPurchaseByPurchaseNumber(String purchaseNumber) throws SQLException;
+//
+//    List<Purchase> getPurchaseByCustomerId(UUID CustomerId) throws SQLException;
+//
+//    List<Purchase> getPurchaseByCarId(UUID carId) throws SQLException;
+//
+//    List<Purchase> getPurchaseByCustomer(Customer customer) throws SQLException;
+//
+//    List<Purchase> getPurchaseByCar(Car car) throws SQLException;
+//
+//    List<Purchase> getAllPurchases() throws SQLException;
+//
+//    void create(UUID customerId, UUID carId) throws SQLException;
+//
+//    void update(UUID purchaseId, UUID customerId, UUID carId) throws SQLException;
+//
+//    void delete(UUID purchaseId) throws SQLException;
 }

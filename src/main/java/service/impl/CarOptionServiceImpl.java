@@ -19,56 +19,23 @@ public class CarOptionServiceImpl implements CarOptionService {
 
     @Override
     public CarOption getCarOptionByOptionId(UUID optionId) throws SQLException {
-        ResultSet resultSet = carOptionRepository.getCarOptionByOptionId(optionId);
-        CarOption carOption = new CarOption();
+        return carOptionRepository.getCarOptionByOptionId(optionId);
 
-        while (resultSet.next()) {
-            carOption.setOptionId(UUID.fromString(resultSet.getString("option_id")));
-            carOption.setOptionName(resultSet.getString("option_name"));
-        }
-        return carOption;
     }
 
     @Override
     public CarOption getCarOptionByOptionName(String optionName) throws SQLException {
-        ResultSet resultSet = carOptionRepository.getCarOptionByOptionName(optionName);
-        CarOption carOption = new CarOption();
-
-        while (resultSet.next()) {
-            carOption.setOptionId(UUID.fromString(resultSet.getString("option_id")));
-            carOption.setOptionName(resultSet.getString("option_name"));
-        }
-        return carOption;
+        return carOptionRepository.getCarOptionByOptionName(optionName);
     }
 
     @Override
     public List<CarOption> getCarOptionsByCompletionId(UUID completionId) throws SQLException {
-        ResultSet resultSet = carOptionRepository.getCarOptionsByCompletionId(completionId);
-        List<CarOption> carOptions = new ArrayList<>();
-
-        while (resultSet.next()) {
-            CarOption carOption = new CarOption();
-            carOption.setOptionId(UUID.fromString(resultSet.getString("option_id")));
-            carOption.setOptionName(resultSet.getString("option_name"));
-
-            carOptions.add(carOption);
-        }
-        return carOptions;
+        return carOptionRepository.getCarOptionsByCompletionId(completionId);
     }
 
     @Override
     public List<CarOption> getAllCarOptions() throws SQLException {
-        ResultSet resultSet = carOptionRepository.getAllCarOptions();
-        List<CarOption> carOptions = new ArrayList<>();
-
-        while (resultSet.next()) {
-            CarOption carOption = new CarOption();
-            carOption.setOptionId(UUID.fromString(resultSet.getString("option_id")));
-            carOption.setOptionName(resultSet.getString("option_name"));
-
-            carOptions.add(carOption);
-        }
-        return carOptions;
+        return carOptionRepository.getAllCarOptions();
     }
 
     @Override
@@ -85,4 +52,73 @@ public class CarOptionServiceImpl implements CarOptionService {
     public void delete(UUID optionId) throws SQLException {
         carOptionRepository.delete(optionId);
     }
+
+//    @Override
+//    public CarOption getCarOptionByOptionId(UUID optionId) throws SQLException {
+//        ResultSet resultSet = carOptionRepository.getCarOptionByOptionId(optionId);
+//        CarOption carOption = new CarOption();
+//
+//        while (resultSet.next()) {
+//            carOption.setOptionId(UUID.fromString(resultSet.getString("option_id")));
+//            carOption.setOptionName(resultSet.getString("option_name"));
+//        }
+//        return carOption;
+//    }
+//
+//    @Override
+//    public CarOption getCarOptionByOptionName(String optionName) throws SQLException {
+//        ResultSet resultSet = carOptionRepository.getCarOptionByOptionName(optionName);
+//        CarOption carOption = new CarOption();
+//
+//        while (resultSet.next()) {
+//            carOption.setOptionId(UUID.fromString(resultSet.getString("option_id")));
+//            carOption.setOptionName(resultSet.getString("option_name"));
+//        }
+//        return carOption;
+//    }
+//
+//    @Override
+//    public List<CarOption> getCarOptionsByCompletionId(UUID completionId) throws SQLException {
+//        ResultSet resultSet = carOptionRepository.getCarOptionsByCompletionId(completionId);
+//        List<CarOption> carOptions = new ArrayList<>();
+//
+//        while (resultSet.next()) {
+//            CarOption carOption = new CarOption();
+//            carOption.setOptionId(UUID.fromString(resultSet.getString("option_id")));
+//            carOption.setOptionName(resultSet.getString("option_name"));
+//
+//            carOptions.add(carOption);
+//        }
+//        return carOptions;
+//    }
+//
+//    @Override
+//    public List<CarOption> getAllCarOptions() throws SQLException {
+//        ResultSet resultSet = carOptionRepository.getAllCarOptions();
+//        List<CarOption> carOptions = new ArrayList<>();
+//
+//        while (resultSet.next()) {
+//            CarOption carOption = new CarOption();
+//            carOption.setOptionId(UUID.fromString(resultSet.getString("option_id")));
+//            carOption.setOptionName(resultSet.getString("option_name"));
+//
+//            carOptions.add(carOption);
+//        }
+//        return carOptions;
+//    }
+//
+//    @Override
+//    public void create(String optionName) throws SQLException {
+//        carOptionRepository.create(optionName);
+//    }
+//
+//    @Override
+//    public void update(UUID optionId, String optionName) throws SQLException {
+//        carOptionRepository.update(optionId, optionName);
+//    }
+//
+//    @Override
+//    public void delete(UUID optionId) throws SQLException {
+//        carOptionRepository.delete(optionId);
+//    }
 }

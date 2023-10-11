@@ -1,7 +1,7 @@
 package mapper;
 
-import dto.CarOptionDTO;
-import dto.CompletionDTO;
+import dto.CarOptionDto;
+import dto.CompletionDto;
 import entity.CarOption;
 import entity.Completion;
 import org.mapstruct.Mapper;
@@ -15,11 +15,11 @@ public interface CompletionMapper {
     CompletionMapper INSTANCE = Mappers.getMapper(CompletionMapper.class);
 
     @Mapping(source = "carOptions", target = "carOptions")
-    CompletionDTO completionToCompletionDTO(Completion completion);
+    CompletionDto completionToCompletionDTO(Completion completion);
 
-    List<CarOptionDTO> map(List<CarOption> carOptions);
+    List<CarOptionDto> map(List<CarOption> carOptions);
 
-    Completion completionDTOToCompletion(CompletionDTO completionDTO);
+    Completion completionDTOToCompletion(CompletionDto completionDTO);
 
-    List<CarOption> mapDto(List<CarOptionDTO> carOptions);
+    List<CarOption> mapDto(List<CarOptionDto> carOptions);
 }

@@ -1,9 +1,15 @@
 package repository.impl;
 
+import entity.CarOption;
+import entity.Completion;
 import repository.CompletionRepository;
+import service.CarOptionService;
+import service.impl.CarOptionServiceImpl;
 import util.PropertiesUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class CompletionRepositoryImpl implements CompletionRepository {
@@ -22,68 +28,168 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     }
 
     @Override
-    public ResultSet getCompletionByCompletionId(UUID completionId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_COMPLETION_BY_COMPLETION_ID);
-        preparedStatement.setObject(1, completionId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return resultSet;
+    public Completion getCompletionByCompletionId(UUID completionId) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_COMPLETION_BY_COMPLETION_ID)) {
+            preparedStatement.setObject(1, completionId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Completion completion = new Completion();
+
+            while (resultSet.next()) {
+                completion.setCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+                completion.setCompletionName(resultSet.getString("completion_name"));
+                CarOptionService carOptionService = new CarOptionServiceImpl();
+                List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+                completion.setCarOptions(carOptions);
+
+            }
+            return completion;
+        }
     }
 
     @Override
-    public ResultSet getCompletionByCompletionName(String completionName) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_COMPLETION_BY_COMPLETION_NAME);
-        preparedStatement.setString(1, completionName);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return resultSet;
+    public Completion getCompletionByCompletionName(String completionName) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_COMPLETION_BY_COMPLETION_NAME)) {
+            preparedStatement.setString(1, completionName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Completion completion = new Completion();
+
+            while (resultSet.next()) {
+                completion.setCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+                completion.setCompletionName(resultSet.getString("completion_name"));
+                CarOptionService carOptionService = new CarOptionServiceImpl();
+                List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+                completion.setCarOptions(carOptions);
+            }
+            return completion;
+        }
     }
 
     @Override
-    public ResultSet getAllCompletions() throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_COMPLETIONS);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return resultSet;
+    public List<Completion> getAllCompletions() throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_COMPLETIONS)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Completion> completions = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Completion completion = new Completion();
+                completion.setCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+                completion.setCompletionName(resultSet.getString("completion_name"));
+                CarOptionService carOptionService = new CarOptionServiceImpl();
+                List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+                completion.setCarOptions(carOptions);
+
+                completions.add(completion);
+            }
+            return completions;
+        }
     }
 
     @Override
     public void addCarOption(UUID completionId, UUID optionId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_A_CAR_OPTION);
-        preparedStatement.setObject(1, completionId);
-        preparedStatement.setObject(2, optionId);
-        preparedStatement.executeQuery();
-        preparedStatement.close();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_A_CAR_OPTION)) {
+            preparedStatement.setObject(1, completionId);
+            preparedStatement.setObject(2, optionId);
+            preparedStatement.executeQuery();
+        }
     }
 
     @Override
     public void deleteCarOption(UUID completionId, UUID optionId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_CAR_OPTION);
-        preparedStatement.setObject(1, completionId);
-        preparedStatement.setObject(2, optionId);
-        preparedStatement.executeQuery();
-        preparedStatement.close();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_CAR_OPTION)) {
+            preparedStatement.setObject(1, completionId);
+            preparedStatement.setObject(2, optionId);
+            preparedStatement.executeQuery();
+        }
     }
 
     @Override
     public void create(String completionName) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_A_COMPLETION);
-        preparedStatement.setString(1, completionName);
-        preparedStatement.executeQuery();
-        preparedStatement.close();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_A_COMPLETION)) {
+            preparedStatement.setString(1, completionName);
+            preparedStatement.executeQuery();
+        }
     }
 
     @Override
     public void update(UUID completionId, String completionName) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_A_COMPLETION);
-        preparedStatement.setString(1, completionName);
-        preparedStatement.setObject(2, completionId);
-        preparedStatement.executeQuery();
-        preparedStatement.close();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_A_COMPLETION)) {
+            preparedStatement.setString(1, completionName);
+            preparedStatement.setObject(2, completionId);
+            preparedStatement.executeQuery();
+        }
     }
 
     @Override
     public void delete(UUID completionId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_COMPLETION);
-        preparedStatement.setObject(1, completionId);
-        preparedStatement.executeQuery();
-        preparedStatement.close();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_COMPLETION)) {
+            preparedStatement.setObject(1, completionId);
+            preparedStatement.executeQuery();
+        }
     }
+
+//    @Override
+//    public ResultSet getCompletionByCompletionId(UUID completionId) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_COMPLETION_BY_COMPLETION_ID);
+//        preparedStatement.setObject(1, completionId);
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//        return resultSet;
+//    }
+//
+//    @Override
+//    public ResultSet getCompletionByCompletionName(String completionName) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_COMPLETION_BY_COMPLETION_NAME);
+//        preparedStatement.setString(1, completionName);
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//        return resultSet;
+//    }
+//
+//    @Override
+//    public ResultSet getAllCompletions() throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_COMPLETIONS);
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//        return resultSet;
+//    }
+//
+//    @Override
+//    public void addCarOption(UUID completionId, UUID optionId) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_A_CAR_OPTION);
+//        preparedStatement.setObject(1, completionId);
+//        preparedStatement.setObject(2, optionId);
+//        preparedStatement.executeQuery();
+//        preparedStatement.close();
+//    }
+//
+//    @Override
+//    public void deleteCarOption(UUID completionId, UUID optionId) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_CAR_OPTION);
+//        preparedStatement.setObject(1, completionId);
+//        preparedStatement.setObject(2, optionId);
+//        preparedStatement.executeQuery();
+//        preparedStatement.close();
+//    }
+//
+//    @Override
+//    public void create(String completionName) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_A_COMPLETION);
+//        preparedStatement.setString(1, completionName);
+//        preparedStatement.executeQuery();
+//        preparedStatement.close();
+//    }
+//
+//    @Override
+//    public void update(UUID completionId, String completionName) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_A_COMPLETION);
+//        preparedStatement.setString(1, completionName);
+//        preparedStatement.setObject(2, completionId);
+//        preparedStatement.executeQuery();
+//        preparedStatement.close();
+//    }
+//
+//    @Override
+//    public void delete(UUID completionId) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_COMPLETION);
+//        preparedStatement.setObject(1, completionId);
+//        preparedStatement.executeQuery();
+//        preparedStatement.close();
+//    }
 }

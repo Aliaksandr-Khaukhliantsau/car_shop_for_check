@@ -21,33 +21,12 @@ public class CompletionServiceImpl implements CompletionService {
 
     @Override
     public Completion getCompletionByCompletionId(UUID completionId) throws SQLException {
-        ResultSet resultSet = completionRepository.getCompletionByCompletionId(completionId);
-        Completion completion = new Completion();
-
-        while (resultSet.next()) {
-            completion.setCompletionId(UUID.fromString(resultSet.getString("completion_id")));
-            completion.setCompletionName(resultSet.getString("completion_name"));
-            CarOptionService carOptionService = new CarOptionServiceImpl();
-            List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
-            completion.setCarOptions(carOptions);
-
-        }
-        return completion;
+        return completionRepository.getCompletionByCompletionId(completionId);
     }
 
     @Override
     public Completion getCompletionByCompletionName(String completionName) throws SQLException {
-        ResultSet resultSet = completionRepository.getCompletionByCompletionName(completionName);
-        Completion completion = new Completion();
-
-        while (resultSet.next()) {
-            completion.setCompletionId(UUID.fromString(resultSet.getString("completion_id")));
-            completion.setCompletionName(resultSet.getString("completion_name"));
-            CarOptionService carOptionService = new CarOptionServiceImpl();
-            List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
-            completion.setCarOptions(carOptions);
-        }
-        return completion;
+        return completionRepository.getCompletionByCompletionName(completionName);
     }
 
     @Override
@@ -62,20 +41,7 @@ public class CompletionServiceImpl implements CompletionService {
 
     @Override
     public List<Completion> getAllCompletions() throws SQLException {
-        ResultSet resultSet = completionRepository.getAllCompletions();
-        List<Completion> completions = new ArrayList<>();
-
-        while (resultSet.next()) {
-            Completion completion = new Completion();
-            completion.setCompletionId(UUID.fromString(resultSet.getString("completion_id")));
-            completion.setCompletionName(resultSet.getString("completion_name"));
-            CarOptionService carOptionService = new CarOptionServiceImpl();
-            List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
-            completion.setCarOptions(carOptions);
-
-            completions.add(completion);
-        }
-        return completions;
+        return completionRepository.getAllCompletions();
     }
 
     @Override
@@ -92,4 +58,78 @@ public class CompletionServiceImpl implements CompletionService {
     public void delete(UUID CompletionId) throws SQLException {
         completionRepository.delete(CompletionId);
     }
+
+//    @Override
+//    public Completion getCompletionByCompletionId(UUID completionId) throws SQLException {
+//        ResultSet resultSet = completionRepository.getCompletionByCompletionId(completionId);
+//        Completion completion = new Completion();
+//
+//        while (resultSet.next()) {
+//            completion.setCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+//            completion.setCompletionName(resultSet.getString("completion_name"));
+//            CarOptionService carOptionService = new CarOptionServiceImpl();
+//            List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+//            completion.setCarOptions(carOptions);
+//
+//        }
+//        return completion;
+//    }
+//
+//    @Override
+//    public Completion getCompletionByCompletionName(String completionName) throws SQLException {
+//        ResultSet resultSet = completionRepository.getCompletionByCompletionName(completionName);
+//        Completion completion = new Completion();
+//
+//        while (resultSet.next()) {
+//            completion.setCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+//            completion.setCompletionName(resultSet.getString("completion_name"));
+//            CarOptionService carOptionService = new CarOptionServiceImpl();
+//            List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+//            completion.setCarOptions(carOptions);
+//        }
+//        return completion;
+//    }
+//
+//    @Override
+//    public void addCarOption(UUID completionId, UUID optionId) throws SQLException {
+//        completionRepository.addCarOption(completionId, optionId);
+//    }
+//
+//    @Override
+//    public void deleteCarOption(UUID completionId, UUID optionId) throws SQLException {
+//        completionRepository.deleteCarOption(completionId, optionId);
+//    }
+//
+//    @Override
+//    public List<Completion> getAllCompletions() throws SQLException {
+//        ResultSet resultSet = completionRepository.getAllCompletions();
+//        List<Completion> completions = new ArrayList<>();
+//
+//        while (resultSet.next()) {
+//            Completion completion = new Completion();
+//            completion.setCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+//            completion.setCompletionName(resultSet.getString("completion_name"));
+//            CarOptionService carOptionService = new CarOptionServiceImpl();
+//            List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+//            completion.setCarOptions(carOptions);
+//
+//            completions.add(completion);
+//        }
+//        return completions;
+//    }
+//
+//    @Override
+//    public void create(String completionName) throws SQLException {
+//        completionRepository.create(completionName);
+//    }
+//
+//    @Override
+//    public void update(UUID CompletionId, String completionName) throws SQLException {
+//        completionRepository.update(CompletionId, completionName);
+//    }
+//
+//    @Override
+//    public void delete(UUID CompletionId) throws SQLException {
+//        completionRepository.delete(CompletionId);
+//    }
 }

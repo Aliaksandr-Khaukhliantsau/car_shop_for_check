@@ -9,7 +9,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CarOptionDTO {
-    private UUID optionId;
-    private String optionName;
+public class CarModelDto {
+    private UUID modelId;
+    private String modelName;
+    private CompletionDto completion;
 }

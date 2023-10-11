@@ -1,9 +1,14 @@
 package repository.impl;
 
+import entity.Car;
 import repository.CarRepository;
+import service.CarModelService;
+import service.impl.CarModelServiceImpl;
 import util.PropertiesUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class CarRepositoryImpl implements CarRepository {
@@ -21,60 +26,105 @@ public class CarRepositoryImpl implements CarRepository {
     }
 
     @Override
-    public ResultSet getCarByCarId(UUID carId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_BY_CAR_ID);
-        preparedStatement.setObject(1, carId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return resultSet;
+    public Car getCarByCarId(UUID carId) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_BY_CAR_ID)) {
+            preparedStatement.setObject(1, carId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Car car = new Car();
+
+            while (resultSet.next()) {
+                car.setCarId(UUID.fromString(resultSet.getString("car_id")));
+                car.setVin(resultSet.getString("vin"));
+                UUID modelId = UUID.fromString(resultSet.getString("model_id"));
+                CarModelService carModelService = new CarModelServiceImpl();
+                car.setCarModel(carModelService.getCarModelByModelId(modelId));
+            }
+            return car;
+        }
     }
 
     @Override
-    public ResultSet getCarByVin(String vin) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_BY_VIN);
-        preparedStatement.setString(1, vin);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return resultSet;
+    public Car getCarByVin(String vin) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_BY_VIN)) {
+            preparedStatement.setString(1, vin);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Car car = new Car();
+
+            while (resultSet.next()) {
+                car.setCarId(UUID.fromString(resultSet.getString("car_id")));
+                car.setVin(resultSet.getString("vin"));
+                UUID modelId = UUID.fromString(resultSet.getString("model_id"));
+                CarModelService carModelService = new CarModelServiceImpl();
+                car.setCarModel(carModelService.getCarModelByModelId(modelId));
+            }
+            return car;
+        }
     }
 
     @Override
-    public ResultSet getCarByModelId(UUID modelId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_BY_MODEL_ID);
-        preparedStatement.setObject(1, modelId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return resultSet;
+    public List<Car> getCarByModelId(UUID modelId) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_BY_MODEL_ID)) {
+            preparedStatement.setObject(1, modelId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Car> cars = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Car car = new Car();
+                car.setCarId(UUID.fromString(resultSet.getString("car_id")));
+                car.setVin(resultSet.getString("vin"));
+                CarModelService carModelService = new CarModelServiceImpl();
+                car.setCarModel(carModelService.getCarModelByModelId(modelId));
+
+                cars.add(car);
+            }
+            return cars;
+        }
     }
 
     @Override
-    public ResultSet getAllCars() throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_CARS);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return resultSet;
+    public List<Car> getAllCars() throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_CARS)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Car> cars = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Car car = new Car();
+                car.setCarId(UUID.fromString(resultSet.getString("car_id")));
+                car.setVin(resultSet.getString("vin"));
+                UUID modelId = UUID.fromString(resultSet.getString("model_id"));
+                CarModelService carModelService = new CarModelServiceImpl();
+                car.setCarModel(carModelService.getCarModelByModelId(modelId));
+
+                cars.add(car);
+            }
+            return cars;
+        }
     }
 
     @Override
     public void create(String vin, UUID modelId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_A_CAR);
-        preparedStatement.setString(1, vin);
-        preparedStatement.setObject(2, modelId);
-        preparedStatement.executeQuery();
-        preparedStatement.close();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_A_CAR)) {
+            preparedStatement.setString(1, vin);
+            preparedStatement.setObject(2, modelId);
+            preparedStatement.executeQuery();
+        }
     }
 
     @Override
     public void update(UUID carId, String vin, UUID modelId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_A_CAR);
-        preparedStatement.setString(1, vin);
-        preparedStatement.setObject(2, modelId);
-        preparedStatement.setObject(3, carId);
-        preparedStatement.executeQuery();
-        preparedStatement.close();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_A_CAR)) {
+            preparedStatement.setString(1, vin);
+            preparedStatement.setObject(2, modelId);
+            preparedStatement.setObject(3, carId);
+            preparedStatement.executeQuery();
+        }
     }
 
     @Override
     public void delete(UUID carId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_CAR);
-        preparedStatement.setObject(1, carId);
-        preparedStatement.executeQuery();
-        preparedStatement.close();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_CAR)) {
+            preparedStatement.setObject(1, carId);
+            preparedStatement.executeQuery();
+        }
     }
 }

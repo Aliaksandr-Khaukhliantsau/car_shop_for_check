@@ -1,9 +1,14 @@
 package repository.impl;
 
+import entity.CarModel;
 import repository.CarModelRepository;
+import service.CompletionService;
+import service.impl.CompletionServiceImpl;
 import util.PropertiesUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class CarModelRepositoryImpl implements CarModelRepository {
@@ -21,60 +26,171 @@ public class CarModelRepositoryImpl implements CarModelRepository {
     }
 
     @Override
-    public ResultSet getCarModelByModelId(UUID modelId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_MODEL_BY_MODEL_ID);
-        preparedStatement.setObject(1, modelId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return resultSet;
+    public CarModel getCarModelByModelId(UUID modelId) throws SQLException {
+        ResultSet resultSet;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_MODEL_BY_MODEL_ID)) {
+            preparedStatement.setObject(1, modelId);
+            resultSet = preparedStatement.executeQuery();
+            CarModel carModel = new CarModel();
+
+            while (resultSet.next()) {
+                carModel.setModelId(UUID.fromString(resultSet.getString("model_id")));
+                carModel.setModelName(resultSet.getString("model_name"));
+                UUID completionId = UUID.fromString(resultSet.getString("completion_id"));
+                CompletionService completionService = new CompletionServiceImpl();
+                carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
+
+            }
+            return carModel;
+        }
     }
 
     @Override
-    public ResultSet getCarModelByModelName(String modelName) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_MODEL_BY_MODEL_NAME);
-        preparedStatement.setString(1, modelName);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return resultSet;
+    public List<CarModel> getCarModelByModelName(String modelName) throws SQLException {
+        ResultSet resultSet;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_MODEL_BY_MODEL_NAME)) {
+            preparedStatement.setString(1, modelName);
+            resultSet = preparedStatement.executeQuery();
+            List<CarModel> carModels = new ArrayList<>();
+
+            while (resultSet.next()) {
+                CarModel carModel = new CarModel();
+                carModel.setModelId(UUID.fromString(resultSet.getString("model_id")));
+                carModel.setModelName(resultSet.getString("model_name"));
+                UUID completionId = UUID.fromString(resultSet.getString("completion_id"));
+                CompletionService completionService = new CompletionServiceImpl();
+                carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
+
+                carModels.add(carModel);
+            }
+            return carModels;
+        }
     }
 
     @Override
-    public ResultSet getCarModelByCompletionId(UUID completionId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_MODEL_BY_COMPLETION_ID);
-        preparedStatement.setObject(1, completionId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return resultSet;
+    public List<CarModel> getCarModelByCompletionId(UUID completionId) throws SQLException {
+        ResultSet resultSet;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_MODEL_BY_COMPLETION_ID)) {
+            preparedStatement.setObject(1, completionId);
+            resultSet = preparedStatement.executeQuery();
+            List<CarModel> carModels = new ArrayList<>();
+
+            while (resultSet.next()) {
+                CarModel carModel = new CarModel();
+                carModel.setModelId(UUID.fromString(resultSet.getString("model_id")));
+                carModel.setModelName(resultSet.getString("model_name"));
+                CompletionService completionService = new CompletionServiceImpl();
+                carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
+
+                carModels.add(carModel);
+            }
+            return carModels;
+        }
     }
 
     @Override
-    public ResultSet getAllCarModels() throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_CAR_MODELS);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return resultSet;
+    public List<CarModel> getAllCarModels() throws SQLException {
+        ResultSet resultSet;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_CAR_MODELS)) {
+            resultSet = preparedStatement.executeQuery();
+            List<CarModel> carModels = new ArrayList<>();
+
+            while (resultSet.next()) {
+                CarModel carModel = new CarModel();
+                carModel.setModelId(UUID.fromString(resultSet.getString("model_id")));
+                carModel.setModelName(resultSet.getString("model_name"));
+                UUID completionId = UUID.fromString(resultSet.getString("completion_id"));
+                CompletionService completionService = new CompletionServiceImpl();
+                carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
+
+                carModels.add(carModel);
+            }
+            return carModels;
+        }
     }
 
     @Override
     public void create(String modelName, UUID completionId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_A_CAR_MODEL);
-        preparedStatement.setString(1, modelName);
-        preparedStatement.setObject(2, completionId);
-        preparedStatement.executeQuery();
-        preparedStatement.close();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_A_CAR_MODEL)) {
+            preparedStatement.setString(1, modelName);
+            preparedStatement.setObject(2, completionId);
+            preparedStatement.executeQuery();
+        }
     }
 
     @Override
     public void update(UUID modelId, String modelName, UUID completionId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_A_CAR_MODEL);
-        preparedStatement.setString(1, modelName);
-        preparedStatement.setObject(2, completionId);
-        preparedStatement.setObject(3, modelId);
-        preparedStatement.executeQuery();
-        preparedStatement.close();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_A_CAR_MODEL)) {
+            preparedStatement.setString(1, modelName);
+            preparedStatement.setObject(2, completionId);
+            preparedStatement.setObject(3, modelId);
+            preparedStatement.executeQuery();
+        }
     }
 
     @Override
     public void delete(UUID modelId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_CAR_MODEL);
-        preparedStatement.setObject(1, modelId);
-        preparedStatement.executeQuery();
-        preparedStatement.close();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_CAR_MODEL)) {
+            preparedStatement.setObject(1, modelId);
+            preparedStatement.executeQuery();
+        }
     }
+
+//    @Override
+//    public ResultSet getCarModelByModelId(UUID modelId) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_MODEL_BY_MODEL_ID);
+//        preparedStatement.setObject(1, modelId);
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//        return resultSet;
+//    }
+//
+//    @Override
+//    public ResultSet getCarModelByModelName(String modelName) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_MODEL_BY_MODEL_NAME);
+//        preparedStatement.setString(1, modelName);
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//        return resultSet;
+//    }
+//
+//    @Override
+//    public ResultSet getCarModelByCompletionId(UUID completionId) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_MODEL_BY_COMPLETION_ID);
+//        preparedStatement.setObject(1, completionId);
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//        return resultSet;
+//    }
+//
+//    @Override
+//    public ResultSet getAllCarModels() throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_CAR_MODELS);
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//        return resultSet;
+//    }
+//
+//    @Override
+//    public void create(String modelName, UUID completionId) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_A_CAR_MODEL);
+//        preparedStatement.setString(1, modelName);
+//        preparedStatement.setObject(2, completionId);
+//        preparedStatement.executeQuery();
+//        preparedStatement.close();
+//    }
+//
+//    @Override
+//    public void update(UUID modelId, String modelName, UUID completionId) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_A_CAR_MODEL);
+//        preparedStatement.setString(1, modelName);
+//        preparedStatement.setObject(2, completionId);
+//        preparedStatement.setObject(3, modelId);
+//        preparedStatement.executeQuery();
+//        preparedStatement.close();
+//    }
+//
+//    @Override
+//    public void delete(UUID modelId) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_CAR_MODEL);
+//        preparedStatement.setObject(1, modelId);
+//        preparedStatement.executeQuery();
+//        preparedStatement.close();
+//    }
 }

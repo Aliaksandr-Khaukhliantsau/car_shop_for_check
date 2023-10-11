@@ -10,8 +10,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CompletionDTO {
+public class CompletionDto {
     private UUID completionId;
     private String completionName;
-    private List<CarOptionDTO> carOptions;
+    private List<CarOptionDto> carOptions;
 }

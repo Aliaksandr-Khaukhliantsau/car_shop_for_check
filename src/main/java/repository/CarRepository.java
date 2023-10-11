@@ -1,18 +1,20 @@
 package repository;
 
-import java.sql.ResultSet;
+import entity.Car;
+
 import java.sql.SQLException;
+import java.util.List;
 import java.util.UUID;
 
 public interface CarRepository {
     // Везде java doc по формату, образец в инете !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    ResultSet getCarByCarId(UUID carId) throws SQLException;
+    Car getCarByCarId(UUID carId) throws SQLException;
 
-    ResultSet getCarByVin(String vin) throws SQLException;
+    Car getCarByVin(String vin) throws SQLException;
 
-    ResultSet getCarByModelId(UUID modelId) throws SQLException;
+    List<Car> getCarByModelId(UUID modelId) throws SQLException;
 
-    ResultSet getAllCars() throws SQLException;
+    List<Car> getAllCars() throws SQLException;
 
     void create(String vin, UUID modelId) throws SQLException;
 

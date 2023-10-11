@@ -9,8 +9,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CarDTO {
+public class CarDto {
     private UUID carId;
     private String vin;
-    private CarModelDTO carModel;
+    private CarModelDto carModel;
 }

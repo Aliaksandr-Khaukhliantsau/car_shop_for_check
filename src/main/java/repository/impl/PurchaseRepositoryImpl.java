@@ -1,9 +1,16 @@
 package repository.impl;
 
+import entity.Purchase;
 import repository.PurchaseRepository;
+import service.CarService;
+import service.CustomerService;
+import service.impl.CarServiceImpl;
+import service.impl.CustomerServiceImpl;
 import util.PropertiesUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class PurchaseRepositoryImpl implements PurchaseRepository {
@@ -22,68 +29,206 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
     }
 
     @Override
-    public ResultSet getPurchaseByPurchaseId(UUID purchaseId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_PURCHASE_ID);
-        preparedStatement.setObject(1, purchaseId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return resultSet;
+    public Purchase getPurchaseByPurchaseId(UUID purchaseId) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_PURCHASE_ID)) {
+            preparedStatement.setObject(1, purchaseId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Purchase purchase = new Purchase();
+
+            while (resultSet.next()) {
+                purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchase_id")));
+                purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
+                UUID customerId = UUID.fromString(resultSet.getString("customer_id"));
+                CustomerService customerService = new CustomerServiceImpl();
+                purchase.setCustomer(customerService.getCustomerByCustomerId(customerId));
+                UUID carId = UUID.fromString(resultSet.getString("car_id"));
+                CarService carService = new CarServiceImpl();
+                purchase.setCar(carService.getCarByCarId(carId));
+            }
+            return purchase;
+        }
     }
 
     @Override
-    public ResultSet getPurchaseByPurchaseNumber(String purchaseNumber) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_PURCHASE_NUMBER);
-        preparedStatement.setInt(1, Integer.parseInt(purchaseNumber));
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return resultSet;
+    public Purchase getPurchaseByPurchaseNumber(String purchaseNumber) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_PURCHASE_NUMBER)) {
+            preparedStatement.setInt(1, Integer.parseInt(purchaseNumber));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Purchase purchase = new Purchase();
+
+            while (resultSet.next()) {
+                purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchase_id")));
+                purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
+                UUID customerId = UUID.fromString(resultSet.getString("customer_id"));
+                CustomerService customerService = new CustomerServiceImpl();
+                purchase.setCustomer(customerService.getCustomerByCustomerId(customerId));
+                UUID carId = UUID.fromString(resultSet.getString("car_id"));
+                CarService carService = new CarServiceImpl();
+                purchase.setCar(carService.getCarByCarId(carId));
+            }
+            return purchase;
+        }
     }
 
     @Override
-    public ResultSet getPurchaseByCustomerId(UUID customerId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_CUSTOMER_ID);
-        preparedStatement.setObject(1, customerId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return resultSet;
+    public List<Purchase> getPurchaseByCustomerId(UUID customerId) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_CUSTOMER_ID)) {
+            preparedStatement.setObject(1, customerId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Purchase> purchases = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Purchase purchase = new Purchase();
+                purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchase_id")));
+                purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
+                CustomerService customerService = new CustomerServiceImpl();
+                purchase.setCustomer(customerService.getCustomerByCustomerId(customerId));
+                UUID carId = UUID.fromString(resultSet.getString("car_id"));
+                CarService carService = new CarServiceImpl();
+                purchase.setCar(carService.getCarByCarId(carId));
+
+                purchases.add(purchase);
+            }
+            return purchases;
+        }
     }
 
     @Override
-    public ResultSet getPurchaseByCarId(UUID carId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_CAR_ID);
-        preparedStatement.setObject(1, carId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return resultSet;
+    public List<Purchase> getPurchaseByCarId(UUID carId) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_CAR_ID)) {
+            preparedStatement.setObject(1, carId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Purchase> purchases = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Purchase purchase = new Purchase();
+                purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchase_id")));
+                purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
+                CustomerService customerService = new CustomerServiceImpl();
+                UUID customerId = UUID.fromString(resultSet.getString("customer_id"));
+                purchase.setCustomer(customerService.getCustomerByCustomerId(customerId));
+                CarService carService = new CarServiceImpl();
+                purchase.setCar(carService.getCarByCarId(carId));
+
+                purchases.add(purchase);
+            }
+            return purchases;
+        }
     }
 
     @Override
-    public ResultSet getAllPurchases() throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_PURCHASES);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return resultSet;
+    public List<Purchase> getAllPurchases() throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_PURCHASES)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Purchase> purchases = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Purchase purchase = new Purchase();
+                purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchase_id")));
+                purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
+                UUID customerId = UUID.fromString(resultSet.getString("customer_id"));
+                CustomerService customerService = new CustomerServiceImpl();
+                purchase.setCustomer(customerService.getCustomerByCustomerId(customerId));
+                UUID carId = UUID.fromString(resultSet.getString("car_id"));
+                CarService carService = new CarServiceImpl();
+                purchase.setCar(carService.getCarByCarId(carId));
+
+                purchases.add(purchase);
+            }
+            return purchases;
+        }
     }
 
     @Override
     public void create(UUID customerId, UUID carId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_A_PURCHASE);
-        preparedStatement.setObject(1, customerId);
-        preparedStatement.setObject(2, carId);
-        preparedStatement.executeQuery();
-        preparedStatement.close();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_A_PURCHASE)) {
+            preparedStatement.setObject(1, customerId);
+            preparedStatement.setObject(2, carId);
+            preparedStatement.executeQuery();
+        }
     }
 
     @Override
     public void update(UUID purchaseId, UUID customerId, UUID carId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_A_PURCHASE);
-        preparedStatement.setObject(1, customerId);
-        preparedStatement.setObject(2, carId);
-        preparedStatement.setObject(3, purchaseId);
-        preparedStatement.executeQuery();
-        preparedStatement.close();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_A_PURCHASE)) {
+            preparedStatement.setObject(1, customerId);
+            preparedStatement.setObject(2, carId);
+            preparedStatement.setObject(3, purchaseId);
+            preparedStatement.executeQuery();
+        }
     }
 
     @Override
     public void delete(UUID purchaseId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_PURCHASE);
-        preparedStatement.setObject(1, purchaseId);
-        preparedStatement.executeQuery();
-        preparedStatement.close();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_PURCHASE)) {
+            preparedStatement.setObject(1, purchaseId);
+            preparedStatement.executeQuery();
+        }
     }
+
+//    @Override
+//    public ResultSet getPurchaseByPurchaseId(UUID purchaseId) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_PURCHASE_ID);
+//        preparedStatement.setObject(1, purchaseId);
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//        return resultSet;
+//    }
+//
+//    @Override
+//    public ResultSet getPurchaseByPurchaseNumber(String purchaseNumber) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_PURCHASE_NUMBER);
+//        preparedStatement.setInt(1, Integer.parseInt(purchaseNumber));
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//        return resultSet;
+//    }
+//
+//    @Override
+//    public ResultSet getPurchaseByCustomerId(UUID customerId) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_CUSTOMER_ID);
+//        preparedStatement.setObject(1, customerId);
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//        return resultSet;
+//    }
+//
+//    @Override
+//    public ResultSet getPurchaseByCarId(UUID carId) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_CAR_ID);
+//        preparedStatement.setObject(1, carId);
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//        return resultSet;
+//    }
+//
+//    @Override
+//    public ResultSet getAllPurchases() throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_PURCHASES);
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//        return resultSet;
+//    }
+//
+//    @Override
+//    public void create(UUID customerId, UUID carId) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_A_PURCHASE);
+//        preparedStatement.setObject(1, customerId);
+//        preparedStatement.setObject(2, carId);
+//        preparedStatement.executeQuery();
+//        preparedStatement.close();
+//    }
+//
+//    @Override
+//    public void update(UUID purchaseId, UUID customerId, UUID carId) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_A_PURCHASE);
+//        preparedStatement.setObject(1, customerId);
+//        preparedStatement.setObject(2, carId);
+//        preparedStatement.setObject(3, purchaseId);
+//        preparedStatement.executeQuery();
+//        preparedStatement.close();
+//    }
+//
+//    @Override
+//    public void delete(UUID purchaseId) throws SQLException {
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_PURCHASE);
+//        preparedStatement.setObject(1, purchaseId);
+//        preparedStatement.executeQuery();
+//        preparedStatement.close();
+//    }
 }

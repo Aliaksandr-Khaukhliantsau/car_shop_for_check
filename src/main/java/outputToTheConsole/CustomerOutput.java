@@ -1,5 +1,6 @@
 package outputToTheConsole;
 
+import dto.CustomerDto;
 import entity.Customer;
 import service.CustomerService;
 import service.impl.CustomerServiceImpl;
@@ -64,8 +65,10 @@ public class CustomerOutput {
                         UUID customerId = UUID.fromString(scanner.nextLine());
 
                         Customer customer = customerService.getCustomerByCustomerId(customerId);
+//                        CustomerDto customerDto = customerService.getCustomerByCustomerId(customerId);
 
                         System.out.println(customer);
+//                        System.out.println(customerDto);
                         System.out.println();
 
                         // Выборка по имени

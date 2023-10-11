@@ -1,6 +1,8 @@
 package service.impl;
 
+import dto.CustomerDto;
 import entity.Customer;
+import mapper.CustomerMapper;
 import repository.CustomerRepository;
 import repository.impl.CustomerRepositoryImpl;
 import service.CustomerService;
@@ -14,6 +16,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     public CustomerServiceImpl() throws SQLException {
     }
+
+//    @Override
+//    public CustomerDto getCustomerByCustomerId(UUID customerId) throws SQLException {
+//        Customer customer = customerRepository.getCustomerByCustomerId(customerId);
+//        return CustomerMapper.INSTANCE.customerToCustomerDTO(customer);
+//    }
 
     @Override
     public Customer getCustomerByCustomerId(UUID customerId) throws SQLException {

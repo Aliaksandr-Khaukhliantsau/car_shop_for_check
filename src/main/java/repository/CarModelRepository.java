@@ -1,21 +1,36 @@
 package repository;
 
-import java.sql.ResultSet;
+import entity.CarModel;
+
 import java.sql.SQLException;
+import java.util.List;
 import java.util.UUID;
 
 public interface CarModelRepository {
-    ResultSet getCarModelByModelId(UUID modelId) throws SQLException;
+    CarModel getCarModelByModelId(UUID modelId) throws SQLException;
 
-    ResultSet getCarModelByModelName(String modelName) throws SQLException;
+    List<CarModel> getCarModelByModelName(String modelName) throws SQLException;
 
-    ResultSet getCarModelByCompletionId(UUID completionId) throws SQLException;
+    List<CarModel> getCarModelByCompletionId(UUID completionId) throws SQLException;
 
-    ResultSet getAllCarModels() throws SQLException;
+    List<CarModel> getAllCarModels() throws SQLException;
 
     void create(String modelName, UUID completionId) throws SQLException;
 
     void update(UUID modelId, String modelName, UUID completionId) throws SQLException;
 
     void delete(UUID modelId) throws SQLException;
+//    ResultSet getCarModelByModelId(UUID modelId) throws SQLException;
+//
+//    ResultSet getCarModelByModelName(String modelName) throws SQLException;
+//
+//    ResultSet getCarModelByCompletionId(UUID completionId) throws SQLException;
+//
+//    ResultSet getAllCarModels() throws SQLException;
+//
+//    void create(String modelName, UUID completionId) throws SQLException;
+//
+//    void update(UUID modelId, String modelName, UUID completionId) throws SQLException;
+//
+//    void delete(UUID modelId) throws SQLException;
 }

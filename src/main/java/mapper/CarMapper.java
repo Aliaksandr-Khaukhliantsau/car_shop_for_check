@@ -1,6 +1,6 @@
 package mapper;
 
-import dto.CarDTO;
+import dto.CarDto;
 import entity.Car;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -11,11 +11,11 @@ public interface CarMapper {
     CarMapper INSTANCE = Mappers.getMapper(CarMapper.class);
 
     @Mapping(source = "carModel", target = "carModel")
-    CarDTO carToCarDTO(Car car);
+    CarDto carToCarDTO(Car car);
 
 //    CarModelDTO map(CarModel carModel);
 
-    Car carDTOToCar(CarDTO carDTO);
+    Car carDTOToCar(CarDto carDTO);
 
 //    CarModel mapDto(CarModelDTO carModel);
 }
