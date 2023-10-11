@@ -22,20 +22,4 @@ public interface CustomerRepository {
     void update(UUID customerId, String firstName, String lastName, String middleName) throws SQLException;
 
     void delete(UUID customerId) throws SQLException;
-
-//    ResultSet getCustomerByCustomerId(UUID customerId) throws SQLException;
-//
-//    ResultSet getCustomerByFirstName(String firstName) throws SQLException;
-//
-//    ResultSet getCustomerByMiddleName(String middleName) throws SQLException;
-//
-//    ResultSet getCustomerByLastName(String lastName) throws SQLException;
-//
-//    ResultSet getAllCustomers() throws SQLException;
-//
-//    void create(String firstName, String lastName, String middleName) throws SQLException;
-//
-//    void update(UUID customerId, String firstName, String lastName, String middleName) throws SQLException;
-//
-//    void delete(UUID customerId) throws SQLException;
 }

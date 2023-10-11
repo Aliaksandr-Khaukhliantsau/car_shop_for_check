@@ -15,11 +15,11 @@ public interface CompletionMapper {
     CompletionMapper INSTANCE = Mappers.getMapper(CompletionMapper.class);
 
     @Mapping(source = "carOptions", target = "carOptions")
-    CompletionDto completionToCompletionDTO(Completion completion);
+    CompletionDto completionToCompletionDto(Completion completion);
 
     List<CarOptionDto> map(List<CarOption> carOptions);
 
-    Completion completionDTOToCompletion(CompletionDto completionDTO);
+    Completion completionDtoToCompletion(CompletionDto completionDTO);
 
     List<CarOption> mapDto(List<CarOptionDto> carOptions);
 }

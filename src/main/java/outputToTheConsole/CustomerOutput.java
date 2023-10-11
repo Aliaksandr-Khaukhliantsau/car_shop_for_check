@@ -1,7 +1,6 @@
 package outputToTheConsole;
 
 import dto.CustomerDto;
-import entity.Customer;
 import service.CustomerService;
 import service.impl.CustomerServiceImpl;
 
@@ -34,10 +33,10 @@ public class CustomerOutput {
 
                 // Показать всех клинтов
             } else if (userCommand.equals("1")) {
-                List<Customer> customers = customerService.getAllCustomers();
+                List<CustomerDto> customersDto = customerService.getAllCustomers();
 
-                for (Customer customer : customers) {
-                    System.out.println(customer);
+                for (CustomerDto customerDto : customersDto) {
+                    System.out.println(customerDto);
                 }
                 System.out.println();
 
@@ -64,11 +63,9 @@ public class CustomerOutput {
                         System.out.println("Enter the customer's id:");
                         UUID customerId = UUID.fromString(scanner.nextLine());
 
-                        Customer customer = customerService.getCustomerByCustomerId(customerId);
-//                        CustomerDto customerDto = customerService.getCustomerByCustomerId(customerId);
+                        CustomerDto customerDto = customerService.getCustomerByCustomerId(customerId);
 
-                        System.out.println(customer);
-//                        System.out.println(customerDto);
+                        System.out.println(customerDto);
                         System.out.println();
 
                         // Выборка по имени
@@ -76,10 +73,10 @@ public class CustomerOutput {
                         System.out.println("Enter the first name:");
                         String firstName = scanner.nextLine();
 
-                        List<Customer> customers = customerService.getCustomerByFirstName(firstName);
+                        List<CustomerDto> customersDto = customerService.getCustomerByFirstName(firstName);
 
-                        for (Customer customer : customers) {
-                            System.out.println(customer);
+                        for (CustomerDto customerDto : customersDto) {
+                            System.out.println(customerDto);
                         }
                         System.out.println();
 
@@ -88,10 +85,10 @@ public class CustomerOutput {
                         System.out.println("Enter the middle name:");
                         String middleName = scanner.nextLine();
 
-                        List<Customer> customers = customerService.getCustomerByMiddleName(middleName);
+                        List<CustomerDto> customersDto = customerService.getCustomerByMiddleName(middleName);
 
-                        for (Customer customer : customers) {
-                            System.out.println(customer);
+                        for (CustomerDto customerDto : customersDto) {
+                            System.out.println(customerDto);
                         }
                         System.out.println();
 
@@ -100,10 +97,10 @@ public class CustomerOutput {
                         System.out.println("Enter the last name:");
                         String lastName = scanner.nextLine();
 
-                        List<Customer> customers = customerService.getCustomerByLastName(lastName);
+                        List<CustomerDto> customersDto = customerService.getCustomerByLastName(lastName);
 
-                        for (Customer customer : customers) {
-                            System.out.println(customer);
+                        for (CustomerDto customerDto : customersDto) {
+                            System.out.println(customerDto);
                         }
                         System.out.println();
 

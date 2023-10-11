@@ -11,11 +11,11 @@ public interface CarMapper {
     CarMapper INSTANCE = Mappers.getMapper(CarMapper.class);
 
     @Mapping(source = "carModel", target = "carModel")
-    CarDto carToCarDTO(Car car);
+    CarDto carToCarDto(Car car);
 
 //    CarModelDTO map(CarModel carModel);
 
-    Car carDTOToCar(CarDto carDTO);
+    Car carDtoToCar(CarDto carDTO);
 
 //    CarModel mapDto(CarModelDTO carModel);
 }

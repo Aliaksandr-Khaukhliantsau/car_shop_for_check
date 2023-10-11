@@ -9,7 +9,7 @@ import org.mapstruct.factory.Mappers;
 public interface CarOptionMapper {
     CarOptionMapper INSTANCE = Mappers.getMapper(CarOptionMapper.class);
 
-    CarOptionDto carOptionToCarOptionDTO(CarOption carOption);
+    CarOptionDto carOptionToCarOptionDto(CarOption carOption);
 
-    CarOption carOptionDTOToCarOption(CarOptionDto carOptionDTO);
+    CarOption carOptionDtoToCarOption(CarOptionDto carOptionDTO);
 }
