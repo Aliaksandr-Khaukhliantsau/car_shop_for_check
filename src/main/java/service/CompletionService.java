@@ -1,17 +1,17 @@
 package service;
 
-import entity.Completion;
+import dto.CompletionDto;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
 public interface CompletionService {
-    Completion getCompletionByCompletionId(UUID completionId) throws SQLException;
+    CompletionDto getCompletionByCompletionId(UUID completionId) throws SQLException;
 
-    Completion getCompletionByCompletionName(String completionName) throws SQLException;
+    CompletionDto getCompletionByCompletionName(String completionName) throws SQLException;
 
-    List<Completion> getAllCompletions() throws SQLException;
+    List<CompletionDto> getAllCompletions() throws SQLException;
 
     void addCarOption(UUID CompletionId, UUID optionId) throws SQLException;
 

@@ -1,6 +1,7 @@
 package service.impl;
 
-import entity.CarOption;
+import dto.CarOptionDto;
+import mapper.CarOptionMapper;
 import repository.CarOptionRepository;
 import repository.impl.CarOptionRepositoryImpl;
 import service.CarOptionService;
@@ -8,32 +9,35 @@ import service.CarOptionService;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class CarOptionServiceImpl implements CarOptionService {
+    private static final CarOptionMapper carOptionMapper = CarOptionMapper.INSTANCE;
+
     CarOptionRepository carOptionRepository = new CarOptionRepositoryImpl();
 
     public CarOptionServiceImpl() throws SQLException {
     }
 
     @Override
-    public CarOption getCarOptionByOptionId(UUID optionId) throws SQLException {
-        return carOptionRepository.getCarOptionByOptionId(optionId);
+    public CarOptionDto getCarOptionByOptionId(UUID optionId) throws SQLException {
+        return carOptionMapper.carOptionToCarOptionDto(carOptionRepository.getCarOptionByOptionId(optionId));
 
     }
 
     @Override
-    public CarOption getCarOptionByOptionName(String optionName) throws SQLException {
-        return carOptionRepository.getCarOptionByOptionName(optionName);
+    public CarOptionDto getCarOptionByOptionName(String optionName) throws SQLException {
+        return carOptionMapper.carOptionToCarOptionDto(carOptionRepository.getCarOptionByOptionName(optionName));
     }
 
     @Override
-    public List<CarOption> getCarOptionsByCompletionId(UUID completionId) throws SQLException {
-        return carOptionRepository.getCarOptionsByCompletionId(completionId);
+    public List<CarOptionDto> getCarOptionsByCompletionId(UUID completionId) throws SQLException {
+        return carOptionRepository.getCarOptionsByCompletionId(completionId).stream().map(carOptionMapper::carOptionToCarOptionDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<CarOption> getAllCarOptions() throws SQLException {
-        return carOptionRepository.getAllCarOptions();
+    public List<CarOptionDto> getAllCarOptions() throws SQLException {
+        return carOptionRepository.getAllCarOptions().stream().map(carOptionMapper::carOptionToCarOptionDto).collect(Collectors.toList());
     }
 
     @Override

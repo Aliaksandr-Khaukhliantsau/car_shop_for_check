@@ -1,6 +1,7 @@
 package repository.impl;
 
 import entity.Car;
+import mapper.CarModelMapper;
 import repository.CarRepository;
 import service.CarModelService;
 import service.impl.CarModelServiceImpl;
@@ -19,6 +20,7 @@ public class CarRepositoryImpl implements CarRepository {
     private static final String SQL_CREATE_A_CAR = "INSERT INTO cars (vin, model_id) VALUES (?, ?) RETURNING *;";
     private static final String SQL_UPDATE_A_CAR = "UPDATE cars SET vin = ?, model_id = ? WHERE car_id = ? RETURNING *;";
     private static final String SQL_DELETE_A_CAR = "DELETE FROM cars WHERE car_id = ? RETURNING *;";
+    private static final CarModelMapper carModelMapper = mapper.CarModelMapper.INSTANCE;
     private final Connection connection;
 
     public CarRepositoryImpl() throws SQLException {
@@ -37,7 +39,7 @@ public class CarRepositoryImpl implements CarRepository {
                 car.setVin(resultSet.getString("vin"));
                 UUID modelId = UUID.fromString(resultSet.getString("model_id"));
                 CarModelService carModelService = new CarModelServiceImpl();
-                car.setCarModel(carModelService.getCarModelByModelId(modelId));
+                car.setCarModel(carModelMapper.carModelDtoToCarModel(carModelService.getCarModelByModelId(modelId)));
             }
             return car;
         }
@@ -55,7 +57,7 @@ public class CarRepositoryImpl implements CarRepository {
                 car.setVin(resultSet.getString("vin"));
                 UUID modelId = UUID.fromString(resultSet.getString("model_id"));
                 CarModelService carModelService = new CarModelServiceImpl();
-                car.setCarModel(carModelService.getCarModelByModelId(modelId));
+                car.setCarModel(carModelMapper.carModelDtoToCarModel(carModelService.getCarModelByModelId(modelId)));
             }
             return car;
         }
@@ -73,7 +75,7 @@ public class CarRepositoryImpl implements CarRepository {
                 car.setCarId(UUID.fromString(resultSet.getString("car_id")));
                 car.setVin(resultSet.getString("vin"));
                 CarModelService carModelService = new CarModelServiceImpl();
-                car.setCarModel(carModelService.getCarModelByModelId(modelId));
+                car.setCarModel(carModelMapper.carModelDtoToCarModel(carModelService.getCarModelByModelId(modelId)));
 
                 cars.add(car);
             }
@@ -93,7 +95,7 @@ public class CarRepositoryImpl implements CarRepository {
                 car.setVin(resultSet.getString("vin"));
                 UUID modelId = UUID.fromString(resultSet.getString("model_id"));
                 CarModelService carModelService = new CarModelServiceImpl();
-                car.setCarModel(carModelService.getCarModelByModelId(modelId));
+                car.setCarModel(carModelMapper.carModelDtoToCarModel(carModelService.getCarModelByModelId(modelId)));
 
                 cars.add(car);
             }

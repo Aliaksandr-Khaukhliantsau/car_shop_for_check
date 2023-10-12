@@ -1,11 +1,9 @@
 package outputToTheConsole;
 
-import entity.CarModel;
 import service.CarModelService;
 import service.impl.CarModelServiceImpl;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -33,11 +31,7 @@ public class CarModelOutput {
 
                 // Показать все модели
             } else if (userCommand.equals("1")) {
-                List<CarModel> carModels = carModelService.getAllCarModels();
-
-                for (CarModel carModel : carModels) {
-                    System.out.println(carModel);
-                }
+                carModelService.getAllCarModels().forEach(System.out::println);
                 System.out.println();
 
                 // Показать модели по выборке
@@ -62,9 +56,7 @@ public class CarModelOutput {
                         System.out.println("Enter the model's id:");
                         UUID modelId = UUID.fromString(scanner.nextLine());
 
-                        CarModel carModel = carModelService.getCarModelByModelId(modelId);
-
-                        System.out.println(carModel);
+                        System.out.println(carModelService.getCarModelByModelId(modelId));
                         System.out.println();
 
                         // Выборка по названию
@@ -72,11 +64,7 @@ public class CarModelOutput {
                         System.out.println("Enter the model's name:");
                         String modelName = scanner.nextLine();
 
-                        List<CarModel> carModels = carModelService.getCarModelByModelName(modelName);
-
-                        for (CarModel carModel : carModels) {
-                            System.out.println(carModel);
-                        }
+                        carModelService.getCarModelByModelName(modelName).forEach(System.out::println);
                         System.out.println();
 
                         // Выборка по id комплектации
@@ -84,11 +72,7 @@ public class CarModelOutput {
                         System.out.println("Enter the completion's id:");
                         UUID completionId = UUID.fromString(scanner.nextLine());
 
-                        List<CarModel> carModels = carModelService.getCarModelByCompletionId(completionId);
-
-                        for (CarModel carModel : carModels) {
-                            System.out.println(carModel);
-                        }
+                        carModelService.getCarModelByCompletionId(completionId).forEach(System.out::println);
                         System.out.println();
 
                     } else {

@@ -1,6 +1,7 @@
 package service.impl;
 
-import entity.CarModel;
+import dto.CarModelDto;
+import mapper.CarModelMapper;
 import repository.CarModelRepository;
 import repository.impl.CarModelRepositoryImpl;
 import service.CarModelService;
@@ -8,31 +9,34 @@ import service.CarModelService;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class CarModelServiceImpl implements CarModelService {
+    private static final CarModelMapper carModelMapper = mapper.CarModelMapper.INSTANCE;
+
     CarModelRepository carModelRepository = new CarModelRepositoryImpl();
 
     public CarModelServiceImpl() throws SQLException {
     }
 
     @Override
-    public CarModel getCarModelByModelId(UUID modelId) throws SQLException {
-        return carModelRepository.getCarModelByModelId(modelId);
+    public CarModelDto getCarModelByModelId(UUID modelId) throws SQLException {
+        return carModelMapper.carModelToCarModelDto(carModelRepository.getCarModelByModelId(modelId));
     }
 
     @Override
-    public List<CarModel> getCarModelByModelName(String modelName) throws SQLException {
-        return carModelRepository.getCarModelByModelName(modelName);
+    public List<CarModelDto> getCarModelByModelName(String modelName) throws SQLException {
+        return carModelRepository.getCarModelByModelName(modelName).stream().map(carModelMapper::carModelToCarModelDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<CarModel> getCarModelByCompletionId(UUID completionId) throws SQLException {
-        return carModelRepository.getCarModelByCompletionId(completionId);
+    public List<CarModelDto> getCarModelByCompletionId(UUID completionId) throws SQLException {
+        return carModelRepository.getCarModelByCompletionId(completionId).stream().map(carModelMapper::carModelToCarModelDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<CarModel> getAllCarModels() throws SQLException {
-        return carModelRepository.getAllCarModels();
+    public List<CarModelDto> getAllCarModels() throws SQLException {
+        return carModelRepository.getAllCarModels().stream().map(carModelMapper::carModelToCarModelDto).collect(Collectors.toList());
     }
 
     @Override

@@ -1,19 +1,19 @@
 package service;
 
-import entity.Car;
+import dto.CarDto;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
 public interface CarService {
-    Car getCarByCarId(UUID carId) throws SQLException;
+    CarDto getCarByCarId(UUID carId) throws SQLException;
 
-    Car getCarByVin(String vin) throws SQLException;
+    CarDto getCarByVin(String vin) throws SQLException;
 
-    List<Car> getCarByModelId(UUID modelId) throws SQLException;
+    List<CarDto> getCarByModelId(UUID modelId) throws SQLException;
 
-    List<Car> getAllCars() throws SQLException;
+    List<CarDto> getAllCars() throws SQLException;
 
     void create(String vin, UUID modelId) throws SQLException;
 

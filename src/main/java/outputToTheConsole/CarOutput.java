@@ -1,11 +1,9 @@
 package outputToTheConsole;
 
-import entity.Car;
 import service.CarService;
 import service.impl.CarServiceImpl;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -32,11 +30,7 @@ public class CarOutput {
 
                 // Показать все автомобили
             } else if (userCommand.equals("1")) {
-                List<Car> cars = carService.getAllCars();
-
-                for (Car car : cars) {
-                    System.out.println(car);
-                }
+                carService.getAllCars().forEach(System.out::println);
                 System.out.println();
 
                 // Показать автомобиль по выборке
@@ -62,9 +56,7 @@ public class CarOutput {
                         System.out.println("Enter the car's id:");
                         UUID carId = UUID.fromString(scanner.nextLine());
 
-                        Car car = carService.getCarByCarId(carId);
-
-                        System.out.println(car);
+                        System.out.println(carService.getCarByCarId(carId));
                         System.out.println();
 
                         // Выборка по VIN
@@ -72,9 +64,7 @@ public class CarOutput {
                         System.out.println("Enter the VIN:");
                         String vin = scanner.nextLine();
 
-                        Car car = carService.getCarByVin(vin);
-
-                        System.out.println(car);
+                        System.out.println(carService.getCarByVin(vin));
                         System.out.println();
 
                         // Выборка по id модели
@@ -82,11 +72,7 @@ public class CarOutput {
                         System.out.println("Enter the model's id:");
                         UUID modelId = UUID.fromString(scanner.nextLine());
 
-                        List<Car> cars = carService.getCarByModelId(modelId);
-
-                        for (Car car : cars) {
-                            System.out.println(car);
-                        }
+                        carService.getCarByModelId(modelId).forEach(System.out::println);
                         System.out.println();
 
                     } else {

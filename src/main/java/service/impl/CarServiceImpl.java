@@ -1,6 +1,7 @@
 package service.impl;
 
-import entity.Car;
+import dto.CarDto;
+import mapper.CarMapper;
 import repository.CarRepository;
 import repository.impl.CarRepositoryImpl;
 import service.CarService;
@@ -8,31 +9,34 @@ import service.CarService;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class CarServiceImpl implements CarService {
+    private static final CarMapper carMapper = CarMapper.INSTANCE;
+
     CarRepository carRepository = new CarRepositoryImpl();
 
     public CarServiceImpl() throws SQLException {
     }
 
     @Override
-    public Car getCarByCarId(UUID carId) throws SQLException {
-        return carRepository.getCarByCarId(carId);
+    public CarDto getCarByCarId(UUID carId) throws SQLException {
+        return carMapper.carToCarDto(carRepository.getCarByCarId(carId));
     }
 
     @Override
-    public Car getCarByVin(String vin) throws SQLException {
-        return carRepository.getCarByVin(vin);
+    public CarDto getCarByVin(String vin) throws SQLException {
+        return carMapper.carToCarDto(carRepository.getCarByVin(vin));
     }
 
     @Override
-    public List<Car> getCarByModelId(UUID modelId) throws SQLException {
-        return carRepository.getCarByModelId(modelId);
+    public List<CarDto> getCarByModelId(UUID modelId) throws SQLException {
+        return carRepository.getCarByModelId(modelId).stream().map(carMapper::carToCarDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<Car> getAllCars() throws SQLException {
-        return carRepository.getAllCars();
+    public List<CarDto> getAllCars() throws SQLException {
+        return carRepository.getAllCars().stream().map(carMapper::carToCarDto).collect(Collectors.toList());
     }
 
     @Override

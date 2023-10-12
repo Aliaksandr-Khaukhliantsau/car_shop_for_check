@@ -1,7 +1,8 @@
 package repository.impl;
 
-import entity.CarOption;
+import dto.CarOptionDto;
 import entity.Completion;
+import mapper.CarOptionMapper;
 import repository.CompletionRepository;
 import service.CarOptionService;
 import service.impl.CarOptionServiceImpl;
@@ -11,6 +12,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class CompletionRepositoryImpl implements CompletionRepository {
     private static final String SQL_GET_COMPLETION_BY_COMPLETION_ID = "SELECT * FROM completions WHERE completion_id = ? ORDER BY completion_name ASC;";
@@ -21,6 +23,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     private static final String SQL_CREATE_A_COMPLETION = "INSERT INTO completions (completion_name) VALUES (?) RETURNING *;";
     private static final String SQL_UPDATE_A_COMPLETION = "UPDATE completions SET completion_name = ? WHERE completion_id = ? RETURNING *;";
     private static final String SQL_DELETE_A_COMPLETION = "DELETE FROM completions WHERE completion_id = ? RETURNING *;";
+    private static final CarOptionMapper carOptionMapper = CarOptionMapper.INSTANCE;
     private final Connection connection;
 
     public CompletionRepositoryImpl() throws SQLException {
@@ -38,9 +41,8 @@ public class CompletionRepositoryImpl implements CompletionRepository {
                 completion.setCompletionId(UUID.fromString(resultSet.getString("completion_id")));
                 completion.setCompletionName(resultSet.getString("completion_name"));
                 CarOptionService carOptionService = new CarOptionServiceImpl();
-                List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
-                completion.setCarOptions(carOptions);
-
+                List<CarOptionDto> carOptionsDto = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+                completion.setCarOptions(carOptionsDto.stream().map(carOptionMapper::carOptionDtoToCarOption).collect(Collectors.toList()));
             }
             return completion;
         }
@@ -57,8 +59,8 @@ public class CompletionRepositoryImpl implements CompletionRepository {
                 completion.setCompletionId(UUID.fromString(resultSet.getString("completion_id")));
                 completion.setCompletionName(resultSet.getString("completion_name"));
                 CarOptionService carOptionService = new CarOptionServiceImpl();
-                List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
-                completion.setCarOptions(carOptions);
+                List<CarOptionDto> carOptionsDto = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+                completion.setCarOptions(carOptionsDto.stream().map(carOptionMapper::carOptionDtoToCarOption).collect(Collectors.toList()));
             }
             return completion;
         }
@@ -75,8 +77,8 @@ public class CompletionRepositoryImpl implements CompletionRepository {
                 completion.setCompletionId(UUID.fromString(resultSet.getString("completion_id")));
                 completion.setCompletionName(resultSet.getString("completion_name"));
                 CarOptionService carOptionService = new CarOptionServiceImpl();
-                List<CarOption> carOptions = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
-                completion.setCarOptions(carOptions);
+                List<CarOptionDto> carOptionsDto = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+                completion.setCarOptions(carOptionsDto.stream().map(carOptionMapper::carOptionDtoToCarOption).collect(Collectors.toList()));
 
                 completions.add(completion);
             }

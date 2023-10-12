@@ -1,6 +1,7 @@
 package repository.impl;
 
 import entity.CarModel;
+import mapper.CompletionMapper;
 import repository.CarModelRepository;
 import service.CompletionService;
 import service.impl.CompletionServiceImpl;
@@ -19,6 +20,7 @@ public class CarModelRepositoryImpl implements CarModelRepository {
     private static final String SQL_CREATE_A_CAR_MODEL = "INSERT INTO car_models (model_name, completion_id) VALUES (?, ?) RETURNING *;";
     private static final String SQL_UPDATE_A_CAR_MODEL = "UPDATE car_models SET model_name = ?, completion_id = ? WHERE model_id = ? RETURNING *;";
     private static final String SQL_DELETE_A_CAR_MODEL = "DELETE FROM car_models WHERE model_id = ? RETURNING *;";
+    private static final CompletionMapper completionMapper = CompletionMapper.INSTANCE;
     private final Connection connection;
 
     public CarModelRepositoryImpl() throws SQLException {
@@ -27,10 +29,9 @@ public class CarModelRepositoryImpl implements CarModelRepository {
 
     @Override
     public CarModel getCarModelByModelId(UUID modelId) throws SQLException {
-        ResultSet resultSet;
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_MODEL_BY_MODEL_ID)) {
             preparedStatement.setObject(1, modelId);
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
             CarModel carModel = new CarModel();
 
             while (resultSet.next()) {
@@ -38,7 +39,7 @@ public class CarModelRepositoryImpl implements CarModelRepository {
                 carModel.setModelName(resultSet.getString("model_name"));
                 UUID completionId = UUID.fromString(resultSet.getString("completion_id"));
                 CompletionService completionService = new CompletionServiceImpl();
-                carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
+                carModel.setCompletion(completionMapper.completionDtoToCompletion(completionService.getCompletionByCompletionId(completionId)));
 
             }
             return carModel;
@@ -47,10 +48,9 @@ public class CarModelRepositoryImpl implements CarModelRepository {
 
     @Override
     public List<CarModel> getCarModelByModelName(String modelName) throws SQLException {
-        ResultSet resultSet;
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_MODEL_BY_MODEL_NAME)) {
             preparedStatement.setString(1, modelName);
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
             List<CarModel> carModels = new ArrayList<>();
 
             while (resultSet.next()) {
@@ -59,7 +59,7 @@ public class CarModelRepositoryImpl implements CarModelRepository {
                 carModel.setModelName(resultSet.getString("model_name"));
                 UUID completionId = UUID.fromString(resultSet.getString("completion_id"));
                 CompletionService completionService = new CompletionServiceImpl();
-                carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
+                carModel.setCompletion(completionMapper.completionDtoToCompletion(completionService.getCompletionByCompletionId(completionId)));
 
                 carModels.add(carModel);
             }
@@ -69,10 +69,9 @@ public class CarModelRepositoryImpl implements CarModelRepository {
 
     @Override
     public List<CarModel> getCarModelByCompletionId(UUID completionId) throws SQLException {
-        ResultSet resultSet;
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CAR_MODEL_BY_COMPLETION_ID)) {
             preparedStatement.setObject(1, completionId);
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
             List<CarModel> carModels = new ArrayList<>();
 
             while (resultSet.next()) {
@@ -80,7 +79,7 @@ public class CarModelRepositoryImpl implements CarModelRepository {
                 carModel.setModelId(UUID.fromString(resultSet.getString("model_id")));
                 carModel.setModelName(resultSet.getString("model_name"));
                 CompletionService completionService = new CompletionServiceImpl();
-                carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
+                carModel.setCompletion(completionMapper.completionDtoToCompletion(completionService.getCompletionByCompletionId(completionId)));
 
                 carModels.add(carModel);
             }
@@ -90,9 +89,8 @@ public class CarModelRepositoryImpl implements CarModelRepository {
 
     @Override
     public List<CarModel> getAllCarModels() throws SQLException {
-        ResultSet resultSet;
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_CAR_MODELS)) {
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
             List<CarModel> carModels = new ArrayList<>();
 
             while (resultSet.next()) {
@@ -101,7 +99,7 @@ public class CarModelRepositoryImpl implements CarModelRepository {
                 carModel.setModelName(resultSet.getString("model_name"));
                 UUID completionId = UUID.fromString(resultSet.getString("completion_id"));
                 CompletionService completionService = new CompletionServiceImpl();
-                carModel.setCompletion(completionService.getCompletionByCompletionId(completionId));
+                carModel.setCompletion(completionMapper.completionDtoToCompletion(completionService.getCompletionByCompletionId(completionId)));
 
                 carModels.add(carModel);
             }

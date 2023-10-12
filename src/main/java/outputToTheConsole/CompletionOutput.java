@@ -1,11 +1,9 @@
 package outputToTheConsole;
 
-import entity.Completion;
 import service.CompletionService;
 import service.impl.CompletionServiceImpl;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -33,11 +31,7 @@ public class CompletionOutput {
 
                 // Показать все комплектации
             } else if (userCommand.equals("1")) {
-                List<Completion> completions = completionService.getAllCompletions();
-
-                for (Completion completion : completions) {
-                    System.out.println(completion);
-                }
+                completionService.getAllCompletions().forEach(System.out::println);
                 System.out.println();
 
                 // Показать комплектации по выборке
@@ -61,9 +55,7 @@ public class CompletionOutput {
                         System.out.println("Enter the completion's id:");
                         UUID completionId = UUID.fromString(scanner.nextLine());
 
-                        Completion completion = completionService.getCompletionByCompletionId(completionId);
-
-                        System.out.println(completion);
+                        System.out.println(completionService.getCompletionByCompletionId(completionId));
                         System.out.println();
 
                         // Выборка по названию
@@ -71,9 +63,7 @@ public class CompletionOutput {
                         System.out.println("Enter the completion's name:");
                         String completionName = scanner.nextLine();
 
-                        Completion completion = completionService.getCompletionByCompletionName(completionName);
-
-                        System.out.println(completion);
+                        System.out.println(completionService.getCompletionByCompletionName(completionName));
                         System.out.println();
 
                     } else {
@@ -84,9 +74,7 @@ public class CompletionOutput {
                 // Создать новую комплектацию
             } else if (userCommand.equals("3")) {
                 System.out.println("Enter the completion's name of the new completion:");
-                String completionName = scanner.nextLine();
-
-                completionService.create(completionName);
+                completionService.create(scanner.nextLine());
 
                 System.out.println("New completion's record has been created.");
                 System.out.println();
@@ -149,7 +137,6 @@ public class CompletionOutput {
                 UUID completionId = UUID.fromString(scanner.nextLine());
 
                 completionService.delete(completionId);
-
                 System.out.println("The completion's record has been deleted:");
                 System.out.println();
 

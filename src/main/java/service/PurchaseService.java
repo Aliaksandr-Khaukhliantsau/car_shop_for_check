@@ -1,21 +1,21 @@
 package service;
 
-import entity.Purchase;
+import dto.PurchaseDto;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
 public interface PurchaseService {
-    Purchase getPurchaseByPurchaseId(UUID purchaseId) throws SQLException;
+    PurchaseDto getPurchaseByPurchaseId(UUID purchaseId) throws SQLException;
 
-    Purchase getPurchaseByPurchaseNumber(String purchaseNumber) throws SQLException;
+    PurchaseDto getPurchaseByPurchaseNumber(String purchaseNumber) throws SQLException;
 
-    List<Purchase> getPurchaseByCustomerId(UUID CustomerId) throws SQLException;
+    List<PurchaseDto> getPurchaseByCustomerId(UUID CustomerId) throws SQLException;
 
-    List<Purchase> getPurchaseByCarId(UUID carId) throws SQLException;
+    List<PurchaseDto> getPurchaseByCarId(UUID carId) throws SQLException;
 
-    List<Purchase> getAllPurchases() throws SQLException;
+    List<PurchaseDto> getAllPurchases() throws SQLException;
 
     void create(UUID customerId, UUID carId) throws SQLException;
 

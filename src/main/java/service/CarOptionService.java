@@ -1,19 +1,19 @@
 package service;
 
-import entity.CarOption;
+import dto.CarOptionDto;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
 public interface CarOptionService {
-    CarOption getCarOptionByOptionId(UUID optionId) throws SQLException;
+    CarOptionDto getCarOptionByOptionId(UUID optionId) throws SQLException;
 
-    CarOption getCarOptionByOptionName(String optionName) throws SQLException;
+    CarOptionDto getCarOptionByOptionName(String optionName) throws SQLException;
 
-    List<CarOption> getCarOptionsByCompletionId(UUID completionId) throws SQLException;
+    List<CarOptionDto> getCarOptionsByCompletionId(UUID completionId) throws SQLException;
 
-    List<CarOption> getAllCarOptions() throws SQLException;
+    List<CarOptionDto> getAllCarOptions() throws SQLException;
 
     void create(String optionName) throws SQLException;
 

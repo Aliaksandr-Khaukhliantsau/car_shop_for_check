@@ -14,13 +14,13 @@ public interface PurchaseMapper {
     @Mapping(source = "car", target = "car")
     PurchaseDto purchaseToPurchaseDto(Purchase purchase);
 
-//    CustomerDTO map(Customer customer);
+//    CustomerDto map(Customer customer);
 
-//    CarDTO map(Car car);
+//    CarDto map(Car car);
 
-    Purchase purchaseDTOToPurchase(PurchaseDto purchaseDto);
+    Purchase purchaseDtoToPurchase(PurchaseDto purchaseDto);
 
-//    Customer mapDto(CustomerDTO customer);
+//    Customer mapDto(CustomerDto customer);
 
-//    Car mapDto(CarDTO car);
+//    Car mapDto(CarDto car);
 }

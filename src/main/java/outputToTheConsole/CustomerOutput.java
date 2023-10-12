@@ -1,11 +1,9 @@
 package outputToTheConsole;
 
-import dto.CustomerDto;
 import service.CustomerService;
 import service.impl.CustomerServiceImpl;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -33,11 +31,7 @@ public class CustomerOutput {
 
                 // Показать всех клинтов
             } else if (userCommand.equals("1")) {
-                List<CustomerDto> customersDto = customerService.getAllCustomers();
-
-                for (CustomerDto customerDto : customersDto) {
-                    System.out.println(customerDto);
-                }
+                customerService.getAllCustomers().forEach(System.out::println);
                 System.out.println();
 
                 // Показать клиентов по выборке
@@ -63,9 +57,7 @@ public class CustomerOutput {
                         System.out.println("Enter the customer's id:");
                         UUID customerId = UUID.fromString(scanner.nextLine());
 
-                        CustomerDto customerDto = customerService.getCustomerByCustomerId(customerId);
-
-                        System.out.println(customerDto);
+                        System.out.println(customerService.getCustomerByCustomerId(customerId));
                         System.out.println();
 
                         // Выборка по имени
@@ -73,11 +65,7 @@ public class CustomerOutput {
                         System.out.println("Enter the first name:");
                         String firstName = scanner.nextLine();
 
-                        List<CustomerDto> customersDto = customerService.getCustomerByFirstName(firstName);
-
-                        for (CustomerDto customerDto : customersDto) {
-                            System.out.println(customerDto);
-                        }
+                        customerService.getCustomerByFirstName(firstName).forEach(System.out::println);
                         System.out.println();
 
                         // Выборка по отчеству
@@ -85,11 +73,7 @@ public class CustomerOutput {
                         System.out.println("Enter the middle name:");
                         String middleName = scanner.nextLine();
 
-                        List<CustomerDto> customersDto = customerService.getCustomerByMiddleName(middleName);
-
-                        for (CustomerDto customerDto : customersDto) {
-                            System.out.println(customerDto);
-                        }
+                        customerService.getCustomerByMiddleName(middleName).forEach(System.out::println);
                         System.out.println();
 
                         // Выборка по фамилии
@@ -97,11 +81,7 @@ public class CustomerOutput {
                         System.out.println("Enter the last name:");
                         String lastName = scanner.nextLine();
 
-                        List<CustomerDto> customersDto = customerService.getCustomerByLastName(lastName);
-
-                        for (CustomerDto customerDto : customersDto) {
-                            System.out.println(customerDto);
-                        }
+                        customerService.getCustomerByLastName(lastName).forEach(System.out::println);
                         System.out.println();
 
                     } else {
@@ -119,7 +99,6 @@ public class CustomerOutput {
                 String lastName = scanner.nextLine();
 
                 customerService.create(firstName, middleName, lastName);
-
                 System.out.println("New customer's record has been created.");
                 System.out.println();
 
@@ -135,7 +114,6 @@ public class CustomerOutput {
                 String lastName = scanner.nextLine();
 
                 customerService.update(customerId, firstName, middleName, lastName);
-
                 System.out.println("The customer's record has been changed.");
                 System.out.println();
 
@@ -145,7 +123,6 @@ public class CustomerOutput {
                 UUID customerId = UUID.fromString(scanner.nextLine());
 
                 customerService.delete(customerId);
-
                 System.out.println("The customer's record has been deleted.");
                 System.out.println();
 

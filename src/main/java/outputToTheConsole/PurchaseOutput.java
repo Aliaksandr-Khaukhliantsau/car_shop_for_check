@@ -1,11 +1,9 @@
 package outputToTheConsole;
 
-import entity.Purchase;
 import service.PurchaseService;
 import service.impl.PurchaseServiceImpl;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -33,11 +31,7 @@ public class PurchaseOutput {
 
                 // Показать все заказы
             } else if (userCommand.equals("1")) {
-                List<Purchase> purchases = purchaseService.getAllPurchases();
-
-                for (Purchase purchase : purchases) {
-                    System.out.println(purchase);
-                }
+                purchaseService.getAllPurchases().forEach(System.out::println);
                 System.out.println();
 
                 // Показать заказы по выборке
@@ -64,9 +58,7 @@ public class PurchaseOutput {
                         System.out.println("Enter the purchase's id:");
                         UUID purchaseId = UUID.fromString(scanner.nextLine());
 
-                        Purchase purchase = purchaseService.getPurchaseByPurchaseId(purchaseId);
-
-                        System.out.println(purchase);
+                        System.out.println(purchaseService.getPurchaseByPurchaseId(purchaseId));
                         System.out.println();
 
                         // Выборка по номеру заказа
@@ -74,9 +66,7 @@ public class PurchaseOutput {
                         System.out.println("Enter the purchase's number:");
                         String purchaseNumber = scanner.nextLine();
 
-                        Purchase purchase = purchaseService.getPurchaseByPurchaseNumber(purchaseNumber);
-
-                        System.out.println(purchase);
+                        System.out.println(purchaseService.getPurchaseByPurchaseNumber(purchaseNumber));
                         System.out.println();
 
                         // Выборка по id клиента
@@ -84,11 +74,7 @@ public class PurchaseOutput {
                         System.out.println("Enter the customer's id:");
                         UUID customerId = UUID.fromString(scanner.nextLine());
 
-                        List<Purchase> purchases = purchaseService.getPurchaseByCustomerId(customerId);
-
-                        for (Purchase purchase : purchases) {
-                            System.out.println(purchase);
-                        }
+                        purchaseService.getPurchaseByCustomerId(customerId).forEach(System.out::println);
                         System.out.println();
 
                         // Выборка по id автомобиля
@@ -96,11 +82,7 @@ public class PurchaseOutput {
                         System.out.println("Enter the car's id:");
                         UUID carId = UUID.fromString(scanner.nextLine());
 
-                        List<Purchase> purchases = purchaseService.getPurchaseByCarId(carId);
-
-                        for (Purchase purchase : purchases) {
-                            System.out.println(purchase);
-                        }
+                        purchaseService.getPurchaseByCarId(carId).forEach(System.out::println);
                         System.out.println();
 
                     } else {

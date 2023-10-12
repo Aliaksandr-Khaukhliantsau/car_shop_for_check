@@ -1,6 +1,6 @@
 package outputToTheConsole;
 
-import entity.CarOption;
+import dto.CarOptionDto;
 import service.CarOptionService;
 import service.impl.CarOptionServiceImpl;
 
@@ -33,10 +33,10 @@ public class CarOptionOutput {
 
                 // Показать все опции
             } else if (userCommand.equals("1")) {
-                List<CarOption> carOptions = carOptionService.getAllCarOptions();
+                List<CarOptionDto> carOptionsDto = carOptionService.getAllCarOptions();
 
-                for (CarOption carOption : carOptions) {
-                    System.out.println(carOption);
+                for (CarOptionDto carOptionDto : carOptionsDto) {
+                    System.out.println(carOptionDto);
                 }
                 System.out.println();
 
@@ -61,9 +61,9 @@ public class CarOptionOutput {
                         System.out.println("Enter the option's id:");
                         UUID optionId = UUID.fromString(scanner.nextLine());
 
-                        CarOption carOption = carOptionService.getCarOptionByOptionId(optionId);
+                        CarOptionDto carOptionDto = carOptionService.getCarOptionByOptionId(optionId);
 
-                        System.out.println(carOption);
+                        System.out.println(carOptionDto);
                         System.out.println();
 
                         // Выборка по названию
@@ -71,9 +71,9 @@ public class CarOptionOutput {
                         System.out.println("Enter the option's name:");
                         String optionName = scanner.nextLine();
 
-                        CarOption carOption = carOptionService.getCarOptionByOptionName(optionName);
+                        CarOptionDto carOptionDto = carOptionService.getCarOptionByOptionName(optionName);
 
-                        System.out.println(carOption);
+                        System.out.println(carOptionDto);
                         System.out.println();
 
                     } else {
