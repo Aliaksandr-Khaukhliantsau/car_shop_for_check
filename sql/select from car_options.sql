@@ -1,1 +1,0 @@
-SELECT * FROM car_options ORDER BY option_name ASC;

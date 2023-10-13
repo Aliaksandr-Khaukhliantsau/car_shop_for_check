@@ -13,9 +13,5 @@ public interface CarModelMapper {
     @Mapping(source = "completion", target = "completion")
     CarModelDto carModelToCarModelDto(CarModel carModel);
 
-//    CompletionDTO map(Completion completion);
-
     CarModel carModelDtoToCarModel(CarModelDto carModelDTO);
-
-//    Completion mapDto(CompletionDTO completion);
 }

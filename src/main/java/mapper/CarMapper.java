@@ -13,9 +13,5 @@ public interface CarMapper {
     @Mapping(source = "carModel", target = "carModel")
     CarDto carToCarDto(Car car);
 
-//    CarModelDTO map(CarModel carModel);
-
     Car carDtoToCar(CarDto carDTO);
-
-//    CarModel mapDto(CarModelDTO carModel);
 }
