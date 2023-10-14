@@ -9,6 +9,13 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
+/**
+ * The CarOptionOutput class provides a main method for interacting with the car option service.
+ * This class includes a menu for performing various operations related to car options.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
+ */
 public class CarOptionOutput {
     public static void main(String[] args) throws SQLException {
         CarOptionService carOptionService = new CarOptionServiceImpl();

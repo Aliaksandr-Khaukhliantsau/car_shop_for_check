@@ -7,6 +7,13 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.UUID;
 
+/**
+ * The CarModelOutput class provides a main method for interacting with the car model service.
+ * This class includes a menu for performing various operations related to car models.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
+ */
 public class CarModelOutput {
     public static void main(String[] args) throws SQLException {
         CarModelService carModelService = new CarModelServiceImpl();

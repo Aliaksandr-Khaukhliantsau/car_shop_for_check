@@ -7,6 +7,13 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.UUID;
 
+/**
+ * The PurchaseOutput class provides a main method for interacting with the purchase service.
+ * This class includes a menu for performing various operations related to purchases.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
+ */
 public class PurchaseOutput {
     public static void main(String[] args) throws SQLException {
         PurchaseService purchaseService = new PurchaseServiceImpl();

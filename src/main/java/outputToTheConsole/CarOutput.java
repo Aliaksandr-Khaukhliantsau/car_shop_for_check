@@ -7,6 +7,13 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.UUID;
 
+/**
+ * The CarOutput class provides a main method for interacting with the car service.
+ * This class includes a menu for performing various operations related to cars.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
+ */
 public class CarOutput {
     public static void main(String[] args) throws SQLException {
         CarService carService = new CarServiceImpl();

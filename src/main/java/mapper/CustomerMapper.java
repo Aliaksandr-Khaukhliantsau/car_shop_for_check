@@ -5,11 +5,33 @@ import entity.Customer;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * The CustomerMapper interface provides methods for mapping between Customer entities and CustomerDto data transfer objects.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
+ */
 @Mapper
 public interface CustomerMapper {
+
+    /**
+     * The singleton instance of the mapper.
+     */
     CustomerMapper INSTANCE = Mappers.getMapper(CustomerMapper.class);
 
+    /**
+     * Maps a Customer entity to a CustomerDto.
+     *
+     * @param customer The Customer entity to map.
+     * @return The mapped CustomerDto.
+     */
     CustomerDto customerToCustomerDto(Customer customer);
 
+    /**
+     * Maps a CustomerDto to a Customer entity.
+     *
+     * @param customerDTO The CustomerDto to map.
+     * @return The mapped Customer entity.
+     */
     Customer customerDtoToCustomer(CustomerDto customerDTO);
 }

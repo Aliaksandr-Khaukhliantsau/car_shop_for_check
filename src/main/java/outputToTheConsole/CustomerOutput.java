@@ -7,6 +7,13 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.UUID;
 
+/**
+ * The CustomerOutput class provides a main method for interacting with the customer service.
+ * This class includes a menu for performing various operations related to customers.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
+ */
 public class CustomerOutput {
     public static void main(String[] args) throws SQLException {
         CustomerService customerService = new CustomerServiceImpl();

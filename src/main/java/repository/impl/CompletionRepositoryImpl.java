@@ -14,7 +14,15 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * The CompletionRepositoryImpl class implements the CompletionRepository interface.
+ * It provides methods to interact with the completions table in the database.
+ */
 public class CompletionRepositoryImpl implements CompletionRepository {
+
+    /**
+     * SQL queries for various operations on the completions table.
+     */
     private static final String SQL_GET_COMPLETION_BY_COMPLETION_ID = "SELECT * FROM completions WHERE completion_id = ? ORDER BY completion_name ASC;";
     private static final String SQL_GET_COMPLETION_BY_COMPLETION_NAME = "SELECT * FROM completions WHERE completion_name = ? ORDER BY completion_name ASC;";
     private static final String SQL_GET_ALL_COMPLETIONS = "SELECT * FROM completions ORDER BY completion_name ASC;";
@@ -24,12 +32,25 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     private static final String SQL_UPDATE_A_COMPLETION = "UPDATE completions SET completion_name = ? WHERE completion_id = ? RETURNING *;";
     private static final String SQL_DELETE_A_COMPLETION = "DELETE FROM completions WHERE completion_id = ? RETURNING *;";
     private static final CarOptionMapper carOptionMapper = CarOptionMapper.INSTANCE;
+
+    /**
+     * Connection to the database.
+     */
     private final Connection connection;
 
+    /**
+     * Constructor establishes a connection to the database.
+     */
     public CompletionRepositoryImpl() throws SQLException {
         connection = DriverManager.getConnection(PropertiesUtil.get("postgres_url"), PropertiesUtil.get("postgres_user"), PropertiesUtil.get("postgres_password"));
     }
 
+    /**
+     * Method to get a completion by its ID.
+     *
+     * @param completionId The UUID of the completion.
+     * @return A Completion object.
+     */
     @Override
     public Completion getCompletionByCompletionId(UUID completionId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_COMPLETION_BY_COMPLETION_ID)) {
@@ -48,6 +69,12 @@ public class CompletionRepositoryImpl implements CompletionRepository {
         }
     }
 
+    /**
+     * Method to get a completion by its name.
+     *
+     * @param completionName The name of the completion.
+     * @return A Completion object.
+     */
     @Override
     public Completion getCompletionByCompletionName(String completionName) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_COMPLETION_BY_COMPLETION_NAME)) {
@@ -66,6 +93,11 @@ public class CompletionRepositoryImpl implements CompletionRepository {
         }
     }
 
+    /**
+     * Method to get a list of all completions.
+     *
+     * @return A list of Completion objects.
+     */
     @Override
     public List<Completion> getAllCompletions() throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_COMPLETIONS)) {
@@ -86,6 +118,12 @@ public class CompletionRepositoryImpl implements CompletionRepository {
         }
     }
 
+    /**
+     * Method to add a car option to a completion.
+     *
+     * @param completionId The UUID of the completion.
+     * @param optionId     The UUID of the car option.
+     */
     @Override
     public void addCarOption(UUID completionId, UUID optionId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_A_CAR_OPTION)) {
@@ -95,6 +133,12 @@ public class CompletionRepositoryImpl implements CompletionRepository {
         }
     }
 
+    /**
+     * Method to delete a car option from a completion.
+     *
+     * @param completionId The UUID of the completion.
+     * @param optionId     The UUID of the car option.
+     */
     @Override
     public void deleteCarOption(UUID completionId, UUID optionId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_CAR_OPTION)) {
@@ -104,6 +148,11 @@ public class CompletionRepositoryImpl implements CompletionRepository {
         }
     }
 
+    /**
+     * Method to create a new completion.
+     *
+     * @param completionName The name of the new completion.
+     */
     @Override
     public void create(String completionName) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_A_COMPLETION)) {
@@ -112,6 +161,12 @@ public class CompletionRepositoryImpl implements CompletionRepository {
         }
     }
 
+    /**
+     * Method to update an existing completion.
+     *
+     * @param completionId   The UUID of the completion to be updated.
+     * @param completionName The new name of the completion.
+     */
     @Override
     public void update(UUID completionId, String completionName) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_A_COMPLETION)) {
@@ -121,6 +176,11 @@ public class CompletionRepositoryImpl implements CompletionRepository {
         }
     }
 
+    /**
+     * Method to delete an existing completion.
+     *
+     * @param completionId The UUID of the completion to be deleted.
+     */
     @Override
     public void delete(UUID completionId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_COMPLETION)) {

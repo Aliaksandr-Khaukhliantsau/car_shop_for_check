@@ -7,6 +7,13 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.UUID;
 
+/**
+ * The CompletionOutput class provides a main method for interacting with the completion service.
+ * This class includes a menu for performing various operations related to completions.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
+ */
 public class CompletionOutput {
     public static void main(String[] args) throws SQLException {
         CompletionService completionService = new CompletionServiceImpl();

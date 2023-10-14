@@ -17,6 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * The PurchaseRepositoryImpl class implements the PurchaseRepository interface.
+ * This class provides methods to interact with the purchases data in the database.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
+ */
 public class PurchaseRepositoryImpl implements PurchaseRepository {
     private static final String SQL_GET_PURCHASE_BY_PURCHASE_ID = "SELECT * FROM purchases WHERE purchase_id = ? ORDER BY purchase_number ASC;";
     private static final String SQL_GET_PURCHASE_BY_PURCHASE_NUMBER = "SELECT * FROM purchases WHERE purchase_number = ? ORDER BY purchase_number ASC;";
@@ -34,6 +41,13 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
         connection = DriverManager.getConnection(PropertiesUtil.get("postgres_url"), PropertiesUtil.get("postgres_user"), PropertiesUtil.get("postgres_password"));
     }
 
+    /**
+     * This method retrieves a purchase by its ID.
+     *
+     * @param purchaseId The ID of the purchase to retrieve.
+     * @return The purchase corresponding to the provided ID.
+     * @throws SQLException If an SQL error occurs while retrieving the purchase.
+     */
     @Override
     public Purchase getPurchaseByPurchaseId(UUID purchaseId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_PURCHASE_ID)) {
@@ -57,6 +71,13 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
         }
     }
 
+    /**
+     * This method retrieves a purchase by its purchase number.
+     *
+     * @param purchaseNumber The purchase number of the purchase to retrieve.
+     * @return The purchase corresponding to the provided purchase number.
+     * @throws SQLException If an SQL error occurs while retrieving the purchase.
+     */
     @Override
     public Purchase getPurchaseByPurchaseNumber(String purchaseNumber) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_PURCHASE_NUMBER)) {
@@ -80,6 +101,13 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
         }
     }
 
+    /**
+     * This method retrieves all purchases made by a specific customer.
+     *
+     * @param customerId The ID of the customer whose purchases to retrieve.
+     * @return A list of purchases made by the specified customer.
+     * @throws SQLException If an SQL error occurs while retrieving the purchases.
+     */
     @Override
     public List<Purchase> getPurchaseByCustomerId(UUID customerId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_CUSTOMER_ID)) {
@@ -105,6 +133,13 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
         }
     }
 
+    /**
+     * This method retrieves all purchases made for a specific car.
+     *
+     * @param carId The ID of the car whose purchases to retrieve.
+     * @return A list of purchases made for the specified car.
+     * @throws SQLException If an SQL error occurs while retrieving the purchases.
+     */
     @Override
     public List<Purchase> getPurchaseByCarId(UUID carId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_CAR_ID)) {
@@ -130,6 +165,12 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
         }
     }
 
+    /**
+     * This method retrieves all purchases.
+     *
+     * @return A list of all purchases.
+     * @throws SQLException If an SQL error occurs while retrieving the purchases.
+     */
     @Override
     public List<Purchase> getAllPurchases() throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_PURCHASES)) {
@@ -155,6 +196,13 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
         }
     }
 
+    /**
+     * This method creates a new purchase.
+     *
+     * @param customerId The ID of the customer making the purchase.
+     * @param carId      The ID of the car being purchased.
+     * @throws SQLException If an SQL error occurs while creating the purchase.
+     */
     @Override
     public void create(UUID customerId, UUID carId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_A_PURCHASE)) {
@@ -164,6 +212,14 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
         }
     }
 
+    /**
+     * This method updates an existing purchase.
+     *
+     * @param purchaseId The ID of the purchase to update.
+     * @param customerId The new customer ID for the purchase.
+     * @param carId      The new car ID for the purchase.
+     * @throws SQLException If an SQL error occurs while updating the purchase.
+     */
     @Override
     public void update(UUID purchaseId, UUID customerId, UUID carId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_A_PURCHASE)) {
@@ -174,6 +230,12 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
         }
     }
 
+    /**
+     * This method deletes a purchase.
+     *
+     * @param purchaseId The ID of the purchase to delete.
+     * @throws SQLException If an SQL error occurs while deleting the purchase.
+     */
     @Override
     public void delete(UUID purchaseId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_PURCHASE)) {
