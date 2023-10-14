@@ -6,7 +6,9 @@ import java.util.UUID;
 
 /**
  * The Purchase class is an entity representing a purchase.
- * It uses Lombok annotations for convenient boilerplate code reduction.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 @Getter
 @Setter

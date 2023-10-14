@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Interface for the car model service.
+ * The CarModelService interface provides methods for interacting with car model data.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 public interface CarModelService {
     /**
-     * Retrieves a car model by its ID.
+     * Retrieves a car model DTO by its ID.
      *
      * @param modelId The ID of the car model.
      * @return The car model DTO.
@@ -20,7 +23,7 @@ public interface CarModelService {
     CarModelDto getCarModelByModelId(UUID modelId) throws SQLException;
 
     /**
-     * Retrieves all car models with a specific name.
+     * Retrieves all car model DTOs with a specific name.
      *
      * @param modelName The name of the car models.
      * @return A list of car model DTOs.
@@ -29,7 +32,7 @@ public interface CarModelService {
     List<CarModelDto> getCarModelByModelName(String modelName) throws SQLException;
 
     /**
-     * Retrieves all car models for a specific completion.
+     * Retrieves all car model DTOs for a specific completion.
      *
      * @param completionId The ID of the completion.
      * @return A list of car model DTOs.
@@ -38,7 +41,7 @@ public interface CarModelService {
     List<CarModelDto> getCarModelByCompletionId(UUID completionId) throws SQLException;
 
     /**
-     * Retrieves all car models.
+     * Retrieves all car model DTOs.
      *
      * @return A list of all car model DTOs.
      * @throws SQLException if a database access error occurs.

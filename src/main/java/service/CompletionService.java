@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Interface for the completion service.
+ * The CompletionService interface provides methods for interacting with completion data.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 public interface CompletionService {
     /**
-     * Retrieves a completion by its ID.
+     * Retrieves a completion DTO by its ID.
      *
      * @param completionId The ID of the completion.
      * @return The completion DTO.
@@ -20,7 +23,7 @@ public interface CompletionService {
     CompletionDto getCompletionByCompletionId(UUID completionId) throws SQLException;
 
     /**
-     * Retrieves a completion by its name.
+     * Retrieves a completion DTO by its name.
      *
      * @param completionName The name of the completion.
      * @return The completion DTO.
@@ -29,7 +32,7 @@ public interface CompletionService {
     CompletionDto getCompletionByCompletionName(String completionName) throws SQLException;
 
     /**
-     * Retrieves all completions.
+     * Retrieves all completion DTOs.
      *
      * @return A list of all completion DTOs.
      * @throws SQLException if a database access error occurs.

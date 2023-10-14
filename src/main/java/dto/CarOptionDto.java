@@ -6,7 +6,9 @@ import java.util.UUID;
 
 /**
  * The CarOptionDto class is a data transfer object representing a car option.
- * It uses Lombok annotations for convenient boilerplate code reduction.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 @Getter
 @Setter

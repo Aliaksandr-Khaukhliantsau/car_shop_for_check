@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Interface for the car option service.
+ * The CarOptionService interface provides methods for interacting with car option data.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 public interface CarOptionService {
     /**
-     * Retrieves a car option by its ID.
+     * Retrieves a car option DTO by its ID.
      *
      * @param optionId The ID of the car option.
      * @return The car option DTO.
@@ -20,7 +23,7 @@ public interface CarOptionService {
     CarOptionDto getCarOptionByOptionId(UUID optionId) throws SQLException;
 
     /**
-     * Retrieves a car option by its name.
+     * Retrieves a car option DTO by its name.
      *
      * @param optionName The name of the car option.
      * @return The car option DTO.
@@ -29,7 +32,7 @@ public interface CarOptionService {
     CarOptionDto getCarOptionByOptionName(String optionName) throws SQLException;
 
     /**
-     * Retrieves all car options for a specific completion.
+     * Retrieves all car option DTOs for a specific completion.
      *
      * @param completionId The ID of the completion.
      * @return A list of car option DTOs.
@@ -38,7 +41,7 @@ public interface CarOptionService {
     List<CarOptionDto> getCarOptionsByCompletionId(UUID completionId) throws SQLException;
 
     /**
-     * Retrieves all car options.
+     * Retrieves all car option DTOs.
      *
      * @return A list of all car option DTOs.
      * @throws SQLException if a database access error occurs.

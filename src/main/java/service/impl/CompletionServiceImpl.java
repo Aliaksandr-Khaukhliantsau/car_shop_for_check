@@ -13,6 +13,10 @@ import java.util.stream.Collectors;
 
 /**
  * Implementation of the CompletionService interface.
+ * This class provides methods to interact with completion data.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 public class CompletionServiceImpl implements CompletionService {
     private static final CompletionMapper completionMapper = CompletionMapper.INSTANCE;
@@ -28,7 +32,7 @@ public class CompletionServiceImpl implements CompletionService {
     }
 
     /**
-     * Retrieves a completion by its ID.
+     * Retrieves a completion DTO by its ID.
      *
      * @param completionId The ID of the completion.
      * @return The completion DTO.
@@ -40,7 +44,7 @@ public class CompletionServiceImpl implements CompletionService {
     }
 
     /**
-     * Retrieves a completion by its name.
+     * Retrieves a completion DTO by its name.
      *
      * @param completionName The name of the completion.
      * @return The completion DTO.
@@ -52,7 +56,7 @@ public class CompletionServiceImpl implements CompletionService {
     }
 
     /**
-     * Retrieves all completions.
+     * Retrieves all completion DTOs.
      *
      * @return A list of all completion DTOs.
      * @throws SQLException if a database access error occurs.

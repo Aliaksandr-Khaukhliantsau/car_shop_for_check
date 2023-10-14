@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Interface for the car model repository.
+ * The CarModelRepository interface provides methods for interacting with car model data.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 public interface CarModelRepository {
 

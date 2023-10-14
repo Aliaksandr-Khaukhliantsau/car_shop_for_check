@@ -19,7 +19,7 @@ public interface CustomerRepository {
      *
      * @param customerId The ID of the customer to retrieve.
      * @return The customer with the specified ID.
-     * @throws SQLException If an SQL error occurs while retrieving the customer.
+     * @throws SQLException if a database access error occurs.
      */
     Customer getCustomerByCustomerId(UUID customerId) throws SQLException;
 
@@ -28,7 +28,7 @@ public interface CustomerRepository {
      *
      * @param firstName The first name of the customers to retrieve.
      * @return A list of customers with the specified first name.
-     * @throws SQLException If an SQL error occurs while retrieving the customers.
+     * @throws SQLException if a database access error occurs.
      */
     List<Customer> getCustomerByFirstName(String firstName) throws SQLException;
 
@@ -37,7 +37,7 @@ public interface CustomerRepository {
      *
      * @param middleName The middle name of the customers to retrieve.
      * @return A list of customers with the specified middle name.
-     * @throws SQLException If an SQL error occurs while retrieving the customers.
+     * @throws SQLException if a database access error occurs.
      */
     List<Customer> getCustomerByMiddleName(String middleName) throws SQLException;
 
@@ -46,7 +46,7 @@ public interface CustomerRepository {
      *
      * @param lastName The last name of the customers to retrieve.
      * @return A list of customers with the specified last name.
-     * @throws SQLException If an SQL error occurs while retrieving the customers.
+     * @throws SQLException if a database access error occurs.
      */
     List<Customer> getCustomerByLastName(String lastName) throws SQLException;
 
@@ -54,7 +54,7 @@ public interface CustomerRepository {
      * Retrieves all customers.
      *
      * @return A list of all customers.
-     * @throws SQLException If an SQL error occurs while retrieving the customers.
+     * @throws SQLException if a database access error occurs.
      */
     List<Customer> getAllCustomers() throws SQLException;
 
@@ -64,7 +64,7 @@ public interface CustomerRepository {
      * @param firstName  The first name of the new customer.
      * @param lastName   The last name of the new customer.
      * @param middleName The middle name of the new customer.
-     * @throws SQLException If an SQL error occurs while creating the new customer.
+     * @throws SQLException if a database access error occurs.
      */
     void create(String firstName, String lastName, String middleName) throws SQLException;
 
@@ -75,7 +75,7 @@ public interface CustomerRepository {
      * @param firstName  The new first name for the customer.
      * @param lastName   The new last name for the customer.
      * @param middleName The new middle name for the customer.
-     * @throws SQLException If an SQL error occurs while updating the customer's information.
+     * @throws SQLException if a database access error occurs.
      */
     void update(UUID customerId, String firstName, String lastName, String middleName) throws SQLException;
 
@@ -83,7 +83,7 @@ public interface CustomerRepository {
      * Deletes a customer by their ID.
      *
      * @param customerId The ID of the customer to delete.
-     * @throws SQLException If an SQL error occurs while deleting the customer.
+     * @throws SQLException if a database access error occurs.
      */
     void delete(UUID customerId) throws SQLException;
 }

@@ -37,6 +37,11 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
     private static final CarMapper carMapper = CarMapper.INSTANCE;
     private final Connection connection;
 
+    /**
+     * Constructor establishes a connection to the database.
+     *
+     * @throws SQLException if a database access error occurs.
+     */
     public PurchaseRepositoryImpl() throws SQLException {
         connection = DriverManager.getConnection(PropertiesUtil.get("postgres_url"), PropertiesUtil.get("postgres_user"), PropertiesUtil.get("postgres_password"));
     }
@@ -46,7 +51,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
      *
      * @param purchaseId The ID of the purchase to retrieve.
      * @return The purchase corresponding to the provided ID.
-     * @throws SQLException If an SQL error occurs while retrieving the purchase.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public Purchase getPurchaseByPurchaseId(UUID purchaseId) throws SQLException {
@@ -76,7 +81,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
      *
      * @param purchaseNumber The purchase number of the purchase to retrieve.
      * @return The purchase corresponding to the provided purchase number.
-     * @throws SQLException If an SQL error occurs while retrieving the purchase.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public Purchase getPurchaseByPurchaseNumber(String purchaseNumber) throws SQLException {
@@ -106,7 +111,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
      *
      * @param customerId The ID of the customer whose purchases to retrieve.
      * @return A list of purchases made by the specified customer.
-     * @throws SQLException If an SQL error occurs while retrieving the purchases.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public List<Purchase> getPurchaseByCustomerId(UUID customerId) throws SQLException {
@@ -138,7 +143,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
      *
      * @param carId The ID of the car whose purchases to retrieve.
      * @return A list of purchases made for the specified car.
-     * @throws SQLException If an SQL error occurs while retrieving the purchases.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public List<Purchase> getPurchaseByCarId(UUID carId) throws SQLException {
@@ -169,7 +174,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
      * This method retrieves all purchases.
      *
      * @return A list of all purchases.
-     * @throws SQLException If an SQL error occurs while retrieving the purchases.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public List<Purchase> getAllPurchases() throws SQLException {
@@ -201,7 +206,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
      *
      * @param customerId The ID of the customer making the purchase.
      * @param carId      The ID of the car being purchased.
-     * @throws SQLException If an SQL error occurs while creating the purchase.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public void create(UUID customerId, UUID carId) throws SQLException {
@@ -218,7 +223,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
      * @param purchaseId The ID of the purchase to update.
      * @param customerId The new customer ID for the purchase.
      * @param carId      The new car ID for the purchase.
-     * @throws SQLException If an SQL error occurs while updating the purchase.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public void update(UUID purchaseId, UUID customerId, UUID carId) throws SQLException {
@@ -234,7 +239,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
      * This method deletes a purchase.
      *
      * @param purchaseId The ID of the purchase to delete.
-     * @throws SQLException If an SQL error occurs while deleting the purchase.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public void delete(UUID purchaseId) throws SQLException {

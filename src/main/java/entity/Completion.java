@@ -8,7 +8,9 @@ import java.util.UUID;
 
 /**
  * The Completion class is an entity representing a car completion.
- * It uses Lombok annotations for convenient boilerplate code reduction.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 @Getter
 @Setter

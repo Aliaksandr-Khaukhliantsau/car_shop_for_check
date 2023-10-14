@@ -13,6 +13,10 @@ import java.util.stream.Collectors;
 
 /**
  * Implementation of the PurchaseService interface.
+ * This class provides methods to interact with purchase data.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 public class PurchaseServiceImpl implements PurchaseService {
     private static final PurchaseMapper purchaseMapper = PurchaseMapper.INSTANCE;
@@ -28,7 +32,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     /**
-     * Retrieves a purchase by its ID.
+     * Retrieves a purchase DTO by its ID.
      *
      * @param purchaseId The ID of the purchase.
      * @return The purchase DTO.
@@ -40,7 +44,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     /**
-     * Retrieves a purchase by its number.
+     * Retrieves a purchase DTO by its number.
      *
      * @param purchaseNumber The number of the purchase.
      * @return The purchase DTO.
@@ -52,7 +56,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     /**
-     * Retrieves all purchases made by a specific customer.
+     * Retrieves all purchase DTOs made by a specific customer.
      *
      * @param customerId The ID of the customer.
      * @return A list of purchase DTOs.
@@ -64,7 +68,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     /**
-     * Retrieves all purchases of a specific car.
+     * Retrieves all purchase DTOs of a specific car.
      *
      * @param carId The ID of the car.
      * @return A list of purchase DTOs.
@@ -76,7 +80,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     /**
-     * Retrieves all purchases.
+     * Retrieves all purchase DTOs.
      *
      * @return A list of all purchase DTOs.
      * @throws SQLException if a database access error occurs.

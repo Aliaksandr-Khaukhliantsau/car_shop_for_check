@@ -12,14 +12,16 @@ import java.util.List;
 
 /**
  * The CompletionMapper interface provides methods for mapping between Completion and CompletionDto objects.
- * It uses MapStruct, a code generator that simplifies the implementation of mappings between Java bean types.
  * This mapper also uses the CarOptionMapper for mapping between CarOption and CarOptionDto objects.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 @Mapper(uses = CarOptionMapper.class)
 public interface CompletionMapper {
 
     /**
-     * An instance of the CompletionMapper, created by the MapStruct library.
+     * The singleton instance of the mapper.
      */
     CompletionMapper INSTANCE = Mappers.getMapper(CompletionMapper.class);
 

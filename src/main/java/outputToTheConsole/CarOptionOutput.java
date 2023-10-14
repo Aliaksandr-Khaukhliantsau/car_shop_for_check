@@ -1,11 +1,9 @@
 package outputToTheConsole;
 
-import dto.CarOptionDto;
 import service.CarOptionService;
 import service.impl.CarOptionServiceImpl;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -21,7 +19,7 @@ public class CarOptionOutput {
         CarOptionService carOptionService = new CarOptionServiceImpl();
         Scanner scanner = new Scanner(System.in);
 
-        // Основное меню
+        // Main menu
         while (true) {
             System.out.println("1 - Show all options");
             System.out.println("2 - Show options by the sample");
@@ -32,24 +30,21 @@ public class CarOptionOutput {
 
             String userCommand = scanner.nextLine();
 
-            // Выход из программы и освобождение ресурсов
+            // Exiting the program and releasing resources
             if (userCommand.equals("0")) {
                 System.out.println("Exit from program.");
                 scanner.close();
                 System.exit(0);
 
-                // Показать все опции
+                // Show all options
             } else if (userCommand.equals("1")) {
-                List<CarOptionDto> carOptionsDto = carOptionService.getAllCarOptions();
-
-                for (CarOptionDto carOptionDto : carOptionsDto) {
-                    System.out.println(carOptionDto);
-                }
+                carOptionService.getAllCarOptions().forEach(System.out::println);
                 System.out.println();
 
-                // Показать опции по выборке
+                // Show options by selection
             } else if (userCommand.equals("2")) {
-                // Меню выборки
+
+                // Selection menu
                 while (true) {
                     System.out.println("Select a sample:");
                     System.out.println("1 - Option's id");
@@ -58,29 +53,25 @@ public class CarOptionOutput {
 
                     userCommand = scanner.nextLine();
 
-                    // Выход в предыдущее меню
+                    // Exit to the previous menu
                     if (userCommand.equals("0")) {
                         System.out.println("Exit to the previous menu.\n");
                         break;
 
-                        // Выборка по optionId
+                        // Sampling by option's id
                     } else if (userCommand.equals("1")) {
                         System.out.println("Enter the option's id:");
                         UUID optionId = UUID.fromString(scanner.nextLine());
 
-                        CarOptionDto carOptionDto = carOptionService.getCarOptionByOptionId(optionId);
-
-                        System.out.println(carOptionDto);
+                        System.out.println(carOptionService.getCarOptionByOptionId(optionId));
                         System.out.println();
 
-                        // Выборка по названию
+                        // Sampling by option's name
                     } else if (userCommand.equals("2")) {
                         System.out.println("Enter the option's name:");
                         String optionName = scanner.nextLine();
 
-                        CarOptionDto carOptionDto = carOptionService.getCarOptionByOptionName(optionName);
-
-                        System.out.println(carOptionDto);
+                        System.out.println(carOptionService.getCarOptionByOptionName(optionName));
                         System.out.println();
 
                     } else {
@@ -88,17 +79,15 @@ public class CarOptionOutput {
                     }
                 }
 
-                // Создать новую опцию
+                // Create a new option
             } else if (userCommand.equals("3")) {
                 System.out.println("Enter the option's name of the new option:");
                 String optionName = scanner.nextLine();
 
                 carOptionService.create(optionName);
+                System.out.println("New option's record has been created.\n");
 
-                System.out.println("New option's record has been created.");
-                System.out.println();
-
-                // Изменить опцию
+                // Change the option
             } else if (userCommand.equals("4")) {
                 System.out.println("Enter the option's id:");
                 UUID optionId = UUID.fromString(scanner.nextLine());
@@ -106,19 +95,15 @@ public class CarOptionOutput {
                 String optionName = scanner.nextLine();
 
                 carOptionService.update(optionId, optionName);
+                System.out.println("The option's record has been changed.\n");
 
-                System.out.println("The option's record has been changed.");
-                System.out.println();
-
-                // Удалить опцию
+                // Delete an option
             } else if (userCommand.equals("5")) {
                 System.out.println("Enter the option's id:");
                 UUID optionId = UUID.fromString(scanner.nextLine());
 
                 carOptionService.delete(optionId);
-
-                System.out.println("The option's record has been deleted.");
-                System.out.println();
+                System.out.println("The option's record has been deleted.\n");
 
             } else {
                 System.err.println("Unknown Command!\n");

@@ -19,7 +19,7 @@ public class CompletionOutput {
         CompletionService completionService = new CompletionServiceImpl();
         Scanner scanner = new Scanner(System.in);
 
-        // Основное меню
+        // Main menu
         while (true) {
             System.out.println("1 - Show all completions");
             System.out.println("2 - Show completions by the sample");
@@ -30,20 +30,21 @@ public class CompletionOutput {
 
             String userCommand = scanner.nextLine();
 
-            // Выход из программы и освобождение ресурсов
+            // Exiting the program and releasing resources
             if (userCommand.equals("0")) {
                 System.out.println("Exit from program.");
                 scanner.close();
                 System.exit(0);
 
-                // Показать все комплектации
+                // Show all completions
             } else if (userCommand.equals("1")) {
                 completionService.getAllCompletions().forEach(System.out::println);
                 System.out.println();
 
-                // Показать комплектации по выборке
+                // Show completions by selection
             } else if (userCommand.equals("2")) {
-                // Меню выборки
+
+                // Selection menu
                 while (true) {
                     System.out.println("Select a sample:");
                     System.out.println("1 - Completion's id");
@@ -52,12 +53,12 @@ public class CompletionOutput {
 
                     userCommand = scanner.nextLine();
 
-                    // Выход в предыдущее меню
+                    // Exit to the previous menu
                     if (userCommand.equals("0")) {
                         System.out.println("Exit to the previous menu.\n");
                         break;
 
-                        // Выборка по completion's id
+                        // Sampling by completion's id
                     } else if (userCommand.equals("1")) {
                         System.out.println("Enter the completion's id:");
                         UUID completionId = UUID.fromString(scanner.nextLine());
@@ -65,7 +66,7 @@ public class CompletionOutput {
                         System.out.println(completionService.getCompletionByCompletionId(completionId));
                         System.out.println();
 
-                        // Выборка по названию
+                        // Sampling by completion's name
                     } else if (userCommand.equals("2")) {
                         System.out.println("Enter the completion's name:");
                         String completionName = scanner.nextLine();
@@ -78,16 +79,17 @@ public class CompletionOutput {
                     }
                 }
 
-                // Создать новую комплектацию
+                // Create a new completion
             } else if (userCommand.equals("3")) {
                 System.out.println("Enter the completion's name of the new completion:");
                 completionService.create(scanner.nextLine());
 
-                System.out.println("New completion's record has been created.");
-                System.out.println();
+                System.out.println("New completion's record has been created.\n");
 
-                // Изменить комплектацию
+                // Change the completion
             } else if (userCommand.equals("4")) {
+
+                // Completion change menu
                 while (true) {
                     System.out.println("1 - Change a completion's name");
                     System.out.println("2 - Add a car's option to the completion");
@@ -96,12 +98,12 @@ public class CompletionOutput {
 
                     userCommand = scanner.nextLine();
 
-                    // Выход в предыдущее меню
+                    // Exit to the previous menu
                     if (userCommand.equals("0")) {
                         System.out.println("Exit to the previous menu.\n");
                         break;
 
-                        // изменить имя комплектации
+                        // Change the completion's name
                     } else if (userCommand.equals("1")) {
                         System.out.println("Enter the completion's id:");
                         UUID completionId = UUID.fromString(scanner.nextLine());
@@ -109,10 +111,9 @@ public class CompletionOutput {
                         String completionName = scanner.nextLine();
 
                         completionService.update(completionId, completionName);
-                        System.out.println("The completion's name has been changed.");
-                        System.out.println();
+                        System.out.println("The completion's name has been changed.\n");
 
-                        // добавить опцию
+                        // Add an option
                     } else if (userCommand.equals("2")) {
                         System.out.println("Enter the completion's id:");
                         UUID completionId = UUID.fromString(scanner.nextLine());
@@ -120,10 +121,9 @@ public class CompletionOutput {
                         UUID optionId = UUID.fromString(scanner.nextLine());
 
                         completionService.addCarOption(completionId, optionId);
-                        System.out.println("The option has been added.");
-                        System.out.println();
+                        System.out.println("The option has been added.\n");
 
-                        // удалить опцию
+                        // Delete an option
                     } else if (userCommand.equals("3")) {
                         System.out.println("Enter the completion's id:");
                         UUID completionId = UUID.fromString(scanner.nextLine());
@@ -131,21 +131,20 @@ public class CompletionOutput {
                         UUID optionId = UUID.fromString(scanner.nextLine());
 
                         completionService.deleteCarOption(completionId, optionId);
-                        System.out.println("The option has been deleted.");
-                        System.out.println();
+                        System.out.println("The option has been deleted.\n");
 
                     } else {
                         System.err.println("Unknown Command!\n");
                     }
                 }
-                // Удалить комплектацию
+
+                // Delete a completion
             } else if (userCommand.equals("5")) {
                 System.out.println("Enter the completion's id:");
                 UUID completionId = UUID.fromString(scanner.nextLine());
 
                 completionService.delete(completionId);
-                System.out.println("The completion's record has been deleted:");
-                System.out.println();
+                System.out.println("The completion's record has been deleted.\n");
 
             } else {
                 System.err.println("Unknown Command!\n");

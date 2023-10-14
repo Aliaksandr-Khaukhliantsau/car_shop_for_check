@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Interface for the completion repository.
+ * The CompletionRepository interface provides methods for interacting with completion data.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 public interface CompletionRepository {
 

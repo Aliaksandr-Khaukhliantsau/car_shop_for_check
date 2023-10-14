@@ -12,7 +12,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- * The CustomerServiceImpl class implements the CustomerService interface.
+ * Implementation of the CustomerService interface.
  * This class provides methods to interact with customer data.
  *
  * @author Aliaksandr Khaukhliantsau
@@ -32,11 +32,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     /**
-     * This method retrieves a customer by their ID.
+     * This method retrieves a customer DTO by their ID.
      *
      * @param customerId The ID of the customer to retrieve.
-     * @return The customer with the specified ID.
-     * @throws SQLException If an SQL error occurs while retrieving the customer.
+     * @return The customer DTO.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public CustomerDto getCustomerByCustomerId(UUID customerId) throws SQLException {
@@ -44,11 +44,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     /**
-     * This method retrieves all customers with a specific first name.
+     * This method retrieves all customer DTOs with a specific first name.
      *
      * @param firstName The first name of the customers to retrieve.
-     * @return A list of customers with the specified first name.
-     * @throws SQLException If an SQL error occurs while retrieving the customers.
+     * @return A list of customer DTOs.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public List<CustomerDto> getCustomerByFirstName(String firstName) throws SQLException {
@@ -56,11 +56,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     /**
-     * This method retrieves all customers with a specific middle name.
+     * This method retrieves all customer DTOs with a specific middle name.
      *
      * @param middleName The middle name of the customers to retrieve.
-     * @return A list of customers with the specified middle name.
-     * @throws SQLException If an SQL error occurs while retrieving the customers.
+     * @return A list of customer DTOs.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public List<CustomerDto> getCustomerByMiddleName(String middleName) throws SQLException {
@@ -68,11 +68,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     /**
-     * This method retrieves all customers with a specific last name.
+     * This method retrieves all customer DTOs with a specific last name.
      *
      * @param lastName The last name of the customers to retrieve.
-     * @return A list of customer DTOs with the specified last name.
-     * @throws SQLException If an SQL error occurs while retrieving the customers.
+     * @return A list of customer DTOs.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public List<CustomerDto> getCustomerByLastName(String lastName) throws SQLException {
@@ -80,10 +80,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     /**
-     * This method retrieves all customers.
+     * This method retrieves all customer DTOs.
      *
      * @return A list of all customer DTOs.
-     * @throws SQLException If an SQL error occurs while retrieving the customers.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public List<CustomerDto> getAllCustomers() throws SQLException {
@@ -96,7 +96,7 @@ public class CustomerServiceImpl implements CustomerService {
      * @param firstName  The first name of the new customer.
      * @param middleName The middle name of the new customer.
      * @param lastName   The last name of the new customer.
-     * @throws SQLException If an SQL error occurs while creating the new customer.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public void create(String firstName, String middleName, String lastName) throws SQLException {
@@ -110,7 +110,7 @@ public class CustomerServiceImpl implements CustomerService {
      * @param firstName  The new first name for the customer.
      * @param middleName The new middle name for the customer.
      * @param lastName   The new last name for the customer.
-     * @throws SQLException If an SQL error occurs while updating the customer's information.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public void update(UUID customerId, String firstName, String middleName, String lastName) throws SQLException {
@@ -121,7 +121,7 @@ public class CustomerServiceImpl implements CustomerService {
      * This method deletes a customer by their ID.
      *
      * @param customerId The ID of the customer to delete.
-     * @throws SQLException If an SQL error occurs while deleting the customer.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public void delete(UUID customerId) throws SQLException {

@@ -6,7 +6,9 @@ import java.util.UUID;
 
 /**
  * The CarOption class is an entity representing a car option.
- * It uses Lombok annotations for convenient boilerplate code reduction.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 @Getter
 @Setter

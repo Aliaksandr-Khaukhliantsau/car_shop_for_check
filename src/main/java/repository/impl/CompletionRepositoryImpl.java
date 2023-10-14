@@ -17,12 +17,11 @@ import java.util.stream.Collectors;
 /**
  * The CompletionRepositoryImpl class implements the CompletionRepository interface.
  * It provides methods to interact with the completions table in the database.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 public class CompletionRepositoryImpl implements CompletionRepository {
-
-    /**
-     * SQL queries for various operations on the completions table.
-     */
     private static final String SQL_GET_COMPLETION_BY_COMPLETION_ID = "SELECT * FROM completions WHERE completion_id = ? ORDER BY completion_name ASC;";
     private static final String SQL_GET_COMPLETION_BY_COMPLETION_NAME = "SELECT * FROM completions WHERE completion_name = ? ORDER BY completion_name ASC;";
     private static final String SQL_GET_ALL_COMPLETIONS = "SELECT * FROM completions ORDER BY completion_name ASC;";
@@ -32,14 +31,12 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     private static final String SQL_UPDATE_A_COMPLETION = "UPDATE completions SET completion_name = ? WHERE completion_id = ? RETURNING *;";
     private static final String SQL_DELETE_A_COMPLETION = "DELETE FROM completions WHERE completion_id = ? RETURNING *;";
     private static final CarOptionMapper carOptionMapper = CarOptionMapper.INSTANCE;
-
-    /**
-     * Connection to the database.
-     */
     private final Connection connection;
 
     /**
      * Constructor establishes a connection to the database.
+     *
+     * @throws SQLException if a database access error occurs.
      */
     public CompletionRepositoryImpl() throws SQLException {
         connection = DriverManager.getConnection(PropertiesUtil.get("postgres_url"), PropertiesUtil.get("postgres_user"), PropertiesUtil.get("postgres_password"));
@@ -50,6 +47,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
      *
      * @param completionId The UUID of the completion.
      * @return A Completion object.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public Completion getCompletionByCompletionId(UUID completionId) throws SQLException {
@@ -74,6 +72,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
      *
      * @param completionName The name of the completion.
      * @return A Completion object.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public Completion getCompletionByCompletionName(String completionName) throws SQLException {
@@ -97,6 +96,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
      * Method to get a list of all completions.
      *
      * @return A list of Completion objects.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public List<Completion> getAllCompletions() throws SQLException {
@@ -123,6 +123,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
      *
      * @param completionId The UUID of the completion.
      * @param optionId     The UUID of the car option.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public void addCarOption(UUID completionId, UUID optionId) throws SQLException {
@@ -138,6 +139,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
      *
      * @param completionId The UUID of the completion.
      * @param optionId     The UUID of the car option.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public void deleteCarOption(UUID completionId, UUID optionId) throws SQLException {
@@ -152,6 +154,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
      * Method to create a new completion.
      *
      * @param completionName The name of the new completion.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public void create(String completionName) throws SQLException {
@@ -166,6 +169,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
      *
      * @param completionId   The UUID of the completion to be updated.
      * @param completionName The new name of the completion.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public void update(UUID completionId, String completionName) throws SQLException {
@@ -180,6 +184,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
      * Method to delete an existing completion.
      *
      * @param completionId The UUID of the completion to be deleted.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public void delete(UUID completionId) throws SQLException {

@@ -6,7 +6,9 @@ import java.util.UUID;
 
 /**
  * The CarModel class is an entity representing a car model.
- * It uses Lombok annotations for convenient boilerplate code reduction.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 @Getter
 @Setter

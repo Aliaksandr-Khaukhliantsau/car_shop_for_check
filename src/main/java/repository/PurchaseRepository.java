@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Interface for the purchase repository.
+ * The PurchaseRepository interface provides methods for interacting with purchase data.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 public interface PurchaseRepository {
 

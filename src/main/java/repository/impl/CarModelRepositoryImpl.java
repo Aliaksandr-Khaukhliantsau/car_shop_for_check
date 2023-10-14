@@ -15,12 +15,11 @@ import java.util.UUID;
 /**
  * The CarModelRepositoryImpl class implements the CarModelRepository interface.
  * It provides methods to interact with the car_models table in the database.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 public class CarModelRepositoryImpl implements CarModelRepository {
-
-    /**
-     * SQL queries for various operations on the car_models table.
-     */
     private static final String SQL_GET_CAR_MODEL_BY_MODEL_ID = "SELECT * FROM car_models WHERE model_id = ? ORDER BY model_name ASC;";
     private static final String SQL_GET_CAR_MODEL_BY_MODEL_NAME = "SELECT * FROM car_models WHERE model_name = ? ORDER BY model_name ASC;";
     private static final String SQL_GET_CAR_MODEL_BY_COMPLETION_ID = "SELECT * FROM car_models WHERE completion_id = ? ORDER BY model_name ASC;";
@@ -29,14 +28,12 @@ public class CarModelRepositoryImpl implements CarModelRepository {
     private static final String SQL_UPDATE_A_CAR_MODEL = "UPDATE car_models SET model_name = ?, completion_id = ? WHERE model_id = ? RETURNING *;";
     private static final String SQL_DELETE_A_CAR_MODEL = "DELETE FROM car_models WHERE model_id = ? RETURNING *;";
     private static final CompletionMapper completionMapper = CompletionMapper.INSTANCE;
-
-    /**
-     * Connection to the database.
-     */
     private final Connection connection;
 
     /**
      * Constructor establishes a connection to the database.
+     *
+     * @throws SQLException if a database access error occurs.
      */
     public CarModelRepositoryImpl() throws SQLException {
         connection = DriverManager.getConnection(PropertiesUtil.get("postgres_url"), PropertiesUtil.get("postgres_user"), PropertiesUtil.get("postgres_password"));
@@ -47,6 +44,7 @@ public class CarModelRepositoryImpl implements CarModelRepository {
      *
      * @param modelId The UUID of the car model.
      * @return A CarModel object.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public CarModel getCarModelByModelId(UUID modelId) throws SQLException {
@@ -72,6 +70,7 @@ public class CarModelRepositoryImpl implements CarModelRepository {
      *
      * @param modelName The name of the car model(s).
      * @return A list of CarModel objects.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public List<CarModel> getCarModelByModelName(String modelName) throws SQLException {
@@ -99,6 +98,7 @@ public class CarModelRepositoryImpl implements CarModelRepository {
      *
      * @param completionId The UUID of the completion.
      * @return A list of CarModel objects.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public List<CarModel> getCarModelByCompletionId(UUID completionId) throws SQLException {
@@ -124,6 +124,7 @@ public class CarModelRepositoryImpl implements CarModelRepository {
      * Method to get a list of all car models.
      *
      * @return A list of CarModel objects.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public List<CarModel> getAllCarModels() throws SQLException {
@@ -150,6 +151,7 @@ public class CarModelRepositoryImpl implements CarModelRepository {
      *
      * @param modelName    The name of the new car model.
      * @param completionId The UUID of the completion associated with the new car model.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public void create(String modelName, UUID completionId) throws SQLException {
@@ -166,6 +168,7 @@ public class CarModelRepositoryImpl implements CarModelRepository {
      * @param modelId      The UUID of the car model to be updated.
      * @param modelName    The new name of the car model.
      * @param completionId The UUID of the completion associated with the car model.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public void update(UUID modelId, String modelName, UUID completionId) throws SQLException {
@@ -181,6 +184,7 @@ public class CarModelRepositoryImpl implements CarModelRepository {
      * Method to delete an existing car model.
      *
      * @param modelId The UUID of the car model to be deleted.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public void delete(UUID modelId) throws SQLException {

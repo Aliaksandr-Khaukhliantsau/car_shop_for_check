@@ -8,14 +8,16 @@ import org.mapstruct.factory.Mappers;
 
 /**
  * The CarModelMapper interface provides methods for mapping between CarModel and CarModelDto objects.
- * It uses MapStruct, a code generator that simplifies the implementation of mappings between Java bean types.
  * This mapper also uses the CompletionMapper for mapping between Completion and CompletionDto objects.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 @Mapper(uses = CompletionMapper.class)
 public interface CarModelMapper {
 
     /**
-     * An instance of the CarModelMapper, created by the MapStruct library.
+     * The singleton instance of the mapper.
      */
     CarModelMapper INSTANCE = Mappers.getMapper(CarModelMapper.class);
 

@@ -6,7 +6,6 @@ import java.util.UUID;
 
 /**
  * The Customer class is an entity representing a customer.
- * It uses Lombok annotations for convenient boilerplate code reduction.
  *
  * @author Aliaksandr Khaukhliantsau
  * @version 1.0

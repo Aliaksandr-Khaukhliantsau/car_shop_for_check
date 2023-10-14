@@ -8,14 +8,16 @@ import org.mapstruct.factory.Mappers;
 
 /**
  * The PurchaseMapper interface provides methods for mapping between Purchase and PurchaseDto objects.
- * It uses MapStruct, a code generator that simplifies the implementation of mappings between Java bean types.
  * This mapper also uses the CustomerMapper and CarMapper for mapping between Customer, Car and their respective DTOs.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 @Mapper(uses = {CustomerMapper.class, CarMapper.class})
 public interface PurchaseMapper {
 
     /**
-     * An instance of the PurchaseMapper, created by the MapStruct library.
+     * The singleton instance of the mapper.
      */
     PurchaseMapper INSTANCE = Mappers.getMapper(PurchaseMapper.class);
 

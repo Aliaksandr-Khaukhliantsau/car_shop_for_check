@@ -6,7 +6,6 @@ import java.util.UUID;
 
 /**
  * The CustomerDto class is a data transfer object representing a customer.
- * It uses Lombok annotations for convenient boilerplate code reduction.
  *
  * @author Aliaksandr Khaukhliantsau
  * @version 1.0

@@ -19,7 +19,7 @@ public class CustomerOutput {
         CustomerService customerService = new CustomerServiceImpl();
         Scanner scanner = new Scanner(System.in);
 
-        // Основное меню
+        // Main menu
         while (true) {
             System.out.println("1 - Show all customers");
             System.out.println("2 - Show customers by the sample");
@@ -30,20 +30,21 @@ public class CustomerOutput {
 
             String userCommand = scanner.nextLine();
 
-            // Выход из программы и освобождение ресурсов
+            // Exiting the program and releasing resources
             if (userCommand.equals("0")) {
                 System.out.println("Exit from program.");
                 scanner.close();
                 System.exit(0);
 
-                // Показать всех клинтов
+                // Show all customers
             } else if (userCommand.equals("1")) {
                 customerService.getAllCustomers().forEach(System.out::println);
                 System.out.println();
 
-                // Показать клиентов по выборке
+                // Show customers by sample
             } else if (userCommand.equals("2")) {
-                // Меню выборки
+
+                // Selection menu
                 while (true) {
                     System.out.println("Select a sample:");
                     System.out.println("1 - Customer's id");
@@ -54,12 +55,12 @@ public class CustomerOutput {
 
                     userCommand = scanner.nextLine();
 
-                    // Выход в предыдущее меню
+                    // Exit to the previous menu
                     if (userCommand.equals("0")) {
                         System.out.println("Exit to the previous menu.\n");
                         break;
 
-                        // Выборка по id клиента
+                        // Selection by customer's id
                     } else if (userCommand.equals("1")) {
                         System.out.println("Enter the customer's id:");
                         UUID customerId = UUID.fromString(scanner.nextLine());
@@ -67,7 +68,7 @@ public class CustomerOutput {
                         System.out.println(customerService.getCustomerByCustomerId(customerId));
                         System.out.println();
 
-                        // Выборка по имени
+                        // Selection by first name
                     } else if (userCommand.equals("2")) {
                         System.out.println("Enter the first name:");
                         String firstName = scanner.nextLine();
@@ -75,7 +76,7 @@ public class CustomerOutput {
                         customerService.getCustomerByFirstName(firstName).forEach(System.out::println);
                         System.out.println();
 
-                        // Выборка по отчеству
+                        // Selection by middle name
                     } else if (userCommand.equals("3")) {
                         System.out.println("Enter the middle name:");
                         String middleName = scanner.nextLine();
@@ -83,7 +84,7 @@ public class CustomerOutput {
                         customerService.getCustomerByMiddleName(middleName).forEach(System.out::println);
                         System.out.println();
 
-                        // Выборка по фамилии
+                        // Selection by last name
                     } else if (userCommand.equals("4")) {
                         System.out.println("Enter the last name:");
                         String lastName = scanner.nextLine();
@@ -96,7 +97,7 @@ public class CustomerOutput {
                     }
                 }
 
-                // Создать нового клиента
+                // Create a new customer
             } else if (userCommand.equals("3")) {
                 System.out.println("Enter the first name of the new customer:");
                 String firstName = scanner.nextLine();
@@ -106,10 +107,9 @@ public class CustomerOutput {
                 String lastName = scanner.nextLine();
 
                 customerService.create(firstName, middleName, lastName);
-                System.out.println("New customer's record has been created.");
-                System.out.println();
+                System.out.println("New customer's record has been created.\n");
 
-                // Изменить клиента
+                // Change a customer
             } else if (userCommand.equals("4")) {
                 System.out.println("Enter the customer's id:");
                 UUID customerId = UUID.fromString(scanner.nextLine());
@@ -121,17 +121,15 @@ public class CustomerOutput {
                 String lastName = scanner.nextLine();
 
                 customerService.update(customerId, firstName, middleName, lastName);
-                System.out.println("The customer's record has been changed.");
-                System.out.println();
+                System.out.println("The customer's record has been changed.\n");
 
-                // Удалить клиента
+                // Delete a customer
             } else if (userCommand.equals("5")) {
                 System.out.println("Enter the customer's id:");
                 UUID customerId = UUID.fromString(scanner.nextLine());
 
                 customerService.delete(customerId);
-                System.out.println("The customer's record has been deleted.");
-                System.out.println();
+                System.out.println("The customer's record has been deleted.\n");
 
             } else {
                 System.err.println("Unknown Command!\n");

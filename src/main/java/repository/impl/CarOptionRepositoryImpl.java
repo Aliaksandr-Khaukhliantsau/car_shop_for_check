@@ -12,12 +12,11 @@ import java.util.UUID;
 /**
  * The CarOptionRepositoryImpl class implements the CarOptionRepository interface.
  * It provides methods to interact with the car_options table in the database.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 public class CarOptionRepositoryImpl implements CarOptionRepository {
-
-    /**
-     * SQL queries for various operations on the car_options table.
-     */
     private static final String SQL_GET_CAR_OPTION_BY_OPTION_ID = "SELECT * FROM car_options WHERE option_id = ? ORDER BY option_name ASC;";
     private static final String SQL_GET_CAR_OPTION_BY_OPTION_NAME = "SELECT * FROM car_options WHERE option_name = ? ORDER BY option_name ASC;";
     private static final String SQL_GET_CAR_OPTIONS_BY_COMPLETION_ID = "SELECT * FROM completions_car_options JOIN car_options ON completions_car_options.option_id = car_options.option_id WHERE completions_car_options.completion_id = ? ORDER BY car_options.option_name ASC;";
@@ -25,14 +24,12 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
     private static final String SQL_CREATE_A_CAR_OPTION = "INSERT INTO car_options (option_name) VALUES (?) RETURNING *;";
     private static final String SQL_UPDATE_A_CAR_OPTION = "UPDATE car_options SET option_name = ? WHERE option_id = ? RETURNING *;";
     private static final String SQL_DELETE_A_CAR_OPTION = "DELETE FROM car_options WHERE option_id = ? RETURNING *;";
-
-    /**
-     * Connection to the database.
-     */
     private final Connection connection;
 
     /**
      * Constructor establishes a connection to the database.
+     *
+     * @throws SQLException if a database access error occurs.
      */
     public CarOptionRepositoryImpl() throws SQLException {
         connection = DriverManager.getConnection(PropertiesUtil.get("postgres_url"), PropertiesUtil.get("postgres_user"), PropertiesUtil.get("postgres_password"));
@@ -43,6 +40,7 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
      *
      * @param optionId The UUID of the car option.
      * @return A CarOption object.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public CarOption getCarOptionByOptionId(UUID optionId) throws SQLException {
@@ -64,6 +62,7 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
      *
      * @param optionName The name of the car option.
      * @return A CarOption object.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public CarOption getCarOptionByOptionName(String optionName) throws SQLException {
@@ -85,6 +84,7 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
      *
      * @param completionId The UUID of the completion.
      * @return A list of CarOption objects.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public List<CarOption> getCarOptionsByCompletionId(UUID completionId) throws SQLException {
@@ -108,6 +108,7 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
      * Method to get a list of all car options.
      *
      * @return A list of CarOption objects.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public List<CarOption> getAllCarOptions() throws SQLException {
@@ -130,6 +131,7 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
      * Method to create a new car option.
      *
      * @param optionName The name of the new car option.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public void create(String optionName) throws SQLException {
@@ -144,6 +146,7 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
      *
      * @param optionId   The UUID of the car option to be updated.
      * @param optionName The new name of the car option.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public void update(UUID optionId, String optionName) throws SQLException {
@@ -158,6 +161,7 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
      * Method to delete an existing car option.
      *
      * @param optionId The UUID of the car option to be deleted.
+     * @throws SQLException if a database access error occurs.
      */
     @Override
     public void delete(UUID optionId) throws SQLException {

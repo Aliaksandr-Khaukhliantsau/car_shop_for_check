@@ -13,6 +13,10 @@ import java.util.stream.Collectors;
 
 /**
  * Implementation of the CarModelService interface.
+ * This class provides methods to interact with car model data.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 public class CarModelServiceImpl implements CarModelService {
     private static final CarModelMapper carModelMapper = mapper.CarModelMapper.INSTANCE;
@@ -28,7 +32,7 @@ public class CarModelServiceImpl implements CarModelService {
     }
 
     /**
-     * Retrieves a car model by its ID.
+     * Retrieves a car model DTO by its ID.
      *
      * @param modelId The ID of the car model.
      * @return The car model DTO.
@@ -40,7 +44,7 @@ public class CarModelServiceImpl implements CarModelService {
     }
 
     /**
-     * Retrieves all car models with a specific name.
+     * Retrieves all car model DTOs with a specific name.
      *
      * @param modelName The name of the car models.
      * @return A list of car model DTOs.
@@ -52,7 +56,7 @@ public class CarModelServiceImpl implements CarModelService {
     }
 
     /**
-     * Retrieves all car models for a specific completion.
+     * Retrieves all car model DTOs for a specific completion.
      *
      * @param completionId The ID of the completion.
      * @return A list of car model DTOs.
@@ -64,7 +68,7 @@ public class CarModelServiceImpl implements CarModelService {
     }
 
     /**
-     * Retrieves all car models.
+     * Retrieves all car model DTOs.
      *
      * @return A list of all car model DTOs.
      * @throws SQLException if a database access error occurs.

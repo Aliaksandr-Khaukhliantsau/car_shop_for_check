@@ -7,13 +7,15 @@ import org.mapstruct.factory.Mappers;
 
 /**
  * The CarOptionMapper interface provides methods for mapping between CarOption and CarOptionDto objects.
- * It uses MapStruct, a code generator that simplifies the implementation of mappings between Java bean types.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 @Mapper
 public interface CarOptionMapper {
 
     /**
-     * An instance of the CarOptionMapper, created by the MapStruct library.
+     * The singleton instance of the mapper.
      */
     CarOptionMapper INSTANCE = Mappers.getMapper(CarOptionMapper.class);
 

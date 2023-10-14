@@ -13,6 +13,10 @@ import java.util.stream.Collectors;
 
 /**
  * Implementation of the CarService interface.
+ * This class provides methods to interact with car data.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 public class CarServiceImpl implements CarService {
     private static final CarMapper carMapper = CarMapper.INSTANCE;
@@ -28,7 +32,7 @@ public class CarServiceImpl implements CarService {
     }
 
     /**
-     * Retrieves a car by its ID.
+     * Retrieves a car DTO by its ID.
      *
      * @param carId The ID of the car.
      * @return The car DTO.
@@ -40,7 +44,7 @@ public class CarServiceImpl implements CarService {
     }
 
     /**
-     * Retrieves a car by its VIN (Vehicle Identification Number).
+     * Retrieves a car DTO by its VIN (Vehicle Identification Number).
      *
      * @param vin The VIN of the car.
      * @return The car DTO.
@@ -52,7 +56,7 @@ public class CarServiceImpl implements CarService {
     }
 
     /**
-     * Retrieves all cars of a specific model.
+     * Retrieves all car DTOs of a specific model.
      *
      * @param modelId The ID of the model.
      * @return A list of car DTOs.
@@ -64,7 +68,7 @@ public class CarServiceImpl implements CarService {
     }
 
     /**
-     * Retrieves all cars.
+     * Retrieves all car DTOs.
      *
      * @return A list of all car DTOs.
      * @throws SQLException if a database access error occurs.

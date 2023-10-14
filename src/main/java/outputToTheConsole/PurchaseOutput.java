@@ -19,7 +19,7 @@ public class PurchaseOutput {
         PurchaseService purchaseService = new PurchaseServiceImpl();
         Scanner scanner = new Scanner(System.in);
 
-        // Основное меню
+        // Main menu
         while (true) {
             System.out.println("1 - Show all purchases");
             System.out.println("2 - Show purchases by the sample");
@@ -30,21 +30,21 @@ public class PurchaseOutput {
 
             String userCommand = scanner.nextLine();
 
-            // Выход из программы и освобождение ресурсов
+            // Exiting the program and releasing resources
             if (userCommand.equals("0")) {
                 System.out.println("Exit from program.");
                 scanner.close();
                 System.exit(0);
 
-                // Показать все заказы
+                // Show all purchases
             } else if (userCommand.equals("1")) {
                 purchaseService.getAllPurchases().forEach(System.out::println);
                 System.out.println();
 
-                // Показать заказы по выборке
+                // Show purchases by selection
             } else if (userCommand.equals("2")) {
 
-                // Меню выборки
+                // Selection menu
                 while (true) {
                     System.out.println("Select a sample:");
                     System.out.println("1 - Purchase's id");
@@ -55,12 +55,12 @@ public class PurchaseOutput {
 
                     userCommand = scanner.nextLine();
 
-                    // Выход в предыдущее меню
+                    // Exit to the previous menu
                     if (userCommand.equals("0")) {
                         System.out.println("Exit to the previous menu.\n");
                         break;
 
-                        // Выборка по id заказа
+                        // Sampling by purchase's id
                     } else if (userCommand.equals("1")) {
                         System.out.println("Enter the purchase's id:");
                         UUID purchaseId = UUID.fromString(scanner.nextLine());
@@ -68,7 +68,7 @@ public class PurchaseOutput {
                         System.out.println(purchaseService.getPurchaseByPurchaseId(purchaseId));
                         System.out.println();
 
-                        // Выборка по номеру заказа
+                        // Sampling by purchase's number
                     } else if (userCommand.equals("2")) {
                         System.out.println("Enter the purchase's number:");
                         String purchaseNumber = scanner.nextLine();
@@ -76,7 +76,7 @@ public class PurchaseOutput {
                         System.out.println(purchaseService.getPurchaseByPurchaseNumber(purchaseNumber));
                         System.out.println();
 
-                        // Выборка по id клиента
+                        // Sampling by customer's id
                     } else if (userCommand.equals("3")) {
                         System.out.println("Enter the customer's id:");
                         UUID customerId = UUID.fromString(scanner.nextLine());
@@ -84,7 +84,7 @@ public class PurchaseOutput {
                         purchaseService.getPurchaseByCustomerId(customerId).forEach(System.out::println);
                         System.out.println();
 
-                        // Выборка по id автомобиля
+                        // Sampling by car's id
                     } else if (userCommand.equals("4")) {
                         System.out.println("Enter the car's id:");
                         UUID carId = UUID.fromString(scanner.nextLine());
@@ -97,7 +97,7 @@ public class PurchaseOutput {
                     }
                 }
 
-                // Создать новый заказ
+                // Create a new purchase
             } else if (userCommand.equals("3")) {
                 System.out.println("Enter the customer's id of the new purchase:");
                 UUID customerId = UUID.fromString(scanner.nextLine());
@@ -105,11 +105,9 @@ public class PurchaseOutput {
                 UUID carId = UUID.fromString(scanner.nextLine());
 
                 purchaseService.create(customerId, carId);
+                System.out.println("New purchase's record has been created.\n");
 
-                System.out.println("New purchase's record has been created.");
-                System.out.println();
-
-                // Изменить заказ
+                // Change a purchase
             } else if (userCommand.equals("4")) {
                 System.out.println("Enter the purchase's id:");
                 UUID purchaseId = UUID.fromString(scanner.nextLine());
@@ -119,19 +117,15 @@ public class PurchaseOutput {
                 UUID carId = UUID.fromString(scanner.nextLine());
 
                 purchaseService.update(purchaseId, customerId, carId);
+                System.out.println("The purchase's record has been changed.\n");
 
-                System.out.println("The purchase's record has been changed.");
-                System.out.println();
-
-                // Удалить заказ
+                // Delete a purchase
             } else if (userCommand.equals("5")) {
                 System.out.println("Enter the purchase's id:");
                 UUID purchaseId = UUID.fromString(scanner.nextLine());
 
                 purchaseService.delete(purchaseId);
-
-                System.out.println("The purchase's record has been deleted.");
-                System.out.println();
+                System.out.println("The purchase's record has been deleted.\n");
 
             } else {
                 System.err.println("Unknown Command!\n");

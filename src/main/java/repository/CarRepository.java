@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Interface for the car repository.
+ * The CarRepository interface provides methods for interacting with car data.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 public interface CarRepository {
 

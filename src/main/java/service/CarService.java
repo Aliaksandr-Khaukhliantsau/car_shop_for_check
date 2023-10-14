@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Interface for the car service.
+ * The CarService interface provides methods for interacting with car data.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 public interface CarService {
     /**
-     * Retrieves a car by its ID.
+     * Retrieves a car DTO by its ID.
      *
      * @param carId The ID of the car.
      * @return The car DTO.
@@ -20,7 +23,7 @@ public interface CarService {
     CarDto getCarByCarId(UUID carId) throws SQLException;
 
     /**
-     * Retrieves a car by its VIN (Vehicle Identification Number).
+     * Retrieves a car DTO by its VIN (Vehicle Identification Number).
      *
      * @param vin The VIN of the car.
      * @return The car DTO.
@@ -29,7 +32,7 @@ public interface CarService {
     CarDto getCarByVin(String vin) throws SQLException;
 
     /**
-     * Retrieves all cars of a specific model.
+     * Retrieves all car DTOs of a specific model.
      *
      * @param modelId The ID of the model.
      * @return A list of car DTOs.
@@ -38,7 +41,7 @@ public interface CarService {
     List<CarDto> getCarByModelId(UUID modelId) throws SQLException;
 
     /**
-     * Retrieves all cars.
+     * Retrieves all car DTOs.
      *
      * @return A list of all car DTOs.
      * @throws SQLException if a database access error occurs.

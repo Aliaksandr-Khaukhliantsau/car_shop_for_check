@@ -12,10 +12,6 @@ import java.util.Properties;
  * @version 1.0
  */
 public final class PropertiesUtil {
-
-    /**
-     * The properties object that holds the loaded properties.
-     */
     private static final Properties PROPERTIES = new Properties();
 
     static {

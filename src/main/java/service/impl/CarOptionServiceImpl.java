@@ -13,6 +13,10 @@ import java.util.stream.Collectors;
 
 /**
  * Implementation of the CarOptionService interface.
+ * This class provides methods to interact with car option data.
+ *
+ * @author Aliaksandr Khaukhliantsau
+ * @version 1.0
  */
 public class CarOptionServiceImpl implements CarOptionService {
     private static final CarOptionMapper carOptionMapper = CarOptionMapper.INSTANCE;
@@ -28,7 +32,7 @@ public class CarOptionServiceImpl implements CarOptionService {
     }
 
     /**
-     * Retrieves a car option by its ID.
+     * Retrieves a car option DTO by its ID.
      *
      * @param optionId The ID of the car option.
      * @return The car option DTO.
@@ -41,7 +45,7 @@ public class CarOptionServiceImpl implements CarOptionService {
     }
 
     /**
-     * Retrieves a car option by its name.
+     * Retrieves a car option DTO by its name.
      *
      * @param optionName The name of the car option.
      * @return The car option DTO.
@@ -53,7 +57,7 @@ public class CarOptionServiceImpl implements CarOptionService {
     }
 
     /**
-     * Retrieves all car options for a specific completion.
+     * Retrieves all car option DTOs for a specific completion.
      *
      * @param completionId The ID of the completion.
      * @return A list of car option DTOs.
@@ -65,7 +69,7 @@ public class CarOptionServiceImpl implements CarOptionService {
     }
 
     /**
-     * Retrieves all car options.
+     * Retrieves all car option DTOs.
      *
      * @return A list of all car option DTOs.
      * @throws SQLException if a database access error occurs.
