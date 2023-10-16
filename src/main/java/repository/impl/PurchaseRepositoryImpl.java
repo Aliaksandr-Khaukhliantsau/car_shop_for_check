@@ -43,14 +43,14 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
      * @throws SQLException if a database access error occurs.
      */
     public PurchaseRepositoryImpl() throws SQLException {
-        connection = DriverManager.getConnection(PropertiesUtil.get("postgres_url"), PropertiesUtil.get("postgres_user"), PropertiesUtil.get("postgres_password"));
+        connection = DriverManager.getConnection(PropertiesUtil.get("postgres.url"), PropertiesUtil.get("postgres.user"), PropertiesUtil.get("postgres.password"));
     }
 
     /**
      * This method retrieves a purchase by its ID.
      *
-     * @param purchaseId The ID of the purchase to retrieve.
-     * @return The purchase corresponding to the provided ID.
+     * @param purchaseId the ID of the purchase to retrieve.
+     * @return the purchase corresponding to the provided ID.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -79,8 +79,8 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
     /**
      * This method retrieves a purchase by its purchase number.
      *
-     * @param purchaseNumber The purchase number of the purchase to retrieve.
-     * @return The purchase corresponding to the provided purchase number.
+     * @param purchaseNumber the purchase number of the purchase to retrieve.
+     * @return the purchase corresponding to the provided purchase number.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -109,8 +109,8 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
     /**
      * This method retrieves all purchases made by a specific customer.
      *
-     * @param customerId The ID of the customer whose purchases to retrieve.
-     * @return A list of purchases made by the specified customer.
+     * @param customerId the ID of the customer whose purchases to retrieve.
+     * @return a list of purchases made by the specified customer.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -141,8 +141,8 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
     /**
      * This method retrieves all purchases made for a specific car.
      *
-     * @param carId The ID of the car whose purchases to retrieve.
-     * @return A list of purchases made for the specified car.
+     * @param carId the ID of the car whose purchases to retrieve.
+     * @return a list of purchases made for the specified car.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -173,7 +173,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
     /**
      * This method retrieves all purchases.
      *
-     * @return A list of all purchases.
+     * @return a list of all purchases.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -204,8 +204,8 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
     /**
      * This method creates a new purchase.
      *
-     * @param customerId The ID of the customer making the purchase.
-     * @param carId      The ID of the car being purchased.
+     * @param customerId the ID of the customer making the purchase.
+     * @param carId      the ID of the car being purchased.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -220,9 +220,9 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
     /**
      * This method updates an existing purchase.
      *
-     * @param purchaseId The ID of the purchase to update.
-     * @param customerId The new customer ID for the purchase.
-     * @param carId      The new car ID for the purchase.
+     * @param purchaseId the ID of the purchase to update.
+     * @param customerId the new customer ID for the purchase.
+     * @param carId      the new car ID for the purchase.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -238,7 +238,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
     /**
      * This method deletes a purchase.
      *
-     * @param purchaseId The ID of the purchase to delete.
+     * @param purchaseId the ID of the purchase to delete.
      * @throws SQLException if a database access error occurs.
      */
     @Override

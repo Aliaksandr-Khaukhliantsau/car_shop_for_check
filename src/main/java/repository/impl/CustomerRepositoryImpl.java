@@ -33,14 +33,14 @@ public class CustomerRepositoryImpl implements CustomerRepository {
      * @throws SQLException if a database access error occurs.
      */
     public CustomerRepositoryImpl() throws SQLException {
-        connection = DriverManager.getConnection(PropertiesUtil.get("postgres_url"), PropertiesUtil.get("postgres_user"), PropertiesUtil.get("postgres_password"));
+        connection = DriverManager.getConnection(PropertiesUtil.get("postgres.url"), PropertiesUtil.get("postgres.user"), PropertiesUtil.get("postgres.password"));
     }
 
     /**
      * This method retrieves a customer by its ID.
      *
-     * @param customerId The ID of the customer to retrieve.
-     * @return The customer corresponding to the provided ID.
+     * @param customerId the ID of the customer to retrieve.
+     * @return the customer corresponding to the provided ID.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -63,8 +63,8 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     /**
      * This method retrieves all customers with a specific first name.
      *
-     * @param firstName The first name of the customers to retrieve.
-     * @return A list of customers with the specified first name.
+     * @param firstName the first name of the customers to retrieve.
+     * @return a list of customers with the specified first name.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -89,8 +89,8 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     /**
      * This method retrieves all customers with a specific middle name.
      *
-     * @param middleName The middle name of the customers to retrieve.
-     * @return A list of customers with the specified middle name.
+     * @param middleName the middle name of the customers to retrieve.
+     * @return a list of customers with the specified middle name.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -116,8 +116,8 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     /**
      * This method retrieves all customers with a specific last name.
      *
-     * @param lastName The last name of the customers to retrieve.
-     * @return A list of customers with the specified last name.
+     * @param lastName the last name of the customers to retrieve.
+     * @return a list of customers with the specified last name.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -143,7 +143,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     /**
      * This method retrieves all customers.
      *
-     * @return A list of all customers.
+     * @return a list of all customers.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -168,9 +168,9 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     /**
      * This method creates a new customer.
      *
-     * @param firstName  The first name of the customer.
-     * @param middleName The middle name of the customer.
-     * @param lastName   The last name of the customer.
+     * @param firstName  the first name of the customer.
+     * @param middleName the middle name of the customer.
+     * @param lastName   the last name of the customer.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -186,10 +186,10 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     /**
      * This method updates an existing customer.
      *
-     * @param customerId The ID of the customer to update.
-     * @param firstName  The new first name for the customer.
-     * @param middleName The new middle name for the customer.
-     * @param lastName   The new last name for the customer.
+     * @param customerId the ID of the customer to update.
+     * @param firstName  the new first name for the customer.
+     * @param middleName the new middle name for the customer.
+     * @param lastName   the new last name for the customer.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -206,7 +206,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     /**
      * This method deletes a customer.
      *
-     * @param customerId The ID of the customer to delete.
+     * @param customerId the ID of the customer to delete.
      * @throws SQLException if a database access error occurs.
      */
     @Override

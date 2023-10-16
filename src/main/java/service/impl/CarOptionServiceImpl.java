@@ -34,8 +34,8 @@ public class CarOptionServiceImpl implements CarOptionService {
     /**
      * Retrieves a car option DTO by its ID.
      *
-     * @param optionId The ID of the car option.
-     * @return The car option DTO.
+     * @param optionId the ID of the car option.
+     * @return the car option DTO.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -47,8 +47,8 @@ public class CarOptionServiceImpl implements CarOptionService {
     /**
      * Retrieves a car option DTO by its name.
      *
-     * @param optionName The name of the car option.
-     * @return The car option DTO.
+     * @param optionName the name of the car option.
+     * @return the car option DTO.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -59,8 +59,8 @@ public class CarOptionServiceImpl implements CarOptionService {
     /**
      * Retrieves all car option DTOs for a specific completion.
      *
-     * @param completionId The ID of the completion.
-     * @return A list of car option DTOs.
+     * @param completionId the ID of the completion.
+     * @return a list of car option DTOs.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -71,7 +71,7 @@ public class CarOptionServiceImpl implements CarOptionService {
     /**
      * Retrieves all car option DTOs.
      *
-     * @return A list of all car option DTOs.
+     * @return a list of all car option DTOs.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -82,7 +82,7 @@ public class CarOptionServiceImpl implements CarOptionService {
     /**
      * Creates a new car option record in the database with the provided name.
      *
-     * @param optionName The name of the new car option.
+     * @param optionName the name of the new car option.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -93,8 +93,8 @@ public class CarOptionServiceImpl implements CarOptionService {
     /**
      * Updates an existing car option record in the database with a new name using its ID and the new name.
      *
-     * @param optionId   The ID of the car option to update.
-     * @param optionName The new name for the car option record.
+     * @param optionId   the ID of the car option to update.
+     * @param optionName the new name for the car option record.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -105,7 +105,7 @@ public class CarOptionServiceImpl implements CarOptionService {
     /**
      * Deletes a specific car option record from the database using its ID.
      *
-     * @param optionId The ID of the car option to delete.
+     * @param optionId the ID of the car option to delete.
      * @throws SQLException if a database access error occurs.
      */
     @Override

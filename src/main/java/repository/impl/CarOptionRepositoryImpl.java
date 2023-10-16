@@ -32,14 +32,14 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
      * @throws SQLException if a database access error occurs.
      */
     public CarOptionRepositoryImpl() throws SQLException {
-        connection = DriverManager.getConnection(PropertiesUtil.get("postgres_url"), PropertiesUtil.get("postgres_user"), PropertiesUtil.get("postgres_password"));
+        connection = DriverManager.getConnection(PropertiesUtil.get("postgres.url"), PropertiesUtil.get("postgres.user"), PropertiesUtil.get("postgres.password"));
     }
 
     /**
      * Method to get a car option by its ID.
      *
-     * @param optionId The UUID of the car option.
-     * @return A CarOption object.
+     * @param optionId the UUID of the car option.
+     * @return a CarOption object.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -60,8 +60,8 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
     /**
      * Method to get a car option by its name.
      *
-     * @param optionName The name of the car option.
-     * @return A CarOption object.
+     * @param optionName the name of the car option.
+     * @return a CarOption object.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -82,8 +82,8 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
     /**
      * Method to get a list of car options by completion ID.
      *
-     * @param completionId The UUID of the completion.
-     * @return A list of CarOption objects.
+     * @param completionId the UUID of the completion.
+     * @return a list of CarOption objects.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -107,7 +107,7 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
     /**
      * Method to get a list of all car options.
      *
-     * @return A list of CarOption objects.
+     * @return a list of CarOption objects.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -130,7 +130,7 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
     /**
      * Method to create a new car option.
      *
-     * @param optionName The name of the new car option.
+     * @param optionName the name of the new car option.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -144,8 +144,8 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
     /**
      * Method to update an existing car option.
      *
-     * @param optionId   The UUID of the car option to be updated.
-     * @param optionName The new name of the car option.
+     * @param optionId   the UUID of the car option to be updated.
+     * @param optionName the new name of the car option.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -160,7 +160,7 @@ public class CarOptionRepositoryImpl implements CarOptionRepository {
     /**
      * Method to delete an existing car option.
      *
-     * @param optionId The UUID of the car option to be deleted.
+     * @param optionId the UUID of the car option to be deleted.
      * @throws SQLException if a database access error occurs.
      */
     @Override

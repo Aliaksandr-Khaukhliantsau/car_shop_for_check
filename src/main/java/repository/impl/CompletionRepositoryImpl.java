@@ -39,14 +39,14 @@ public class CompletionRepositoryImpl implements CompletionRepository {
      * @throws SQLException if a database access error occurs.
      */
     public CompletionRepositoryImpl() throws SQLException {
-        connection = DriverManager.getConnection(PropertiesUtil.get("postgres_url"), PropertiesUtil.get("postgres_user"), PropertiesUtil.get("postgres_password"));
+        connection = DriverManager.getConnection(PropertiesUtil.get("postgres.url"), PropertiesUtil.get("postgres.user"), PropertiesUtil.get("postgres.password"));
     }
 
     /**
      * Method to get a completion by its ID.
      *
-     * @param completionId The UUID of the completion.
-     * @return A Completion object.
+     * @param completionId the UUID of the completion.
+     * @return a Completion object.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -70,8 +70,8 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     /**
      * Method to get a completion by its name.
      *
-     * @param completionName The name of the completion.
-     * @return A Completion object.
+     * @param completionName the name of the completion.
+     * @return a Completion object.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -95,7 +95,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     /**
      * Method to get a list of all completions.
      *
-     * @return A list of Completion objects.
+     * @return a list of Completion objects.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -121,8 +121,8 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     /**
      * Method to add a car option to a completion.
      *
-     * @param completionId The UUID of the completion.
-     * @param optionId     The UUID of the car option.
+     * @param completionId the UUID of the completion.
+     * @param optionId     the UUID of the car option.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -137,8 +137,8 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     /**
      * Method to delete a car option from a completion.
      *
-     * @param completionId The UUID of the completion.
-     * @param optionId     The UUID of the car option.
+     * @param completionId the UUID of the completion.
+     * @param optionId     the UUID of the car option.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -153,7 +153,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     /**
      * Method to create a new completion.
      *
-     * @param completionName The name of the new completion.
+     * @param completionName the name of the new completion.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -167,8 +167,8 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     /**
      * Method to update an existing completion.
      *
-     * @param completionId   The UUID of the completion to be updated.
-     * @param completionName The new name of the completion.
+     * @param completionId   the UUID of the completion to be updated.
+     * @param completionName the new name of the completion.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -183,7 +183,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     /**
      * Method to delete an existing completion.
      *
-     * @param completionId The UUID of the completion to be deleted.
+     * @param completionId the UUID of the completion to be deleted.
      * @throws SQLException if a database access error occurs.
      */
     @Override

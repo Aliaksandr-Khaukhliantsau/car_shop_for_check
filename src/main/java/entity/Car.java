@@ -23,7 +23,7 @@ public class Car {
     private UUID carId;
 
     /**
-     * Vehicle Identification Number of the car.
+     * Vehicle identification number of the car.
      */
     private String vin;
 

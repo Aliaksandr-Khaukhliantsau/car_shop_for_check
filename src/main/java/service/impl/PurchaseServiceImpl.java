@@ -34,8 +34,8 @@ public class PurchaseServiceImpl implements PurchaseService {
     /**
      * Retrieves a purchase DTO by its ID.
      *
-     * @param purchaseId The ID of the purchase.
-     * @return The purchase DTO.
+     * @param purchaseId the ID of the purchase.
+     * @return the purchase DTO.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -46,8 +46,8 @@ public class PurchaseServiceImpl implements PurchaseService {
     /**
      * Retrieves a purchase DTO by its number.
      *
-     * @param purchaseNumber The number of the purchase.
-     * @return The purchase DTO.
+     * @param purchaseNumber the number of the purchase.
+     * @return the purchase DTO.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -58,8 +58,8 @@ public class PurchaseServiceImpl implements PurchaseService {
     /**
      * Retrieves all purchase DTOs made by a specific customer.
      *
-     * @param customerId The ID of the customer.
-     * @return A list of purchase DTOs.
+     * @param customerId the ID of the customer.
+     * @return a list of purchase DTOs.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -70,8 +70,8 @@ public class PurchaseServiceImpl implements PurchaseService {
     /**
      * Retrieves all purchase DTOs of a specific car.
      *
-     * @param carId The ID of the car.
-     * @return A list of purchase DTOs.
+     * @param carId the ID of the car.
+     * @return a list of purchase DTOs.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -82,7 +82,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     /**
      * Retrieves all purchase DTOs.
      *
-     * @return A list of all purchase DTOs.
+     * @return a list of all purchase DTOs.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -93,8 +93,8 @@ public class PurchaseServiceImpl implements PurchaseService {
     /**
      * Creates a new purchase record in the database for a specific customer and car.
      *
-     * @param customerId The ID of the customer making the purchase.
-     * @param carId      The ID of the car being purchased.
+     * @param customerId the ID of the customer making the purchase.
+     * @param carId      the ID of the car being purchased.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -105,9 +105,9 @@ public class PurchaseServiceImpl implements PurchaseService {
     /**
      * Updates an existing purchase record in the database with new customer and car IDs.
      *
-     * @param purchaseId The ID of the purchase to update.
-     * @param customerId The new customer ID for the purchase record.
-     * @param carId      The new car ID for the purchase record.
+     * @param purchaseId the ID of the purchase to update.
+     * @param customerId the new customer ID for the purchase record.
+     * @param carId      the new car ID for the purchase record.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -118,7 +118,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     /**
      * Deletes a specific purchase record from the database using its ID.
      *
-     * @param purchaseId The ID of the purchase to delete.
+     * @param purchaseId the ID of the purchase to delete.
      * @throws SQLException if a database access error occurs.
      */
     @Override

@@ -1,4 +1,4 @@
-package outputToTheConsole;
+package output;
 
 import service.CarModelService;
 import service.impl.CarModelServiceImpl;

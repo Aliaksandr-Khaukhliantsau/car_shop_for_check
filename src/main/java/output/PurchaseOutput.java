@@ -1,4 +1,4 @@
-package outputToTheConsole;
+package output;
 
 import service.PurchaseService;
 import service.impl.PurchaseServiceImpl;

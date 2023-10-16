@@ -1,4 +1,4 @@
-package outputToTheConsole;
+package output;
 
 import service.CompletionService;
 import service.impl.CompletionServiceImpl;

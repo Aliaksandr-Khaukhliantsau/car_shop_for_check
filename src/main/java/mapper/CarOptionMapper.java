@@ -22,16 +22,16 @@ public interface CarOptionMapper {
     /**
      * Maps a CarOption entity to a CarOptionDto.
      *
-     * @param carOption The CarOption entity to be mapped.
-     * @return The mapped CarOptionDto.
+     * @param carOption the CarOption entity to be mapped.
+     * @return the mapped CarOptionDto.
      */
     CarOptionDto carOptionToCarOptionDto(CarOption carOption);
 
     /**
      * Maps a CarOptionDto to a CarOption entity.
      *
-     * @param carOptionDTO The CarOptionDto to be mapped.
-     * @return The mapped CarOption entity.
+     * @param carOptionDTO the CarOptionDto to be mapped.
+     * @return the mapped CarOption entity.
      */
     CarOption carOptionDtoToCarOption(CarOptionDto carOptionDTO);
 }

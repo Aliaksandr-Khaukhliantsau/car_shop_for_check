@@ -24,8 +24,8 @@ public interface CarMapper {
     /**
      * Maps a Car entity to a CarDto. Also maps the CarModel entity to a CarModelDto.
      *
-     * @param car The Car entity to be mapped.
-     * @return The mapped CarDto.
+     * @param car the Car entity to be mapped.
+     * @return the mapped CarDto.
      */
     @Mapping(source = "carModel", target = "carModel")
     CarDto carToCarDto(Car car);
@@ -33,8 +33,8 @@ public interface CarMapper {
     /**
      * Maps a CarDto to a Car entity.
      *
-     * @param carDTO The CarDto to be mapped.
-     * @return The mapped Car entity.
+     * @param carDTO the CarDto to be mapped.
+     * @return the mapped Car entity.
      */
     Car carDtoToCar(CarDto carDTO);
 }

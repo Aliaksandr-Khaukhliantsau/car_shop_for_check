@@ -28,8 +28,8 @@ public interface CompletionMapper {
     /**
      * Maps a Completion entity to a CompletionDto. Also maps the list of CarOption entities to a list of CarOptionDto objects.
      *
-     * @param completion The Completion entity to be mapped.
-     * @return The mapped CompletionDto.
+     * @param completion the Completion entity to be mapped.
+     * @return the mapped CompletionDto.
      */
     @Mapping(source = "carOptions", target = "carOptions")
     CompletionDto completionToCompletionDto(Completion completion);
@@ -37,24 +37,24 @@ public interface CompletionMapper {
     /**
      * Maps a list of CarOption entities to a list of CarOptionDto objects.
      *
-     * @param carOptions The list of CarOption entities to be mapped.
-     * @return The mapped list of CarOptionDto objects.
+     * @param carOptions the list of CarOption entities to be mapped.
+     * @return the mapped list of CarOptionDto objects.
      */
     List<CarOptionDto> map(List<CarOption> carOptions);
 
     /**
      * Maps a CompletionDto to a Completion entity.
      *
-     * @param completionDTO The CompletionDto to be mapped.
-     * @return The mapped Completion entity.
+     * @param completionDTO the CompletionDto to be mapped.
+     * @return the mapped Completion entity.
      */
     Completion completionDtoToCompletion(CompletionDto completionDTO);
 
     /**
      * Maps a list of CarOptionDto objects to a list of CarOption entities.
      *
-     * @param carOptions The list of CarOptionDto objects to be mapped.
-     * @return The mapped list of CarOption entities.
+     * @param carOptions the list of CarOptionDto objects to be mapped.
+     * @return the mapped list of CarOption entities.
      */
     List<CarOption> mapDto(List<CarOptionDto> carOptions);
 }

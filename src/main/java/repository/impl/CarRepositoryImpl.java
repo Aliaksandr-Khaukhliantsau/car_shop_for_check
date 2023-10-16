@@ -36,14 +36,14 @@ public class CarRepositoryImpl implements CarRepository {
      * @throws SQLException if a database access error occurs.
      */
     public CarRepositoryImpl() throws SQLException {
-        connection = DriverManager.getConnection(PropertiesUtil.get("postgres_url"), PropertiesUtil.get("postgres_user"), PropertiesUtil.get("postgres_password"));
+        connection = DriverManager.getConnection(PropertiesUtil.get("postgres.url"), PropertiesUtil.get("postgres.user"), PropertiesUtil.get("postgres.password"));
     }
 
     /**
      * Method to get a car by its ID.
      *
-     * @param carId The UUID of the car.
-     * @return A Car object.
+     * @param carId the UUID of the car.
+     * @return a Car object.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -65,10 +65,10 @@ public class CarRepositoryImpl implements CarRepository {
     }
 
     /**
-     * Method to get a car by its VIN (Vehicle Identification Number).
+     * Method to get a car by its VIN (vehicle identification number).
      *
-     * @param vin The VIN of the car.
-     * @return A Car object.
+     * @param vin the VIN of the car.
+     * @return a Car object.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -92,8 +92,8 @@ public class CarRepositoryImpl implements CarRepository {
     /**
      * Method to get a list of cars by model ID.
      *
-     * @param modelId The UUID of the car model.
-     * @return A list of Car objects.
+     * @param modelId the UUID of the car model.
+     * @return a list of Car objects.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -119,7 +119,7 @@ public class CarRepositoryImpl implements CarRepository {
     /**
      * Method to get a list of all cars.
      *
-     * @return A list of Car objects.
+     * @return a list of Car objects.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -145,8 +145,8 @@ public class CarRepositoryImpl implements CarRepository {
     /**
      * Method to create a new car.
      *
-     * @param vin     The VIN (Vehicle Identification Number) of the new car.
-     * @param modelId The UUID of the car model associated with the new car.
+     * @param vin     the VIN (vehicle identification number) of the new car.
+     * @param modelId the UUID of the car model associated with the new car.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -161,9 +161,9 @@ public class CarRepositoryImpl implements CarRepository {
     /**
      * Method to update an existing car.
      *
-     * @param carId   The UUID of the car to be updated.
-     * @param vin     The new VIN (Vehicle Identification Number) of the car.
-     * @param modelId The UUID of the car model associated with the car.
+     * @param carId   the UUID of the car to be updated.
+     * @param vin     the new VIN (Vehicle Identification Number) of the car.
+     * @param modelId the UUID of the car model associated with the car.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -179,7 +179,7 @@ public class CarRepositoryImpl implements CarRepository {
     /**
      * Method to delete an existing car.
      *
-     * @param carId The UUID of the car to be deleted.
+     * @param carId the UUID of the car to be deleted.
      * @throws SQLException if a database access error occurs.
      */
     @Override

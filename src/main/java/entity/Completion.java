@@ -37,7 +37,7 @@ public class Completion {
     /**
      * Adds a CarOption to the list of car options. If the list is null, it initializes a new ArrayList and adds the CarOption to it.
      *
-     * @param carOption The CarOption to be added to the list of car options.
+     * @param carOption the CarOption to be added to the list of car options.
      */
     public void addCarOption(CarOption carOption) {
         if (this.carOptions != null) {

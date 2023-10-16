@@ -27,7 +27,7 @@ public final class PropertiesUtil {
     /**
      * Loads the properties from the 'config.properties' file.
      *
-     * @throws RuntimeException If an error occurs while loading the properties.
+     * @throws RuntimeException if an error occurs while loading the properties.
      */
     private static void loadProperties() {
         try (InputStream inputStream = PropertiesUtil.class.getClassLoader().getResourceAsStream("config.properties")) {
@@ -40,8 +40,8 @@ public final class PropertiesUtil {
     /**
      * Retrieves the value of a property by its key.
      *
-     * @param key The key of the property to retrieve.
-     * @return The value of the property with the specified key.
+     * @param key the key of the property to retrieve.
+     * @return the value of the property with the specified key.
      */
     public static String get(String key) {
         return PROPERTIES.getProperty(key);

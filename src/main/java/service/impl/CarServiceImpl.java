@@ -34,8 +34,8 @@ public class CarServiceImpl implements CarService {
     /**
      * Retrieves a car DTO by its ID.
      *
-     * @param carId The ID of the car.
-     * @return The car DTO.
+     * @param carId the ID of the car.
+     * @return the car DTO.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -44,10 +44,10 @@ public class CarServiceImpl implements CarService {
     }
 
     /**
-     * Retrieves a car DTO by its VIN (Vehicle Identification Number).
+     * Retrieves a car DTO by its VIN (vehicle identification number).
      *
-     * @param vin The VIN of the car.
-     * @return The car DTO.
+     * @param vin the VIN of the car.
+     * @return the car DTO.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -58,8 +58,8 @@ public class CarServiceImpl implements CarService {
     /**
      * Retrieves all car DTOs of a specific model.
      *
-     * @param modelId The ID of the model.
-     * @return A list of car DTOs.
+     * @param modelId the ID of the model.
+     * @return a list of car DTOs.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -70,7 +70,7 @@ public class CarServiceImpl implements CarService {
     /**
      * Retrieves all car DTOs.
      *
-     * @return A list of all car DTOs.
+     * @return a list of all car DTOs.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -81,8 +81,8 @@ public class CarServiceImpl implements CarService {
     /**
      * Creates a new car record in the database with the provided VIN and model ID.
      *
-     * @param vin     The VIN of the new car.
-     * @param modelId The ID of the model of the new car.
+     * @param vin     the VIN of the new car.
+     * @param modelId the ID of the model of the new car.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -93,9 +93,9 @@ public class CarServiceImpl implements CarService {
     /**
      * Updates an existing car record in the database with a new VIN and model ID using its ID and the new VIN and model ID.
      *
-     * @param carId   The ID of the car to update.
-     * @param vin     The new VIN for the car record.
-     * @param modelId The new model ID for the car record.
+     * @param carId   the ID of the car to update.
+     * @param vin     the new VIN for the car record.
+     * @param modelId the new model ID for the car record.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -106,7 +106,7 @@ public class CarServiceImpl implements CarService {
     /**
      * Deletes a specific car record from the database using its ID.
      *
-     * @param carId The ID of the car to delete.
+     * @param carId the ID of the car to delete.
      * @throws SQLException if a database access error occurs.
      */
     @Override

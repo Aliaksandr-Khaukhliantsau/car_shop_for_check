@@ -24,8 +24,8 @@ public interface CarModelMapper {
     /**
      * Maps a CarModel entity to a CarModelDto. Also maps the Completion entity to a CompletionDto.
      *
-     * @param carModel The CarModel entity to be mapped.
-     * @return The mapped CarModelDto.
+     * @param carModel the CarModel entity to be mapped.
+     * @return the mapped CarModelDto.
      */
     @Mapping(source = "completion", target = "completion")
     CarModelDto carModelToCarModelDto(CarModel carModel);
@@ -33,8 +33,8 @@ public interface CarModelMapper {
     /**
      * Maps a CarModelDto to a CarModel entity.
      *
-     * @param carModelDTO The CarModelDto to be mapped.
-     * @return The mapped CarModel entity.
+     * @param carModelDTO the CarModelDto to be mapped.
+     * @return the mapped CarModel entity.
      */
     CarModel carModelDtoToCarModel(CarModelDto carModelDTO);
 }

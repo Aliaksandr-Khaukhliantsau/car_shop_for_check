@@ -17,8 +17,8 @@ public interface CarOptionRepository {
     /**
      * Retrieves a car option by its ID.
      *
-     * @param optionId The ID of the car option.
-     * @return The car option entity.
+     * @param optionId the ID of the car option.
+     * @return the car option entity.
      * @throws SQLException if a database access error occurs.
      */
     CarOption getCarOptionByOptionId(UUID optionId) throws SQLException;
@@ -26,8 +26,8 @@ public interface CarOptionRepository {
     /**
      * Retrieves a car option by its name.
      *
-     * @param optionName The name of the car option.
-     * @return The car option entity.
+     * @param optionName the name of the car option.
+     * @return the car option entity.
      * @throws SQLException if a database access error occurs.
      */
     CarOption getCarOptionByOptionName(String optionName) throws SQLException;
@@ -35,8 +35,8 @@ public interface CarOptionRepository {
     /**
      * Retrieves all car options for a specific completion.
      *
-     * @param completionId The ID of the completion.
-     * @return A list of car option entities.
+     * @param completionId the ID of the completion.
+     * @return a list of car option entities.
      * @throws SQLException if a database access error occurs.
      */
     List<CarOption> getCarOptionsByCompletionId(UUID completionId) throws SQLException;
@@ -44,7 +44,7 @@ public interface CarOptionRepository {
     /**
      * Retrieves all car options.
      *
-     * @return A list of all car option entities.
+     * @return a list of all car option entities.
      * @throws SQLException if a database access error occurs.
      */
     List<CarOption> getAllCarOptions() throws SQLException;
@@ -52,7 +52,7 @@ public interface CarOptionRepository {
     /**
      * Creates a new car option record in the database with the provided name.
      *
-     * @param optionName The name of the new car option.
+     * @param optionName the name of the new car option.
      * @throws SQLException if a database access error occurs.
      */
     void create(String optionName) throws SQLException;
@@ -60,8 +60,8 @@ public interface CarOptionRepository {
     /**
      * Updates an existing car option record in the database with a new name using its ID and the new name.
      *
-     * @param optionId   The ID of the car option to update.
-     * @param optionName The new name for the car option record.
+     * @param optionId   the ID of the car option to update.
+     * @param optionName the new name for the car option record.
      * @throws SQLException if a database access error occurs.
      */
     void update(UUID optionId, String optionName) throws SQLException;
@@ -69,7 +69,7 @@ public interface CarOptionRepository {
     /**
      * Deletes a specific car option record from the database using its ID.
      *
-     * @param optionId The ID of the car option to delete.
+     * @param optionId the ID of the car option to delete.
      * @throws SQLException if a database access error occurs.
      */
     void delete(UUID optionId) throws SQLException;

@@ -24,8 +24,8 @@ public interface PurchaseMapper {
     /**
      * Maps a Purchase entity to a PurchaseDto. Also maps the Customer and Car entities to their respective DTOs.
      *
-     * @param purchase The Purchase entity to be mapped.
-     * @return The mapped PurchaseDto.
+     * @param purchase the Purchase entity to be mapped.
+     * @return the mapped PurchaseDto.
      */
     @Mapping(source = "customer", target = "customer")
     @Mapping(source = "car", target = "car")
@@ -34,8 +34,8 @@ public interface PurchaseMapper {
     /**
      * Maps a PurchaseDto to a Purchase entity.
      *
-     * @param purchaseDto The PurchaseDto to be mapped.
-     * @return The mapped Purchase entity.
+     * @param purchaseDto the PurchaseDto to be mapped.
+     * @return the mapped Purchase entity.
      */
     Purchase purchaseDtoToPurchase(PurchaseDto purchaseDto);
 }

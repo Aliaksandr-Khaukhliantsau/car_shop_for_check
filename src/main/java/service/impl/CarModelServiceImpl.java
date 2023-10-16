@@ -34,8 +34,8 @@ public class CarModelServiceImpl implements CarModelService {
     /**
      * Retrieves a car model DTO by its ID.
      *
-     * @param modelId The ID of the car model.
-     * @return The car model DTO.
+     * @param modelId the ID of the car model.
+     * @return the car model DTO.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -46,8 +46,8 @@ public class CarModelServiceImpl implements CarModelService {
     /**
      * Retrieves all car model DTOs with a specific name.
      *
-     * @param modelName The name of the car models.
-     * @return A list of car model DTOs.
+     * @param modelName the name of the car models.
+     * @return a list of car model DTOs.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -58,8 +58,8 @@ public class CarModelServiceImpl implements CarModelService {
     /**
      * Retrieves all car model DTOs for a specific completion.
      *
-     * @param completionId The ID of the completion.
-     * @return A list of car model DTOs.
+     * @param completionId the ID of the completion.
+     * @return a list of car model DTOs.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -70,7 +70,7 @@ public class CarModelServiceImpl implements CarModelService {
     /**
      * Retrieves all car model DTOs.
      *
-     * @return A list of all car model DTOs.
+     * @return a list of all car model DTOs.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -81,8 +81,8 @@ public class CarModelServiceImpl implements CarModelService {
     /**
      * Creates a new car model record in the database with the provided name and completion ID.
      *
-     * @param modelName    The name of the new car model.
-     * @param completionId The ID of the completion of the new car model.
+     * @param modelName    the name of the new car model.
+     * @param completionId the ID of the completion of the new car model.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -93,9 +93,9 @@ public class CarModelServiceImpl implements CarModelService {
     /**
      * Updates an existing car model record in the database with a new name and completion ID using its ID and the new name and completion ID.
      *
-     * @param modelId      The ID of the car model to update.
-     * @param modelName    The new name for the car model record.
-     * @param completionId The new completion ID for the car model record.
+     * @param modelId      the ID of the car model to update.
+     * @param modelName    the new name for the car model record.
+     * @param completionId the new completion ID for the car model record.
      * @throws SQLException if a database access error occurs.
      */
     @Override
@@ -106,7 +106,7 @@ public class CarModelServiceImpl implements CarModelService {
     /**
      * Deletes a specific car model record from the database using its ID.
      *
-     * @param modelId The ID of the car model to delete.
+     * @param modelId the ID of the car model to delete.
      * @throws SQLException if a database access error occurs.
      */
     @Override
