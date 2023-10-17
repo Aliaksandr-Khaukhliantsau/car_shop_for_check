@@ -16,11 +16,11 @@ public interface PurchaseService {
     /**
      * Retrieves a purchase DTO by its ID.
      *
-     * @param purchaseId the ID of the purchase.
+     * @param id the ID of the purchase.
      * @return the purchase DTO.
      * @throws SQLException if a database access error occurs.
      */
-    PurchaseDto getPurchaseByPurchaseId(UUID purchaseId) throws SQLException;
+    PurchaseDto getById(UUID id) throws SQLException;
 
     /**
      * Retrieves a purchase DTO by its number.
@@ -29,7 +29,7 @@ public interface PurchaseService {
      * @return the purchase DTO.
      * @throws SQLException if a database access error occurs.
      */
-    PurchaseDto getPurchaseByPurchaseNumber(String purchaseNumber) throws SQLException;
+    PurchaseDto getByPurchaseNumber(String purchaseNumber) throws SQLException;
 
     /**
      * Retrieves all purchase DTOs made by a specific customer.
@@ -38,7 +38,7 @@ public interface PurchaseService {
      * @return a list of purchase DTOs.
      * @throws SQLException if a database access error occurs.
      */
-    List<PurchaseDto> getPurchaseByCustomerId(UUID customerId) throws SQLException;
+    List<PurchaseDto> getByCustomerId(UUID customerId) throws SQLException;
 
     /**
      * Retrieves all purchase DTOs of a specific car.
@@ -47,7 +47,7 @@ public interface PurchaseService {
      * @return a list of purchase DTOs.
      * @throws SQLException if a database access error occurs.
      */
-    List<PurchaseDto> getPurchaseByCarId(UUID carId) throws SQLException;
+    List<PurchaseDto> getByCarId(UUID carId) throws SQLException;
 
     /**
      * Retrieves all purchase DTOs.
@@ -55,7 +55,7 @@ public interface PurchaseService {
      * @return a list of all purchase DTOs.
      * @throws SQLException if a database access error occurs.
      */
-    List<PurchaseDto> getAllPurchases() throws SQLException;
+    List<PurchaseDto> getAll() throws SQLException;
 
     /**
      * Creates a new purchase record in the database for a specific customer and car.
@@ -69,18 +69,18 @@ public interface PurchaseService {
     /**
      * Updates an existing purchase record in the database with new customer and car IDs.
      *
-     * @param purchaseId the ID of the purchase to update.
+     * @param id         the ID of the purchase to update.
      * @param customerId the new customer ID for the purchase record.
      * @param carId      the new car ID for the purchase record.
      * @throws SQLException if a database access error occurs.
      */
-    void update(UUID purchaseId, UUID customerId, UUID carId) throws SQLException;
+    void update(UUID id, UUID customerId, UUID carId) throws SQLException;
 
     /**
      * Deletes a specific purchase record from the database using its ID.
      *
-     * @param purchaseId the ID of the purchase to delete.
+     * @param id the ID of the purchase to delete.
      * @throws SQLException if a database access error occurs.
      */
-    void delete(UUID purchaseId) throws SQLException;
+    void delete(UUID id) throws SQLException;
 }

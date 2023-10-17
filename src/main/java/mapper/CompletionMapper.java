@@ -1,8 +1,8 @@
 package mapper;
 
-import dto.CarOptionDto;
+import dto.SettingDto;
 import dto.CompletionDto;
-import entity.CarOption;
+import entity.Setting;
 import entity.Completion;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,12 +12,12 @@ import java.util.List;
 
 /**
  * The CompletionMapper interface provides methods for mapping between Completion and CompletionDto objects.
- * This mapper also uses the CarOptionMapper for mapping between CarOption and CarOptionDto objects.
+ * This mapper also uses the SettingMapper for mapping between Setting and SettingDto objects.
  *
  * @author Aliaksandr Khaukhliantsau
  * @version 1.0
  */
-@Mapper(uses = CarOptionMapper.class)
+@Mapper(uses = SettingMapper.class)
 public interface CompletionMapper {
 
     /**
@@ -26,35 +26,35 @@ public interface CompletionMapper {
     CompletionMapper INSTANCE = Mappers.getMapper(CompletionMapper.class);
 
     /**
-     * Maps a Completion entity to a CompletionDto. Also maps the list of CarOption entities to a list of CarOptionDto objects.
+     * Maps a Completion entity to a CompletionDto. Also maps the list of Setting entities to a list of SettingDto objects.
      *
      * @param completion the Completion entity to be mapped.
      * @return the mapped CompletionDto.
      */
-    @Mapping(source = "carOptions", target = "carOptions")
+    @Mapping(source = "settings", target = "settings")
     CompletionDto completionToCompletionDto(Completion completion);
 
     /**
-     * Maps a list of CarOption entities to a list of CarOptionDto objects.
+     * Maps a list of Setting entities to a list of SettingDto objects.
      *
-     * @param carOptions the list of CarOption entities to be mapped.
-     * @return the mapped list of CarOptionDto objects.
+     * @param settings the list of Setting entities to be mapped.
+     * @return the mapped list of SettingDto objects.
      */
-    List<CarOptionDto> map(List<CarOption> carOptions);
+    List<SettingDto> map(List<Setting> settings);
 
     /**
      * Maps a CompletionDto to a Completion entity.
      *
-     * @param completionDTO the CompletionDto to be mapped.
+     * @param completionDto the CompletionDto to be mapped.
      * @return the mapped Completion entity.
      */
-    Completion completionDtoToCompletion(CompletionDto completionDTO);
+    Completion completionDtoToCompletion(CompletionDto completionDto);
 
     /**
-     * Maps a list of CarOptionDto objects to a list of CarOption entities.
+     * Maps a list of SettingDto objects to a list of Setting entities.
      *
-     * @param carOptions the list of CarOptionDto objects to be mapped.
-     * @return the mapped list of CarOption entities.
+     * @param settings the list of SettingDto objects to be mapped.
+     * @return the mapped list of Setting entities.
      */
-    List<CarOption> mapDto(List<CarOptionDto> carOptions);
+    List<Setting> mapDto(List<SettingDto> settings);
 }

@@ -34,13 +34,13 @@ public class CarServiceImpl implements CarService {
     /**
      * Retrieves a car DTO by its ID.
      *
-     * @param carId the ID of the car.
+     * @param id the ID of the car.
      * @return the car DTO.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public CarDto getCarByCarId(UUID carId) throws SQLException {
-        return carMapper.carToCarDto(carRepository.getCarByCarId(carId));
+    public CarDto getById(UUID id) throws SQLException {
+        return carMapper.carToCarDto(carRepository.getById(id));
     }
 
     /**
@@ -51,20 +51,20 @@ public class CarServiceImpl implements CarService {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public CarDto getCarByVin(String vin) throws SQLException {
-        return carMapper.carToCarDto(carRepository.getCarByVin(vin));
+    public CarDto getByVin(String vin) throws SQLException {
+        return carMapper.carToCarDto(carRepository.getByVin(vin));
     }
 
     /**
-     * Retrieves all car DTOs of a specific model.
+     * Retrieves all car DTOs of a specific layout.
      *
-     * @param modelId the ID of the model.
+     * @param layoutId the ID of the layout.
      * @return a list of car DTOs.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public List<CarDto> getCarByModelId(UUID modelId) throws SQLException {
-        return carRepository.getCarByModelId(modelId).stream().map(carMapper::carToCarDto).collect(Collectors.toList());
+    public List<CarDto> getByLayoutId(UUID layoutId) throws SQLException {
+        return carRepository.getByLayoutId(layoutId).stream().map(carMapper::carToCarDto).collect(Collectors.toList());
     }
 
     /**
@@ -74,43 +74,43 @@ public class CarServiceImpl implements CarService {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public List<CarDto> getAllCars() throws SQLException {
-        return carRepository.getAllCars().stream().map(carMapper::carToCarDto).collect(Collectors.toList());
+    public List<CarDto> getAll() throws SQLException {
+        return carRepository.getAll().stream().map(carMapper::carToCarDto).collect(Collectors.toList());
     }
 
     /**
-     * Creates a new car record in the database with the provided VIN and model ID.
+     * Creates a new car record in the database with the provided VIN and layout ID.
      *
-     * @param vin     the VIN of the new car.
-     * @param modelId the ID of the model of the new car.
+     * @param vin      the VIN of the new car.
+     * @param layoutId the ID of the layout of the new car.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public void create(String vin, UUID modelId) throws SQLException {
-        carRepository.create(vin, modelId);
+    public void create(String vin, UUID layoutId) throws SQLException {
+        carRepository.create(vin, layoutId);
     }
 
     /**
-     * Updates an existing car record in the database with a new VIN and model ID using its ID and the new VIN and model ID.
+     * Updates an existing car record in the database with a new VIN and layout ID using its ID and the new VIN and layout ID.
      *
-     * @param carId   the ID of the car to update.
-     * @param vin     the new VIN for the car record.
-     * @param modelId the new model ID for the car record.
+     * @param id       the ID of the car to update.
+     * @param vin      the new VIN for the car record.
+     * @param layoutId the new layout ID for the car record.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public void update(UUID carId, String vin, UUID modelId) throws SQLException {
-        carRepository.update(carId, vin, modelId);
+    public void update(UUID id, String vin, UUID layoutId) throws SQLException {
+        carRepository.update(id, vin, layoutId);
     }
 
     /**
      * Deletes a specific car record from the database using its ID.
      *
-     * @param carId the ID of the car to delete.
+     * @param id the ID of the car to delete.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public void delete(UUID carId) throws SQLException {
-        carRepository.delete(carId);
+    public void delete(UUID id) throws SQLException {
+        carRepository.delete(id);
     }
 }

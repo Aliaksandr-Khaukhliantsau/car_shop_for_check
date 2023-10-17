@@ -17,11 +17,11 @@ public interface CarRepository {
     /**
      * Retrieves a car by its ID.
      *
-     * @param carId the ID of the car.
+     * @param id the ID of the car.
      * @return the car entity.
      * @throws SQLException if a database access error occurs.
      */
-    Car getCarByCarId(UUID carId) throws SQLException;
+    Car getById(UUID id) throws SQLException;
 
     /**
      * Retrieves a car by its VIN (vehicle identification number).
@@ -30,16 +30,16 @@ public interface CarRepository {
      * @return the car entity.
      * @throws SQLException if a database access error occurs.
      */
-    Car getCarByVin(String vin) throws SQLException;
+    Car getByVin(String vin) throws SQLException;
 
     /**
-     * Retrieves all cars of a specific model.
+     * Retrieves all cars of a specific layout.
      *
-     * @param modelId the ID of the model.
+     * @param layoutId the ID of the layout.
      * @return a list of car entities.
      * @throws SQLException if a database access error occurs.
      */
-    List<Car> getCarByModelId(UUID modelId) throws SQLException;
+    List<Car> getByLayoutId(UUID layoutId) throws SQLException;
 
     /**
      * Retrieves all cars.
@@ -47,32 +47,32 @@ public interface CarRepository {
      * @return a list of all car entities.
      * @throws SQLException if a database access error occurs.
      */
-    List<Car> getAllCars() throws SQLException;
+    List<Car> getAll() throws SQLException;
 
     /**
-     * Creates a new car record in the database with the provided VIN and model ID.
+     * Creates a new car record in the database with the provided VIN and layout ID.
      *
-     * @param vin     the VIN of the new car.
-     * @param modelId the ID of the model of the new car.
+     * @param vin      the VIN of the new car.
+     * @param layoutId the ID of the model of the new car.
      * @throws SQLException if a database access error occurs.
      */
-    void create(String vin, UUID modelId) throws SQLException;
+    void create(String vin, UUID layoutId) throws SQLException;
 
     /**
-     * Updates an existing car record in the database with a new VIN and model ID using its ID and the new VIN and model ID.
+     * Updates an existing car record in the database with a new VIN and layout ID using its ID and the new VIN and layout ID.
      *
-     * @param carId   the ID of the car to update.
-     * @param vin     the new VIN for the car record.
-     * @param modelId the new model ID for the car record.
+     * @param id       the ID of the car to update.
+     * @param vin      the new VIN for the car record.
+     * @param layoutId the new layout ID for the car record.
      * @throws SQLException if a database access error occurs.
      */
-    void update(UUID carId, String vin, UUID modelId) throws SQLException;
+    void update(UUID id, String vin, UUID layoutId) throws SQLException;
 
     /**
      * Deletes a specific car record from the database using its ID.
      *
-     * @param carId the ID of the car to delete.
+     * @param id the ID of the car to delete.
      * @throws SQLException if a database access error occurs.
      */
-    void delete(UUID carId) throws SQLException;
+    void delete(UUID id) throws SQLException;
 }

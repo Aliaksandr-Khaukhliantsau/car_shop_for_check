@@ -30,8 +30,8 @@ public interface CustomerMapper {
     /**
      * Maps a CustomerDto to a Customer entity.
      *
-     * @param customerDTO the CustomerDto to map.
+     * @param customerDto the CustomerDto to map.
      * @return the mapped Customer entity.
      */
-    Customer customerDtoToCustomer(CustomerDto customerDTO);
+    Customer customerDtoToCustomer(CustomerDto customerDto);
 }

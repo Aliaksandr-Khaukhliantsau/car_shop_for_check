@@ -20,7 +20,7 @@ public class Customer {
     /**
      * Unique identifier for the customer.
      */
-    private UUID customerId;
+    private UUID id;
 
     /**
      * First name of the customer.

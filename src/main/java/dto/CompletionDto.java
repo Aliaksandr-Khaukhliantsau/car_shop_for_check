@@ -21,7 +21,7 @@ public class CompletionDto {
     /**
      * Unique identifier for the car completion.
      */
-    private UUID completionId;
+    private UUID id;
 
     /**
      * Name of the car completion.
@@ -29,7 +29,7 @@ public class CompletionDto {
     private String completionName;
 
     /**
-     * A list of CarOptionDto instances representing the options of the car completion.
+     * A list of SettingDto instances representing the settings of the car completion.
      */
-    private List<CarOptionDto> carOptions;
+    private List<SettingDto> settings;
 }

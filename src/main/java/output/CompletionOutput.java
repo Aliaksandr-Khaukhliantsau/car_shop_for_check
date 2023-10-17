@@ -38,7 +38,7 @@ public class CompletionOutput {
 
                 // Show all completions
             } else if (userCommand.equals("1")) {
-                completionService.getAllCompletions().forEach(System.out::println);
+                completionService.getAll().forEach(System.out::println);
                 System.out.println();
 
                 // Show completions by selection
@@ -47,8 +47,8 @@ public class CompletionOutput {
                 // Selection menu
                 while (true) {
                     System.out.println("Select a sample:");
-                    System.out.println("1 - Completion's id");
-                    System.out.println("2 - Completion's name");
+                    System.out.println("1 - Completion id");
+                    System.out.println("2 - Completion name");
                     System.out.println("0 - Back to the previous menu");
 
                     userCommand = scanner.nextLine();
@@ -58,20 +58,20 @@ public class CompletionOutput {
                         System.out.println("Exit to the previous menu.\n");
                         break;
 
-                        // Sampling by completion's id
+                        // Sampling by completion id
                     } else if (userCommand.equals("1")) {
-                        System.out.println("Enter the completion's id:");
-                        UUID completionId = UUID.fromString(scanner.nextLine());
+                        System.out.println("Enter the completion id:");
+                        UUID id = UUID.fromString(scanner.nextLine());
 
-                        System.out.println(completionService.getCompletionByCompletionId(completionId));
+                        System.out.println(completionService.getById(id));
                         System.out.println();
 
-                        // Sampling by completion's name
+                        // Sampling by completion name
                     } else if (userCommand.equals("2")) {
-                        System.out.println("Enter the completion's name:");
+                        System.out.println("Enter the completion name:");
                         String completionName = scanner.nextLine();
 
-                        System.out.println(completionService.getCompletionByCompletionName(completionName));
+                        System.out.println(completionService.getByCompletionName(completionName));
                         System.out.println();
 
                     } else {
@@ -81,19 +81,19 @@ public class CompletionOutput {
 
                 // Create a new completion
             } else if (userCommand.equals("3")) {
-                System.out.println("Enter the completion's name of the new completion:");
+                System.out.println("Enter the completion name of the new completion:");
                 completionService.create(scanner.nextLine());
 
-                System.out.println("New completion's record has been created.\n");
+                System.out.println("New completion record has been created.\n");
 
                 // Change the completion
             } else if (userCommand.equals("4")) {
 
                 // Completion change menu
                 while (true) {
-                    System.out.println("1 - Change a completion's name");
-                    System.out.println("2 - Add a car's option to the completion");
-                    System.out.println("3 - Delete a car's option from the completion");
+                    System.out.println("1 - Change a completion name");
+                    System.out.println("2 - Add a setting to the completion");
+                    System.out.println("3 - Delete a setting from the completion");
                     System.out.println("0 - Back to the previous menu");
 
                     userCommand = scanner.nextLine();
@@ -103,35 +103,35 @@ public class CompletionOutput {
                         System.out.println("Exit to the previous menu.\n");
                         break;
 
-                        // Change the completion's name
+                        // Change the completion name
                     } else if (userCommand.equals("1")) {
-                        System.out.println("Enter the completion's id:");
-                        UUID completionId = UUID.fromString(scanner.nextLine());
-                        System.out.println("Enter a new name for the completion's record to edit:");
+                        System.out.println("Enter the completion id:");
+                        UUID id = UUID.fromString(scanner.nextLine());
+                        System.out.println("Enter a new name for the completion record to edit:");
                         String completionName = scanner.nextLine();
 
-                        completionService.update(completionId, completionName);
-                        System.out.println("The completion's name has been changed.\n");
+                        completionService.update(id, completionName);
+                        System.out.println("The completion name has been changed.\n");
 
-                        // Add an option
+                        // Add a setting
                     } else if (userCommand.equals("2")) {
-                        System.out.println("Enter the completion's id:");
-                        UUID completionId = UUID.fromString(scanner.nextLine());
-                        System.out.println("Enter the option's id:");
-                        UUID optionId = UUID.fromString(scanner.nextLine());
+                        System.out.println("Enter the completion id:");
+                        UUID id = UUID.fromString(scanner.nextLine());
+                        System.out.println("Enter the setting id:");
+                        UUID settingId = UUID.fromString(scanner.nextLine());
 
-                        completionService.addCarOption(completionId, optionId);
-                        System.out.println("The option has been added.\n");
+                        completionService.addSetting(id, settingId);
+                        System.out.println("The setting has been added.\n");
 
-                        // Delete an option
+                        // Delete a setting
                     } else if (userCommand.equals("3")) {
-                        System.out.println("Enter the completion's id:");
-                        UUID completionId = UUID.fromString(scanner.nextLine());
-                        System.out.println("Enter the option's id:");
-                        UUID optionId = UUID.fromString(scanner.nextLine());
+                        System.out.println("Enter the completion id:");
+                        UUID id = UUID.fromString(scanner.nextLine());
+                        System.out.println("Enter the setting id:");
+                        UUID settingId = UUID.fromString(scanner.nextLine());
 
-                        completionService.deleteCarOption(completionId, optionId);
-                        System.out.println("The option has been deleted.\n");
+                        completionService.deleteSetting(id, settingId);
+                        System.out.println("The setting has been deleted.\n");
 
                     } else {
                         System.err.println("Unknown Command!\n");
@@ -140,11 +140,11 @@ public class CompletionOutput {
 
                 // Delete a completion
             } else if (userCommand.equals("5")) {
-                System.out.println("Enter the completion's id:");
-                UUID completionId = UUID.fromString(scanner.nextLine());
+                System.out.println("Enter the completion id:");
+                UUID id = UUID.fromString(scanner.nextLine());
 
-                completionService.delete(completionId);
-                System.out.println("The completion's record has been deleted.\n");
+                completionService.delete(id);
+                System.out.println("The completion record has been deleted.\n");
 
             } else {
                 System.err.println("Unknown Command!\n");

@@ -25,14 +25,14 @@ import java.util.UUID;
  * @version 1.0
  */
 public class PurchaseRepositoryImpl implements PurchaseRepository {
-    private static final String SQL_GET_PURCHASE_BY_PURCHASE_ID = "SELECT * FROM purchases WHERE purchase_id = ? ORDER BY purchase_number ASC;";
-    private static final String SQL_GET_PURCHASE_BY_PURCHASE_NUMBER = "SELECT * FROM purchases WHERE purchase_number = ? ORDER BY purchase_number ASC;";
-    private static final String SQL_GET_PURCHASE_BY_CUSTOMER_ID = "SELECT * FROM purchases WHERE customer_id = ? ORDER BY purchase_number ASC;";
-    private static final String SQL_GET_PURCHASE_BY_CAR_ID = "SELECT * FROM purchases WHERE car_id = ? ORDER BY purchase_number ASC;";
-    private static final String SQL_GET_ALL_PURCHASES = "SELECT * FROM purchases ORDER BY purchase_number ASC;";
-    private static final String SQL_CREATE_A_PURCHASE = "INSERT INTO purchases (customer_id, car_id) VALUES (?, ?) RETURNING *;";
-    private static final String SQL_UPDATE_A_PURCHASE = "UPDATE purchases SET customer_id = ?, car_id = ? WHERE purchase_id = ? RETURNING *;";
-    private static final String SQL_DELETE_A_PURCHASE = "DELETE FROM purchases WHERE purchase_id = ? RETURNING *;";
+    private static final String SQL_GET_BY_ID = "SELECT * FROM purchases WHERE purchase_id = ? ORDER BY purchase_number ASC;";
+    private static final String SQL_GET_BY_PURCHASE_NUMBER = "SELECT * FROM purchases WHERE purchase_number = ? ORDER BY purchase_number ASC;";
+    private static final String SQL_GET_BY_CUSTOMER_ID = "SELECT * FROM purchases WHERE customer_id = ? ORDER BY purchase_number ASC;";
+    private static final String SQL_GET_BY_CAR_ID = "SELECT * FROM purchases WHERE car_id = ? ORDER BY purchase_number ASC;";
+    private static final String SQL_GET_ALL = "SELECT * FROM purchases ORDER BY purchase_number ASC;";
+    private static final String SQL_CREATE = "INSERT INTO purchases (customer_id, car_id) VALUES (?, ?) RETURNING *;";
+    private static final String SQL_UPDATE = "UPDATE purchases SET customer_id = ?, car_id = ? WHERE purchase_id = ? RETURNING *;";
+    private static final String SQL_DELETE = "DELETE FROM purchases WHERE purchase_id = ? RETURNING *;";
     private static final CustomerMapper customerMapper = CustomerMapper.INSTANCE;
     private static final CarMapper carMapper = CarMapper.INSTANCE;
     private final Connection connection;
@@ -49,27 +49,27 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
     /**
      * This method retrieves a purchase by its ID.
      *
-     * @param purchaseId the ID of the purchase to retrieve.
+     * @param id the ID of the purchase to retrieve.
      * @return the purchase corresponding to the provided ID.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public Purchase getPurchaseByPurchaseId(UUID purchaseId) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_PURCHASE_ID)) {
-            preparedStatement.setObject(1, purchaseId);
+    public Purchase getById(UUID id) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_ID)) {
+            preparedStatement.setObject(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             Purchase purchase = new Purchase();
 
             while (resultSet.next()) {
-                purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchase_id")));
+                purchase.setId(UUID.fromString(resultSet.getString("purchase_id")));
                 purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
                 UUID customerId = UUID.fromString(resultSet.getString("customer_id"));
                 CustomerService customerService = new CustomerServiceImpl();
-                CustomerDto customerDto = customerService.getCustomerByCustomerId(customerId);
+                CustomerDto customerDto = customerService.getById(customerId);
                 purchase.setCustomer(customerMapper.customerDtoToCustomer(customerDto));
                 UUID carId = UUID.fromString(resultSet.getString("car_id"));
                 CarService carService = new CarServiceImpl();
-                CarDto carDto = carService.getCarByCarId(carId);
+                CarDto carDto = carService.getById(carId);
                 purchase.setCar(carMapper.carDtoToCar(carDto));
             }
             return purchase;
@@ -84,22 +84,22 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public Purchase getPurchaseByPurchaseNumber(String purchaseNumber) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_PURCHASE_NUMBER)) {
+    public Purchase getByPurchaseNumber(String purchaseNumber) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_PURCHASE_NUMBER)) {
             preparedStatement.setInt(1, Integer.parseInt(purchaseNumber));
             ResultSet resultSet = preparedStatement.executeQuery();
             Purchase purchase = new Purchase();
 
             while (resultSet.next()) {
-                purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchase_id")));
+                purchase.setId(UUID.fromString(resultSet.getString("purchase_id")));
                 purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
                 UUID customerId = UUID.fromString(resultSet.getString("customer_id"));
                 CustomerService customerService = new CustomerServiceImpl();
-                CustomerDto customerDto = customerService.getCustomerByCustomerId(customerId);
+                CustomerDto customerDto = customerService.getById(customerId);
                 purchase.setCustomer(customerMapper.customerDtoToCustomer(customerDto));
                 UUID carId = UUID.fromString(resultSet.getString("car_id"));
                 CarService carService = new CarServiceImpl();
-                CarDto carDto = carService.getCarByCarId(carId);
+                CarDto carDto = carService.getById(carId);
                 purchase.setCar(carMapper.carDtoToCar(carDto));
             }
             return purchase;
@@ -114,22 +114,22 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public List<Purchase> getPurchaseByCustomerId(UUID customerId) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_CUSTOMER_ID)) {
+    public List<Purchase> getByCustomerId(UUID customerId) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_CUSTOMER_ID)) {
             preparedStatement.setObject(1, customerId);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Purchase> purchases = new ArrayList<>();
 
             while (resultSet.next()) {
                 Purchase purchase = new Purchase();
-                purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchase_id")));
+                purchase.setId(UUID.fromString(resultSet.getString("purchase_id")));
                 purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
                 CustomerService customerService = new CustomerServiceImpl();
-                CustomerDto customerDto = customerService.getCustomerByCustomerId(customerId);
+                CustomerDto customerDto = customerService.getById(customerId);
                 purchase.setCustomer(customerMapper.customerDtoToCustomer(customerDto));
                 UUID carId = UUID.fromString(resultSet.getString("car_id"));
                 CarService carService = new CarServiceImpl();
-                CarDto carDto = carService.getCarByCarId(carId);
+                CarDto carDto = carService.getById(carId);
                 purchase.setCar(carMapper.carDtoToCar(carDto));
 
                 purchases.add(purchase);
@@ -146,22 +146,22 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public List<Purchase> getPurchaseByCarId(UUID carId) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_PURCHASE_BY_CAR_ID)) {
+    public List<Purchase> getByCarId(UUID carId) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_CAR_ID)) {
             preparedStatement.setObject(1, carId);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Purchase> purchases = new ArrayList<>();
 
             while (resultSet.next()) {
                 Purchase purchase = new Purchase();
-                purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchase_id")));
+                purchase.setId(UUID.fromString(resultSet.getString("purchase_id")));
                 purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
                 CustomerService customerService = new CustomerServiceImpl();
                 UUID customerId = UUID.fromString(resultSet.getString("customer_id"));
-                CustomerDto customerDto = customerService.getCustomerByCustomerId(customerId);
+                CustomerDto customerDto = customerService.getById(customerId);
                 purchase.setCustomer(customerMapper.customerDtoToCustomer(customerDto));
                 CarService carService = new CarServiceImpl();
-                CarDto carDto = carService.getCarByCarId(carId);
+                CarDto carDto = carService.getById(carId);
                 purchase.setCar(carMapper.carDtoToCar(carDto));
 
                 purchases.add(purchase);
@@ -177,22 +177,22 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public List<Purchase> getAllPurchases() throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_PURCHASES)) {
+    public List<Purchase> getAll() throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Purchase> purchases = new ArrayList<>();
 
             while (resultSet.next()) {
                 Purchase purchase = new Purchase();
-                purchase.setPurchaseId(UUID.fromString(resultSet.getString("purchase_id")));
+                purchase.setId(UUID.fromString(resultSet.getString("purchase_id")));
                 purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
                 UUID customerId = UUID.fromString(resultSet.getString("customer_id"));
                 CustomerService customerService = new CustomerServiceImpl();
-                CustomerDto customerDto = customerService.getCustomerByCustomerId(customerId);
+                CustomerDto customerDto = customerService.getById(customerId);
                 purchase.setCustomer(customerMapper.customerDtoToCustomer(customerDto));
                 UUID carId = UUID.fromString(resultSet.getString("car_id"));
                 CarService carService = new CarServiceImpl();
-                CarDto carDto = carService.getCarByCarId(carId);
+                CarDto carDto = carService.getById(carId);
                 purchase.setCar(carMapper.carDtoToCar(carDto));
 
                 purchases.add(purchase);
@@ -210,7 +210,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
      */
     @Override
     public void create(UUID customerId, UUID carId) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_A_PURCHASE)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE)) {
             preparedStatement.setObject(1, customerId);
             preparedStatement.setObject(2, carId);
             preparedStatement.executeQuery();
@@ -220,17 +220,17 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
     /**
      * This method updates an existing purchase.
      *
-     * @param purchaseId the ID of the purchase to update.
+     * @param id         the ID of the purchase to update.
      * @param customerId the new customer ID for the purchase.
      * @param carId      the new car ID for the purchase.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public void update(UUID purchaseId, UUID customerId, UUID carId) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_A_PURCHASE)) {
+    public void update(UUID id, UUID customerId, UUID carId) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE)) {
             preparedStatement.setObject(1, customerId);
             preparedStatement.setObject(2, carId);
-            preparedStatement.setObject(3, purchaseId);
+            preparedStatement.setObject(3, id);
             preparedStatement.executeQuery();
         }
     }
@@ -238,13 +238,13 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
     /**
      * This method deletes a purchase.
      *
-     * @param purchaseId the ID of the purchase to delete.
+     * @param id the ID of the purchase to delete.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public void delete(UUID purchaseId) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_PURCHASE)) {
-            preparedStatement.setObject(1, purchaseId);
+    public void delete(UUID id) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE)) {
+            preparedStatement.setObject(1, id);
             preparedStatement.executeQuery();
         }
     }

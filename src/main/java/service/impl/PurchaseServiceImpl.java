@@ -34,13 +34,13 @@ public class PurchaseServiceImpl implements PurchaseService {
     /**
      * Retrieves a purchase DTO by its ID.
      *
-     * @param purchaseId the ID of the purchase.
+     * @param id the ID of the purchase.
      * @return the purchase DTO.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public PurchaseDto getPurchaseByPurchaseId(UUID purchaseId) throws SQLException {
-        return purchaseMapper.purchaseToPurchaseDto(purchaseRepository.getPurchaseByPurchaseId(purchaseId));
+    public PurchaseDto getById(UUID id) throws SQLException {
+        return purchaseMapper.purchaseToPurchaseDto(purchaseRepository.getById(id));
     }
 
     /**
@@ -51,8 +51,8 @@ public class PurchaseServiceImpl implements PurchaseService {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public PurchaseDto getPurchaseByPurchaseNumber(String purchaseNumber) throws SQLException {
-        return purchaseMapper.purchaseToPurchaseDto(purchaseRepository.getPurchaseByPurchaseNumber(purchaseNumber));
+    public PurchaseDto getByPurchaseNumber(String purchaseNumber) throws SQLException {
+        return purchaseMapper.purchaseToPurchaseDto(purchaseRepository.getByPurchaseNumber(purchaseNumber));
     }
 
     /**
@@ -63,8 +63,8 @@ public class PurchaseServiceImpl implements PurchaseService {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public List<PurchaseDto> getPurchaseByCustomerId(UUID customerId) throws SQLException {
-        return purchaseRepository.getPurchaseByCustomerId(customerId).stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
+    public List<PurchaseDto> getByCustomerId(UUID customerId) throws SQLException {
+        return purchaseRepository.getByCustomerId(customerId).stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
     }
 
     /**
@@ -75,8 +75,8 @@ public class PurchaseServiceImpl implements PurchaseService {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public List<PurchaseDto> getPurchaseByCarId(UUID carId) throws SQLException {
-        return purchaseRepository.getPurchaseByCarId(carId).stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
+    public List<PurchaseDto> getByCarId(UUID carId) throws SQLException {
+        return purchaseRepository.getByCarId(carId).stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
     }
 
     /**
@@ -86,8 +86,8 @@ public class PurchaseServiceImpl implements PurchaseService {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public List<PurchaseDto> getAllPurchases() throws SQLException {
-        return purchaseRepository.getAllPurchases().stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
+    public List<PurchaseDto> getAll() throws SQLException {
+        return purchaseRepository.getAll().stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
     }
 
     /**
@@ -105,24 +105,24 @@ public class PurchaseServiceImpl implements PurchaseService {
     /**
      * Updates an existing purchase record in the database with new customer and car IDs.
      *
-     * @param purchaseId the ID of the purchase to update.
+     * @param id         the ID of the purchase to update.
      * @param customerId the new customer ID for the purchase record.
      * @param carId      the new car ID for the purchase record.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public void update(UUID purchaseId, UUID customerId, UUID carId) throws SQLException {
-        purchaseRepository.update(purchaseId, customerId, carId);
+    public void update(UUID id, UUID customerId, UUID carId) throws SQLException {
+        purchaseRepository.update(id, customerId, carId);
     }
 
     /**
      * Deletes a specific purchase record from the database using its ID.
      *
-     * @param purchaseId the ID of the purchase to delete.
+     * @param id the ID of the purchase to delete.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public void delete(UUID purchaseId) throws SQLException {
-        purchaseRepository.delete(purchaseId);
+    public void delete(UUID id) throws SQLException {
+        purchaseRepository.delete(id);
     }
 }

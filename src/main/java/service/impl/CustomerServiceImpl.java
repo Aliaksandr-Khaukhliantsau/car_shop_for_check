@@ -34,13 +34,13 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * This method retrieves a customer DTO by their ID.
      *
-     * @param customerId the ID of the customer to retrieve.
+     * @param id the ID of the customer to retrieve.
      * @return the customer DTO.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public CustomerDto getCustomerByCustomerId(UUID customerId) throws SQLException {
-        return customerMapper.customerToCustomerDto(customerRepository.getCustomerByCustomerId(customerId));
+    public CustomerDto getById(UUID id) throws SQLException {
+        return customerMapper.customerToCustomerDto(customerRepository.getById(id));
     }
 
     /**
@@ -51,8 +51,8 @@ public class CustomerServiceImpl implements CustomerService {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public List<CustomerDto> getCustomerByFirstName(String firstName) throws SQLException {
-        return customerRepository.getCustomerByFirstName(firstName).stream().map(customerMapper::customerToCustomerDto).collect(Collectors.toList());
+    public List<CustomerDto> getByFirstName(String firstName) throws SQLException {
+        return customerRepository.getByFirstName(firstName).stream().map(customerMapper::customerToCustomerDto).collect(Collectors.toList());
     }
 
     /**
@@ -63,8 +63,8 @@ public class CustomerServiceImpl implements CustomerService {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public List<CustomerDto> getCustomerByMiddleName(String middleName) throws SQLException {
-        return customerRepository.getCustomerByMiddleName(middleName).stream().map(customerMapper::customerToCustomerDto).collect(Collectors.toList());
+    public List<CustomerDto> getByMiddleName(String middleName) throws SQLException {
+        return customerRepository.getByMiddleName(middleName).stream().map(customerMapper::customerToCustomerDto).collect(Collectors.toList());
     }
 
     /**
@@ -75,8 +75,8 @@ public class CustomerServiceImpl implements CustomerService {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public List<CustomerDto> getCustomerByLastName(String lastName) throws SQLException {
-        return customerRepository.getCustomerByLastName(lastName).stream().map(customerMapper::customerToCustomerDto).collect(Collectors.toList());
+    public List<CustomerDto> getByLastName(String lastName) throws SQLException {
+        return customerRepository.getByLastName(lastName).stream().map(customerMapper::customerToCustomerDto).collect(Collectors.toList());
     }
 
     /**
@@ -86,8 +86,8 @@ public class CustomerServiceImpl implements CustomerService {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public List<CustomerDto> getAllCustomers() throws SQLException {
-        return customerRepository.getAllCustomers().stream().map(customerMapper::customerToCustomerDto).collect(Collectors.toList());
+    public List<CustomerDto> getAll() throws SQLException {
+        return customerRepository.getAll().stream().map(customerMapper::customerToCustomerDto).collect(Collectors.toList());
     }
 
     /**
@@ -106,25 +106,25 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * This method updates an existing customer's information.
      *
-     * @param customerId the ID of the customer to update.
+     * @param id         the ID of the customer to update.
      * @param firstName  the new first name for the customer.
      * @param middleName the new middle name for the customer.
      * @param lastName   the new last name for the customer.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public void update(UUID customerId, String firstName, String middleName, String lastName) throws SQLException {
-        customerRepository.update(customerId, firstName, middleName, lastName);
+    public void update(UUID id, String firstName, String middleName, String lastName) throws SQLException {
+        customerRepository.update(id, firstName, middleName, lastName);
     }
 
     /**
      * This method deletes a customer by their ID.
      *
-     * @param customerId the ID of the customer to delete.
+     * @param id the ID of the customer to delete.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public void delete(UUID customerId) throws SQLException {
-        customerRepository.delete(customerId);
+    public void delete(UUID id) throws SQLException {
+        customerRepository.delete(id);
     }
 }

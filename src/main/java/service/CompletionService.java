@@ -16,11 +16,11 @@ public interface CompletionService {
     /**
      * Retrieves a completion DTO by its ID.
      *
-     * @param completionId the ID of the completion.
+     * @param id the ID of the completion.
      * @return the completion DTO.
      * @throws SQLException if a database access error occurs.
      */
-    CompletionDto getCompletionByCompletionId(UUID completionId) throws SQLException;
+    CompletionDto getById(UUID id) throws SQLException;
 
     /**
      * Retrieves a completion DTO by its name.
@@ -29,7 +29,7 @@ public interface CompletionService {
      * @return the completion DTO.
      * @throws SQLException if a database access error occurs.
      */
-    CompletionDto getCompletionByCompletionName(String completionName) throws SQLException;
+    CompletionDto getByCompletionName(String completionName) throws SQLException;
 
     /**
      * Retrieves all completion DTOs.
@@ -37,25 +37,25 @@ public interface CompletionService {
      * @return a list of all completion DTOs.
      * @throws SQLException if a database access error occurs.
      */
-    List<CompletionDto> getAllCompletions() throws SQLException;
+    List<CompletionDto> getAll() throws SQLException;
 
     /**
      * Adds a car option to a specific completion in the database.
      *
-     * @param CompletionId the ID of the completion to add the car option to.
-     * @param optionId     the ID of the car option to add.
+     * @param id        the ID of the completion to add the car setting to.
+     * @param settingId the ID of the car setting to add.
      * @throws SQLException if a database access error occurs.
      */
-    void addCarOption(UUID CompletionId, UUID optionId) throws SQLException;
+    void addSetting(UUID id, UUID settingId) throws SQLException;
 
     /**
-     * Deletes a car option from a specific completion in the database using its ID and the ID of the car option.
+     * Deletes a car option from a specific completion in the database using its ID and the ID of the car setting.
      *
-     * @param completionId the ID of the completion to delete the car option from.
-     * @param optionId     the ID of the car option to delete.
+     * @param id        the ID of the completion to delete the car setting from.
+     * @param settingId the ID of the car setting to delete.
      * @throws SQLException if a database access error occurs.
      */
-    void deleteCarOption(UUID completionId, UUID optionId) throws SQLException;
+    void deleteSetting(UUID id, UUID settingId) throws SQLException;
 
     /**
      * Creates a new completion record in the database with the provided name.
@@ -68,17 +68,17 @@ public interface CompletionService {
     /**
      * Updates an existing completion record in the database with a new name using its ID and the new name.
      *
-     * @param CompletionId   the ID of the completion to update.
+     * @param id             the ID of the completion to update.
      * @param completionName the new name for the completion record.
      * @throws SQLException if a database access error occurs.
      */
-    void update(UUID CompletionId, String completionName) throws SQLException;
+    void update(UUID id, String completionName) throws SQLException;
 
     /**
      * Deletes a specific completion record from the database using its ID.
      *
-     * @param CompletionId the ID of the completion to delete.
+     * @param id the ID of the completion to delete.
      * @throws SQLException if a database access error occurs.
      */
-    void delete(UUID CompletionId) throws SQLException;
+    void delete(UUID id) throws SQLException;
 }

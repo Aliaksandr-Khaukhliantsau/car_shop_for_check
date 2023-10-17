@@ -17,11 +17,11 @@ public interface CustomerRepository {
     /**
      * Retrieves a customer by their ID.
      *
-     * @param customerId the ID of the customer to retrieve.
+     * @param id the ID of the customer to retrieve.
      * @return the customer with the specified ID.
      * @throws SQLException if a database access error occurs.
      */
-    Customer getCustomerByCustomerId(UUID customerId) throws SQLException;
+    Customer getById(UUID id) throws SQLException;
 
     /**
      * Retrieves all customers with a specific first name.
@@ -30,7 +30,7 @@ public interface CustomerRepository {
      * @return a list of customers with the specified first name.
      * @throws SQLException if a database access error occurs.
      */
-    List<Customer> getCustomerByFirstName(String firstName) throws SQLException;
+    List<Customer> getByFirstName(String firstName) throws SQLException;
 
     /**
      * Retrieves all customers with a specific middle name.
@@ -39,7 +39,7 @@ public interface CustomerRepository {
      * @return a list of customers with the specified middle name.
      * @throws SQLException if a database access error occurs.
      */
-    List<Customer> getCustomerByMiddleName(String middleName) throws SQLException;
+    List<Customer> getByMiddleName(String middleName) throws SQLException;
 
     /**
      * Retrieves all customers with a specific last name.
@@ -48,7 +48,7 @@ public interface CustomerRepository {
      * @return a list of customers with the specified last name.
      * @throws SQLException if a database access error occurs.
      */
-    List<Customer> getCustomerByLastName(String lastName) throws SQLException;
+    List<Customer> getByLastName(String lastName) throws SQLException;
 
     /**
      * Retrieves all customers.
@@ -56,7 +56,7 @@ public interface CustomerRepository {
      * @return a list of all customers.
      * @throws SQLException if a database access error occurs.
      */
-    List<Customer> getAllCustomers() throws SQLException;
+    List<Customer> getAll() throws SQLException;
 
     /**
      * Creates a new customer.
@@ -71,19 +71,19 @@ public interface CustomerRepository {
     /**
      * Updates an existing customer's information.
      *
-     * @param customerId the ID of the customer to update.
+     * @param id         the ID of the customer to update.
      * @param firstName  the new first name for the customer.
      * @param lastName   the new last name for the customer.
      * @param middleName the new middle name for the customer.
      * @throws SQLException if a database access error occurs.
      */
-    void update(UUID customerId, String firstName, String lastName, String middleName) throws SQLException;
+    void update(UUID id, String firstName, String lastName, String middleName) throws SQLException;
 
     /**
      * Deletes a customer by their ID.
      *
-     * @param customerId the ID of the customer to delete.
+     * @param id the ID of the customer to delete.
      * @throws SQLException if a database access error occurs.
      */
-    void delete(UUID customerId) throws SQLException;
+    void delete(UUID id) throws SQLException;
 }

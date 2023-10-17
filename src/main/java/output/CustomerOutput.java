@@ -38,7 +38,7 @@ public class CustomerOutput {
 
                 // Show all customers
             } else if (userCommand.equals("1")) {
-                customerService.getAllCustomers().forEach(System.out::println);
+                customerService.getAll().forEach(System.out::println);
                 System.out.println();
 
                 // Show customers by sample
@@ -47,7 +47,7 @@ public class CustomerOutput {
                 // Selection menu
                 while (true) {
                     System.out.println("Select a sample:");
-                    System.out.println("1 - Customer's id");
+                    System.out.println("1 - Customer id");
                     System.out.println("2 - First name");
                     System.out.println("3 - Middle name");
                     System.out.println("4 - Last name");
@@ -60,12 +60,12 @@ public class CustomerOutput {
                         System.out.println("Exit to the previous menu.\n");
                         break;
 
-                        // Selection by customer's id
+                        // Selection by customer id
                     } else if (userCommand.equals("1")) {
-                        System.out.println("Enter the customer's id:");
-                        UUID customerId = UUID.fromString(scanner.nextLine());
+                        System.out.println("Enter the customer id:");
+                        UUID id = UUID.fromString(scanner.nextLine());
 
-                        System.out.println(customerService.getCustomerByCustomerId(customerId));
+                        System.out.println(customerService.getById(id));
                         System.out.println();
 
                         // Selection by first name
@@ -73,7 +73,7 @@ public class CustomerOutput {
                         System.out.println("Enter the first name:");
                         String firstName = scanner.nextLine();
 
-                        customerService.getCustomerByFirstName(firstName).forEach(System.out::println);
+                        customerService.getByFirstName(firstName).forEach(System.out::println);
                         System.out.println();
 
                         // Selection by middle name
@@ -81,7 +81,7 @@ public class CustomerOutput {
                         System.out.println("Enter the middle name:");
                         String middleName = scanner.nextLine();
 
-                        customerService.getCustomerByMiddleName(middleName).forEach(System.out::println);
+                        customerService.getByMiddleName(middleName).forEach(System.out::println);
                         System.out.println();
 
                         // Selection by last name
@@ -89,7 +89,7 @@ public class CustomerOutput {
                         System.out.println("Enter the last name:");
                         String lastName = scanner.nextLine();
 
-                        customerService.getCustomerByLastName(lastName).forEach(System.out::println);
+                        customerService.getByLastName(lastName).forEach(System.out::println);
                         System.out.println();
 
                     } else {
@@ -111,25 +111,25 @@ public class CustomerOutput {
 
                 // Change a customer
             } else if (userCommand.equals("4")) {
-                System.out.println("Enter the customer's id:");
-                UUID customerId = UUID.fromString(scanner.nextLine());
-                System.out.println("Enter a new first name for the customer's record to edit:");
+                System.out.println("Enter the customer id:");
+                UUID id = UUID.fromString(scanner.nextLine());
+                System.out.println("Enter a new first name for the customer record to edit:");
                 String firstName = scanner.nextLine();
-                System.out.println("Enter a new middle name for the customer's record to edit:");
+                System.out.println("Enter a new middle name for the customer record to edit:");
                 String middleName = scanner.nextLine();
-                System.out.println("Enter a new last name for the customer's record to edit:");
+                System.out.println("Enter a new last name for the customer record to edit:");
                 String lastName = scanner.nextLine();
 
-                customerService.update(customerId, firstName, middleName, lastName);
-                System.out.println("The customer's record has been changed.\n");
+                customerService.update(id, firstName, middleName, lastName);
+                System.out.println("The customer record has been changed.\n");
 
                 // Delete a customer
             } else if (userCommand.equals("5")) {
-                System.out.println("Enter the customer's id:");
-                UUID customerId = UUID.fromString(scanner.nextLine());
+                System.out.println("Enter the customer id:");
+                UUID id = UUID.fromString(scanner.nextLine());
 
-                customerService.delete(customerId);
-                System.out.println("The customer's record has been deleted.\n");
+                customerService.delete(id);
+                System.out.println("The customer record has been deleted.\n");
 
             } else {
                 System.err.println("Unknown Command!\n");

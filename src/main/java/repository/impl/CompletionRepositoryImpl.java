@@ -1,11 +1,11 @@
 package repository.impl;
 
-import dto.CarOptionDto;
+import dto.SettingDto;
 import entity.Completion;
-import mapper.CarOptionMapper;
+import mapper.SettingMapper;
 import repository.CompletionRepository;
-import service.CarOptionService;
-import service.impl.CarOptionServiceImpl;
+import service.SettingService;
+import service.impl.SettingServiceImpl;
 import util.PropertiesUtil;
 
 import java.sql.*;
@@ -22,15 +22,15 @@ import java.util.stream.Collectors;
  * @version 1.0
  */
 public class CompletionRepositoryImpl implements CompletionRepository {
-    private static final String SQL_GET_COMPLETION_BY_COMPLETION_ID = "SELECT * FROM completions WHERE completion_id = ? ORDER BY completion_name ASC;";
-    private static final String SQL_GET_COMPLETION_BY_COMPLETION_NAME = "SELECT * FROM completions WHERE completion_name = ? ORDER BY completion_name ASC;";
-    private static final String SQL_GET_ALL_COMPLETIONS = "SELECT * FROM completions ORDER BY completion_name ASC;";
-    private static final String SQL_ADD_A_CAR_OPTION = "INSERT INTO completions_car_options (completion_id, option_id) VALUES (?, ?) RETURNING *;";
-    private static final String SQL_DELETE_A_CAR_OPTION = "DELETE FROM completions_car_options WHERE completion_id = ? AND option_id = ? RETURNING *;";
-    private static final String SQL_CREATE_A_COMPLETION = "INSERT INTO completions (completion_name) VALUES (?) RETURNING *;";
-    private static final String SQL_UPDATE_A_COMPLETION = "UPDATE completions SET completion_name = ? WHERE completion_id = ? RETURNING *;";
-    private static final String SQL_DELETE_A_COMPLETION = "DELETE FROM completions WHERE completion_id = ? RETURNING *;";
-    private static final CarOptionMapper carOptionMapper = CarOptionMapper.INSTANCE;
+    private static final String SQL_GET_BY_ID = "SELECT * FROM completions WHERE completion_id = ? ORDER BY completion_name ASC;";
+    private static final String SQL_GET_BY_COMPLETION_NAME = "SELECT * FROM completions WHERE completion_name = ? ORDER BY completion_name ASC;";
+    private static final String SQL_GET_ALL = "SELECT * FROM completions ORDER BY completion_name ASC;";
+    private static final String SQL_ADD_SETTING = "INSERT INTO completions_car_options (completion_id, option_id) VALUES (?, ?) RETURNING *;";
+    private static final String SQL_DELETE_SETTING = "DELETE FROM completions_car_options WHERE completion_id = ? AND option_id = ? RETURNING *;";
+    private static final String SQL_CREATE = "INSERT INTO completions (completion_name) VALUES (?) RETURNING *;";
+    private static final String SQL_UPDATE = "UPDATE completions SET completion_name = ? WHERE completion_id = ? RETURNING *;";
+    private static final String SQL_DELETE = "DELETE FROM completions WHERE completion_id = ? RETURNING *;";
+    private static final SettingMapper MODIFICATION_MAPPER = SettingMapper.INSTANCE;
     private final Connection connection;
 
     /**
@@ -50,18 +50,18 @@ public class CompletionRepositoryImpl implements CompletionRepository {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public Completion getCompletionByCompletionId(UUID completionId) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_COMPLETION_BY_COMPLETION_ID)) {
+    public Completion getById(UUID completionId) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_ID)) {
             preparedStatement.setObject(1, completionId);
             ResultSet resultSet = preparedStatement.executeQuery();
             Completion completion = new Completion();
 
             while (resultSet.next()) {
-                completion.setCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+                completion.setId(UUID.fromString(resultSet.getString("completion_id")));
                 completion.setCompletionName(resultSet.getString("completion_name"));
-                CarOptionService carOptionService = new CarOptionServiceImpl();
-                List<CarOptionDto> carOptionsDto = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
-                completion.setCarOptions(carOptionsDto.stream().map(carOptionMapper::carOptionDtoToCarOption).collect(Collectors.toList()));
+                SettingService settingService = new SettingServiceImpl();
+                List<SettingDto> carOptionsDto = settingService.getByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+                completion.setSettings(carOptionsDto.stream().map(MODIFICATION_MAPPER::settingDtoToSetting).collect(Collectors.toList()));
             }
             return completion;
         }
@@ -75,18 +75,18 @@ public class CompletionRepositoryImpl implements CompletionRepository {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public Completion getCompletionByCompletionName(String completionName) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_COMPLETION_BY_COMPLETION_NAME)) {
+    public Completion getByCompletionName(String completionName) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_COMPLETION_NAME)) {
             preparedStatement.setString(1, completionName);
             ResultSet resultSet = preparedStatement.executeQuery();
             Completion completion = new Completion();
 
             while (resultSet.next()) {
-                completion.setCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+                completion.setId(UUID.fromString(resultSet.getString("completion_id")));
                 completion.setCompletionName(resultSet.getString("completion_name"));
-                CarOptionService carOptionService = new CarOptionServiceImpl();
-                List<CarOptionDto> carOptionsDto = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
-                completion.setCarOptions(carOptionsDto.stream().map(carOptionMapper::carOptionDtoToCarOption).collect(Collectors.toList()));
+                SettingService settingService = new SettingServiceImpl();
+                List<SettingDto> carOptionsDto = settingService.getByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+                completion.setSettings(carOptionsDto.stream().map(MODIFICATION_MAPPER::settingDtoToSetting).collect(Collectors.toList()));
             }
             return completion;
         }
@@ -99,18 +99,18 @@ public class CompletionRepositoryImpl implements CompletionRepository {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public List<Completion> getAllCompletions() throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_COMPLETIONS)) {
+    public List<Completion> getAll() throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Completion> completions = new ArrayList<>();
 
             while (resultSet.next()) {
                 Completion completion = new Completion();
-                completion.setCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+                completion.setId(UUID.fromString(resultSet.getString("completion_id")));
                 completion.setCompletionName(resultSet.getString("completion_name"));
-                CarOptionService carOptionService = new CarOptionServiceImpl();
-                List<CarOptionDto> carOptionsDto = carOptionService.getCarOptionsByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
-                completion.setCarOptions(carOptionsDto.stream().map(carOptionMapper::carOptionDtoToCarOption).collect(Collectors.toList()));
+                SettingService settingService = new SettingServiceImpl();
+                List<SettingDto> carOptionsDto = settingService.getByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
+                completion.setSettings(carOptionsDto.stream().map(MODIFICATION_MAPPER::settingDtoToSetting).collect(Collectors.toList()));
 
                 completions.add(completion);
             }
@@ -119,33 +119,33 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     }
 
     /**
-     * Method to add a car option to a completion.
+     * Method to add a car setting to a completion.
      *
-     * @param completionId the UUID of the completion.
-     * @param optionId     the UUID of the car option.
+     * @param id        the UUID of the completion.
+     * @param settingId the UUID of the car setting.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public void addCarOption(UUID completionId, UUID optionId) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_A_CAR_OPTION)) {
-            preparedStatement.setObject(1, completionId);
-            preparedStatement.setObject(2, optionId);
+    public void addSetting(UUID id, UUID settingId) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_SETTING)) {
+            preparedStatement.setObject(1, id);
+            preparedStatement.setObject(2, settingId);
             preparedStatement.executeQuery();
         }
     }
 
     /**
-     * Method to delete a car option from a completion.
+     * Method to delete a car setting from a completion.
      *
-     * @param completionId the UUID of the completion.
-     * @param optionId     the UUID of the car option.
+     * @param id        the UUID of the completion.
+     * @param settingId the UUID of the car setting.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public void deleteCarOption(UUID completionId, UUID optionId) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_CAR_OPTION)) {
-            preparedStatement.setObject(1, completionId);
-            preparedStatement.setObject(2, optionId);
+    public void deleteSetting(UUID id, UUID settingId) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_SETTING)) {
+            preparedStatement.setObject(1, id);
+            preparedStatement.setObject(2, settingId);
             preparedStatement.executeQuery();
         }
     }
@@ -158,7 +158,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
      */
     @Override
     public void create(String completionName) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_A_COMPLETION)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE)) {
             preparedStatement.setString(1, completionName);
             preparedStatement.executeQuery();
         }
@@ -167,15 +167,15 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     /**
      * Method to update an existing completion.
      *
-     * @param completionId   the UUID of the completion to be updated.
+     * @param id             the UUID of the completion to be updated.
      * @param completionName the new name of the completion.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public void update(UUID completionId, String completionName) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_A_COMPLETION)) {
+    public void update(UUID id, String completionName) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE)) {
             preparedStatement.setString(1, completionName);
-            preparedStatement.setObject(2, completionId);
+            preparedStatement.setObject(2, id);
             preparedStatement.executeQuery();
         }
     }
@@ -183,13 +183,13 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     /**
      * Method to delete an existing completion.
      *
-     * @param completionId the UUID of the completion to be deleted.
+     * @param id the UUID of the completion to be deleted.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public void delete(UUID completionId) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_A_COMPLETION)) {
-            preparedStatement.setObject(1, completionId);
+    public void delete(UUID id) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE)) {
+            preparedStatement.setObject(1, id);
             preparedStatement.executeQuery();
         }
     }

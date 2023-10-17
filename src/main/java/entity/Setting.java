@@ -5,7 +5,7 @@ import lombok.*;
 import java.util.UUID;
 
 /**
- * The CarOption class is an entity representing a car option.
+ * The Setting class is an entity representing a car setting.
  *
  * @author Aliaksandr Khaukhliantsau
  * @version 1.0
@@ -15,15 +15,15 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CarOption {
+public class Setting {
 
     /**
-     * Unique identifier for the car option.
+     * Unique identifier for the car setting.
      */
-    private UUID optionId;
+    private UUID id;
 
     /**
-     * Name of the car option.
+     * Name of the car setting.
      */
-    private String optionName;
+    private String settingName;
 }

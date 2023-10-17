@@ -20,7 +20,7 @@ public class CarDto {
     /**
      * Unique identifier for the car.
      */
-    private UUID carId;
+    private UUID id;
 
     /**
      * Vehicle identification number of the car.
@@ -28,7 +28,7 @@ public class CarDto {
     private String vin;
 
     /**
-     * An instance of CarModelDto representing the model of the car.
+     * An instance of LayoutDto representing the layout of the car.
      */
-    private CarModelDto carModel;
+    private LayoutDto layout;
 }

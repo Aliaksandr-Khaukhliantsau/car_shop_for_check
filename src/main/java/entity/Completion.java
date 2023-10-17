@@ -22,7 +22,7 @@ public class Completion {
     /**
      * Unique identifier for the car completion.
      */
-    private UUID completionId;
+    private UUID id;
 
     /**
      * Name of the car completion.
@@ -30,21 +30,21 @@ public class Completion {
     private String completionName;
 
     /**
-     * A list of CarOption instances representing the options of the car completion.
+     * A list of Setting instances representing the settings of the car completion.
      */
-    private List<CarOption> carOptions;
+    private List<Setting> settings;
 
     /**
-     * Adds a CarOption to the list of car options. If the list is null, it initializes a new ArrayList and adds the CarOption to it.
+     * Adds a setting to the list of car settings. If the list is null, it initializes a new ArrayList and adds the Setting to it.
      *
-     * @param carOption the CarOption to be added to the list of car options.
+     * @param setting the Setting to be added to the list of car settings.
      */
-    public void addCarOption(CarOption carOption) {
-        if (this.carOptions != null) {
-            this.carOptions.add(carOption);
+    public void addSetting(Setting setting) {
+        if (this.settings != null) {
+            this.settings.add(setting);
         } else {
-            this.carOptions = new ArrayList<>();
-            this.carOptions.add(carOption);
+            this.settings = new ArrayList<>();
+            this.settings.add(setting);
         }
     }
 }

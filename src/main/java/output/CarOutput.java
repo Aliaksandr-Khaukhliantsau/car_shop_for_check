@@ -38,7 +38,7 @@ public class CarOutput {
 
                 // Show all cars
             } else if (userCommand.equals("1")) {
-                carService.getAllCars().forEach(System.out::println);
+                carService.getAll().forEach(System.out::println);
                 System.out.println();
 
                 // Show car by selection
@@ -47,9 +47,9 @@ public class CarOutput {
                 // Selection menu
                 while (true) {
                     System.out.println("Select a sample:");
-                    System.out.println("1 - Car's id");
+                    System.out.println("1 - Car id");
                     System.out.println("2 - VIN");
-                    System.out.println("3 - Model's id");
+                    System.out.println("3 - Layout id");
                     System.out.println("0 - Back to the previous menu");
 
                     userCommand = scanner.nextLine();
@@ -59,12 +59,12 @@ public class CarOutput {
                         System.out.println("Exit to the previous menu.\n");
                         break;
 
-                        // Sampling by car's id
+                        // Sampling by car id
                     } else if (userCommand.equals("1")) {
-                        System.out.println("Enter the car's id:");
-                        UUID carId = UUID.fromString(scanner.nextLine());
+                        System.out.println("Enter the car id:");
+                        UUID id = UUID.fromString(scanner.nextLine());
 
-                        System.out.println(carService.getCarByCarId(carId));
+                        System.out.println(carService.getById(id));
                         System.out.println();
 
                         // Sampling by VIN
@@ -72,15 +72,15 @@ public class CarOutput {
                         System.out.println("Enter the VIN:");
                         String vin = scanner.nextLine();
 
-                        System.out.println(carService.getCarByVin(vin));
+                        System.out.println(carService.getByVin(vin));
                         System.out.println();
 
-                        // Sampling by model's id
+                        // Sampling by layout id
                     } else if (userCommand.equals("3")) {
-                        System.out.println("Enter the model's id:");
-                        UUID modelId = UUID.fromString(scanner.nextLine());
+                        System.out.println("Enter the layout id:");
+                        UUID layoutId = UUID.fromString(scanner.nextLine());
 
-                        carService.getCarByModelId(modelId).forEach(System.out::println);
+                        carService.getByLayoutId(layoutId).forEach(System.out::println);
                         System.out.println();
 
                     } else {
@@ -92,31 +92,31 @@ public class CarOutput {
             } else if (userCommand.equals("3")) {
                 System.out.println("Enter the VIN of the new car:");
                 String vin = scanner.nextLine();
-                System.out.println("Enter the model's id of the new car:");
-                UUID modelId = UUID.fromString(scanner.nextLine());
+                System.out.println("Enter the layout id of the new car:");
+                UUID layoutId = UUID.fromString(scanner.nextLine());
 
-                carService.create(vin, modelId);
-                System.out.println("New car's record has been created.\n");
+                carService.create(vin, layoutId);
+                System.out.println("New car record has been created.\n");
 
                 // Change a car
             } else if (userCommand.equals("4")) {
-                System.out.println("Enter the car's id:");
-                UUID carId = UUID.fromString(scanner.nextLine());
-                System.out.println("Enter a new VIN for the car's record to edit:");
+                System.out.println("Enter the car id:");
+                UUID id = UUID.fromString(scanner.nextLine());
+                System.out.println("Enter a new VIN for the car record to edit:");
                 String vin = scanner.nextLine();
-                System.out.println("Enter a new model's id for the car's record to edit:");
-                UUID modelId = UUID.fromString(scanner.nextLine());
+                System.out.println("Enter a new layout id for the car record to edit:");
+                UUID layoutId = UUID.fromString(scanner.nextLine());
 
-                carService.update(carId, vin, modelId);
-                System.out.println("The car's record has been changed.\n");
+                carService.update(id, vin, layoutId);
+                System.out.println("The car record has been changed.\n");
 
                 // Delete a car
             } else if (userCommand.equals("5")) {
-                System.out.println("Enter the car's id:");
-                UUID carId = UUID.fromString(scanner.nextLine());
+                System.out.println("Enter the car id:");
+                UUID id = UUID.fromString(scanner.nextLine());
 
-                carService.delete(carId);
-                System.out.println("The car's record has been deleted.\n");
+                carService.delete(id);
+                System.out.println("The car record has been deleted.\n");
 
             } else {
                 System.err.println("Unknown Command!\n");

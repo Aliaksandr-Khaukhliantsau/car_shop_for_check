@@ -20,7 +20,7 @@ public class Car {
     /**
      * Unique identifier for the car.
      */
-    private UUID carId;
+    private UUID id;
 
     /**
      * Vehicle identification number of the car.
@@ -28,7 +28,7 @@ public class Car {
     private String vin;
 
     /**
-     * An instance of CarModel representing the model of the car.
+     * An instance of Layout representing the layout of the car.
      */
-    private CarModel carModel;
+    private Layout layout;
 }

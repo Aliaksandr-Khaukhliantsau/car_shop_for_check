@@ -20,7 +20,7 @@ public class Purchase {
     /**
      * Unique identifier for the purchase.
      */
-    private UUID purchaseId;
+    private UUID id;
 
     /**
      * Purchase number.

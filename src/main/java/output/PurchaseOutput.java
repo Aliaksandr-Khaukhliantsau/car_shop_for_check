@@ -38,7 +38,7 @@ public class PurchaseOutput {
 
                 // Show all purchases
             } else if (userCommand.equals("1")) {
-                purchaseService.getAllPurchases().forEach(System.out::println);
+                purchaseService.getAll().forEach(System.out::println);
                 System.out.println();
 
                 // Show purchases by selection
@@ -47,10 +47,10 @@ public class PurchaseOutput {
                 // Selection menu
                 while (true) {
                     System.out.println("Select a sample:");
-                    System.out.println("1 - Purchase's id");
-                    System.out.println("2 - Purchase's number");
-                    System.out.println("3 - Customer's id");
-                    System.out.println("4 - Car's id");
+                    System.out.println("1 - Purchase id");
+                    System.out.println("2 - Purchase number");
+                    System.out.println("3 - Customer id");
+                    System.out.println("4 - Car id");
                     System.out.println("0 - Back to the previous menu");
 
                     userCommand = scanner.nextLine();
@@ -60,36 +60,36 @@ public class PurchaseOutput {
                         System.out.println("Exit to the previous menu.\n");
                         break;
 
-                        // Sampling by purchase's id
+                        // Sampling by purchase id
                     } else if (userCommand.equals("1")) {
-                        System.out.println("Enter the purchase's id:");
-                        UUID purchaseId = UUID.fromString(scanner.nextLine());
+                        System.out.println("Enter the purchase id:");
+                        UUID id = UUID.fromString(scanner.nextLine());
 
-                        System.out.println(purchaseService.getPurchaseByPurchaseId(purchaseId));
+                        System.out.println(purchaseService.getById(id));
                         System.out.println();
 
-                        // Sampling by purchase's number
+                        // Sampling by purchase number
                     } else if (userCommand.equals("2")) {
-                        System.out.println("Enter the purchase's number:");
+                        System.out.println("Enter the purchase number:");
                         String purchaseNumber = scanner.nextLine();
 
-                        System.out.println(purchaseService.getPurchaseByPurchaseNumber(purchaseNumber));
+                        System.out.println(purchaseService.getByPurchaseNumber(purchaseNumber));
                         System.out.println();
 
-                        // Sampling by customer's id
+                        // Sampling by customer id
                     } else if (userCommand.equals("3")) {
-                        System.out.println("Enter the customer's id:");
+                        System.out.println("Enter the customer id:");
                         UUID customerId = UUID.fromString(scanner.nextLine());
 
-                        purchaseService.getPurchaseByCustomerId(customerId).forEach(System.out::println);
+                        purchaseService.getByCustomerId(customerId).forEach(System.out::println);
                         System.out.println();
 
-                        // Sampling by car's id
+                        // Sampling by car id
                     } else if (userCommand.equals("4")) {
-                        System.out.println("Enter the car's id:");
+                        System.out.println("Enter the car id:");
                         UUID carId = UUID.fromString(scanner.nextLine());
 
-                        purchaseService.getPurchaseByCarId(carId).forEach(System.out::println);
+                        purchaseService.getByCarId(carId).forEach(System.out::println);
                         System.out.println();
 
                     } else {
@@ -99,33 +99,33 @@ public class PurchaseOutput {
 
                 // Create a new purchase
             } else if (userCommand.equals("3")) {
-                System.out.println("Enter the customer's id of the new purchase:");
+                System.out.println("Enter the customer id of the new purchase:");
                 UUID customerId = UUID.fromString(scanner.nextLine());
-                System.out.println("Enter the car's id of the new purchase:");
+                System.out.println("Enter the car id of the new purchase:");
                 UUID carId = UUID.fromString(scanner.nextLine());
 
                 purchaseService.create(customerId, carId);
-                System.out.println("New purchase's record has been created.\n");
+                System.out.println("New purchase record has been created.\n");
 
                 // Change a purchase
             } else if (userCommand.equals("4")) {
-                System.out.println("Enter the purchase's id:");
-                UUID purchaseId = UUID.fromString(scanner.nextLine());
-                System.out.println("Enter a new customer's id for the purchase's record to edit:");
+                System.out.println("Enter the purchase id:");
+                UUID id = UUID.fromString(scanner.nextLine());
+                System.out.println("Enter a new customer id for the purchase record to edit:");
                 UUID customerId = UUID.fromString(scanner.nextLine());
-                System.out.println("Enter a new car's id for the purchase's record to edit:");
+                System.out.println("Enter a new car id for the purchase record to edit:");
                 UUID carId = UUID.fromString(scanner.nextLine());
 
-                purchaseService.update(purchaseId, customerId, carId);
+                purchaseService.update(id, customerId, carId);
                 System.out.println("The purchase's record has been changed.\n");
 
                 // Delete a purchase
             } else if (userCommand.equals("5")) {
-                System.out.println("Enter the purchase's id:");
-                UUID purchaseId = UUID.fromString(scanner.nextLine());
+                System.out.println("Enter the purchase id:");
+                UUID id = UUID.fromString(scanner.nextLine());
 
-                purchaseService.delete(purchaseId);
-                System.out.println("The purchase's record has been deleted.\n");
+                purchaseService.delete(id);
+                System.out.println("The purchase record has been deleted.\n");
 
             } else {
                 System.err.println("Unknown Command!\n");

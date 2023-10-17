@@ -34,13 +34,13 @@ public class CompletionServiceImpl implements CompletionService {
     /**
      * Retrieves a completion DTO by its ID.
      *
-     * @param completionId the ID of the completion.
+     * @param id the ID of the completion.
      * @return the completion DTO.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public CompletionDto getCompletionByCompletionId(UUID completionId) throws SQLException {
-        return completionMapper.completionToCompletionDto(completionRepository.getCompletionByCompletionId(completionId));
+    public CompletionDto getById(UUID id) throws SQLException {
+        return completionMapper.completionToCompletionDto(completionRepository.getById(id));
     }
 
     /**
@@ -51,8 +51,8 @@ public class CompletionServiceImpl implements CompletionService {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public CompletionDto getCompletionByCompletionName(String completionName) throws SQLException {
-        return completionMapper.completionToCompletionDto(completionRepository.getCompletionByCompletionName(completionName));
+    public CompletionDto getByCompletionName(String completionName) throws SQLException {
+        return completionMapper.completionToCompletionDto(completionRepository.getByCompletionName(completionName));
     }
 
     /**
@@ -62,32 +62,32 @@ public class CompletionServiceImpl implements CompletionService {
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public List<CompletionDto> getAllCompletions() throws SQLException {
-        return completionRepository.getAllCompletions().stream().map(completionMapper::completionToCompletionDto).collect(Collectors.toList());
+    public List<CompletionDto> getAll() throws SQLException {
+        return completionRepository.getAll().stream().map(completionMapper::completionToCompletionDto).collect(Collectors.toList());
     }
 
     /**
-     * Adds a car option to a specific completion in the database.
+     * Adds a car setting to a specific completion in the database.
      *
-     * @param completionId the ID of the completion to add the car option to.
-     * @param optionId     the ID of the car option to add.
+     * @param id        the ID of the completion to add the car setting to.
+     * @param settingId the ID of the car setting to add.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public void addCarOption(UUID completionId, UUID optionId) throws SQLException {
-        completionRepository.addCarOption(completionId, optionId);
+    public void addSetting(UUID id, UUID settingId) throws SQLException {
+        completionRepository.addSetting(id, settingId);
     }
 
     /**
-     * Deletes a car option from a specific completion in the database using its ID and the ID of the car option.
+     * Deletes a car setting from a specific completion in the database using its ID and the ID of the car setting.
      *
-     * @param completionId the ID of the completion to delete the car option from.
-     * @param optionId     the ID of the car option to delete.
+     * @param id        the ID of the completion to delete the car setting from.
+     * @param settingId the ID of the car setting to delete.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public void deleteCarOption(UUID completionId, UUID optionId) throws SQLException {
-        completionRepository.deleteCarOption(completionId, optionId);
+    public void deleteSetting(UUID id, UUID settingId) throws SQLException {
+        completionRepository.deleteSetting(id, settingId);
     }
 
     /**
@@ -104,23 +104,23 @@ public class CompletionServiceImpl implements CompletionService {
     /**
      * Updates an existing completion record in the database with a new name using its ID and the new name.
      *
-     * @param CompletionId   the ID of the completion to update.
+     * @param id             the ID of the completion to update.
      * @param completionName the new name for the completion record.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public void update(UUID CompletionId, String completionName) throws SQLException {
-        completionRepository.update(CompletionId, completionName);
+    public void update(UUID id, String completionName) throws SQLException {
+        completionRepository.update(id, completionName);
     }
 
     /**
      * Deletes a specific completion record from the database using its ID.
      *
-     * @param CompletionId the ID of the completion to delete.
+     * @param id the ID of the completion to delete.
      * @throws SQLException if a database access error occurs.
      */
     @Override
-    public void delete(UUID CompletionId) throws SQLException {
-        completionRepository.delete(CompletionId);
+    public void delete(UUID id) throws SQLException {
+        completionRepository.delete(id);
     }
 }
