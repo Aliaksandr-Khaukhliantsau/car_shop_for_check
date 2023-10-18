@@ -20,16 +20,7 @@ import java.util.stream.Collectors;
  */
 public class SettingServiceImpl implements SettingService {
     private static final SettingMapper MODIFICATION_MAPPER = SettingMapper.INSTANCE;
-
     SettingRepository settingRepository = new SettingRepositoryImpl();
-
-    /**
-     * Constructor for the SettingServiceImpl class.
-     *
-     * @throws SQLException if a database access error occurs.
-     */
-    public SettingServiceImpl() throws SQLException {
-    }
 
     /**
      * Retrieves a car setting DTO by its ID.

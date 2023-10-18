@@ -20,16 +20,7 @@ import java.util.stream.Collectors;
  */
 public class CompletionServiceImpl implements CompletionService {
     private static final CompletionMapper completionMapper = CompletionMapper.INSTANCE;
-
     CompletionRepository completionRepository = new CompletionRepositoryImpl();
-
-    /**
-     * Constructor for the CompletionServiceImpl class.
-     *
-     * @throws SQLException if a database access error occurs.
-     */
-    public CompletionServiceImpl() throws SQLException {
-    }
 
     /**
      * Retrieves a completion DTO by its ID.

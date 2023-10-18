@@ -20,23 +20,22 @@ import java.util.UUID;
  * @version 1.0
  */
 public class CarRepositoryImpl implements CarRepository {
-    private static final String SQL_GET_BY_ID = "SELECT * FROM cars WHERE car_id = ? ORDER BY vin ASC;";
+    private static final String SQL_GET_BY_ID = "SELECT * FROM cars WHERE id = ? ORDER BY vin ASC;";
     private static final String SQL_GET_BY_VIN = "SELECT * FROM cars WHERE vin = ? ORDER BY vin ASC;";
-    private static final String SQL_GET_BY_LAYOUT_ID = "SELECT * FROM cars WHERE model_id = ? ORDER BY vin ASC;";
+    private static final String SQL_GET_BY_LAYOUT_ID = "SELECT * FROM cars WHERE layout_id = ? ORDER BY vin ASC;";
     private static final String SQL_GET_ALL = "SELECT * FROM cars ORDER BY vin ASC;";
-    private static final String SQL_CREATE = "INSERT INTO cars (vin, model_id) VALUES (?, ?) RETURNING *;";
-    private static final String SQL_UPDATE = "UPDATE cars SET vin = ?, model_id = ? WHERE car_id = ? RETURNING *;";
-    private static final String SQL_DELETE = "DELETE FROM cars WHERE car_id = ? RETURNING *;";
+    private static final String SQL_CREATE = "INSERT INTO cars (vin, layout_id) VALUES (?, ?) RETURNING *;";
+    private static final String SQL_UPDATE = "UPDATE cars SET vin = ?, layout_id = ? WHERE id = ? RETURNING *;";
+    private static final String SQL_DELETE = "DELETE FROM cars WHERE id = ? RETURNING *;";
     private static final LayoutMapper LAYOUT_MAPPER = LayoutMapper.INSTANCE;
     private final Connection connection;
 
-    /**
-     * Constructor establishes a connection to the database.
-     *
-     * @throws SQLException if a database access error occurs.
-     */
-    public CarRepositoryImpl() throws SQLException {
-        connection = DriverManager.getConnection(PropertiesUtil.get("postgres.url"), PropertiesUtil.get("postgres.user"), PropertiesUtil.get("postgres.password"));
+    {
+        try {
+            connection = DriverManager.getConnection(PropertiesUtil.get("postgres.url"), PropertiesUtil.get("postgres.user"), PropertiesUtil.get("postgres.password"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -54,11 +53,11 @@ public class CarRepositoryImpl implements CarRepository {
             Car car = new Car();
 
             while (resultSet.next()) {
-                car.setId(UUID.fromString(resultSet.getString("car_id")));
+                car.setId(UUID.fromString(resultSet.getString("id")));
                 car.setVin(resultSet.getString("vin"));
-                UUID modelId = UUID.fromString(resultSet.getString("model_id"));
+                UUID layoutId = UUID.fromString(resultSet.getString("layout_id"));
                 LayoutService layoutService = new LayoutServiceImpl();
-                car.setLayout(LAYOUT_MAPPER.carModelDtoToCarModel(layoutService.getById(modelId)));
+                car.setLayout(LAYOUT_MAPPER.layoutDtoToLayout(layoutService.getById(layoutId)));
             }
             return car;
         }
@@ -79,11 +78,11 @@ public class CarRepositoryImpl implements CarRepository {
             Car car = new Car();
 
             while (resultSet.next()) {
-                car.setId(UUID.fromString(resultSet.getString("car_id")));
+                car.setId(UUID.fromString(resultSet.getString("id")));
                 car.setVin(resultSet.getString("vin"));
-                UUID modelId = UUID.fromString(resultSet.getString("model_id"));
+                UUID layoutId = UUID.fromString(resultSet.getString("layout_id"));
                 LayoutService layoutService = new LayoutServiceImpl();
-                car.setLayout(LAYOUT_MAPPER.carModelDtoToCarModel(layoutService.getById(modelId)));
+                car.setLayout(LAYOUT_MAPPER.layoutDtoToLayout(layoutService.getById(layoutId)));
             }
             return car;
         }
@@ -105,10 +104,10 @@ public class CarRepositoryImpl implements CarRepository {
 
             while (resultSet.next()) {
                 Car car = new Car();
-                car.setId(UUID.fromString(resultSet.getString("car_id")));
+                car.setId(UUID.fromString(resultSet.getString("id")));
                 car.setVin(resultSet.getString("vin"));
                 LayoutService layoutService = new LayoutServiceImpl();
-                car.setLayout(LAYOUT_MAPPER.carModelDtoToCarModel(layoutService.getById(layoutId)));
+                car.setLayout(LAYOUT_MAPPER.layoutDtoToLayout(layoutService.getById(layoutId)));
 
                 cars.add(car);
             }
@@ -130,11 +129,11 @@ public class CarRepositoryImpl implements CarRepository {
 
             while (resultSet.next()) {
                 Car car = new Car();
-                car.setId(UUID.fromString(resultSet.getString("car_id")));
+                car.setId(UUID.fromString(resultSet.getString("id")));
                 car.setVin(resultSet.getString("vin"));
-                UUID modelId = UUID.fromString(resultSet.getString("model_id"));
+                UUID layoutId = UUID.fromString(resultSet.getString("layout_id"));
                 LayoutService layoutService = new LayoutServiceImpl();
-                car.setLayout(LAYOUT_MAPPER.carModelDtoToCarModel(layoutService.getById(modelId)));
+                car.setLayout(LAYOUT_MAPPER.layoutDtoToLayout(layoutService.getById(layoutId)));
 
                 cars.add(car);
             }

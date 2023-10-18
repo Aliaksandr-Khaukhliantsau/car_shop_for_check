@@ -25,25 +25,24 @@ import java.util.UUID;
  * @version 1.0
  */
 public class PurchaseRepositoryImpl implements PurchaseRepository {
-    private static final String SQL_GET_BY_ID = "SELECT * FROM purchases WHERE purchase_id = ? ORDER BY purchase_number ASC;";
+    private static final String SQL_GET_BY_ID = "SELECT * FROM purchases WHERE id = ? ORDER BY purchase_number ASC;";
     private static final String SQL_GET_BY_PURCHASE_NUMBER = "SELECT * FROM purchases WHERE purchase_number = ? ORDER BY purchase_number ASC;";
     private static final String SQL_GET_BY_CUSTOMER_ID = "SELECT * FROM purchases WHERE customer_id = ? ORDER BY purchase_number ASC;";
     private static final String SQL_GET_BY_CAR_ID = "SELECT * FROM purchases WHERE car_id = ? ORDER BY purchase_number ASC;";
     private static final String SQL_GET_ALL = "SELECT * FROM purchases ORDER BY purchase_number ASC;";
     private static final String SQL_CREATE = "INSERT INTO purchases (customer_id, car_id) VALUES (?, ?) RETURNING *;";
-    private static final String SQL_UPDATE = "UPDATE purchases SET customer_id = ?, car_id = ? WHERE purchase_id = ? RETURNING *;";
-    private static final String SQL_DELETE = "DELETE FROM purchases WHERE purchase_id = ? RETURNING *;";
+    private static final String SQL_UPDATE = "UPDATE purchases SET customer_id = ?, car_id = ? WHERE id = ? RETURNING *;";
+    private static final String SQL_DELETE = "DELETE FROM purchases WHERE id = ? RETURNING *;";
     private static final CustomerMapper customerMapper = CustomerMapper.INSTANCE;
     private static final CarMapper carMapper = CarMapper.INSTANCE;
     private final Connection connection;
 
-    /**
-     * Constructor establishes a connection to the database.
-     *
-     * @throws SQLException if a database access error occurs.
-     */
-    public PurchaseRepositoryImpl() throws SQLException {
-        connection = DriverManager.getConnection(PropertiesUtil.get("postgres.url"), PropertiesUtil.get("postgres.user"), PropertiesUtil.get("postgres.password"));
+    {
+        try {
+            connection = DriverManager.getConnection(PropertiesUtil.get("postgres.url"), PropertiesUtil.get("postgres.user"), PropertiesUtil.get("postgres.password"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -61,7 +60,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
             Purchase purchase = new Purchase();
 
             while (resultSet.next()) {
-                purchase.setId(UUID.fromString(resultSet.getString("purchase_id")));
+                purchase.setId(UUID.fromString(resultSet.getString("id")));
                 purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
                 UUID customerId = UUID.fromString(resultSet.getString("customer_id"));
                 CustomerService customerService = new CustomerServiceImpl();
@@ -91,7 +90,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
             Purchase purchase = new Purchase();
 
             while (resultSet.next()) {
-                purchase.setId(UUID.fromString(resultSet.getString("purchase_id")));
+                purchase.setId(UUID.fromString(resultSet.getString("id")));
                 purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
                 UUID customerId = UUID.fromString(resultSet.getString("customer_id"));
                 CustomerService customerService = new CustomerServiceImpl();
@@ -122,7 +121,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
 
             while (resultSet.next()) {
                 Purchase purchase = new Purchase();
-                purchase.setId(UUID.fromString(resultSet.getString("purchase_id")));
+                purchase.setId(UUID.fromString(resultSet.getString("id")));
                 purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
                 CustomerService customerService = new CustomerServiceImpl();
                 CustomerDto customerDto = customerService.getById(customerId);
@@ -154,7 +153,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
 
             while (resultSet.next()) {
                 Purchase purchase = new Purchase();
-                purchase.setId(UUID.fromString(resultSet.getString("purchase_id")));
+                purchase.setId(UUID.fromString(resultSet.getString("id")));
                 purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
                 CustomerService customerService = new CustomerServiceImpl();
                 UUID customerId = UUID.fromString(resultSet.getString("customer_id"));
@@ -184,7 +183,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
 
             while (resultSet.next()) {
                 Purchase purchase = new Purchase();
-                purchase.setId(UUID.fromString(resultSet.getString("purchase_id")));
+                purchase.setId(UUID.fromString(resultSet.getString("id")));
                 purchase.setPurchaseNumber(resultSet.getInt("purchase_number"));
                 UUID customerId = UUID.fromString(resultSet.getString("customer_id"));
                 CustomerService customerService = new CustomerServiceImpl();

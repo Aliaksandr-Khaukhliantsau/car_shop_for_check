@@ -20,16 +20,7 @@ import java.util.stream.Collectors;
  */
 public class PurchaseServiceImpl implements PurchaseService {
     private static final PurchaseMapper purchaseMapper = PurchaseMapper.INSTANCE;
-
     PurchaseRepository purchaseRepository = new PurchaseRepositoryImpl();
-
-    /**
-     * Constructor for the PurchaseServiceImpl class.
-     *
-     * @throws SQLException if a database access error occurs.
-     */
-    public PurchaseServiceImpl() throws SQLException {
-    }
 
     /**
      * Retrieves a purchase DTO by its ID.

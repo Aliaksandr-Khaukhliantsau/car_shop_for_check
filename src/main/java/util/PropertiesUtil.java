@@ -19,12 +19,6 @@ public final class PropertiesUtil {
     }
 
     /**
-     * Private constructor to prevent instantiation of this utility class.
-     */
-    private PropertiesUtil() {
-    }
-
-    /**
      * Loads the properties from the 'config.properties' file.
      *
      * @throws RuntimeException if an error occurs while loading the properties.

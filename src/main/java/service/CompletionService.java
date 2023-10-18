@@ -40,7 +40,7 @@ public interface CompletionService {
     List<CompletionDto> getAll() throws SQLException;
 
     /**
-     * Adds a car option to a specific completion in the database.
+     * Adds a car setting to a specific completion in the database.
      *
      * @param id        the ID of the completion to add the car setting to.
      * @param settingId the ID of the car setting to add.
@@ -49,7 +49,7 @@ public interface CompletionService {
     void addSetting(UUID id, UUID settingId) throws SQLException;
 
     /**
-     * Deletes a car option from a specific completion in the database using its ID and the ID of the car setting.
+     * Deletes a car setting from a specific completion in the database using its ID and the ID of the car setting.
      *
      * @param id        the ID of the completion to delete the car setting from.
      * @param settingId the ID of the car setting to delete.

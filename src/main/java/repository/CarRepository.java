@@ -53,7 +53,7 @@ public interface CarRepository {
      * Creates a new car record in the database with the provided VIN and layout ID.
      *
      * @param vin      the VIN of the new car.
-     * @param layoutId the ID of the model of the new car.
+     * @param layoutId the ID of the layout of the new car.
      * @throws SQLException if a database access error occurs.
      */
     void create(String vin, UUID layoutId) throws SQLException;

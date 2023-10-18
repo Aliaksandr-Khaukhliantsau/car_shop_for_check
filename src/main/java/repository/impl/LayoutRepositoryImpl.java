@@ -14,29 +14,28 @@ import java.util.UUID;
 
 /**
  * The LayoutRepositoryImpl class implements the LayoutRepository interface.
- * It provides methods to interact with the car_models table in the database.
+ * It provides methods to interact with the layouts table in the database.
  *
  * @author Aliaksandr Khaukhliantsau
  * @version 1.0
  */
 public class LayoutRepositoryImpl implements LayoutRepository {
-    private static final String SQL_GET_BY_ID = "SELECT * FROM car_models WHERE model_id = ? ORDER BY model_name ASC;";
-    private static final String SQL_GET_BY_LAYOUT_NAME = "SELECT * FROM car_models WHERE model_name = ? ORDER BY model_name ASC;";
-    private static final String SQL_GET_BY_COMPLETION_ID = "SELECT * FROM car_models WHERE completion_id = ? ORDER BY model_name ASC;";
-    private static final String SQL_GET_ALL = "SELECT * FROM car_models ORDER BY model_name ASC;";
-    private static final String SQL_CREATE = "INSERT INTO car_models (model_name, completion_id) VALUES (?, ?) RETURNING *;";
-    private static final String SQL_UPDATE = "UPDATE car_models SET model_name = ?, completion_id = ? WHERE model_id = ? RETURNING *;";
-    private static final String SQL_DELETE = "DELETE FROM car_models WHERE model_id = ? RETURNING *;";
+    private static final String SQL_GET_BY_ID = "SELECT * FROM layouts WHERE id = ? ORDER BY layout_name ASC;";
+    private static final String SQL_GET_BY_LAYOUT_NAME = "SELECT * FROM layouts WHERE layout_name = ? ORDER BY layout_name ASC;";
+    private static final String SQL_GET_BY_COMPLETION_ID = "SELECT * FROM layouts WHERE completion_id = ? ORDER BY layout_name ASC;";
+    private static final String SQL_GET_ALL = "SELECT * FROM layouts ORDER BY layout_name ASC;";
+    private static final String SQL_CREATE = "INSERT INTO layouts (layout_name, completion_id) VALUES (?, ?) RETURNING *;";
+    private static final String SQL_UPDATE = "UPDATE layouts SET layout_name = ?, completion_id = ? WHERE id = ? RETURNING *;";
+    private static final String SQL_DELETE = "DELETE FROM layouts WHERE id = ? RETURNING *;";
     private static final CompletionMapper completionMapper = CompletionMapper.INSTANCE;
     private final Connection connection;
 
-    /**
-     * Constructor establishes a connection to the database.
-     *
-     * @throws SQLException if a database access error occurs.
-     */
-    public LayoutRepositoryImpl() throws SQLException {
-        connection = DriverManager.getConnection(PropertiesUtil.get("postgres.url"), PropertiesUtil.get("postgres.user"), PropertiesUtil.get("postgres.password"));
+    {
+        try {
+            connection = DriverManager.getConnection(PropertiesUtil.get("postgres.url"), PropertiesUtil.get("postgres.user"), PropertiesUtil.get("postgres.password"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -54,8 +53,8 @@ public class LayoutRepositoryImpl implements LayoutRepository {
             Layout layout = new Layout();
 
             while (resultSet.next()) {
-                layout.setId(UUID.fromString(resultSet.getString("model_id")));
-                layout.setLayoutName(resultSet.getString("model_name"));
+                layout.setId(UUID.fromString(resultSet.getString("id")));
+                layout.setLayoutName(resultSet.getString("layout_name"));
                 UUID completionId = UUID.fromString(resultSet.getString("completion_id"));
                 CompletionService completionService = new CompletionServiceImpl();
                 layout.setCompletion(completionMapper.completionDtoToCompletion(completionService.getById(completionId)));
@@ -81,8 +80,8 @@ public class LayoutRepositoryImpl implements LayoutRepository {
 
             while (resultSet.next()) {
                 Layout layout = new Layout();
-                layout.setId(UUID.fromString(resultSet.getString("model_id")));
-                layout.setLayoutName(resultSet.getString("model_name"));
+                layout.setId(UUID.fromString(resultSet.getString("id")));
+                layout.setLayoutName(resultSet.getString("layout_name"));
                 UUID completionId = UUID.fromString(resultSet.getString("completion_id"));
                 CompletionService completionService = new CompletionServiceImpl();
                 layout.setCompletion(completionMapper.completionDtoToCompletion(completionService.getById(completionId)));
@@ -109,8 +108,8 @@ public class LayoutRepositoryImpl implements LayoutRepository {
 
             while (resultSet.next()) {
                 Layout layout = new Layout();
-                layout.setId(UUID.fromString(resultSet.getString("model_id")));
-                layout.setLayoutName(resultSet.getString("model_name"));
+                layout.setId(UUID.fromString(resultSet.getString("id")));
+                layout.setLayoutName(resultSet.getString("layout_name"));
                 CompletionService completionService = new CompletionServiceImpl();
                 layout.setCompletion(completionMapper.completionDtoToCompletion(completionService.getById(completionId)));
 
@@ -134,8 +133,8 @@ public class LayoutRepositoryImpl implements LayoutRepository {
 
             while (resultSet.next()) {
                 Layout layout = new Layout();
-                layout.setId(UUID.fromString(resultSet.getString("model_id")));
-                layout.setLayoutName(resultSet.getString("model_name"));
+                layout.setId(UUID.fromString(resultSet.getString("id")));
+                layout.setLayoutName(resultSet.getString("layout_name"));
                 UUID completionId = UUID.fromString(resultSet.getString("completion_id"));
                 CompletionService completionService = new CompletionServiceImpl();
                 layout.setCompletion(completionMapper.completionDtoToCompletion(completionService.getById(completionId)));

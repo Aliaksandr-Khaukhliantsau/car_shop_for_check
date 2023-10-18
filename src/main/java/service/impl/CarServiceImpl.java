@@ -20,16 +20,7 @@ import java.util.stream.Collectors;
  */
 public class CarServiceImpl implements CarService {
     private static final CarMapper carMapper = CarMapper.INSTANCE;
-
     CarRepository carRepository = new CarRepositoryImpl();
-
-    /**
-     * Constructor for the CarServiceImpl class.
-     *
-     * @throws SQLException if a database access error occurs.
-     */
-    public CarServiceImpl() throws SQLException {
-    }
 
     /**
      * Retrieves a car DTO by its ID.

@@ -20,16 +20,7 @@ import java.util.stream.Collectors;
  */
 public class LayoutServiceImpl implements LayoutService {
     private static final LayoutMapper LAYOUT_MAPPER = LayoutMapper.INSTANCE;
-
     LayoutRepository layoutRepository = new LayoutRepositoryImpl();
-
-    /**
-     * Constructor for the LayoutServiceImpl class.
-     *
-     * @throws SQLException if a database access error occurs.
-     */
-    public LayoutServiceImpl() throws SQLException {
-    }
 
     /**
      * Retrieves a car layout DTO by its ID.
@@ -40,7 +31,7 @@ public class LayoutServiceImpl implements LayoutService {
      */
     @Override
     public LayoutDto getById(UUID id) throws SQLException {
-        return LAYOUT_MAPPER.carModelToCarModelDto(layoutRepository.getById(id));
+        return LAYOUT_MAPPER.layoutToLayoutDto(layoutRepository.getById(id));
     }
 
     /**
@@ -52,7 +43,7 @@ public class LayoutServiceImpl implements LayoutService {
      */
     @Override
     public List<LayoutDto> getByLayoutName(String layoutName) throws SQLException {
-        return layoutRepository.getByLayoutName(layoutName).stream().map(LAYOUT_MAPPER::carModelToCarModelDto).collect(Collectors.toList());
+        return layoutRepository.getByLayoutName(layoutName).stream().map(LAYOUT_MAPPER::layoutToLayoutDto).collect(Collectors.toList());
     }
 
     /**
@@ -64,7 +55,7 @@ public class LayoutServiceImpl implements LayoutService {
      */
     @Override
     public List<LayoutDto> getByCompletionId(UUID completionId) throws SQLException {
-        return layoutRepository.getByCompletionId(completionId).stream().map(LAYOUT_MAPPER::carModelToCarModelDto).collect(Collectors.toList());
+        return layoutRepository.getByCompletionId(completionId).stream().map(LAYOUT_MAPPER::layoutToLayoutDto).collect(Collectors.toList());
     }
 
     /**
@@ -75,7 +66,7 @@ public class LayoutServiceImpl implements LayoutService {
      */
     @Override
     public List<LayoutDto> getAll() throws SQLException {
-        return layoutRepository.getAll().stream().map(LAYOUT_MAPPER::carModelToCarModelDto).collect(Collectors.toList());
+        return layoutRepository.getAll().stream().map(LAYOUT_MAPPER::layoutToLayoutDto).collect(Collectors.toList());
     }
 
     /**

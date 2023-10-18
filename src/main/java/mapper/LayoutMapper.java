@@ -28,7 +28,7 @@ public interface LayoutMapper {
      * @return the mapped LayoutDto.
      */
     @Mapping(source = "completion", target = "completion")
-    LayoutDto carModelToCarModelDto(Layout layout);
+    LayoutDto layoutToLayoutDto(Layout layout);
 
     /**
      * Maps a LayoutDto to a Layout entity.
@@ -36,5 +36,5 @@ public interface LayoutMapper {
      * @param layoutDto the LayoutDto to be mapped.
      * @return the mapped Layout entity.
      */
-    Layout carModelDtoToCarModel(LayoutDto layoutDto);
+    Layout layoutDtoToLayout(LayoutDto layoutDto);
 }

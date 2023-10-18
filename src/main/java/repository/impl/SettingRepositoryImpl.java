@@ -17,22 +17,21 @@ import java.util.UUID;
  * @version 1.0
  */
 public class SettingRepositoryImpl implements SettingRepository {
-    private static final String SQL_GET_BY_ID = "SELECT * FROM car_options WHERE option_id = ? ORDER BY option_name ASC;";
-    private static final String SQL_GET_BY_SETTING_NAME = "SELECT * FROM car_options WHERE option_name = ? ORDER BY option_name ASC;";
-    private static final String SQL_GET_BY_COMPLETION_ID = "SELECT * FROM completions_car_options JOIN car_options ON completions_car_options.option_id = car_options.option_id WHERE completions_car_options.completion_id = ? ORDER BY car_options.option_name ASC;";
-    private static final String SQL_GET_ALL = "SELECT * FROM car_options ORDER BY option_name ASC;";
-    private static final String SQL_CREATE = "INSERT INTO car_options (option_name) VALUES (?) RETURNING *;";
-    private static final String SQL_UPDATE = "UPDATE car_options SET option_name = ? WHERE option_id = ? RETURNING *;";
-    private static final String SQL_DELETE = "DELETE FROM car_options WHERE option_id = ? RETURNING *;";
+    private static final String SQL_GET_BY_ID = "SELECT * FROM settings WHERE id = ? ORDER BY setting_name ASC;";
+    private static final String SQL_GET_BY_SETTING_NAME = "SELECT * FROM settings WHERE setting_name = ? ORDER BY setting_name ASC;";
+    private static final String SQL_GET_BY_COMPLETION_ID = "SELECT * FROM completions_settings JOIN settings ON completions_settings.setting_id = settings.id WHERE completions_settings.completion_id = ? ORDER BY settings.setting_name ASC;";
+    private static final String SQL_GET_ALL = "SELECT * FROM settings ORDER BY setting_name ASC;";
+    private static final String SQL_CREATE = "INSERT INTO settings (setting_name) VALUES (?) RETURNING *;";
+    private static final String SQL_UPDATE = "UPDATE settings SET setting_name = ? WHERE id = ? RETURNING *;";
+    private static final String SQL_DELETE = "DELETE FROM settings WHERE id = ? RETURNING *;";
     private final Connection connection;
 
-    /**
-     * Constructor establishes a connection to the database.
-     *
-     * @throws SQLException if a database access error occurs.
-     */
-    public SettingRepositoryImpl() throws SQLException {
-        connection = DriverManager.getConnection(PropertiesUtil.get("postgres.url"), PropertiesUtil.get("postgres.user"), PropertiesUtil.get("postgres.password"));
+    {
+        try {
+            connection = DriverManager.getConnection(PropertiesUtil.get("postgres.url"), PropertiesUtil.get("postgres.user"), PropertiesUtil.get("postgres.password"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -50,8 +49,8 @@ public class SettingRepositoryImpl implements SettingRepository {
             Setting setting = new Setting();
 
             while (resultSet.next()) {
-                setting.setId(UUID.fromString(resultSet.getString("option_id")));
-                setting.setSettingName(resultSet.getString("option_name"));
+                setting.setId(UUID.fromString(resultSet.getString("id")));
+                setting.setSettingName(resultSet.getString("setting_name"));
             }
             return setting;
         }
@@ -72,8 +71,8 @@ public class SettingRepositoryImpl implements SettingRepository {
             Setting setting = new Setting();
 
             while (resultSet.next()) {
-                setting.setId(UUID.fromString(resultSet.getString("option_id")));
-                setting.setSettingName(resultSet.getString("option_name"));
+                setting.setId(UUID.fromString(resultSet.getString("id")));
+                setting.setSettingName(resultSet.getString("setting_name"));
             }
             return setting;
         }
@@ -95,8 +94,8 @@ public class SettingRepositoryImpl implements SettingRepository {
 
             while (resultSet.next()) {
                 Setting setting = new Setting();
-                setting.setId(UUID.fromString(resultSet.getString("option_id")));
-                setting.setSettingName(resultSet.getString("option_name"));
+                setting.setId(UUID.fromString(resultSet.getString("id")));
+                setting.setSettingName(resultSet.getString("setting_name"));
 
                 settings.add(setting);
             }
@@ -118,8 +117,8 @@ public class SettingRepositoryImpl implements SettingRepository {
 
             while (resultSet.next()) {
                 Setting setting = new Setting();
-                setting.setId(UUID.fromString(resultSet.getString("option_id")));
-                setting.setSettingName(resultSet.getString("option_name"));
+                setting.setId(UUID.fromString(resultSet.getString("id")));
+                setting.setSettingName(resultSet.getString("setting_name"));
 
                 settings.add(setting);
             }

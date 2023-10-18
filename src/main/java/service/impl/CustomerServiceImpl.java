@@ -20,16 +20,7 @@ import java.util.stream.Collectors;
  */
 public class CustomerServiceImpl implements CustomerService {
     private static final CustomerMapper customerMapper = CustomerMapper.INSTANCE;
-
     CustomerRepository customerRepository = new CustomerRepositoryImpl();
-
-    /**
-     * Constructor for the CustomerServiceImpl class.
-     *
-     * @throws SQLException if a database access error occurs.
-     */
-    public CustomerServiceImpl() throws SQLException {
-    }
 
     /**
      * This method retrieves a customer DTO by their ID.

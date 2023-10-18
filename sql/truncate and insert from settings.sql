@@ -1,7 +1,7 @@
-TRUNCATE car_options CASCADE;
+TRUNCATE settings CASCADE;
 
-INSERT INTO car_options
-(option_name)
+INSERT INTO settings
+(setting_name)
 VALUES 
 ('Подогрев сидений'),
 ('Гидравлическая подвеска'),

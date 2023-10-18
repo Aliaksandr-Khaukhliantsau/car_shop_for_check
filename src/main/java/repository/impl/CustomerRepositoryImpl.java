@@ -17,23 +17,22 @@ import java.util.UUID;
  * @version 1.0
  */
 public class CustomerRepositoryImpl implements CustomerRepository {
-    private static final String SQL_GET_BY_ID = "SELECT * FROM customers WHERE customer_id = ? ORDER BY last_name ASC;";
+    private static final String SQL_GET_BY_ID = "SELECT * FROM customers WHERE id = ? ORDER BY last_name ASC;";
     private static final String SQL_GET_BY_FIRST_NAME = "SELECT * FROM customers WHERE first_name = ? ORDER BY last_name ASC;";
     private static final String SQL_GET_BY_MIDDLE_NAME = "SELECT * FROM customers WHERE middle_name = ? ORDER BY last_name ASC;";
     private static final String SQL_GET_BY_LAST_NAME = "SELECT * FROM customers WHERE last_name = ? ORDER BY last_name ASC;";
     private static final String SQL_GET_ALL = "SELECT * FROM customers ORDER BY last_name ASC;";
     private static final String SQL_CREATE = "INSERT INTO customers (first_name, middle_name, last_name) VALUES (?, ?, ?) RETURNING *;";
-    private static final String SQL_UPDATE = "UPDATE customers SET first_name = ?, middle_name = ?, last_name = ? WHERE customer_id = ? RETURNING *;";
-    private static final String SQL_DELETE = "DELETE FROM customers WHERE customer_id = ? RETURNING *;";
+    private static final String SQL_UPDATE = "UPDATE customers SET first_name = ?, middle_name = ?, last_name = ? WHERE id = ? RETURNING *;";
+    private static final String SQL_DELETE = "DELETE FROM customers WHERE id = ? RETURNING *;";
     private final Connection connection;
 
-    /**
-     * Constructor establishes a connection to the database.
-     *
-     * @throws SQLException if a database access error occurs.
-     */
-    public CustomerRepositoryImpl() throws SQLException {
-        connection = DriverManager.getConnection(PropertiesUtil.get("postgres.url"), PropertiesUtil.get("postgres.user"), PropertiesUtil.get("postgres.password"));
+    {
+        try {
+            connection = DriverManager.getConnection(PropertiesUtil.get("postgres.url"), PropertiesUtil.get("postgres.user"), PropertiesUtil.get("postgres.password"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -51,7 +50,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
             Customer customer = new Customer();
 
             while (resultSet.next()) {
-                customer.setId(UUID.fromString(resultSet.getString("customer_id")));
+                customer.setId(UUID.fromString(resultSet.getString("id")));
                 customer.setFirstName(resultSet.getString("first_name"));
                 customer.setMiddleName(resultSet.getString("middle_name"));
                 customer.setLastName(resultSet.getString("last_name"));
@@ -76,7 +75,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
             while (resultSet.next()) {
                 Customer customer = new Customer();
-                customer.setId(UUID.fromString(resultSet.getString("customer_id")));
+                customer.setId(UUID.fromString(resultSet.getString("id")));
                 customer.setFirstName(resultSet.getString("first_name"));
                 customer.setMiddleName(resultSet.getString("middle_name"));
                 customer.setLastName(resultSet.getString("last_name"));
@@ -102,7 +101,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
             while (resultSet.next()) {
                 Customer customer = new Customer();
-                customer.setId(UUID.fromString(resultSet.getString("customer_id")));
+                customer.setId(UUID.fromString(resultSet.getString("id")));
                 customer.setFirstName(resultSet.getString("first_name"));
                 customer.setMiddleName(resultSet.getString("middle_name"));
                 customer.setLastName(resultSet.getString("last_name"));
@@ -129,7 +128,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
             while (resultSet.next()) {
                 Customer customer = new Customer();
-                customer.setId(UUID.fromString(resultSet.getString("customer_id")));
+                customer.setId(UUID.fromString(resultSet.getString("id")));
                 customer.setFirstName(resultSet.getString("first_name"));
                 customer.setMiddleName(resultSet.getString("middle_name"));
                 customer.setLastName(resultSet.getString("last_name"));
@@ -154,7 +153,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
             while (resultSet.next()) {
                 Customer customer = new Customer();
-                customer.setId(UUID.fromString(resultSet.getString("customer_id")));
+                customer.setId(UUID.fromString(resultSet.getString("id")));
                 customer.setFirstName(resultSet.getString("first_name"));
                 customer.setMiddleName(resultSet.getString("middle_name"));
                 customer.setLastName(resultSet.getString("last_name"));

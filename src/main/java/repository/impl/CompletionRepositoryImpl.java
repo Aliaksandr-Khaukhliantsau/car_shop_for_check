@@ -22,24 +22,23 @@ import java.util.stream.Collectors;
  * @version 1.0
  */
 public class CompletionRepositoryImpl implements CompletionRepository {
-    private static final String SQL_GET_BY_ID = "SELECT * FROM completions WHERE completion_id = ? ORDER BY completion_name ASC;";
+    private static final String SQL_GET_BY_ID = "SELECT * FROM completions WHERE id = ? ORDER BY completion_name ASC;";
     private static final String SQL_GET_BY_COMPLETION_NAME = "SELECT * FROM completions WHERE completion_name = ? ORDER BY completion_name ASC;";
     private static final String SQL_GET_ALL = "SELECT * FROM completions ORDER BY completion_name ASC;";
-    private static final String SQL_ADD_SETTING = "INSERT INTO completions_car_options (completion_id, option_id) VALUES (?, ?) RETURNING *;";
-    private static final String SQL_DELETE_SETTING = "DELETE FROM completions_car_options WHERE completion_id = ? AND option_id = ? RETURNING *;";
+    private static final String SQL_ADD_SETTING = "INSERT INTO completions_settings (completion_id, setting_id) VALUES (?, ?) RETURNING *;";
+    private static final String SQL_DELETE_SETTING = "DELETE FROM completions_settings WHERE completion_id = ? AND setting_id = ? RETURNING *;";
     private static final String SQL_CREATE = "INSERT INTO completions (completion_name) VALUES (?) RETURNING *;";
-    private static final String SQL_UPDATE = "UPDATE completions SET completion_name = ? WHERE completion_id = ? RETURNING *;";
-    private static final String SQL_DELETE = "DELETE FROM completions WHERE completion_id = ? RETURNING *;";
+    private static final String SQL_UPDATE = "UPDATE completions SET completion_name = ? WHERE id = ? RETURNING *;";
+    private static final String SQL_DELETE = "DELETE FROM completions WHERE id = ? RETURNING *;";
     private static final SettingMapper MODIFICATION_MAPPER = SettingMapper.INSTANCE;
     private final Connection connection;
 
-    /**
-     * Constructor establishes a connection to the database.
-     *
-     * @throws SQLException if a database access error occurs.
-     */
-    public CompletionRepositoryImpl() throws SQLException {
-        connection = DriverManager.getConnection(PropertiesUtil.get("postgres.url"), PropertiesUtil.get("postgres.user"), PropertiesUtil.get("postgres.password"));
+    {
+        try {
+            connection = DriverManager.getConnection(PropertiesUtil.get("postgres.url"), PropertiesUtil.get("postgres.user"), PropertiesUtil.get("postgres.password"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -57,11 +56,11 @@ public class CompletionRepositoryImpl implements CompletionRepository {
             Completion completion = new Completion();
 
             while (resultSet.next()) {
-                completion.setId(UUID.fromString(resultSet.getString("completion_id")));
+                completion.setId(UUID.fromString(resultSet.getString("id")));
                 completion.setCompletionName(resultSet.getString("completion_name"));
                 SettingService settingService = new SettingServiceImpl();
-                List<SettingDto> carOptionsDto = settingService.getByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
-                completion.setSettings(carOptionsDto.stream().map(MODIFICATION_MAPPER::settingDtoToSetting).collect(Collectors.toList()));
+                List<SettingDto> settingsDto = settingService.getByCompletionId(UUID.fromString(resultSet.getString("id")));
+                completion.setSettings(settingsDto.stream().map(MODIFICATION_MAPPER::settingDtoToSetting).collect(Collectors.toList()));
             }
             return completion;
         }
@@ -82,11 +81,11 @@ public class CompletionRepositoryImpl implements CompletionRepository {
             Completion completion = new Completion();
 
             while (resultSet.next()) {
-                completion.setId(UUID.fromString(resultSet.getString("completion_id")));
+                completion.setId(UUID.fromString(resultSet.getString("id")));
                 completion.setCompletionName(resultSet.getString("completion_name"));
                 SettingService settingService = new SettingServiceImpl();
-                List<SettingDto> carOptionsDto = settingService.getByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
-                completion.setSettings(carOptionsDto.stream().map(MODIFICATION_MAPPER::settingDtoToSetting).collect(Collectors.toList()));
+                List<SettingDto> settingsDto = settingService.getByCompletionId(UUID.fromString(resultSet.getString("id")));
+                completion.setSettings(settingsDto.stream().map(MODIFICATION_MAPPER::settingDtoToSetting).collect(Collectors.toList()));
             }
             return completion;
         }
@@ -106,11 +105,11 @@ public class CompletionRepositoryImpl implements CompletionRepository {
 
             while (resultSet.next()) {
                 Completion completion = new Completion();
-                completion.setId(UUID.fromString(resultSet.getString("completion_id")));
+                completion.setId(UUID.fromString(resultSet.getString("id")));
                 completion.setCompletionName(resultSet.getString("completion_name"));
                 SettingService settingService = new SettingServiceImpl();
-                List<SettingDto> carOptionsDto = settingService.getByCompletionId(UUID.fromString(resultSet.getString("completion_id")));
-                completion.setSettings(carOptionsDto.stream().map(MODIFICATION_MAPPER::settingDtoToSetting).collect(Collectors.toList()));
+                List<SettingDto> settingsDto = settingService.getByCompletionId(UUID.fromString(resultSet.getString("id")));
+                completion.setSettings(settingsDto.stream().map(MODIFICATION_MAPPER::settingDtoToSetting).collect(Collectors.toList()));
 
                 completions.add(completion);
             }
