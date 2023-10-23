@@ -19,7 +19,7 @@ public interface LayoutMapper {
     /**
      * The singleton instance of the mapper.
      */
-    LayoutMapper INSTANCE = Mappers.getMapper(LayoutMapper.class);
+    LayoutMapper LAYOUT_MAPPER = Mappers.getMapper(LayoutMapper.class);
 
     /**
      * Maps a Layout entity to a LayoutDto. Also maps the Completion entity to a CompletionDto.

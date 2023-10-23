@@ -17,7 +17,7 @@ public interface CustomerMapper {
     /**
      * The singleton instance of the mapper.
      */
-    CustomerMapper INSTANCE = Mappers.getMapper(CustomerMapper.class);
+    CustomerMapper CUSTOMER_MAPPER = Mappers.getMapper(CustomerMapper.class);
 
     /**
      * Maps a Customer entity to a CustomerDto.

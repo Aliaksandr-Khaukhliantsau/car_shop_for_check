@@ -25,6 +25,10 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     private static final String SQL_CREATE = "INSERT INTO customers (first_name, middle_name, last_name) VALUES (?, ?, ?) RETURNING *;";
     private static final String SQL_UPDATE = "UPDATE customers SET first_name = ?, middle_name = ?, last_name = ? WHERE id = ? RETURNING *;";
     private static final String SQL_DELETE = "DELETE FROM customers WHERE id = ? RETURNING *;";
+    private static final int PARAMETER_INDEX_ONE = 1;
+    private static final int PARAMETER_INDEX_TWO = 2;
+    private static final int PARAMETER_INDEX_THREE = 3;
+    private static final int PARAMETER_INDEX_FOUR = 4;
     private final Connection connection;
 
     {
@@ -45,7 +49,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public Customer getById(UUID id) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_ID)) {
-            preparedStatement.setObject(1, id);
+            preparedStatement.setObject(PARAMETER_INDEX_ONE, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             Customer customer = new Customer();
 
@@ -69,7 +73,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public List<Customer> getByFirstName(String firstName) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_FIRST_NAME)) {
-            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(PARAMETER_INDEX_ONE, firstName);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Customer> customers = new ArrayList<>();
 
@@ -95,7 +99,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public List<Customer> getByMiddleName(String middleName) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_MIDDLE_NAME)) {
-            preparedStatement.setString(1, middleName);
+            preparedStatement.setString(PARAMETER_INDEX_ONE, middleName);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Customer> customers = new ArrayList<>();
 
@@ -122,7 +126,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public List<Customer> getByLastName(String lastName) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_LAST_NAME)) {
-            preparedStatement.setString(1, lastName);
+            preparedStatement.setString(PARAMETER_INDEX_ONE, lastName);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Customer> customers = new ArrayList<>();
 
@@ -175,9 +179,9 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public void create(String firstName, String middleName, String lastName) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE)) {
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, middleName);
-            preparedStatement.setString(3, lastName);
+            preparedStatement.setString(PARAMETER_INDEX_ONE, firstName);
+            preparedStatement.setString(PARAMETER_INDEX_TWO, middleName);
+            preparedStatement.setString(PARAMETER_INDEX_THREE, lastName);
             preparedStatement.executeQuery();
         }
     }
@@ -194,10 +198,10 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public void update(UUID id, String firstName, String middleName, String lastName) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE)) {
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, middleName);
-            preparedStatement.setString(3, lastName);
-            preparedStatement.setObject(4, id);
+            preparedStatement.setString(PARAMETER_INDEX_ONE, firstName);
+            preparedStatement.setString(PARAMETER_INDEX_TWO, middleName);
+            preparedStatement.setString(PARAMETER_INDEX_THREE, lastName);
+            preparedStatement.setObject(PARAMETER_INDEX_FOUR, id);
             preparedStatement.executeQuery();
         }
     }
@@ -211,7 +215,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public void delete(UUID id) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE)) {
-            preparedStatement.setObject(1, id);
+            preparedStatement.setObject(PARAMETER_INDEX_ONE, id);
             preparedStatement.executeQuery();
         }
     }

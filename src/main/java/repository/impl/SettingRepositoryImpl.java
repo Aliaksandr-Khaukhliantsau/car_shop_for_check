@@ -24,6 +24,8 @@ public class SettingRepositoryImpl implements SettingRepository {
     private static final String SQL_CREATE = "INSERT INTO settings (setting_name) VALUES (?) RETURNING *;";
     private static final String SQL_UPDATE = "UPDATE settings SET setting_name = ? WHERE id = ? RETURNING *;";
     private static final String SQL_DELETE = "DELETE FROM settings WHERE id = ? RETURNING *;";
+    private static final int PARAMETER_INDEX_ONE = 1;
+    private static final int PARAMETER_INDEX_TWO = 2;
     private final Connection connection;
 
     {
@@ -44,7 +46,7 @@ public class SettingRepositoryImpl implements SettingRepository {
     @Override
     public Setting getById(UUID id) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_ID)) {
-            preparedStatement.setObject(1, id);
+            preparedStatement.setObject(PARAMETER_INDEX_ONE, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             Setting setting = new Setting();
 
@@ -66,7 +68,7 @@ public class SettingRepositoryImpl implements SettingRepository {
     @Override
     public Setting getBySettingName(String settingName) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_SETTING_NAME)) {
-            preparedStatement.setString(1, settingName);
+            preparedStatement.setString(PARAMETER_INDEX_ONE, settingName);
             ResultSet resultSet = preparedStatement.executeQuery();
             Setting setting = new Setting();
 
@@ -88,7 +90,7 @@ public class SettingRepositoryImpl implements SettingRepository {
     @Override
     public List<Setting> getByCompletionId(UUID completionId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_COMPLETION_ID)) {
-            preparedStatement.setObject(1, completionId);
+            preparedStatement.setObject(PARAMETER_INDEX_ONE, completionId);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Setting> settings = new ArrayList<>();
 
@@ -135,7 +137,7 @@ public class SettingRepositoryImpl implements SettingRepository {
     @Override
     public void create(String settingName) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE)) {
-            preparedStatement.setString(1, settingName);
+            preparedStatement.setString(PARAMETER_INDEX_ONE, settingName);
             preparedStatement.executeQuery();
         }
     }
@@ -150,8 +152,8 @@ public class SettingRepositoryImpl implements SettingRepository {
     @Override
     public void update(UUID id, String settingName) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE)) {
-            preparedStatement.setString(1, settingName);
-            preparedStatement.setObject(2, id);
+            preparedStatement.setString(PARAMETER_INDEX_ONE, settingName);
+            preparedStatement.setObject(PARAMETER_INDEX_TWO, id);
             preparedStatement.executeQuery();
         }
     }
@@ -165,7 +167,7 @@ public class SettingRepositoryImpl implements SettingRepository {
     @Override
     public void delete(UUID id) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE)) {
-            preparedStatement.setObject(1, id);
+            preparedStatement.setObject(PARAMETER_INDEX_ONE, id);
             preparedStatement.executeQuery();
         }
     }

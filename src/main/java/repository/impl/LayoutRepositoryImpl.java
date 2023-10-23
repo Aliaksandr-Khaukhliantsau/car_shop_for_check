@@ -27,7 +27,10 @@ public class LayoutRepositoryImpl implements LayoutRepository {
     private static final String SQL_CREATE = "INSERT INTO layouts (layout_name, completion_id) VALUES (?, ?) RETURNING *;";
     private static final String SQL_UPDATE = "UPDATE layouts SET layout_name = ?, completion_id = ? WHERE id = ? RETURNING *;";
     private static final String SQL_DELETE = "DELETE FROM layouts WHERE id = ? RETURNING *;";
-    private static final CompletionMapper completionMapper = CompletionMapper.INSTANCE;
+    private static final CompletionMapper COMPLETION_MAPPER = CompletionMapper.COMPLETION_MAPPER;
+    private static final int PARAMETER_INDEX_ONE = 1;
+    private static final int PARAMETER_INDEX_TWO = 2;
+    private static final int PARAMETER_INDEX_THREE = 3;
     private final Connection connection;
 
     {
@@ -48,7 +51,7 @@ public class LayoutRepositoryImpl implements LayoutRepository {
     @Override
     public Layout getById(UUID id) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_ID)) {
-            preparedStatement.setObject(1, id);
+            preparedStatement.setObject(PARAMETER_INDEX_ONE, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             Layout layout = new Layout();
 
@@ -57,7 +60,7 @@ public class LayoutRepositoryImpl implements LayoutRepository {
                 layout.setLayoutName(resultSet.getString("layout_name"));
                 UUID completionId = UUID.fromString(resultSet.getString("completion_id"));
                 CompletionService completionService = new CompletionServiceImpl();
-                layout.setCompletion(completionMapper.completionDtoToCompletion(completionService.getById(completionId)));
+                layout.setCompletion(COMPLETION_MAPPER.completionDtoToCompletion(completionService.getById(completionId)));
 
             }
             return layout;
@@ -74,7 +77,7 @@ public class LayoutRepositoryImpl implements LayoutRepository {
     @Override
     public List<Layout> getByLayoutName(String layoutName) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_LAYOUT_NAME)) {
-            preparedStatement.setString(1, layoutName);
+            preparedStatement.setString(PARAMETER_INDEX_ONE, layoutName);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Layout> layouts = new ArrayList<>();
 
@@ -84,7 +87,7 @@ public class LayoutRepositoryImpl implements LayoutRepository {
                 layout.setLayoutName(resultSet.getString("layout_name"));
                 UUID completionId = UUID.fromString(resultSet.getString("completion_id"));
                 CompletionService completionService = new CompletionServiceImpl();
-                layout.setCompletion(completionMapper.completionDtoToCompletion(completionService.getById(completionId)));
+                layout.setCompletion(COMPLETION_MAPPER.completionDtoToCompletion(completionService.getById(completionId)));
 
                 layouts.add(layout);
             }
@@ -102,7 +105,7 @@ public class LayoutRepositoryImpl implements LayoutRepository {
     @Override
     public List<Layout> getByCompletionId(UUID completionId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_COMPLETION_ID)) {
-            preparedStatement.setObject(1, completionId);
+            preparedStatement.setObject(PARAMETER_INDEX_ONE, completionId);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Layout> layouts = new ArrayList<>();
 
@@ -111,7 +114,7 @@ public class LayoutRepositoryImpl implements LayoutRepository {
                 layout.setId(UUID.fromString(resultSet.getString("id")));
                 layout.setLayoutName(resultSet.getString("layout_name"));
                 CompletionService completionService = new CompletionServiceImpl();
-                layout.setCompletion(completionMapper.completionDtoToCompletion(completionService.getById(completionId)));
+                layout.setCompletion(COMPLETION_MAPPER.completionDtoToCompletion(completionService.getById(completionId)));
 
                 layouts.add(layout);
             }
@@ -137,7 +140,7 @@ public class LayoutRepositoryImpl implements LayoutRepository {
                 layout.setLayoutName(resultSet.getString("layout_name"));
                 UUID completionId = UUID.fromString(resultSet.getString("completion_id"));
                 CompletionService completionService = new CompletionServiceImpl();
-                layout.setCompletion(completionMapper.completionDtoToCompletion(completionService.getById(completionId)));
+                layout.setCompletion(COMPLETION_MAPPER.completionDtoToCompletion(completionService.getById(completionId)));
 
                 layouts.add(layout);
             }
@@ -155,8 +158,8 @@ public class LayoutRepositoryImpl implements LayoutRepository {
     @Override
     public void create(String layoutName, UUID completionId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE)) {
-            preparedStatement.setString(1, layoutName);
-            preparedStatement.setObject(2, completionId);
+            preparedStatement.setString(PARAMETER_INDEX_ONE, layoutName);
+            preparedStatement.setObject(PARAMETER_INDEX_TWO, completionId);
             preparedStatement.executeQuery();
         }
     }
@@ -172,9 +175,9 @@ public class LayoutRepositoryImpl implements LayoutRepository {
     @Override
     public void update(UUID id, String layoutName, UUID completionId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE)) {
-            preparedStatement.setString(1, layoutName);
-            preparedStatement.setObject(2, completionId);
-            preparedStatement.setObject(3, id);
+            preparedStatement.setString(PARAMETER_INDEX_ONE, layoutName);
+            preparedStatement.setObject(PARAMETER_INDEX_TWO, completionId);
+            preparedStatement.setObject(PARAMETER_INDEX_THREE, id);
             preparedStatement.executeQuery();
         }
     }
@@ -188,7 +191,7 @@ public class LayoutRepositoryImpl implements LayoutRepository {
     @Override
     public void delete(UUID id) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE)) {
-            preparedStatement.setObject(1, id);
+            preparedStatement.setObject(PARAMETER_INDEX_ONE, id);
             preparedStatement.executeQuery();
         }
     }

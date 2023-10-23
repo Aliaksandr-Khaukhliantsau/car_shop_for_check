@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @version 1.0
  */
 public class CarServiceImpl implements CarService {
-    private static final CarMapper carMapper = CarMapper.INSTANCE;
+    private static final CarMapper CAR_MAPPER = CarMapper.CAR_MAPPER;
     CarRepository carRepository = new CarRepositoryImpl();
 
     /**
@@ -31,7 +31,7 @@ public class CarServiceImpl implements CarService {
      */
     @Override
     public CarDto getById(UUID id) throws SQLException {
-        return carMapper.carToCarDto(carRepository.getById(id));
+        return CAR_MAPPER.carToCarDto(carRepository.getById(id));
     }
 
     /**
@@ -43,7 +43,7 @@ public class CarServiceImpl implements CarService {
      */
     @Override
     public CarDto getByVin(String vin) throws SQLException {
-        return carMapper.carToCarDto(carRepository.getByVin(vin));
+        return CAR_MAPPER.carToCarDto(carRepository.getByVin(vin));
     }
 
     /**
@@ -55,7 +55,7 @@ public class CarServiceImpl implements CarService {
      */
     @Override
     public List<CarDto> getByLayoutId(UUID layoutId) throws SQLException {
-        return carRepository.getByLayoutId(layoutId).stream().map(carMapper::carToCarDto).collect(Collectors.toList());
+        return carRepository.getByLayoutId(layoutId).stream().map(CAR_MAPPER::carToCarDto).collect(Collectors.toList());
     }
 
     /**
@@ -66,7 +66,7 @@ public class CarServiceImpl implements CarService {
      */
     @Override
     public List<CarDto> getAll() throws SQLException {
-        return carRepository.getAll().stream().map(carMapper::carToCarDto).collect(Collectors.toList());
+        return carRepository.getAll().stream().map(CAR_MAPPER::carToCarDto).collect(Collectors.toList());
     }
 
     /**

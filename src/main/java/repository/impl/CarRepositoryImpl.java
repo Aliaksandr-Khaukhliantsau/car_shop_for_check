@@ -27,7 +27,10 @@ public class CarRepositoryImpl implements CarRepository {
     private static final String SQL_CREATE = "INSERT INTO cars (vin, layout_id) VALUES (?, ?) RETURNING *;";
     private static final String SQL_UPDATE = "UPDATE cars SET vin = ?, layout_id = ? WHERE id = ? RETURNING *;";
     private static final String SQL_DELETE = "DELETE FROM cars WHERE id = ? RETURNING *;";
-    private static final LayoutMapper LAYOUT_MAPPER = LayoutMapper.INSTANCE;
+    private static final LayoutMapper LAYOUT_MAPPER = LayoutMapper.LAYOUT_MAPPER;
+    private static final int PARAMETER_INDEX_ONE = 1;
+    private static final int PARAMETER_INDEX_TWO = 2;
+    private static final int PARAMETER_INDEX_THREE = 3;
     private final Connection connection;
 
     {
@@ -48,7 +51,7 @@ public class CarRepositoryImpl implements CarRepository {
     @Override
     public Car getById(UUID id) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_ID)) {
-            preparedStatement.setObject(1, id);
+            preparedStatement.setObject(PARAMETER_INDEX_ONE, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             Car car = new Car();
 
@@ -73,7 +76,7 @@ public class CarRepositoryImpl implements CarRepository {
     @Override
     public Car getByVin(String vin) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_VIN)) {
-            preparedStatement.setString(1, vin);
+            preparedStatement.setString(PARAMETER_INDEX_ONE, vin);
             ResultSet resultSet = preparedStatement.executeQuery();
             Car car = new Car();
 
@@ -98,7 +101,7 @@ public class CarRepositoryImpl implements CarRepository {
     @Override
     public List<Car> getByLayoutId(UUID layoutId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_LAYOUT_ID)) {
-            preparedStatement.setObject(1, layoutId);
+            preparedStatement.setObject(PARAMETER_INDEX_ONE, layoutId);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Car> cars = new ArrayList<>();
 
@@ -151,8 +154,8 @@ public class CarRepositoryImpl implements CarRepository {
     @Override
     public void create(String vin, UUID layoutId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE)) {
-            preparedStatement.setString(1, vin);
-            preparedStatement.setObject(2, layoutId);
+            preparedStatement.setString(PARAMETER_INDEX_ONE, vin);
+            preparedStatement.setObject(PARAMETER_INDEX_TWO, layoutId);
             preparedStatement.executeQuery();
         }
     }
@@ -168,9 +171,9 @@ public class CarRepositoryImpl implements CarRepository {
     @Override
     public void update(UUID id, String vin, UUID layoutId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE)) {
-            preparedStatement.setString(1, vin);
-            preparedStatement.setObject(2, layoutId);
-            preparedStatement.setObject(3, id);
+            preparedStatement.setString(PARAMETER_INDEX_ONE, vin);
+            preparedStatement.setObject(PARAMETER_INDEX_TWO, layoutId);
+            preparedStatement.setObject(PARAMETER_INDEX_THREE, id);
             preparedStatement.executeQuery();
         }
     }
@@ -184,7 +187,7 @@ public class CarRepositoryImpl implements CarRepository {
     @Override
     public void delete(UUID id) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE)) {
-            preparedStatement.setObject(1, id);
+            preparedStatement.setObject(PARAMETER_INDEX_ONE, id);
             preparedStatement.executeQuery();
         }
     }

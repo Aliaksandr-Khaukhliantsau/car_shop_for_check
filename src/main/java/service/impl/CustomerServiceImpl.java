@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @version 1.0
  */
 public class CustomerServiceImpl implements CustomerService {
-    private static final CustomerMapper customerMapper = CustomerMapper.INSTANCE;
+    private static final CustomerMapper CUSTOMER_MAPPER = CustomerMapper.CUSTOMER_MAPPER;
     CustomerRepository customerRepository = new CustomerRepositoryImpl();
 
     /**
@@ -31,7 +31,7 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public CustomerDto getById(UUID id) throws SQLException {
-        return customerMapper.customerToCustomerDto(customerRepository.getById(id));
+        return CUSTOMER_MAPPER.customerToCustomerDto(customerRepository.getById(id));
     }
 
     /**
@@ -43,7 +43,7 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public List<CustomerDto> getByFirstName(String firstName) throws SQLException {
-        return customerRepository.getByFirstName(firstName).stream().map(customerMapper::customerToCustomerDto).collect(Collectors.toList());
+        return customerRepository.getByFirstName(firstName).stream().map(CUSTOMER_MAPPER::customerToCustomerDto).collect(Collectors.toList());
     }
 
     /**
@@ -55,7 +55,7 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public List<CustomerDto> getByMiddleName(String middleName) throws SQLException {
-        return customerRepository.getByMiddleName(middleName).stream().map(customerMapper::customerToCustomerDto).collect(Collectors.toList());
+        return customerRepository.getByMiddleName(middleName).stream().map(CUSTOMER_MAPPER::customerToCustomerDto).collect(Collectors.toList());
     }
 
     /**
@@ -67,7 +67,7 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public List<CustomerDto> getByLastName(String lastName) throws SQLException {
-        return customerRepository.getByLastName(lastName).stream().map(customerMapper::customerToCustomerDto).collect(Collectors.toList());
+        return customerRepository.getByLastName(lastName).stream().map(CUSTOMER_MAPPER::customerToCustomerDto).collect(Collectors.toList());
     }
 
     /**
@@ -78,7 +78,7 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public List<CustomerDto> getAll() throws SQLException {
-        return customerRepository.getAll().stream().map(customerMapper::customerToCustomerDto).collect(Collectors.toList());
+        return customerRepository.getAll().stream().map(CUSTOMER_MAPPER::customerToCustomerDto).collect(Collectors.toList());
     }
 
     /**

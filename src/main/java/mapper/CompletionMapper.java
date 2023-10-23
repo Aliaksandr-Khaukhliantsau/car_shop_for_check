@@ -1,9 +1,9 @@
 package mapper;
 
-import dto.SettingDto;
 import dto.CompletionDto;
-import entity.Setting;
+import dto.SettingDto;
 import entity.Completion;
+import entity.Setting;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -23,7 +23,7 @@ public interface CompletionMapper {
     /**
      * The singleton instance of the mapper.
      */
-    CompletionMapper INSTANCE = Mappers.getMapper(CompletionMapper.class);
+    CompletionMapper COMPLETION_MAPPER = Mappers.getMapper(CompletionMapper.class);
 
     /**
      * Maps a Completion entity to a CompletionDto. Also maps the list of Setting entities to a list of SettingDto objects.

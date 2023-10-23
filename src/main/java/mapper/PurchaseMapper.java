@@ -19,7 +19,7 @@ public interface PurchaseMapper {
     /**
      * The singleton instance of the mapper.
      */
-    PurchaseMapper INSTANCE = Mappers.getMapper(PurchaseMapper.class);
+    PurchaseMapper PURCHASE_MAPPER = Mappers.getMapper(PurchaseMapper.class);
 
     /**
      * Maps a Purchase entity to a PurchaseDto. Also maps the Customer and Car entities to their respective DTOs.

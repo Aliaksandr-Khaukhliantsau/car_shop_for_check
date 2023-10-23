@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @version 1.0
  */
 public class LayoutServiceImpl implements LayoutService {
-    private static final LayoutMapper LAYOUT_MAPPER = LayoutMapper.INSTANCE;
+    private static final LayoutMapper LAYOUT_MAPPER = LayoutMapper.LAYOUT_MAPPER;
     LayoutRepository layoutRepository = new LayoutRepositoryImpl();
 
     /**

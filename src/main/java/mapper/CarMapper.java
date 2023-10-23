@@ -19,7 +19,7 @@ public interface CarMapper {
     /**
      * The singleton instance of the mapper.
      */
-    CarMapper INSTANCE = Mappers.getMapper(CarMapper.class);
+    CarMapper CAR_MAPPER = Mappers.getMapper(CarMapper.class);
 
     /**
      * Maps a Car entity to a CarDto. Also maps the Layout entity to a LayoutDto.

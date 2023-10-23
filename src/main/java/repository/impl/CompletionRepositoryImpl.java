@@ -30,7 +30,9 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     private static final String SQL_CREATE = "INSERT INTO completions (completion_name) VALUES (?) RETURNING *;";
     private static final String SQL_UPDATE = "UPDATE completions SET completion_name = ? WHERE id = ? RETURNING *;";
     private static final String SQL_DELETE = "DELETE FROM completions WHERE id = ? RETURNING *;";
-    private static final SettingMapper MODIFICATION_MAPPER = SettingMapper.INSTANCE;
+    private static final SettingMapper SETTING_MAPPER = SettingMapper.SETTING_MAPPER;
+    private static final int PARAMETER_INDEX_ONE = 1;
+    private static final int PARAMETER_INDEX_TWO = 2;
     private final Connection connection;
 
     {
@@ -51,7 +53,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     @Override
     public Completion getById(UUID completionId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_ID)) {
-            preparedStatement.setObject(1, completionId);
+            preparedStatement.setObject(PARAMETER_INDEX_ONE, completionId);
             ResultSet resultSet = preparedStatement.executeQuery();
             Completion completion = new Completion();
 
@@ -60,7 +62,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
                 completion.setCompletionName(resultSet.getString("completion_name"));
                 SettingService settingService = new SettingServiceImpl();
                 List<SettingDto> settingsDto = settingService.getByCompletionId(UUID.fromString(resultSet.getString("id")));
-                completion.setSettings(settingsDto.stream().map(MODIFICATION_MAPPER::settingDtoToSetting).collect(Collectors.toList()));
+                completion.setSettings(settingsDto.stream().map(SETTING_MAPPER::settingDtoToSetting).collect(Collectors.toList()));
             }
             return completion;
         }
@@ -76,7 +78,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     @Override
     public Completion getByCompletionName(String completionName) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_COMPLETION_NAME)) {
-            preparedStatement.setString(1, completionName);
+            preparedStatement.setString(PARAMETER_INDEX_ONE, completionName);
             ResultSet resultSet = preparedStatement.executeQuery();
             Completion completion = new Completion();
 
@@ -85,7 +87,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
                 completion.setCompletionName(resultSet.getString("completion_name"));
                 SettingService settingService = new SettingServiceImpl();
                 List<SettingDto> settingsDto = settingService.getByCompletionId(UUID.fromString(resultSet.getString("id")));
-                completion.setSettings(settingsDto.stream().map(MODIFICATION_MAPPER::settingDtoToSetting).collect(Collectors.toList()));
+                completion.setSettings(settingsDto.stream().map(SETTING_MAPPER::settingDtoToSetting).collect(Collectors.toList()));
             }
             return completion;
         }
@@ -109,7 +111,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
                 completion.setCompletionName(resultSet.getString("completion_name"));
                 SettingService settingService = new SettingServiceImpl();
                 List<SettingDto> settingsDto = settingService.getByCompletionId(UUID.fromString(resultSet.getString("id")));
-                completion.setSettings(settingsDto.stream().map(MODIFICATION_MAPPER::settingDtoToSetting).collect(Collectors.toList()));
+                completion.setSettings(settingsDto.stream().map(SETTING_MAPPER::settingDtoToSetting).collect(Collectors.toList()));
 
                 completions.add(completion);
             }
@@ -127,8 +129,8 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     @Override
     public void addSetting(UUID id, UUID settingId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_SETTING)) {
-            preparedStatement.setObject(1, id);
-            preparedStatement.setObject(2, settingId);
+            preparedStatement.setObject(PARAMETER_INDEX_ONE, id);
+            preparedStatement.setObject(PARAMETER_INDEX_TWO, settingId);
             preparedStatement.executeQuery();
         }
     }
@@ -143,8 +145,8 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     @Override
     public void deleteSetting(UUID id, UUID settingId) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_SETTING)) {
-            preparedStatement.setObject(1, id);
-            preparedStatement.setObject(2, settingId);
+            preparedStatement.setObject(PARAMETER_INDEX_ONE, id);
+            preparedStatement.setObject(PARAMETER_INDEX_TWO, settingId);
             preparedStatement.executeQuery();
         }
     }
@@ -158,7 +160,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     @Override
     public void create(String completionName) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE)) {
-            preparedStatement.setString(1, completionName);
+            preparedStatement.setString(PARAMETER_INDEX_ONE, completionName);
             preparedStatement.executeQuery();
         }
     }
@@ -173,8 +175,8 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     @Override
     public void update(UUID id, String completionName) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE)) {
-            preparedStatement.setString(1, completionName);
-            preparedStatement.setObject(2, id);
+            preparedStatement.setString(PARAMETER_INDEX_ONE, completionName);
+            preparedStatement.setObject(PARAMETER_INDEX_TWO, id);
             preparedStatement.executeQuery();
         }
     }
@@ -188,7 +190,7 @@ public class CompletionRepositoryImpl implements CompletionRepository {
     @Override
     public void delete(UUID id) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE)) {
-            preparedStatement.setObject(1, id);
+            preparedStatement.setObject(PARAMETER_INDEX_ONE, id);
             preparedStatement.executeQuery();
         }
     }

@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @version 1.0
  */
 public class CompletionServiceImpl implements CompletionService {
-    private static final CompletionMapper completionMapper = CompletionMapper.INSTANCE;
+    private static final CompletionMapper COMPLETION_MAPPER = CompletionMapper.COMPLETION_MAPPER;
     CompletionRepository completionRepository = new CompletionRepositoryImpl();
 
     /**
@@ -31,7 +31,7 @@ public class CompletionServiceImpl implements CompletionService {
      */
     @Override
     public CompletionDto getById(UUID id) throws SQLException {
-        return completionMapper.completionToCompletionDto(completionRepository.getById(id));
+        return COMPLETION_MAPPER.completionToCompletionDto(completionRepository.getById(id));
     }
 
     /**
@@ -43,7 +43,7 @@ public class CompletionServiceImpl implements CompletionService {
      */
     @Override
     public CompletionDto getByCompletionName(String completionName) throws SQLException {
-        return completionMapper.completionToCompletionDto(completionRepository.getByCompletionName(completionName));
+        return COMPLETION_MAPPER.completionToCompletionDto(completionRepository.getByCompletionName(completionName));
     }
 
     /**
@@ -54,7 +54,7 @@ public class CompletionServiceImpl implements CompletionService {
      */
     @Override
     public List<CompletionDto> getAll() throws SQLException {
-        return completionRepository.getAll().stream().map(completionMapper::completionToCompletionDto).collect(Collectors.toList());
+        return completionRepository.getAll().stream().map(COMPLETION_MAPPER::completionToCompletionDto).collect(Collectors.toList());
     }
 
     /**

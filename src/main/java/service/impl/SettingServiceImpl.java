@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @version 1.0
  */
 public class SettingServiceImpl implements SettingService {
-    private static final SettingMapper MODIFICATION_MAPPER = SettingMapper.INSTANCE;
+    private static final SettingMapper SETTING_MAPPER = SettingMapper.SETTING_MAPPER;
     SettingRepository settingRepository = new SettingRepositoryImpl();
 
     /**
@@ -31,7 +31,7 @@ public class SettingServiceImpl implements SettingService {
      */
     @Override
     public SettingDto getById(UUID id) throws SQLException {
-        return MODIFICATION_MAPPER.settingToSettingDto(settingRepository.getById(id));
+        return SETTING_MAPPER.settingToSettingDto(settingRepository.getById(id));
 
     }
 
@@ -44,7 +44,7 @@ public class SettingServiceImpl implements SettingService {
      */
     @Override
     public SettingDto getBySettingName(String settingName) throws SQLException {
-        return MODIFICATION_MAPPER.settingToSettingDto(settingRepository.getBySettingName(settingName));
+        return SETTING_MAPPER.settingToSettingDto(settingRepository.getBySettingName(settingName));
     }
 
     /**
@@ -56,7 +56,7 @@ public class SettingServiceImpl implements SettingService {
      */
     @Override
     public List<SettingDto> getByCompletionId(UUID completionId) throws SQLException {
-        return settingRepository.getByCompletionId(completionId).stream().map(MODIFICATION_MAPPER::settingToSettingDto).collect(Collectors.toList());
+        return settingRepository.getByCompletionId(completionId).stream().map(SETTING_MAPPER::settingToSettingDto).collect(Collectors.toList());
     }
 
     /**
@@ -67,7 +67,7 @@ public class SettingServiceImpl implements SettingService {
      */
     @Override
     public List<SettingDto> getAll() throws SQLException {
-        return settingRepository.getAll().stream().map(MODIFICATION_MAPPER::settingToSettingDto).collect(Collectors.toList());
+        return settingRepository.getAll().stream().map(SETTING_MAPPER::settingToSettingDto).collect(Collectors.toList());
     }
 
     /**

@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @version 1.0
  */
 public class PurchaseServiceImpl implements PurchaseService {
-    private static final PurchaseMapper purchaseMapper = PurchaseMapper.INSTANCE;
+    private static final PurchaseMapper PURCHASE_MAPPER = PurchaseMapper.PURCHASE_MAPPER;
     PurchaseRepository purchaseRepository = new PurchaseRepositoryImpl();
 
     /**
@@ -31,7 +31,7 @@ public class PurchaseServiceImpl implements PurchaseService {
      */
     @Override
     public PurchaseDto getById(UUID id) throws SQLException {
-        return purchaseMapper.purchaseToPurchaseDto(purchaseRepository.getById(id));
+        return PURCHASE_MAPPER.purchaseToPurchaseDto(purchaseRepository.getById(id));
     }
 
     /**
@@ -43,7 +43,7 @@ public class PurchaseServiceImpl implements PurchaseService {
      */
     @Override
     public PurchaseDto getByPurchaseNumber(String purchaseNumber) throws SQLException {
-        return purchaseMapper.purchaseToPurchaseDto(purchaseRepository.getByPurchaseNumber(purchaseNumber));
+        return PURCHASE_MAPPER.purchaseToPurchaseDto(purchaseRepository.getByPurchaseNumber(purchaseNumber));
     }
 
     /**
@@ -55,7 +55,7 @@ public class PurchaseServiceImpl implements PurchaseService {
      */
     @Override
     public List<PurchaseDto> getByCustomerId(UUID customerId) throws SQLException {
-        return purchaseRepository.getByCustomerId(customerId).stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
+        return purchaseRepository.getByCustomerId(customerId).stream().map(PURCHASE_MAPPER::purchaseToPurchaseDto).collect(Collectors.toList());
     }
 
     /**
@@ -67,7 +67,7 @@ public class PurchaseServiceImpl implements PurchaseService {
      */
     @Override
     public List<PurchaseDto> getByCarId(UUID carId) throws SQLException {
-        return purchaseRepository.getByCarId(carId).stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
+        return purchaseRepository.getByCarId(carId).stream().map(PURCHASE_MAPPER::purchaseToPurchaseDto).collect(Collectors.toList());
     }
 
     /**
@@ -78,7 +78,7 @@ public class PurchaseServiceImpl implements PurchaseService {
      */
     @Override
     public List<PurchaseDto> getAll() throws SQLException {
-        return purchaseRepository.getAll().stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
+        return purchaseRepository.getAll().stream().map(PURCHASE_MAPPER::purchaseToPurchaseDto).collect(Collectors.toList());
     }
 
     /**
