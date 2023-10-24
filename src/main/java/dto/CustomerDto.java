@@ -1,11 +1,11 @@
-package entity;
+package dto;
 
 import lombok.*;
 
 import java.util.UUID;
 
 /**
- * The Customer class is an entity representing a customer.
+ * The CustomerDto class is a data transfer object representing a customer.
  *
  * @author Aliaksandr Khaukhliantsau
  * @version 1.0
@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Customer {
+public class CustomerDto {
 
     /**
      * Unique identifier for the customer.

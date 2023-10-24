@@ -1,11 +1,11 @@
-package entity;
+package dto;
 
 import lombok.*;
 
 import java.util.UUID;
 
 /**
- * The Car class is an entity representing a car.
+ * The CarDto class is a data transfer object representing a car.
  *
  * @author Aliaksandr Khaukhliantsau
  * @version 1.0
@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Car {
+public class CarDto {
 
     /**
      * Unique identifier for the car.
@@ -28,7 +28,7 @@ public class Car {
     private String vin;
 
     /**
-     * An instance of Layout representing the layout of the car.
+     * An instance of LayoutDto representing the layout of the car.
      */
-    private Layout layout;
+    private LayoutDto layout;
 }

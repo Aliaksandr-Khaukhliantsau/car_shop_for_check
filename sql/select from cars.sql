@@ -1,1 +1,0 @@
-SELECT * FROM cars ORDER BY vin ASC;
