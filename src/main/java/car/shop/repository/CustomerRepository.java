@@ -1,6 +1,6 @@
-package car.shop.repositoryJpa;
+package car.shop.repository;
 
-import car.shop.entityJpa.Customer;
+import car.shop.entity.Customer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,9 +1,9 @@
-//package car.shop.controllerJpa;
+//package car.shop.controller;
 //
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.web.bind.annotation.*;
-//import car.shop.dtoJpa.CustomerDto;
-//import car.shop.serviceJpa.CustomerService;
+//import car.shop.dto.CustomerDto;
+//import car.shop.service.CustomerService;
 //import java.util.List;
 //import java.util.UUID;
 //

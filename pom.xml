@@ -5,8 +5,9 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.5</version>
-		<relativePath/> <!-- lookup parent from repository -->
+<!--		<version>3.1.5</version>-->
+		<version>2.7.17</version>
+		<relativePath/>
 	</parent>
 	<groupId>car.shop</groupId>
 	<artifactId>car_shop_for_check</artifactId>
@@ -15,9 +16,12 @@
 	<description>Car shop project for Spring Boot</description>
 
 	<properties>
-		<java.version>21</java.version>
+<!--		<java.version>21</java.version>-->
+<!--		<java.version>20</java.version>-->
+		<java.version>11</java.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
 		<mapstruct-processor.version>1.5.5.Final</mapstruct-processor.version>
+		<javax.persistence-api.version>2.2</javax.persistence-api.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -43,10 +47,10 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-devtools</artifactId>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.mapstruct</groupId>
@@ -64,7 +68,7 @@
 		<dependency>
 			<groupId>javax.persistence</groupId>
 			<artifactId>javax.persistence-api</artifactId>
-			<version>2.2</version>
+			<version>${javax.persistence-api.version}</version>
 		</dependency>
 
 	</dependencies>

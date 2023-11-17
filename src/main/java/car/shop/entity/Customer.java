@@ -1,16 +1,22 @@
-package car.shop.entityJpa;
+package car.shop.entity;
 
-import lombok.Data;
-import javax.persistence.Entity;
-import javax.persistence.Column;
-import javax.persistence.Id;
+import lombok.*;
+
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Data
+@Table(name = "customers")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Customer {
 
     @Id
+    @GeneratedValue
+    @Column(name = "id")
     private UUID id;
 
     @Column(name = "first_name")

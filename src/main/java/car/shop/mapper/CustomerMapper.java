@@ -1,7 +1,7 @@
-package car.shop.mapperJpa;
+package car.shop.mapper;
 
-import car.shop.dtoJpa.CustomerDto;
-import car.shop.entityJpa.Customer;
+import car.shop.dto.CustomerDto;
+import car.shop.entity.Customer;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
  * @author Aliaksandr Khaukhliantsau
  * @version 1.0
  */
-@Mapper
+//@Mapper(componentModel = "spring")
 public interface CustomerMapper {
 
     /**

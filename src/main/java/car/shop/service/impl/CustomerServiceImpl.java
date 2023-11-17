@@ -1,12 +1,12 @@
-package car.shop.serviceJpa.impl;
+package car.shop.service.impl;
 
-import car.shop.entityJpa.Customer;
-import car.shop.serviceJpa.CustomerService;
+import car.shop.entity.Customer;
+import car.shop.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import car.shop.dtoJpa.CustomerDto;
-import car.shop.mapperJpa.CustomerMapper;
-import car.shop.repositoryJpa.CustomerRepository;
+import car.shop.dto.CustomerDto;
+import car.shop.mapper.CustomerMapper;
+import car.shop.repository.CustomerRepository;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -34,8 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerDto> getByMiddleName(String middleName) {
-        // Implement this method based on your business logic
-        return null;
+        return customerRepository.findByMiddleName(middleName).stream().map(customerMapper::customerToCustomerDto).collect(Collectors.toList());
     }
 
     @Override

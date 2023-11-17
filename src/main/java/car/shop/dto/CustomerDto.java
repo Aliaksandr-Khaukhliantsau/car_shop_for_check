@@ -1,4 +1,4 @@
-package car.shop.dtoJpa;
+package car.shop.dto;
 
 import lombok.*;
 

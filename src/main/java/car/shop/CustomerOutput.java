@@ -1,6 +1,6 @@
 package car.shop;
 
-import car.shop.serviceJpa.CustomerService;
+import car.shop.service.CustomerService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.util.UUID;
 
 @SpringBootApplication(scanBasePackages = {"car.shop"})
-@EntityScan("car.shop.entityJpa")
+@EntityScan("car.shop.entity")
 public class CustomerOutput {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(CustomerOutput.class, args);
@@ -80,7 +80,7 @@ public class CustomerOutput {
                         System.out.println("Enter the middle name:");
                         String middleName = scanner.nextLine();
 
-                        // Implement this method based on your business logic
+                        customerService.getByMiddleName(middleName).forEach(System.out::println);
                         System.out.println();
 
                         // Selection by last name

@@ -1,6 +1,6 @@
-package car.shop.serviceJpa;
+package car.shop.service;
 
-import car.shop.dtoJpa.CustomerDto;
+import car.shop.dto.CustomerDto;
 import java.util.List;
 import java.util.UUID;
 
