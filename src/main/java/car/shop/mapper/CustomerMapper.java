@@ -11,13 +11,13 @@ import org.mapstruct.factory.Mappers;
  * @author Aliaksandr Khaukhliantsau
  * @version 1.0
  */
-//@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring")
 public interface CustomerMapper {
 
     /**
      * The singleton instance of the mapper.
      */
-    CustomerMapper CUSTOMER_MAPPER = Mappers.getMapper(CustomerMapper.class);
+//    CustomerMapper CUSTOMER_MAPPER = Mappers.getMapper(CustomerMapper.class);
 
     /**
      * Maps a Customer entity to a CustomerDto.
