@@ -1,19 +1,19 @@
 package car.shop.ouptut;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.ApplicationContext;
 import car.shop.service.CustomerService;
-import java.util.Scanner;
-import java.util.UUID;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.ApplicationContext;
+
+import java.util.Scanner;
+import java.util.UUID;
 
 @SpringBootApplication(scanBasePackages = {"car.shop"})
 @EntityScan("car.shop.entity")
 public class CustomerOutput {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(CustomerOutput.class, args);
-//        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         CustomerService customerService = context.getBean(CustomerService.class);
         Scanner scanner = new Scanner(System.in);
 

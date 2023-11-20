@@ -1,12 +1,13 @@
 package car.shop.service.impl;
 
+import car.shop.dto.CustomerDto;
 import car.shop.entity.Customer;
+import car.shop.mapper.CustomerMapper;
+import car.shop.repository.CustomerRepository;
 import car.shop.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import car.shop.dto.CustomerDto;
-import car.shop.mapper.CustomerMapper;
-import car.shop.repository.CustomerRepository;
+
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
