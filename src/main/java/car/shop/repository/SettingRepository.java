@@ -18,5 +18,4 @@ public interface SettingRepository extends JpaRepository<Setting, UUID> {
     Optional<Setting> findById(UUID id);
 
     Optional<Setting> findBySettingName(String settingName);
-//    List<Setting> findByCompletionId(UUID completionId);
 }

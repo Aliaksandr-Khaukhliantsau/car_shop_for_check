@@ -14,11 +14,6 @@ import org.mapstruct.Mapper;
 public interface CustomerMapper {
 
     /**
-     * The singleton instance of the mapper.
-     */
-//    CustomerMapper CUSTOMER_MAPPER = Mappers.getMapper(CustomerMapper.class);
-
-    /**
      * Maps a Customer entity to a CustomerDto.
      *
      * @param customer the Customer entity to map.

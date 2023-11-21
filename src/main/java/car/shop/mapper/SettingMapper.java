@@ -13,11 +13,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface SettingMapper {
 
-//    /**
-//     * The singleton instance of the mapper.
-//     */
-//    SettingMapper SETTING_MAPPER = Mappers.getMapper(SettingMapper.class);
-
     /**
      * Maps a Setting entity to a SettingDto.
      *

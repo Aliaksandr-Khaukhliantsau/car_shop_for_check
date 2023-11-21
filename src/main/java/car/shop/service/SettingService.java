@@ -28,14 +28,6 @@ public interface SettingService {
      */
     SettingDto getBySettingName(String settingName);
 
-//    /**
-//     * Retrieves all car setting DTOs for a specific completion.
-//     *
-//     * @param completionId the ID of the completion.
-//     * @return a list of car setting DTOs.
-//     */
-//    List<SettingDto> getByCompletionId(UUID completionId);
-
     /**
      * Retrieves all car setting DTOs.
      *

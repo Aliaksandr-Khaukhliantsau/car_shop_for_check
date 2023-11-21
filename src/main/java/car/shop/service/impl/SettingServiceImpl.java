@@ -8,6 +8,7 @@ import car.shop.service.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -25,19 +26,15 @@ public class SettingServiceImpl implements SettingService {
 
     @Override
     public SettingDto getById(UUID id) {
-        return settingRepository.findById(id).map(settingMapper::settingToSettingDto).orElse(null);
-
+        Setting setting = settingRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Setting not found"));
+        return settingMapper.settingToSettingDto(setting);
     }
 
     @Override
     public SettingDto getBySettingName(String settingName) {
-        return settingRepository.findBySettingName(settingName).map(settingMapper::settingToSettingDto).orElse(null);
+        Setting setting = settingRepository.findBySettingName(settingName).orElseThrow(() -> new EntityNotFoundException("Setting not found"));
+        return settingMapper.settingToSettingDto(setting);
     }
-
-//    @Override
-//    public List<SettingDto> getByCompletionId(UUID completionId) {
-//        return settingRepository.findByCompletionId(completionId).stream().map(settingMapper::settingToSettingDto).collect(Collectors.toList());
-//    }
 
     @Override
     public List<SettingDto> getAll() {
@@ -53,11 +50,9 @@ public class SettingServiceImpl implements SettingService {
 
     @Override
     public void update(UUID id, String settingName) {
-        Setting setting = settingRepository.findById(id).orElse(null);
-        if (setting != null) {
-            setting.setSettingName(settingName);
-            settingRepository.save(setting);
-        }
+        Setting setting = settingRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Setting not found"));
+        setting.setSettingName(settingName);
+        settingRepository.save(setting);
     }
 
     @Override

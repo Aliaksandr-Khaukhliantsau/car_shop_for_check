@@ -2,6 +2,7 @@ package car.shop.dto;
 
 import lombok.*;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -26,4 +27,9 @@ public class SettingDto {
      * Name of the car setting.
      */
     private String settingName;
+
+//    /**
+//     * A list of CompletionDto.
+//     */
+//    private List<CompletionDto> completions;
 }
