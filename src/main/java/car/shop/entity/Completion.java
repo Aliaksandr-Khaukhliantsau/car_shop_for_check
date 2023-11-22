@@ -22,7 +22,8 @@ public class Completion {
     @Column(name = "completion_name", unique = true, nullable = false)
     private String completionName;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+//    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(
             name = "completions_settings",
             joinColumns = @JoinColumn(name = "completion_id"),

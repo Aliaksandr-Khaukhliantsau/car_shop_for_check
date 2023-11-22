@@ -17,14 +17,18 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Transactional
 @Service
 public class CompletionServiceImpl implements CompletionService {
     private final CompletionRepository completionRepository;
     private final SettingRepository settingRepository;
     private final CompletionMapper completionMapper;
 
-    @PersistenceContext
-    private EntityManager entityManager;
+//    @PersistenceContext
+//    private EntityManager entityManager;
+
+//    @Autowired
+//    private EntityManager entityManager;
 
     @Autowired
     public CompletionServiceImpl(CompletionRepository completionRepository, SettingRepository settingRepository, CompletionMapper completionMapper) {
@@ -33,27 +37,23 @@ public class CompletionServiceImpl implements CompletionService {
         this.completionMapper = completionMapper;
     }
 
-    @Transactional
     @Override
     public CompletionDto getById(UUID id) {
         Completion completion = completionRepository.findById(id).orElse(null);
         return completionMapper.completionToCompletionDto(completion);
     }
 
-    @Transactional
     @Override
     public CompletionDto getByCompletionName(String completionName) {
         Completion completion = completionRepository.findByCompletionName(completionName).orElse(null);
         return completionMapper.completionToCompletionDto(completion);
     }
 
-    @Transactional
     @Override
     public List<CompletionDto> getAll() {
         return completionRepository.findAll().stream().map(completionMapper::completionToCompletionDto).collect(Collectors.toList());
     }
 
-    @Transactional
     @Override
     public void addSettingToCompletion(UUID completionId, UUID settingId) {
         Completion completion = completionRepository.findById(completionId).orElse(null);
@@ -61,13 +61,24 @@ public class CompletionServiceImpl implements CompletionService {
 
         if (completion != null && setting != null) {
             completion.getSettings().add(setting);
-            setting.getCompletions().add(completion);
+//            setting.getCompletions().add(completion);
             completionRepository.save(completion);
-            settingRepository.save(setting);
+//            settingRepository.save(setting);
         }
     }
 
-    @Transactional
+//    @Override
+//    @Transactional
+//    public void addSettingToCompletion(UUID completionId, UUID settingId) {
+//        Completion completion = entityManager.find(Completion.class, completionId);
+//        Setting setting = entityManager.find(Setting.class, settingId);
+//
+//        if (completion != null && setting != null) {
+//            completion.getSettings().add(setting);
+//            entityManager.persist(completion);
+//        }
+//    }
+
     @Override
     public void removeSettingFromCompletion(UUID completionId, UUID settingId) {
         Completion completion = completionRepository.findById(completionId).orElse(null);
@@ -75,14 +86,13 @@ public class CompletionServiceImpl implements CompletionService {
 
         if (completion != null && setting != null) {
             completion.getSettings().remove(setting);
-            setting.getCompletions().remove(completion);
+//            setting.getCompletions().remove(completion);
             completionRepository.save(completion);
-            settingRepository.save(setting);
-            entityManager.flush();
+//            settingRepository.save(setting);
+//            entityManager.flush();
         }
     }
 
-    @Transactional
     @Override
     public void create(String completionName) {
         Completion completion = new Completion();
@@ -90,7 +100,6 @@ public class CompletionServiceImpl implements CompletionService {
         completionRepository.save(completion);
     }
 
-    @Transactional
     @Override
     public void update(UUID id, String completionName) {
         Completion completion = completionRepository.findById(id).orElse(null);
@@ -101,7 +110,6 @@ public class CompletionServiceImpl implements CompletionService {
         }
     }
 
-    @Transactional
     @Override
     public void delete(UUID id) {
         completionRepository.deleteById(id);

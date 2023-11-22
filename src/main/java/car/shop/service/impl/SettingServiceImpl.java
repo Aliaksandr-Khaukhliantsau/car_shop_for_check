@@ -7,11 +7,13 @@ import car.shop.repository.SettingRepository;
 import car.shop.service.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Transactional
 @Service
 public class SettingServiceImpl implements SettingService {
     private final SettingRepository settingRepository;
@@ -50,8 +52,10 @@ public class SettingServiceImpl implements SettingService {
     @Override
     public void update(UUID id, String settingName) {
         Setting setting = settingRepository.findById(id).orElse(null);
-        setting.setSettingName(settingName);
-        settingRepository.save(setting);
+        if (setting != null) {
+            setting.setSettingName(settingName);
+            settingRepository.save(setting);
+        }
     }
 
     @Override

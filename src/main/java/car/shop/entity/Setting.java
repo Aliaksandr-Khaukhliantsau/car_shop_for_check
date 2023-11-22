@@ -20,6 +20,7 @@ public class Setting {
     @Column(name = "setting_name", unique = true, nullable = false)
     private String settingName;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "settings")
+//    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "settings")
+    @ManyToMany(mappedBy = "settings")
     private List<Completion> completions;
 }
