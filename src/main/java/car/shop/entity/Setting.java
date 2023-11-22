@@ -1,33 +1,25 @@
 package car.shop.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
-@Entity
-@Table(name = "settings")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Entity
+@Table(name = "settings")
 public class Setting {
 
     @Id
     @GeneratedValue
-    @Column(name = "id")
     private UUID id;
 
-    @Column(name = "setting_name")
+    @Column(name = "setting_name", unique = true, nullable = false)
     private String settingName;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "completions_settings",
-//            joinColumns = @JoinColumn(name = "setting_id"),
-//            inverseJoinColumns = @JoinColumn(name = "completion_id"))
-//    private List<Completion> completions;
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "settings")
+    private List<Completion> completions;
 }
-

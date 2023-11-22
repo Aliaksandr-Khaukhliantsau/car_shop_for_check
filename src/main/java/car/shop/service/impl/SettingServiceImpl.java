@@ -8,7 +8,6 @@ import car.shop.service.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -26,13 +25,13 @@ public class SettingServiceImpl implements SettingService {
 
     @Override
     public SettingDto getById(UUID id) {
-        Setting setting = settingRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Setting not found"));
+        Setting setting = settingRepository.findById(id).orElse(null);
         return settingMapper.settingToSettingDto(setting);
     }
 
     @Override
     public SettingDto getBySettingName(String settingName) {
-        Setting setting = settingRepository.findBySettingName(settingName).orElseThrow(() -> new EntityNotFoundException("Setting not found"));
+        Setting setting = settingRepository.findBySettingName(settingName).orElse(null);
         return settingMapper.settingToSettingDto(setting);
     }
 
@@ -50,7 +49,7 @@ public class SettingServiceImpl implements SettingService {
 
     @Override
     public void update(UUID id, String settingName) {
-        Setting setting = settingRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Setting not found"));
+        Setting setting = settingRepository.findById(id).orElse(null);
         setting.setSettingName(settingName);
         settingRepository.save(setting);
     }

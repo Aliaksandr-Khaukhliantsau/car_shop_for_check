@@ -9,13 +9,6 @@ import org.springframework.context.ApplicationContext;
 import java.util.Scanner;
 import java.util.UUID;
 
-/**
- * The SettingOutput class provides a main method for interacting with the car setting service.
- * This class includes a menu for performing various operations related to car settings.
- *
- * @author Aliaksandr Khaukhliantsau
- * @version 1.0
- */
 @SpringBootApplication(scanBasePackages = {"car.shop"})
 @EntityScan("car.shop.entity")
 public class SettingOutput {

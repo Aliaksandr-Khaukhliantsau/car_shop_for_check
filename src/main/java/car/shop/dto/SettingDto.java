@@ -28,8 +28,8 @@ public class SettingDto {
      */
     private String settingName;
 
-//    /**
-//     * A list of CompletionDto.
-//     */
-//    private List<CompletionDto> completions;
+    /**
+     * A list of CompletionDto.
+     */
+    private List<CompletionDto> completions;
 }

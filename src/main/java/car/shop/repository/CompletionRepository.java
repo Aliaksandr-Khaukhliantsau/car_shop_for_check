@@ -15,7 +15,5 @@ import java.util.UUID;
  */
 @Repository
 public interface CompletionRepository extends JpaRepository<Completion, UUID> {
-    Optional<Completion> findById(UUID id);
-
     Optional<Completion> findByCompletionName(String completionName);
 }
