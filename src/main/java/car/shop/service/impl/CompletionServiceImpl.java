@@ -24,9 +24,6 @@ public class CompletionServiceImpl implements CompletionService {
     private final SettingRepository settingRepository;
     private final CompletionMapper completionMapper;
 
-//    @PersistenceContext
-//    private EntityManager entityManager;
-
 //    @Autowired
 //    private EntityManager entityManager;
 
@@ -66,18 +63,6 @@ public class CompletionServiceImpl implements CompletionService {
 //            settingRepository.save(setting);
         }
     }
-
-//    @Override
-//    @Transactional
-//    public void addSettingToCompletion(UUID completionId, UUID settingId) {
-//        Completion completion = entityManager.find(Completion.class, completionId);
-//        Setting setting = entityManager.find(Setting.class, settingId);
-//
-//        if (completion != null && setting != null) {
-//            completion.getSettings().add(setting);
-//            entityManager.persist(completion);
-//        }
-//    }
 
     @Override
     public void removeSettingFromCompletion(UUID completionId, UUID settingId) {
