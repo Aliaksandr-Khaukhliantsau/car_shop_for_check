@@ -2,6 +2,7 @@ package car.shop.dto;
 
 import lombok.*;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -17,18 +18,7 @@ import java.util.UUID;
 @ToString
 public class LayoutDto {
 
-    /**
-     * Unique identifier for the car layout.
-     */
     private UUID id;
-
-    /**
-     * Name of the car layout.
-     */
     private String layoutName;
-
-    /**
-     * An instance of CompletionDto representing the completion of the car layout.
-     */
-    private CompletionDto completion;
+    private List<CompletionDto> completions;
 }
