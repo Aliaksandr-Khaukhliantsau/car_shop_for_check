@@ -3,6 +3,7 @@ package car.shop.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,6 +23,9 @@ public class Layout {
     @Column(name = "layout_name", nullable = false)
     private String layoutName;
 
+    @Column(name = "completion_id", nullable = false)
+    private UUID completionId;
+
     @OneToMany(mappedBy = "layout", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Completion> completions;
+    private List<Completion> completions = new ArrayList<>();
 }

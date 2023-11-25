@@ -1,107 +1,169 @@
 //package car.shop.service.impl;
 //
 //import car.shop.dto.LayoutDto;
+//import car.shop.entity.Completion;
+//import car.shop.entity.Layout;
 //import car.shop.mapper.LayoutMapper;
+//import car.shop.repository.CompletionRepository;
 //import car.shop.repository.LayoutRepository;
-//import car.shop.repository.impl.LayoutRepositoryImpl;
 //import car.shop.service.LayoutService;
+//import org.springframework.stereotype.Service;
+//import org.springframework.transaction.annotation.Transactional;
 //
-//import java.sql.SQLException;
 //import java.util.List;
 //import java.util.UUID;
 //import java.util.stream.Collectors;
 //
-///**
-// * Implementation of the LayoutService interface.
-// * This class provides methods to interact with car layout data.
-// *
-// * @author Aliaksandr Khaukhliantsau
-// * @version 1.0
-// */
+//@Transactional
+//@Service
 //public class LayoutServiceImpl implements LayoutService {
-//    private static final LayoutMapper LAYOUT_MAPPER = LayoutMapper.LAYOUT_MAPPER;
-//    LayoutRepository layoutRepository = new LayoutRepositoryImpl();
 //
-//    /**
-//     * Retrieves a car layout DTO by its ID.
-//     *
-//     * @param id the ID of the car layout.
-//     * @return the car layout DTO.
-//     * @throws SQLException if a database access error occurs.
-//     */
-//    @Override
-//    public LayoutDto getById(UUID id) throws SQLException {
-//        return LAYOUT_MAPPER.layoutToLayoutDto(layoutRepository.getById(id));
+//    private final LayoutRepository layoutRepository;
+//
+//    private final CompletionRepository completionRepository;
+//
+//    private final LayoutMapper layoutMapper;
+//
+//    public LayoutServiceImpl(LayoutRepository layoutRepository, CompletionRepository completionRepository, LayoutMapper layoutMapper) {
+//        this.layoutRepository = layoutRepository;
+//        this.completionRepository = completionRepository;
+//        this.layoutMapper = layoutMapper;
 //    }
 //
-//    /**
-//     * Retrieves all car layout DTOs with a specific name.
-//     *
-//     * @param layoutName the name of the car layouts.
-//     * @return a list of car layout DTOs.
-//     * @throws SQLException if a database access error occurs.
-//     */
 //    @Override
-//    public List<LayoutDto> getByLayoutName(String layoutName) throws SQLException {
-//        return layoutRepository.getByLayoutName(layoutName).stream().map(LAYOUT_MAPPER::layoutToLayoutDto).collect(Collectors.toList());
+//    public LayoutDto getById(UUID id) {
+//        Layout layout = layoutRepository.findById(id).orElse(null);
+//        return layoutMapper.layoutToLayoutDto(layout);
 //    }
 //
-//    /**
-//     * Retrieves all car layout DTOs for a specific completion.
-//     *
-//     * @param completionId the ID of the completion.
-//     * @return a list of car layout DTOs.
-//     * @throws SQLException if a database access error occurs.
-//     */
 //    @Override
-//    public List<LayoutDto> getByCompletionId(UUID completionId) throws SQLException {
-//        return layoutRepository.getByCompletionId(completionId).stream().map(LAYOUT_MAPPER::layoutToLayoutDto).collect(Collectors.toList());
+//    public List<LayoutDto> getByLayoutName(String layoutName) {
+//        return layoutRepository.findByLayoutName(layoutName).stream().map(layoutMapper::layoutToLayoutDto).collect(Collectors.toList());
 //    }
 //
-//    /**
-//     * Retrieves all car layout DTOs.
-//     *
-//     * @return a list of all car layout DTOs.
-//     * @throws SQLException if a database access error occurs.
-//     */
+////    @Override
+////    public List<LayoutDto> getByCompletionId(UUID completionId) {
+////        return layoutRepository.findByCompletionId(completionId).stream().map(layoutMapper::layoutToLayoutDto).collect(Collectors.toList());
+////    }
+//
 //    @Override
-//    public List<LayoutDto> getAll() throws SQLException {
-//        return layoutRepository.getAll().stream().map(LAYOUT_MAPPER::layoutToLayoutDto).collect(Collectors.toList());
+//    public LayoutDto getByCompletionId(UUID completionId) {
+//        Layout layout = layoutRepository.findByCompletion_Id(completionId).orElse(null);
+//        return layoutMapper.layoutToLayoutDto(layout);
 //    }
 //
-//    /**
-//     * Creates a new car layout record in the database with the provided name and completion ID.
-//     *
-//     * @param layoutName   the name of the new car layout.
-//     * @param completionId the ID of the completion of the new car layout.
-//     * @throws SQLException if a database access error occurs.
-//     */
 //    @Override
-//    public void create(String layoutName, UUID completionId) throws SQLException {
-//        layoutRepository.create(layoutName, completionId);
+//    public List<LayoutDto> getAll() {
+//        return layoutRepository.findAll().stream().map(layoutMapper::layoutToLayoutDto).collect(Collectors.toList());
 //    }
 //
-//    /**
-//     * Updates an existing car layout record in the database with a new name and completion ID using its ID and the new name and completion ID.
-//     *
-//     * @param id           the ID of the car layout to update.
-//     * @param layoutName   the new name for the car layout record.
-//     * @param completionId the new completion ID for the car layout record.
-//     * @throws SQLException if a database access error occurs.
-//     */
 //    @Override
-//    public void update(UUID id, String layoutName, UUID completionId) throws SQLException {
-//        layoutRepository.update(id, layoutName, completionId);
+//    public void create(String layoutName, UUID completionId) {
+//        Completion completion = completionRepository.findById(completionId).orElse(null);
+//        if (completion != null) {
+//            Layout layout = new Layout();
+//            layout.setLayoutName(layoutName);
+//            layout.setCompletion(completion);
+//            layoutRepository.save(layout);
+//        }
 //    }
 //
-//    /**
-//     * Deletes a specific car layout record from the database using its ID.
-//     *
-//     * @param id the ID of the car layout to delete.
-//     * @throws SQLException if a database access error occurs.
-//     */
 //    @Override
-//    public void delete(UUID id) throws SQLException {
-//        layoutRepository.delete(id);
+//    public void update(UUID id, String layoutName, UUID completionId) {
+//        Completion completion = completionRepository.findById(completionId).orElse(null);
+//        Layout layout = layoutRepository.findById(id).orElse(null);
+//        if (layout != null && completion != null) {
+//            layout.setLayoutName(layoutName);
+//            layout.setCompletion(completion);
+//            layoutRepository.save(layout);
+//        }
+//    }
+//
+//    @Override
+//    public void delete(UUID id) {
+//        layoutRepository.deleteById(id);
 //    }
 //}
+
+package car.shop.service.impl;
+
+import car.shop.dto.LayoutDto;
+import car.shop.entity.Completion;
+import car.shop.entity.Layout;
+import car.shop.mapper.LayoutMapper;
+import car.shop.repository.CompletionRepository;
+import car.shop.repository.LayoutRepository;
+import car.shop.service.LayoutService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+@Transactional
+@Service
+public class LayoutServiceImpl implements LayoutService {
+    private final LayoutRepository layoutRepository;
+    private final CompletionRepository completionRepository;
+    private final LayoutMapper layoutMapper;
+
+    @Autowired
+    public LayoutServiceImpl(LayoutRepository layoutRepository, CompletionRepository completionRepository, LayoutMapper layoutMapper) {
+        this.layoutRepository = layoutRepository;
+        this.completionRepository = completionRepository;
+        this.layoutMapper = layoutMapper;
+    }
+
+    @Override
+    public LayoutDto getById(UUID id) {
+        Layout layout = layoutRepository.findById(id).orElse(null);
+        return layoutMapper.layoutToLayoutDto(layout);
+    }
+
+    @Override
+    public List<LayoutDto> getByLayoutName(String layoutName) {
+        return layoutRepository.findByLayoutName(layoutName).stream().map(layoutMapper::layoutToLayoutDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<LayoutDto> getByCompletionId(UUID completionId) {
+        return layoutRepository.findByCompletions_Id(completionId).stream().map(layoutMapper::layoutToLayoutDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<LayoutDto> getAll() {
+        return layoutRepository.findAll().stream().map(layoutMapper::layoutToLayoutDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public void create(String layoutName, UUID completionId) {
+        Completion completion = completionRepository.findById(completionId).orElse(null);
+        if (completion != null) {
+            Layout layout = new Layout();
+            layout.setLayoutName(layoutName);
+            layout.setCompletionId(completionId);
+//            layout.getCompletions().add(completion); // ??????
+            layoutRepository.save(layout);
+        }
+    }
+
+    @Override
+    public void update(UUID id, String layoutName, UUID completionId) {
+        Completion completion = completionRepository.findById(completionId).orElse(null);
+        Layout layout = layoutRepository.findById(id).orElse(null);
+        if (layout != null && completion != null) {
+            layout.setLayoutName(layoutName);
+            layout.setCompletionId(completionId);
+//            layout.getCompletions().add(completion); // ??????
+            layoutRepository.save(layout);
+        }
+    }
+
+
+    @Override
+    public void delete(UUID id) {
+        layoutRepository.deleteById(id);
+    }
+}

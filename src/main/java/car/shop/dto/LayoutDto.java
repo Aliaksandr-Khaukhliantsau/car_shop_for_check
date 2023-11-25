@@ -1,16 +1,12 @@
 package car.shop.dto;
 
+import car.shop.entity.Completion;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * The LayoutDto class is a data transfer object representing a car layout.
- *
- * @author Aliaksandr Khaukhliantsau
- * @version 1.0
- */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,5 +16,6 @@ public class LayoutDto {
 
     private UUID id;
     private String layoutName;
-    private List<CompletionDto> completions;
+    private UUID completionId;
+    private List<Completion> completions = new ArrayList<>();
 }
