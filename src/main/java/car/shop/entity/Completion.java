@@ -10,7 +10,8 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = "layout")
+//@ToString
 @Entity
 @Table(name = "completions")
 public class Completion {
@@ -22,11 +23,13 @@ public class Completion {
     @Column(name = "completion_name", unique = true, nullable = false)
     private String completionName;
 
+//    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "layout_id")
     private Layout layout;
 
-    @ManyToMany
+//    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "completions_settings",
             joinColumns = @JoinColumn(name = "completion_id"),
