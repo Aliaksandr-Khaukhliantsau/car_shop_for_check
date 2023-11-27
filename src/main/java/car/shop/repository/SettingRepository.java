@@ -1,6 +1,5 @@
 package car.shop.repository;
 
-import car.shop.entity.Completion;
 import car.shop.entity.Setting;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;

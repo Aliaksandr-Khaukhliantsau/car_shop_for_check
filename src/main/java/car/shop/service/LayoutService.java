@@ -10,8 +10,7 @@ public interface LayoutService {
 
     List<LayoutDto> getByLayoutName(String layoutName);
 
-        List<LayoutDto> getByCompletionId(UUID completionId);
-//    LayoutDto getByCompletionId(UUID completionId);
+    List<LayoutDto> getByCompletionId(UUID completionId);
 
     List<LayoutDto> getAll();
 

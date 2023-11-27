@@ -1,20 +1,3 @@
-//package car.shop.mapper;
-//
-//import car.shop.dto.LayoutDto;
-//import car.shop.entity.Layout;
-//import org.mapstruct.Mapper;
-//import org.mapstruct.Mapping;
-//
-//@Mapper(componentModel = "spring", uses = CompletionMapper.class)
-//public interface LayoutMapper {
-//
-////    @Mapping(source = "completion", target = "completion")
-//    @Mapping(source = "completions", target = "completions")
-//    LayoutDto layoutToLayoutDto(Layout layout);
-//
-//    Layout layoutDtoToLayout(LayoutDto layoutDto);
-//}
-
 package car.shop.mapper;
 
 import car.shop.dto.LayoutDto;

@@ -1,9 +1,9 @@
 package car.shop.entity;
 
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,6 +26,7 @@ public class Layout {
     @Column(name = "completion_id", nullable = false)
     private UUID completionId;
 
-    @OneToMany(mappedBy = "layout", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Completion> completions = new ArrayList<>();
+    @OneToMany(mappedBy = "layout", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @BatchSize(size = 10)
+    private List<Completion> completions;
 }
