@@ -42,7 +42,8 @@ public class LayoutServiceImpl implements LayoutService {
 
     @Override
     public List<LayoutDto> getByCompletionId(UUID completionId) {
-        return layoutRepository.findByCompletions_Id(completionId).stream().map(layoutMapper::layoutToLayoutDto).collect(Collectors.toList());
+//        return layoutRepository.findByCompletions_Id(completionId).stream().map(layoutMapper::layoutToLayoutDto).collect(Collectors.toList());
+        return layoutRepository.findByCompletionId(completionId).stream().map(layoutMapper::layoutToLayoutDto).collect(Collectors.toList());
     }
 
     @Override
@@ -83,7 +84,7 @@ public class LayoutServiceImpl implements LayoutService {
             for (Completion completion : layout.getCompletions()) {
                 completion.setLayout(null);
             }
-            layoutRepository.save(layout);
+//            layoutRepository.save(layout);
             layoutRepository.delete(layout);
         }
     }
