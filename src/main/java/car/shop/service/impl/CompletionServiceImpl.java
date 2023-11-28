@@ -22,9 +22,6 @@ public class CompletionServiceImpl implements CompletionService {
     private final SettingRepository settingRepository;
     private final CompletionMapper completionMapper;
 
-//    @Autowired
-//    private EntityManager entityManager;
-
     @Autowired
     public CompletionServiceImpl(CompletionRepository completionRepository, SettingRepository settingRepository, CompletionMapper completionMapper) {
         this.completionRepository = completionRepository;
@@ -56,9 +53,7 @@ public class CompletionServiceImpl implements CompletionService {
 
         if (completion != null && setting != null) {
             completion.getSettings().add(setting);
-//            setting.getCompletions().add(completion);
             completionRepository.save(completion);
-//            settingRepository.save(setting);
         }
     }
 
@@ -69,10 +64,7 @@ public class CompletionServiceImpl implements CompletionService {
 
         if (completion != null && setting != null) {
             completion.getSettings().remove(setting);
-//            setting.getCompletions().remove(completion);
             completionRepository.save(completion);
-//            settingRepository.save(setting);
-//            entityManager.flush();
         }
     }
 

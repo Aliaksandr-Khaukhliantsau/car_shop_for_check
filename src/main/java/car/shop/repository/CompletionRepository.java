@@ -9,12 +9,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-/**
- * The CompletionRepository interface provides methods for interacting with completion data.
- *
- * @author Aliaksandr Khaukhliantsau
- * @version 1.0
- */
 @Repository
 public interface CompletionRepository extends JpaRepository<Completion, UUID> {
 

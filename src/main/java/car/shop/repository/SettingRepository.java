@@ -9,12 +9,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-/**
- * The SettingRepository interface provides methods for interacting with car setting data.
- *
- * @author Aliaksandr Khaukhliantsau
- * @version 1.0
- */
 @Repository
 public interface SettingRepository extends JpaRepository<Setting, UUID> {
 

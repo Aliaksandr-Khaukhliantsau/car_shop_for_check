@@ -13,6 +13,7 @@ import java.util.List;
 public interface CompletionMapper {
 
     @Mapping(source = "settings", target = "settings")
+    @Mapping(target = "layout", ignore = true)
     CompletionDto completionToCompletionDto(Completion completion);
 
     List<SettingDto> map(List<Setting> settings);

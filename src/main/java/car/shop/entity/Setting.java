@@ -10,7 +10,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = "completions")
 @Entity
 @Table(name = "settings")
 public class Setting {
@@ -21,9 +21,6 @@ public class Setting {
 
     @Column(name = "setting_name", unique = true, nullable = false)
     private String settingName;
-
-//    @ManyToMany(mappedBy = "settings")
-//    private List<Completion> completions;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
