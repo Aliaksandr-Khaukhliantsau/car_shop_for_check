@@ -1,119 +1,88 @@
-//package car.shop.service.impl;
-//
-//import car.shop.dto.PurchaseDto;
-//import car.shop.mapper.PurchaseMapper;
-//import car.shop.repository.PurchaseRepository;
-//import car.shop.repository.impl.PurchaseRepositoryImpl;
-//import car.shop.service.PurchaseService;
-//
-//import java.sql.SQLException;
-//import java.util.List;
-//import java.util.UUID;
-//import java.util.stream.Collectors;
-//
-///**
-// * Implementation of the PurchaseService interface.
-// * This class provides methods to interact with purchase data.
-// *
-// * @author Aliaksandr Khaukhliantsau
-// * @version 1.0
-// */
-//public class PurchaseServiceImpl implements PurchaseService {
-//    private static final PurchaseMapper PURCHASE_MAPPER = PurchaseMapper.PURCHASE_MAPPER;
-//    PurchaseRepository purchaseRepository = new PurchaseRepositoryImpl();
-//
-//    /**
-//     * Retrieves a purchase DTO by its ID.
-//     *
-//     * @param id the ID of the purchase.
-//     * @return the purchase DTO.
-//     * @throws SQLException if a database access error occurs.
-//     */
-//    @Override
-//    public PurchaseDto getById(UUID id) throws SQLException {
-//        return PURCHASE_MAPPER.purchaseToPurchaseDto(purchaseRepository.getById(id));
-//    }
-//
-//    /**
-//     * Retrieves a purchase DTO by its number.
-//     *
-//     * @param purchaseNumber the number of the purchase.
-//     * @return the purchase DTO.
-//     * @throws SQLException if a database access error occurs.
-//     */
-//    @Override
-//    public PurchaseDto getByPurchaseNumber(String purchaseNumber) throws SQLException {
-//        return PURCHASE_MAPPER.purchaseToPurchaseDto(purchaseRepository.getByPurchaseNumber(purchaseNumber));
-//    }
-//
-//    /**
-//     * Retrieves all purchase DTOs made by a specific customer.
-//     *
-//     * @param customerId the ID of the customer.
-//     * @return a list of purchase DTOs.
-//     * @throws SQLException if a database access error occurs.
-//     */
-//    @Override
-//    public List<PurchaseDto> getByCustomerId(UUID customerId) throws SQLException {
-//        return purchaseRepository.getByCustomerId(customerId).stream().map(PURCHASE_MAPPER::purchaseToPurchaseDto).collect(Collectors.toList());
-//    }
-//
-//    /**
-//     * Retrieves all purchase DTOs of a specific car.
-//     *
-//     * @param carId the ID of the car.
-//     * @return a list of purchase DTOs.
-//     * @throws SQLException if a database access error occurs.
-//     */
-//    @Override
-//    public List<PurchaseDto> getByCarId(UUID carId) throws SQLException {
-//        return purchaseRepository.getByCarId(carId).stream().map(PURCHASE_MAPPER::purchaseToPurchaseDto).collect(Collectors.toList());
-//    }
-//
-//    /**
-//     * Retrieves all purchase DTOs.
-//     *
-//     * @return a list of all purchase DTOs.
-//     * @throws SQLException if a database access error occurs.
-//     */
-//    @Override
-//    public List<PurchaseDto> getAll() throws SQLException {
-//        return purchaseRepository.getAll().stream().map(PURCHASE_MAPPER::purchaseToPurchaseDto).collect(Collectors.toList());
-//    }
-//
-//    /**
-//     * Creates a new purchase record in the database for a specific customer and car.
-//     *
-//     * @param customerId the ID of the customer making the purchase.
-//     * @param carId      the ID of the car being purchased.
-//     * @throws SQLException if a database access error occurs.
-//     */
-//    @Override
-//    public void create(UUID customerId, UUID carId) throws SQLException {
-//        purchaseRepository.create(customerId, carId);
-//    }
-//
-//    /**
-//     * Updates an existing purchase record in the database with new customer and car IDs.
-//     *
-//     * @param id         the ID of the purchase to update.
-//     * @param customerId the new customer ID for the purchase record.
-//     * @param carId      the new car ID for the purchase record.
-//     * @throws SQLException if a database access error occurs.
-//     */
-//    @Override
-//    public void update(UUID id, UUID customerId, UUID carId) throws SQLException {
-//        purchaseRepository.update(id, customerId, carId);
-//    }
-//
-//    /**
-//     * Deletes a specific purchase record from the database using its ID.
-//     *
-//     * @param id the ID of the purchase to delete.
-//     * @throws SQLException if a database access error occurs.
-//     */
-//    @Override
-//    public void delete(UUID id) throws SQLException {
-//        purchaseRepository.delete(id);
-//    }
-//}
+package car.shop.service.impl;
+
+import car.shop.dto.PurchaseDto;
+import car.shop.entity.Car;
+import car.shop.entity.Customer;
+import car.shop.entity.Purchase;
+import car.shop.mapper.PurchaseMapper;
+import car.shop.repository.CarRepository;
+import car.shop.repository.CustomerRepository;
+import car.shop.repository.PurchaseRepository;
+import car.shop.service.PurchaseService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+@Transactional
+@Service
+public class PurchaseServiceImpl implements PurchaseService {
+    private final PurchaseRepository purchaseRepository;
+    private final CustomerRepository customerRepository;
+    private final CarRepository carRepository;
+    private final PurchaseMapper purchaseMapper;
+
+    public PurchaseServiceImpl(PurchaseRepository purchaseRepository, CustomerRepository customerRepository, CarRepository carRepository, PurchaseMapper purchaseMapper) {
+        this.purchaseRepository = purchaseRepository;
+        this.customerRepository = customerRepository;
+        this.carRepository = carRepository;
+        this.purchaseMapper = purchaseMapper;
+    }
+
+    @Override
+    public PurchaseDto getById(UUID id) {
+        return purchaseMapper.purchaseToPurchaseDto(purchaseRepository.findById(id).orElse(null));
+    }
+
+    @Override
+    public PurchaseDto getByPurchaseNumber(String purchaseNumber) {
+        return purchaseMapper.purchaseToPurchaseDto(purchaseRepository.findByPurchaseNumber(purchaseNumber).orElse(null));
+    }
+
+    @Override
+    public List<PurchaseDto> getByCustomerId(UUID customerId) {
+        return purchaseRepository.findByCustomerId(customerId).stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
+    }
+
+
+    @Override
+    public List<PurchaseDto> getByCarId(UUID carId) {
+        return purchaseRepository.findByCarId(carId).stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PurchaseDto> getAll() {
+        return purchaseRepository.findAll().stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public void create(UUID customerId, UUID carId) {
+        Customer customer = customerRepository.findById(customerId).orElse(null);
+        Car car = carRepository.findById(carId).orElse(null);
+        if (customer != null && car != null) {
+            Purchase purchase = new Purchase();
+            purchase.setCustomerId(customerId);
+            purchase.setCarId(carId);
+            purchaseRepository.save(purchase);
+        }
+    }
+
+    @Override
+    public void update(UUID id, UUID customerId, UUID carId) {
+        Purchase purchase = purchaseRepository.findById(id).orElse(null);
+        Customer customer = customerRepository.findById(customerId).orElse(null);
+        Car car = carRepository.findById(carId).orElse(null);
+        if (purchase != null && customer != null && car != null) {
+            purchase.setCustomerId(customerId);
+            purchase.setCarId(carId);
+            purchaseRepository.save(purchase);
+        }
+    }
+
+    @Override
+    public void delete(UUID id) {
+        purchaseRepository.deleteById(id);
+    }
+}

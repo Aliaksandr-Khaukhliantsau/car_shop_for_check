@@ -5,7 +5,7 @@ import car.shop.entity.Layout;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {CompletionMapper.class})
+@Mapper(componentModel = "spring", uses = CompletionMapper.class)
 public interface LayoutMapper {
 
     @Mapping(source = "completions", target = "completions")

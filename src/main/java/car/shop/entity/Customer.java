@@ -1,48 +1,37 @@
 package car.shop.entity;
 
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-/**
- * The Customer class is an entity representing a customer.
- *
- * @author Aliaksandr Khaukhliantsau
- * @version 1.0
- */
-@Entity
-@Table(name = "customers")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = "purchases")
+@Entity
+@Table(name = "customers")
 public class Customer {
 
-    /**
-     * Unique identifier for the customer.
-     */
     @Id
     @GeneratedValue
     @Column(name = "id")
     private UUID id;
 
-    /**
-     * First name of the customer.
-     */
     @Column(name = "first_name")
     private String firstName;
 
-    /**
-     * Middle name of the customer.
-     */
     @Column(name = "middle_name")
     private String middleName;
 
-    /**
-     * Last name of the customer.
-     */
     @Column(name = "last_name")
     private String lastName;
+
+    @OneToMany(mappedBy = "customer", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @BatchSize(size = 10)
+    private List<Purchase> purchases = new ArrayList<>();
 }

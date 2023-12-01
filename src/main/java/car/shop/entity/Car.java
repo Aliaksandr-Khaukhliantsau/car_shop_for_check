@@ -9,7 +9,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = "purchase")
 @Entity
 @Table(name = "cars")
 public class Car {
@@ -27,4 +27,8 @@ public class Car {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "layout_id", insertable = false, updatable = false)
     private Layout layout;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "purchase_id") // purchase_id or id????
+    private Purchase purchase;
 }

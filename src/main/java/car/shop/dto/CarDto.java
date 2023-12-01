@@ -8,7 +8,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = "purchase")
 public class CarDto {
 
     private UUID id;
@@ -18,4 +18,6 @@ public class CarDto {
     private UUID layoutId;
 
     private LayoutDto layout;
+
+    private PurchaseDto purchase;
 }
