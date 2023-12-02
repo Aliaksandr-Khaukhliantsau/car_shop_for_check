@@ -37,7 +37,8 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public PurchaseDto getByPurchaseNumber(String purchaseNumber) {
+//    public PurchaseDto getByPurchaseNumber(String purchaseNumber) {
+    public PurchaseDto getByPurchaseNumber(int purchaseNumber) {
         return purchaseMapper.purchaseToPurchaseDto(purchaseRepository.findByPurchaseNumber(purchaseNumber).orElse(null));
     }
 
@@ -57,14 +58,38 @@ public class PurchaseServiceImpl implements PurchaseService {
         return purchaseRepository.findAll().stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
     }
 
+//    @Override
+//    public void create(UUID customerId, UUID carId) {
+//        Customer customer = customerRepository.findById(customerId).orElse(null);
+//        Car car = carRepository.findById(carId).orElse(null);
+//        if (customer != null && car != null) {
+//            Purchase purchase = new Purchase();
+//            purchase.setCustomerId(customerId);
+//            purchase.setCarId(carId);
+//            purchaseRepository.save(purchase);
+//        }
+//    }
+//
+//    @Override
+//    public void update(UUID id, UUID customerId, UUID carId) {
+//        Purchase purchase = purchaseRepository.findById(id).orElse(null);
+//        Customer customer = customerRepository.findById(customerId).orElse(null);
+//        Car car = carRepository.findById(carId).orElse(null);
+//        if (purchase != null && customer != null && car != null) {
+//            purchase.setCustomerId(customerId);
+//            purchase.setCarId(carId);
+//            purchaseRepository.save(purchase);
+//        }
+//    }
+
     @Override
     public void create(UUID customerId, UUID carId) {
         Customer customer = customerRepository.findById(customerId).orElse(null);
         Car car = carRepository.findById(carId).orElse(null);
         if (customer != null && car != null) {
             Purchase purchase = new Purchase();
-            purchase.setCustomerId(customerId);
-            purchase.setCarId(carId);
+            purchase.setCustomer(customer);
+            purchase.setCar(car);
             purchaseRepository.save(purchase);
         }
     }
@@ -75,8 +100,8 @@ public class PurchaseServiceImpl implements PurchaseService {
         Customer customer = customerRepository.findById(customerId).orElse(null);
         Car car = carRepository.findById(carId).orElse(null);
         if (purchase != null && customer != null && car != null) {
-            purchase.setCustomerId(customerId);
-            purchase.setCarId(carId);
+            purchase.setCustomer(customer);
+            purchase.setCar(car);
             purchaseRepository.save(purchase);
         }
     }

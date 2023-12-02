@@ -69,7 +69,7 @@ public class PurchaseOutput {
                         // Sampling by purchase number
                     } else if (userCommand.equals("2")) {
                         System.out.println("Enter the purchase number:");
-                        String purchaseNumber = scanner.nextLine();
+                        int purchaseNumber = Integer.parseInt(scanner.nextLine());
 
                         System.out.println(purchaseService.getByPurchaseNumber(purchaseNumber));
                         System.out.println();

@@ -15,9 +15,9 @@ public class PurchaseDto {
 
     private int purchaseNumber;
 
-    private UUID customerId;
+//    private UUID customerId;
 
-    private UUID carId;
+//    private UUID carId;
 
     private CustomerDto customer;
 
