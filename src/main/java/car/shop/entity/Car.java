@@ -29,6 +29,6 @@ public class Car {
     private Layout layout;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "purchase_id") // purchase_id or id????
+    @JoinColumn(name = "purchase_id")
     private Purchase purchase;
 }

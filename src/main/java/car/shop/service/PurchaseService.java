@@ -9,7 +9,6 @@ public interface PurchaseService {
 
     PurchaseDto getById(UUID id);
 
-//    PurchaseDto getByPurchaseNumber(String purchaseNumber);
     PurchaseDto getByPurchaseNumber(int purchaseNumber);
 
     List<PurchaseDto> getByCustomerId(UUID customerId);

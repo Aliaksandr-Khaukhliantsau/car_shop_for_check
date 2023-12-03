@@ -21,7 +21,6 @@ public interface PurchaseRepository extends JpaRepository<Purchase, UUID> {
     List<Purchase> findAll();
 
     @EntityGraph(attributePaths = {"customer", "car"})
-//    Optional<Purchase> findByPurchaseNumber(String purchaseNumber);
     Optional<Purchase> findByPurchaseNumber(int purchaseNumber);
 
     @EntityGraph(attributePaths = {"customer", "car"})

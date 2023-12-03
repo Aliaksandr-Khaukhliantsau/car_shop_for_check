@@ -13,11 +13,7 @@ public class PurchaseDto {
 
     private UUID id;
 
-    private int purchaseNumber;
-
-//    private UUID customerId;
-
-//    private UUID carId;
+    private Integer purchaseNumber;
 
     private CustomerDto customer;
 

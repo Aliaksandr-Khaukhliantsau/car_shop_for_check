@@ -84,7 +84,6 @@ public class LayoutServiceImpl implements LayoutService {
             for (Completion completion : layout.getCompletions()) {
                 completion.setLayout(null);
             }
-//            layoutRepository.save(layout);
             layoutRepository.delete(layout);
         }
     }
