@@ -9,6 +9,7 @@ import car.shop.repository.CarRepository;
 import car.shop.repository.CustomerRepository;
 import car.shop.repository.PurchaseRepository;
 import car.shop.service.PurchaseService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@Transactional
+@AllArgsConstructor
 @Service
 public class PurchaseServiceImpl implements PurchaseService {
     private final PurchaseRepository purchaseRepository;
@@ -24,40 +25,39 @@ public class PurchaseServiceImpl implements PurchaseService {
     private final CarRepository carRepository;
     private final PurchaseMapper purchaseMapper;
 
-    public PurchaseServiceImpl(PurchaseRepository purchaseRepository, CustomerRepository customerRepository, CarRepository carRepository, PurchaseMapper purchaseMapper) {
-        this.purchaseRepository = purchaseRepository;
-        this.customerRepository = customerRepository;
-        this.carRepository = carRepository;
-        this.purchaseMapper = purchaseMapper;
-    }
-
     @Override
+    @Transactional
     public PurchaseDto getById(UUID id) {
         return purchaseMapper.purchaseToPurchaseDto(purchaseRepository.findById(id).orElse(null));
     }
 
     @Override
+    @Transactional
     public PurchaseDto getByPurchaseNumber(int purchaseNumber) {
         return purchaseMapper.purchaseToPurchaseDto(purchaseRepository.findByPurchaseNumber(purchaseNumber).orElse(null));
     }
 
     @Override
+    @Transactional
     public List<PurchaseDto> getByCustomerId(UUID customerId) {
         return purchaseRepository.findByCustomerId(customerId).stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
     }
 
 
     @Override
+    @Transactional
     public List<PurchaseDto> getByCarId(UUID carId) {
         return purchaseRepository.findByCarId(carId).stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
     }
 
     @Override
+    @Transactional
     public List<PurchaseDto> getAll() {
         return purchaseRepository.findAll().stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
     }
 
     @Override
+    @Transactional
     public void create(UUID customerId, UUID carId) {
         Customer customer = customerRepository.findById(customerId).orElse(null);
         Car car = carRepository.findById(carId).orElse(null);
@@ -70,6 +70,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
+    @Transactional
     public void update(UUID id, UUID customerId, UUID carId) {
         Purchase purchase = purchaseRepository.findById(id).orElse(null);
         Customer customer = customerRepository.findById(customerId).orElse(null);
@@ -82,6 +83,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
+    @Transactional
     public void delete(UUID id) {
         Purchase purchase = purchaseRepository.findById(id).orElse(null);
         if (purchase != null) {

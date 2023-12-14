@@ -1,8 +1,11 @@
 package car.shop.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,5 +24,5 @@ public class CustomerDto {
 
     private String lastName;
 
-    private List<PurchaseDto> purchases = new ArrayList<>();
+    private List<PurchaseDto> purchases;
 }

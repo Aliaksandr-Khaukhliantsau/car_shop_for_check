@@ -12,7 +12,6 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = SettingMapper.class)
 public interface CompletionMapper {
 
-    @Mapping(source = "settings", target = "settings")
     @Mapping(target = "layout", ignore = true)
     CompletionDto completionToCompletionDto(Completion completion);
 

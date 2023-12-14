@@ -7,7 +7,7 @@ import car.shop.mapper.CompletionMapper;
 import car.shop.repository.CompletionRepository;
 import car.shop.repository.SettingRepository;
 import car.shop.service.CompletionService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,38 +15,35 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@Transactional
+@AllArgsConstructor
 @Service
 public class CompletionServiceImpl implements CompletionService {
     private final CompletionRepository completionRepository;
     private final SettingRepository settingRepository;
     private final CompletionMapper completionMapper;
 
-    @Autowired
-    public CompletionServiceImpl(CompletionRepository completionRepository, SettingRepository settingRepository, CompletionMapper completionMapper) {
-        this.completionRepository = completionRepository;
-        this.settingRepository = settingRepository;
-        this.completionMapper = completionMapper;
-    }
-
     @Override
+    @Transactional
     public CompletionDto getById(UUID id) {
         Completion completion = completionRepository.findById(id).orElse(null);
         return completionMapper.completionToCompletionDto(completion);
     }
 
     @Override
+    @Transactional
     public CompletionDto getByCompletionName(String completionName) {
         Completion completion = completionRepository.findByCompletionName(completionName).orElse(null);
         return completionMapper.completionToCompletionDto(completion);
     }
 
     @Override
+    @Transactional
     public List<CompletionDto> getAll() {
         return completionRepository.findAll().stream().map(completionMapper::completionToCompletionDto).collect(Collectors.toList());
     }
 
     @Override
+    @Transactional
     public void addSettingToCompletion(UUID completionId, UUID settingId) {
         Completion completion = completionRepository.findById(completionId).orElse(null);
         Setting setting = settingRepository.findById(settingId).orElse(null);
@@ -58,6 +55,7 @@ public class CompletionServiceImpl implements CompletionService {
     }
 
     @Override
+    @Transactional
     public void removeSettingFromCompletion(UUID completionId, UUID settingId) {
         Completion completion = completionRepository.findById(completionId).orElse(null);
         Setting setting = settingRepository.findById(settingId).orElse(null);
@@ -69,6 +67,7 @@ public class CompletionServiceImpl implements CompletionService {
     }
 
     @Override
+    @Transactional
     public void create(String completionName) {
         Completion completion = new Completion();
         completion.setCompletionName(completionName);
@@ -76,6 +75,7 @@ public class CompletionServiceImpl implements CompletionService {
     }
 
     @Override
+    @Transactional
     public void update(UUID id, String completionName) {
         Completion completion = completionRepository.findById(id).orElse(null);
 
@@ -86,6 +86,7 @@ public class CompletionServiceImpl implements CompletionService {
     }
 
     @Override
+    @Transactional
     public void delete(UUID id) {
         completionRepository.deleteById(id);
     }

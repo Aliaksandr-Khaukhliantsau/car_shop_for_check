@@ -8,8 +8,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = LayoutMapper.class)
 public interface CarMapper {
 
-    @Mapping(source = "layout", target = "layout")
-    @Mapping(source = "layoutId", target = "layoutId")
     @Mapping(target = "purchase", ignore = true)
     CarDto carToCarDto(Car car);
 
