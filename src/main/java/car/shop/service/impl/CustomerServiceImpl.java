@@ -22,31 +22,39 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public CustomerDto getById(UUID id) {
-        return customerRepository.findById(id).map(customerMapper::customerToCustomerDto).orElse(null);
+        return customerMapper.customerToCustomerDto(customerRepository.getById(id));
     }
 
     @Override
     @Transactional
     public List<CustomerDto> getByFirstName(String firstName) {
-        return customerRepository.findByFirstName(firstName).stream().map(customerMapper::customerToCustomerDto).collect(Collectors.toList());
+        return customerRepository.findByFirstName(firstName).stream()
+                .map(customerMapper::customerToCustomerDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional
     public List<CustomerDto> getByMiddleName(String middleName) {
-        return customerRepository.findByMiddleName(middleName).stream().map(customerMapper::customerToCustomerDto).collect(Collectors.toList());
+        return customerRepository.findByMiddleName(middleName).stream()
+                .map(customerMapper::customerToCustomerDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional
     public List<CustomerDto> getByLastName(String lastName) {
-        return customerRepository.findByLastName(lastName).stream().map(customerMapper::customerToCustomerDto).collect(Collectors.toList());
+        return customerRepository.findByLastName(lastName).stream()
+                .map(customerMapper::customerToCustomerDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional
     public List<CustomerDto> getAll() {
-        return customerRepository.findAll().stream().map(customerMapper::customerToCustomerDto).collect(Collectors.toList());
+        return customerRepository.findAll().stream()
+                .map(customerMapper::customerToCustomerDto)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -62,7 +70,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public void update(UUID id, String firstName, String middleName, String lastName) {
-        Customer customer = customerRepository.findById(id).orElse(null);
+//        Customer customer = customerRepository.findById(id).orElse(null);
+        Customer customer = customerRepository.getById(id);
+//        if (customer != null) {
         if (customer != null) {
             customer.setFirstName(firstName);
             customer.setMiddleName(middleName);
