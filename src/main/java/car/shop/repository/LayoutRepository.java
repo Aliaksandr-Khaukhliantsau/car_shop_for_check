@@ -21,7 +21,4 @@ public interface LayoutRepository extends JpaRepository<Layout, UUID> {
 
     @EntityGraph(attributePaths = {"completions"})
     List<Layout> findByLayoutName(String layoutName);
-
-    @EntityGraph(attributePaths = {"completions"})
-    List<Layout> findByCompletionId(UUID completionId);
 }

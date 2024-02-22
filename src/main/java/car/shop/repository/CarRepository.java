@@ -21,7 +21,4 @@ public interface CarRepository extends JpaRepository<Car, UUID> {
 
     @EntityGraph(attributePaths = {"layout"})
     Car getByVin(String vin);
-
-    @EntityGraph(attributePaths = {"layout"})
-    List<Car> findByLayoutId(UUID layoutId);
 }

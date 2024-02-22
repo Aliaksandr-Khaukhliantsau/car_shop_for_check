@@ -31,11 +31,8 @@ public class Car {
     @Column(name = "vin", nullable = false)
     private String vin;
 
-    @Column(name = "layout_id", nullable = false)
-    private UUID layoutId;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "layout_id", insertable = false, updatable = false)
+    @ManyToOne()
+    @JoinColumn(name = "layout_id")
     private Layout layout;
 
     @OneToOne(fetch = FetchType.LAZY)

@@ -44,7 +44,7 @@ public class CompletionServiceImpl implements CompletionService {
 
     @Override
     @Transactional
-    public void addSettingToCompletion(UUID completionId, UUID settingId) {
+    public void addSetting(UUID completionId, UUID settingId) {
         Completion completion = completionRepository.getById(completionId);
         Setting setting = settingRepository.getById(settingId);
 
@@ -56,7 +56,7 @@ public class CompletionServiceImpl implements CompletionService {
 
     @Override
     @Transactional
-    public void removeSettingFromCompletion(UUID completionId, UUID settingId) {
+    public void removeSetting(UUID completionId, UUID settingId) {
         Completion completion = completionRepository.getById(completionId);
         Setting setting = settingRepository.getById(settingId);
 
@@ -68,21 +68,14 @@ public class CompletionServiceImpl implements CompletionService {
 
     @Override
     @Transactional
-    public void create(String completionName) {
-        Completion completion = new Completion();
-        completion.setCompletionName(completionName);
+    public void create(Completion completion) {
         completionRepository.save(completion);
     }
 
     @Override
     @Transactional
-    public void update(UUID id, String completionName) {
-        Completion completion = completionRepository.getById(id);
-
-        if (completion != null) {
-            completion.setCompletionName(completionName);
-            completionRepository.save(completion);
-        }
+    public void update(Completion completion) {
+        completionRepository.save(completion);
     }
 
     @Override

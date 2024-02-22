@@ -1,12 +1,8 @@
 package car.shop.service.impl;
 
 import car.shop.dto.PurchaseDto;
-import car.shop.entity.Car;
-import car.shop.entity.Customer;
 import car.shop.entity.Purchase;
 import car.shop.mapper.PurchaseMapper;
-import car.shop.repository.CarRepository;
-import car.shop.repository.CustomerRepository;
 import car.shop.repository.PurchaseRepository;
 import car.shop.service.PurchaseService;
 import lombok.AllArgsConstructor;
@@ -21,8 +17,6 @@ import java.util.stream.Collectors;
 @Service
 public class PurchaseServiceImpl implements PurchaseService {
     private final PurchaseRepository purchaseRepository;
-    private final CustomerRepository customerRepository;
-    private final CarRepository carRepository;
     private final PurchaseMapper purchaseMapper;
 
     @Override
@@ -64,28 +58,14 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     @Transactional
-    public void create(UUID customerId, UUID carId) {
-        Customer customer = customerRepository.getById(customerId);
-        Car car = carRepository.getById(carId);
-        if (customer != null && car != null) {
-            Purchase purchase = new Purchase();
-            purchase.setCustomer(customer);
-            purchase.setCar(car);
-            purchaseRepository.save(purchase);
-        }
+    public void create(Purchase purchase) {
+        purchaseRepository.save(purchase);
     }
 
     @Override
     @Transactional
-    public void update(UUID id, UUID customerId, UUID carId) {
-        Purchase purchase = purchaseRepository.getById(id);
-        Customer customer = customerRepository.getById(customerId);
-        Car car = carRepository.getById(carId);
-        if (purchase != null && customer != null && car != null) {
-            purchase.setCustomer(customer);
-            purchase.setCar(car);
-            purchaseRepository.save(purchase);
-        }
+    public void update(Purchase purchase) {
+        purchaseRepository.save(purchase);
     }
 
     @Override

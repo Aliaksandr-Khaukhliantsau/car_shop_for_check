@@ -1,6 +1,7 @@
 package car.shop.service;
 
 import car.shop.dto.PurchaseDto;
+import car.shop.entity.Purchase;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,9 +18,9 @@ public interface PurchaseService {
 
     List<PurchaseDto> getAll();
 
-    void create(UUID customerId, UUID carId);
+    void create(Purchase purchase);
 
-    void update(UUID id, UUID customerId, UUID carId);
+    void update(Purchase purchase);
 
     void delete(UUID id);
 }

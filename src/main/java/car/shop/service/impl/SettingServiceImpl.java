@@ -41,20 +41,14 @@ public class SettingServiceImpl implements SettingService {
 
     @Override
     @Transactional
-    public void create(String settingName) {
-        Setting setting = new Setting();
-        setting.setSettingName(settingName);
+    public void create(Setting setting) {
         settingRepository.save(setting);
     }
 
     @Override
     @Transactional
-    public void update(UUID id, String settingName) {
-        Setting setting = settingRepository.getById(id);
-        if (setting != null) {
-            setting.setSettingName(settingName);
-            settingRepository.save(setting);
-        }
+    public void update(Setting setting) {
+        settingRepository.save(setting);
     }
 
     @Override

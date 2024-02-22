@@ -14,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,10 +32,11 @@ public class Layout {
     @Column(name = "layout_name", nullable = false)
     private String layoutName;
 
-    @Column(name = "completion_id", nullable = false)
-    private UUID completionId;
-
     @OneToMany(mappedBy = "layout", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @BatchSize(size = 10)
-    private List<Completion> completions = new ArrayList<>();
+    private List<Completion> completions;
+
+    @OneToMany(mappedBy = "layout", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @BatchSize(size = 10)
+    private List<Car> cars;
 }

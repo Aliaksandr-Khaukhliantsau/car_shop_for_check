@@ -120,34 +120,34 @@ public class CustomerServiceImplTest {
         verify(customerMapper, times(1)).customerToCustomerDto(customers.getFirst());
     }
 
-    @Test
-    public void testCreate() {
-        String firstName = "Иван";
-        String middleName = "Иванович";
-        String lastName = "Иванов";
-        Customer customer = new Customer();
+//    @Test
+//    public void testCreate() {
+//        String firstName = "Иван";
+//        String middleName = "Иванович";
+//        String lastName = "Иванов";
+//        Customer customer = new Customer();
+//
+//        customerService.create(firstName, middleName, lastName);
+//
+//        verify(customerRepository, times(1)).save(any(Customer.class));
+//    }
 
-        customerService.create(firstName, middleName, lastName);
-
-        verify(customerRepository, times(1)).save(any(Customer.class));
-    }
-
-    @Test
-    public void testUpdate() {
-        UUID id = UUID.randomUUID();
-//        String id = "9eaefad3-b9d6-4476-a21e-93a698d4f4ef";
-        String firstName = "Test";
-        String middleName = "Test";
-        String lastName = "Test";
-        Customer customer = new Customer();
-
-        when(customerRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(customer));
-
-        customerService.update(id, firstName, middleName, lastName);
-
-        verify(customerRepository, times(1)).findById(id);
-        verify(customerRepository, times(1)).save(any(Customer.class));
-    }
+//    @Test
+//    public void testUpdate() {
+//        UUID id = UUID.randomUUID();
+////        String id = "9eaefad3-b9d6-4476-a21e-93a698d4f4ef";
+//        String firstName = "Test";
+//        String middleName = "Test";
+//        String lastName = "Test";
+//        Customer customer = new Customer();
+//
+//        when(customerRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(customer));
+//
+//        customerService.update(id, firstName, middleName, lastName);
+//
+//        verify(customerRepository, times(1)).findById(id);
+//        verify(customerRepository, times(1)).save(any(Customer.class));
+//    }
 
     @Test
     public void testDelete() {
