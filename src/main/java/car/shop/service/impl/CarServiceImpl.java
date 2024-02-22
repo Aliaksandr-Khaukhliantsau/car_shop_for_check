@@ -26,33 +26,35 @@ public class CarServiceImpl implements CarService {
     @Override
     @Transactional
     public CarDto getById(UUID id) {
-        Car car = carRepository.findById(id).orElse(null);
-        return carMapper.carToCarDto(car);
+        return carMapper.carToCarDto(carRepository.getById(id));
     }
 
     @Override
     @Transactional
     public CarDto getByVin(String vin) {
-        Car car = carRepository.findByVin(vin).orElse(null);
-        return carMapper.carToCarDto(car);
+        return carMapper.carToCarDto(carRepository.getByVin(vin));
     }
 
     @Override
     @Transactional
     public List<CarDto> getByLayoutId(UUID layoutId) {
-        return carRepository.findByLayoutId(layoutId).stream().map(carMapper::carToCarDto).collect(Collectors.toList());
+        return carRepository.findByLayoutId(layoutId).stream()
+                .map(carMapper::carToCarDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional
     public List<CarDto> getAll() {
-        return carRepository.findAll().stream().map(carMapper::carToCarDto).collect(Collectors.toList());
+        return carRepository.findAll().stream()
+                .map(carMapper::carToCarDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional
     public void create(String vin, UUID layoutId) {
-        Layout layout = layoutRepository.findById(layoutId).orElse(null);
+        Layout layout = layoutRepository.getById(layoutId);
         if (layout != null) {
             Car car = new Car();
             car.setVin(vin);
@@ -64,8 +66,8 @@ public class CarServiceImpl implements CarService {
     @Override
     @Transactional
     public void update(UUID id, String vin, UUID layoutId) {
-        Car car = carRepository.findById(id).orElse(null);
-        Layout layout = layoutRepository.findById(layoutId).orElse(null);
+        Car car = carRepository.getById(id);
+        Layout layout = layoutRepository.getById(layoutId);
         if (car != null && layout != null) {
             car.setVin(vin);
             car.setLayoutId(layoutId);

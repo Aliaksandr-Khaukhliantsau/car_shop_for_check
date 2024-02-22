@@ -28,39 +28,45 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     @Transactional
     public PurchaseDto getById(UUID id) {
-        return purchaseMapper.purchaseToPurchaseDto(purchaseRepository.findById(id).orElse(null));
+        return purchaseMapper.purchaseToPurchaseDto(purchaseRepository.getById(id));
     }
 
     @Override
     @Transactional
     public PurchaseDto getByPurchaseNumber(int purchaseNumber) {
-        return purchaseMapper.purchaseToPurchaseDto(purchaseRepository.findByPurchaseNumber(purchaseNumber).orElse(null));
+        return purchaseMapper.purchaseToPurchaseDto(purchaseRepository.getByPurchaseNumber(purchaseNumber));
     }
 
     @Override
     @Transactional
     public List<PurchaseDto> getByCustomerId(UUID customerId) {
-        return purchaseRepository.findByCustomerId(customerId).stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
+        return purchaseRepository.findByCustomerId(customerId).stream()
+                .map(purchaseMapper::purchaseToPurchaseDto)
+                .collect(Collectors.toList());
     }
 
 
     @Override
     @Transactional
     public List<PurchaseDto> getByCarId(UUID carId) {
-        return purchaseRepository.findByCarId(carId).stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
+        return purchaseRepository.findByCarId(carId).stream()
+                .map(purchaseMapper::purchaseToPurchaseDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional
     public List<PurchaseDto> getAll() {
-        return purchaseRepository.findAll().stream().map(purchaseMapper::purchaseToPurchaseDto).collect(Collectors.toList());
+        return purchaseRepository.findAll().stream()
+                .map(purchaseMapper::purchaseToPurchaseDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional
     public void create(UUID customerId, UUID carId) {
-        Customer customer = customerRepository.findById(customerId).orElse(null);
-        Car car = carRepository.findById(carId).orElse(null);
+        Customer customer = customerRepository.getById(customerId);
+        Car car = carRepository.getById(carId);
         if (customer != null && car != null) {
             Purchase purchase = new Purchase();
             purchase.setCustomer(customer);
@@ -72,9 +78,9 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     @Transactional
     public void update(UUID id, UUID customerId, UUID carId) {
-        Purchase purchase = purchaseRepository.findById(id).orElse(null);
-        Customer customer = customerRepository.findById(customerId).orElse(null);
-        Car car = carRepository.findById(carId).orElse(null);
+        Purchase purchase = purchaseRepository.getById(id);
+        Customer customer = customerRepository.getById(customerId);
+        Car car = carRepository.getById(carId);
         if (purchase != null && customer != null && car != null) {
             purchase.setCustomer(customer);
             purchase.setCar(car);
@@ -85,7 +91,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     @Transactional
     public void delete(UUID id) {
-        Purchase purchase = purchaseRepository.findById(id).orElse(null);
+        Purchase purchase = purchaseRepository.getById(id);
         if (purchase != null) {
             purchase.getCar().setPurchase(null);
             purchase.getCustomer().getPurchases().remove(purchase);

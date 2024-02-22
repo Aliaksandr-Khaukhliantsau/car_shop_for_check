@@ -25,33 +25,37 @@ public class LayoutServiceImpl implements LayoutService {
     @Override
     @Transactional
     public LayoutDto getById(UUID id) {
-        Layout layout = layoutRepository.findById(id).orElse(null);
-        return layoutMapper.layoutToLayoutDto(layout);
+        return layoutMapper.layoutToLayoutDto(layoutRepository.getById(id));
     }
 
     @Override
     @Transactional
     public List<LayoutDto> getByLayoutName(String layoutName) {
-        return layoutRepository.findByLayoutName(layoutName).stream().map(layoutMapper::layoutToLayoutDto).collect(Collectors.toList());
+        return layoutRepository.findByLayoutName(layoutName).stream().
+                map(layoutMapper::layoutToLayoutDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional
     public List<LayoutDto> getByCompletionId(UUID completionId) {
-//        return layoutRepository.findByCompletions_Id(completionId).stream().map(layoutMapper::layoutToLayoutDto).collect(Collectors.toList());
-        return layoutRepository.findByCompletionId(completionId).stream().map(layoutMapper::layoutToLayoutDto).collect(Collectors.toList());
+        return layoutRepository.findByCompletionId(completionId).stream()
+                .map(layoutMapper::layoutToLayoutDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional
     public List<LayoutDto> getAll() {
-        return layoutRepository.findAll().stream().map(layoutMapper::layoutToLayoutDto).collect(Collectors.toList());
+        return layoutRepository.findAll().stream()
+                .map(layoutMapper::layoutToLayoutDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional
     public void create(String layoutName, UUID completionId) {
-        Completion completion = completionRepository.findById(completionId).orElse(null);
+        Completion completion = completionRepository.getById(completionId);
         if (completion != null) {
             Layout layout = new Layout();
             layout.setLayoutName(layoutName);
@@ -65,8 +69,8 @@ public class LayoutServiceImpl implements LayoutService {
     @Override
     @Transactional
     public void update(UUID id, String layoutName, UUID completionId) {
-        Completion completion = completionRepository.findById(completionId).orElse(null);
-        Layout layout = layoutRepository.findById(id).orElse(null);
+        Completion completion = completionRepository.getById(completionId);
+        Layout layout = layoutRepository.getById(id);
         if (layout != null && completion != null) {
             layout.setLayoutName(layoutName);
             layout.setCompletionId(completionId);
@@ -79,7 +83,7 @@ public class LayoutServiceImpl implements LayoutService {
     @Override
     @Transactional
     public void delete(UUID id) {
-        Layout layout = layoutRepository.findById(id).orElse(null);
+        Layout layout = layoutRepository.getById(id);
         if (layout != null) {
             for (Completion completion : layout.getCompletions()) {
                 completion.setLayout(null);

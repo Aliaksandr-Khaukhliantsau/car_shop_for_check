@@ -25,28 +25,28 @@ public class CompletionServiceImpl implements CompletionService {
     @Override
     @Transactional
     public CompletionDto getById(UUID id) {
-        Completion completion = completionRepository.findById(id).orElse(null);
-        return completionMapper.completionToCompletionDto(completion);
+        return completionMapper.completionToCompletionDto(completionRepository.getById(id));
     }
 
     @Override
     @Transactional
     public CompletionDto getByCompletionName(String completionName) {
-        Completion completion = completionRepository.findByCompletionName(completionName).orElse(null);
-        return completionMapper.completionToCompletionDto(completion);
+        return completionMapper.completionToCompletionDto(completionRepository.getByCompletionName(completionName));
     }
 
     @Override
     @Transactional
     public List<CompletionDto> getAll() {
-        return completionRepository.findAll().stream().map(completionMapper::completionToCompletionDto).collect(Collectors.toList());
+        return completionRepository.findAll().stream()
+                .map(completionMapper::completionToCompletionDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional
     public void addSettingToCompletion(UUID completionId, UUID settingId) {
-        Completion completion = completionRepository.findById(completionId).orElse(null);
-        Setting setting = settingRepository.findById(settingId).orElse(null);
+        Completion completion = completionRepository.getById(completionId);
+        Setting setting = settingRepository.getById(settingId);
 
         if (completion != null && setting != null) {
             completion.getSettings().add(setting);
@@ -57,8 +57,8 @@ public class CompletionServiceImpl implements CompletionService {
     @Override
     @Transactional
     public void removeSettingFromCompletion(UUID completionId, UUID settingId) {
-        Completion completion = completionRepository.findById(completionId).orElse(null);
-        Setting setting = settingRepository.findById(settingId).orElse(null);
+        Completion completion = completionRepository.getById(completionId);
+        Setting setting = settingRepository.getById(settingId);
 
         if (completion != null && setting != null) {
             completion.getSettings().remove(setting);
@@ -77,7 +77,7 @@ public class CompletionServiceImpl implements CompletionService {
     @Override
     @Transactional
     public void update(UUID id, String completionName) {
-        Completion completion = completionRepository.findById(id).orElse(null);
+        Completion completion = completionRepository.getById(id);
 
         if (completion != null) {
             completion.setCompletionName(completionName);

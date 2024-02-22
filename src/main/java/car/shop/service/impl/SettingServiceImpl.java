@@ -22,21 +22,21 @@ public class SettingServiceImpl implements SettingService {
     @Override
     @Transactional
     public SettingDto getById(UUID id) {
-        Setting setting = settingRepository.findById(id).orElse(null);
-        return settingMapper.settingToSettingDto(setting);
+        return settingMapper.settingToSettingDto(settingRepository.getById(id));
     }
 
     @Override
     @Transactional
     public SettingDto getBySettingName(String settingName) {
-        Setting setting = settingRepository.findBySettingName(settingName).orElse(null);
-        return settingMapper.settingToSettingDto(setting);
+        return settingMapper.settingToSettingDto(settingRepository.getBySettingName(settingName));
     }
 
     @Override
     @Transactional
     public List<SettingDto> getAll() {
-        return settingRepository.findAll().stream().map(settingMapper::settingToSettingDto).collect(Collectors.toList());
+        return settingRepository.findAll().stream()
+                .map(settingMapper::settingToSettingDto)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -50,7 +50,7 @@ public class SettingServiceImpl implements SettingService {
     @Override
     @Transactional
     public void update(UUID id, String settingName) {
-        Setting setting = settingRepository.findById(id).orElse(null);
+        Setting setting = settingRepository.getById(id);
         if (setting != null) {
             setting.setSettingName(settingName);
             settingRepository.save(setting);

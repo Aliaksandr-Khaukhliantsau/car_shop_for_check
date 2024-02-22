@@ -70,9 +70,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public void update(UUID id, String firstName, String middleName, String lastName) {
-//        Customer customer = customerRepository.findById(id).orElse(null);
         Customer customer = customerRepository.getById(id);
-//        if (customer != null) {
         if (customer != null) {
             customer.setFirstName(firstName);
             customer.setMiddleName(middleName);
