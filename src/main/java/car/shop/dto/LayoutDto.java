@@ -1,12 +1,11 @@
 package car.shop.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,14 +13,15 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@Schema(description = "Information about the layout")
 public class LayoutDto {
 
+    @Schema(description = "ID")
     private UUID id;
 
+    @Schema(description = "Name")
     private String layoutName;
 
-    private UUID completionId;
-
-    private List<CompletionDto> completions = new ArrayList<>();
+    @Schema(description = "Completions")
+    private List<CompletionDto> completions;
 }

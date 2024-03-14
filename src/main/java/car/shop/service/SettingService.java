@@ -1,6 +1,7 @@
 package car.shop.service;
 
 import car.shop.dto.SettingDto;
+import car.shop.entity.Setting;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,9 +14,9 @@ public interface SettingService {
 
     List<SettingDto> getAll();
 
-    void create(String settingName);
+    void create(Setting setting);
 
-    void update(UUID id, String settingName);
+    void update(Setting setting);
 
     void delete(UUID id);
 }

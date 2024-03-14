@@ -59,24 +59,14 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
-    public void create(String firstName, String middleName, String lastName) {
-        Customer customer = new Customer();
-        customer.setFirstName(firstName);
-        customer.setMiddleName(middleName);
-        customer.setLastName(lastName);
+    public void create(Customer customer) {
         customerRepository.save(customer);
     }
 
     @Override
     @Transactional
-    public void update(UUID id, String firstName, String middleName, String lastName) {
-        Customer customer = customerRepository.getById(id);
-        if (customer != null) {
-            customer.setFirstName(firstName);
-            customer.setMiddleName(middleName);
-            customer.setLastName(lastName);
-            customerRepository.save(customer);
-        }
+    public void update(Customer customer) {
+        customerRepository.save(customer);
     }
 
     @Override

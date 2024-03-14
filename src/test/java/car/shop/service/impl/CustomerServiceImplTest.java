@@ -10,8 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,139 +23,112 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class CustomerServiceImplTest {
 
-    @InjectMocks
-    private CustomerServiceImpl customerService;
-
     @Mock
     private CustomerRepository customerRepository;
 
     @Mock
     private CustomerMapper customerMapper;
 
+    @InjectMocks
+    private CustomerServiceImpl customerService;
+
     @Test
     public void testGetById() {
-//        UUID id = UUID.randomUUID();
-        String id = "9eaefad3-b9d6-4476-a21e-93a698d4f4ef";
-
+        UUID customerId = UUID.randomUUID();
         Customer customer = new Customer();
+        customer.setId(customerId);
         CustomerDto customerDto = new CustomerDto();
+        customerDto.setId(customerId);
 
-//        when(customerRepository.findById(id)).thenReturn(Optional.ofNullable(customer));
-        when(customerRepository.findById(UUID.fromString(id))).thenReturn(Optional.ofNullable(customer));
+        when(customerRepository.getById(customerId)).thenReturn(customer);
         when(customerMapper.customerToCustomerDto(customer)).thenReturn(customerDto);
 
-//        CustomerDto result = customerService.getById(id);
-        CustomerDto result = customerService.getById(UUID.fromString(id));
-
-//        verify(customerRepository, times(1)).findById(id);
-        verify(customerRepository, times(1)).findById(UUID.fromString(id));
-        verify(customerMapper, times(1)).customerToCustomerDto(customer);
+        CustomerDto result = customerService.getById(customerId);
 
         assertEquals(customerDto, result);
+        verify(customerRepository, times(1)).getById(customerId);
+        verify(customerMapper, times(1)).customerToCustomerDto(customer);
     }
 
     @Test
     public void testGetByFirstName() {
         String firstName = "Иван";
+        Customer customer1 = new Customer();
+        customer1.setId(UUID.randomUUID());
+        Customer customer2 = new Customer();
+        customer2.setId(UUID.randomUUID());
+        CustomerDto customerDto1 = new CustomerDto();
+        CustomerDto customerDto2 = new CustomerDto();
 
-        List<Customer> customers = List.of(new Customer());
-        List<CustomerDto> customerDtos = List.of(new CustomerDto());
-
-
-        when(customerRepository.findByFirstName(firstName)).thenReturn(customers);
-        when(customerMapper.customerToCustomerDto(customers.getFirst())).thenReturn(customerDtos.getFirst());
+        when(customerRepository.findByFirstName(firstName)).thenReturn(Arrays.asList(customer1, customer2));
+        when(customerMapper.customerToCustomerDto(customer1)).thenReturn(customerDto1);
+        when(customerMapper.customerToCustomerDto(customer2)).thenReturn(customerDto2);
 
         List<CustomerDto> result = customerService.getByFirstName(firstName);
 
+        assertEquals(2, result.size());
+        assertEquals(customerDto1, result.get(0));
+        assertEquals(customerDto2, result.get(1));
         verify(customerRepository, times(1)).findByFirstName(firstName);
-        verify(customerMapper, times(1)).customerToCustomerDto(customers.getFirst());
-
-        assertEquals(customerDtos, result);
+        verify(customerMapper, times(2)).customerToCustomerDto(any());
     }
 
     @Test
     public void testGetByMiddleName() {
-        String middleName = "Иванович";
-        List<Customer> customers = List.of(new Customer());
-        List<CustomerDto> customerDtos = List.of(new CustomerDto());
-
+        String middleName = "Иванов";
+        List<Customer> customers = Arrays.asList(new Customer(), new Customer());
+        List<CustomerDto> expectedDtos = Arrays.asList(new CustomerDto(), new CustomerDto());
         when(customerRepository.findByMiddleName(middleName)).thenReturn(customers);
-        when(customerMapper.customerToCustomerDto(customers.getFirst())).thenReturn(customerDtos.getFirst());
+        when(customerMapper.customerToCustomerDto(any())).thenReturn(expectedDtos.get(0), expectedDtos.get(1));
 
-        List<CustomerDto> results = customerService.getByMiddleName(middleName);
+        List<CustomerDto> actualDtos = customerService.getByMiddleName(middleName);
 
-        assertEquals(customerDtos, results);
-        verify(customerRepository, times(1)).findByMiddleName(middleName);
-        verify(customerMapper, times(1)).customerToCustomerDto(customers.getFirst());
+        assertEquals(expectedDtos, actualDtos);
     }
 
     @Test
     public void testGetByLastName() {
-        String lastName = "Иванов";
-        List<Customer> customers = List.of(new Customer());
-        List<CustomerDto> customerDtos = List.of(new CustomerDto());
-
+        String lastName = "Иванович";
+        List<Customer> customers = Arrays.asList(new Customer(), new Customer());
+        List<CustomerDto> expectedDtos = Arrays.asList(new CustomerDto(), new CustomerDto());
         when(customerRepository.findByLastName(lastName)).thenReturn(customers);
-        when(customerMapper.customerToCustomerDto(customers.getFirst())).thenReturn(customerDtos.getFirst());
+        when(customerMapper.customerToCustomerDto(any())).thenReturn(expectedDtos.get(0), expectedDtos.get(1));
 
-        List<CustomerDto> results = customerService.getByLastName(lastName);
+        List<CustomerDto> actualDtos = customerService.getByLastName(lastName);
 
-        assertEquals(customerDtos, results);
-        verify(customerRepository, times(1)).findByLastName(lastName);
-        verify(customerMapper, times(1)).customerToCustomerDto(customers.getFirst());
+        assertEquals(expectedDtos, actualDtos);
     }
 
     @Test
     public void testGetAll() {
-        List<Customer> customers = List.of(new Customer());
-        List<CustomerDto> customerDtos = List.of(new CustomerDto());
-
+        List<Customer> customers = Arrays.asList(new Customer(), new Customer());
+        List<CustomerDto> expectedDtos = Arrays.asList(new CustomerDto(), new CustomerDto());
         when(customerRepository.findAll()).thenReturn(customers);
-        when(customerMapper.customerToCustomerDto(customers.getFirst())).thenReturn(customerDtos.getFirst());
+        when(customerMapper.customerToCustomerDto(any())).thenReturn(expectedDtos.get(0), expectedDtos.get(1));
 
-        List<CustomerDto> results = customerService.getAll();
+        List<CustomerDto> actualDtos = customerService.getAll();
 
-        assertEquals(customerDtos, results);
-        verify(customerRepository, times(1)).findAll();
-        verify(customerMapper, times(1)).customerToCustomerDto(customers.getFirst());
+        assertEquals(expectedDtos, actualDtos);
     }
 
     @Test
     public void testCreate() {
-        String firstName = "Иван";
-        String middleName = "Иванович";
-        String lastName = "Иванов";
         Customer customer = new Customer();
-
-        customerService.create(firstName, middleName, lastName);
-
-        verify(customerRepository, times(1)).save(any(Customer.class));
+        customerService.create(customer);
+        verify(customerRepository, times(1)).save(customer);
     }
 
     @Test
     public void testUpdate() {
-        UUID id = UUID.randomUUID();
-//        String id = "9eaefad3-b9d6-4476-a21e-93a698d4f4ef";
-        String firstName = "Test";
-        String middleName = "Test";
-        String lastName = "Test";
         Customer customer = new Customer();
-
-        when(customerRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(customer));
-
-        customerService.update(id, firstName, middleName, lastName);
-
-        verify(customerRepository, times(1)).findById(id);
-        verify(customerRepository, times(1)).save(any(Customer.class));
+        customerService.update(customer);
+        verify(customerRepository, times(1)).save(customer);
     }
 
     @Test
     public void testDelete() {
         UUID id = UUID.randomUUID();
-//        String id = "9eaefad3-b9d6-4476-a21e-93a698d4f4ef";
-
         customerService.delete(id);
-
         verify(customerRepository, times(1)).deleteById(id);
     }
 }

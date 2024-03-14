@@ -1,6 +1,7 @@
 package car.shop.service;
 
 import car.shop.dto.LayoutDto;
+import car.shop.entity.Layout;
 
 import java.util.List;
 import java.util.UUID;
@@ -10,13 +11,11 @@ public interface LayoutService {
 
     List<LayoutDto> getByLayoutName(String layoutName);
 
-    List<LayoutDto> getByCompletionId(UUID completionId);
-
     List<LayoutDto> getAll();
 
-    void create(String layoutName, UUID completionId);
+    void create(Layout layout);
 
-    void update(UUID id, String layoutName, UUID completionId);
+    void update(Layout layout);
 
     void delete(UUID id);
 }

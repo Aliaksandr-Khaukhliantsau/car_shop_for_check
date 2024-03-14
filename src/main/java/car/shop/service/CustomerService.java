@@ -1,6 +1,7 @@
 package car.shop.service;
 
 import car.shop.dto.CustomerDto;
+import car.shop.entity.Customer;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,9 +17,9 @@ public interface CustomerService {
 
     List<CustomerDto> getAll();
 
-    void create(String firstName, String middleName, String lastName);
+    void create(Customer customer);
 
-    void update(UUID id, String firstName, String middleName, String lastName);
+    void update(Customer customer);
 
     void delete(UUID id);
 }

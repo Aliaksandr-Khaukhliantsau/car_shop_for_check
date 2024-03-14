@@ -1,6 +1,7 @@
 package car.shop.service;
 
 import car.shop.dto.CarDto;
+import car.shop.entity.Car;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,13 +12,11 @@ public interface CarService {
 
     CarDto getByVin(String vin);
 
-    List<CarDto> getByLayoutId(UUID layoutId);
-
     List<CarDto> getAll();
 
-    void create(String vin, UUID layoutId);
+    void create(Car car);
 
-    void update(UUID id, String vin, UUID layoutId);
+    void update(Car car);
 
     void delete(UUID id);
 }
