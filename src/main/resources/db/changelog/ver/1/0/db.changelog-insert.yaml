@@ -1,0 +1,102 @@
+databaseChangeLog:
+  - changeSet:
+      id: truncate-and-insert-customers
+      author: Aliaksandr
+      changes:
+#        - delete:
+#            tableName: customers
+        - sql:
+            sql: "TRUNCATE customers CASCADE;"
+#        - insert:
+#            tableName: customers
+#            columns:
+#              - column:
+#                  name: first_name
+#                  value: Иван
+#              - column:
+#                  name: middle_name
+#                  value: Иванович
+#              - column:
+#                  name: last_name
+#                  value: Иванов
+
+#        - loadData:
+#            file: customers.csv
+#            tableName: customers
+#            separator: ","
+#            columns:
+#              - column:
+#                  name: first_name
+##                  type: STRING
+#                  type: TEXT
+#              - column:
+#                  name: middle_name
+##                  type: STRING
+#                  type: TEXT
+#              - column:
+#                  name: last_name
+##                  type: STRING
+#                  type: TEXT
+
+        - loadUpdateData:
+            file: customers.csv
+            tableName: customers
+            primaryKey: id
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+              - column:
+                  name: first_name
+#                  type: STRING
+                  type: TEXT
+              - column:
+                  name: middle_name
+#                  type: STRING
+                  type: TEXT
+              - column:
+                  name: last_name
+#                  type: STRING
+                  type: TEXT
+
+  - changeSet:
+      id: truncate-and-insert-settings
+      author: Aliaksandr
+      changes:
+#        - delete:
+#            tableName: settings
+        - sql:
+            sql: "TRUNCATE settings CASCADE;"
+        - loadUpdateData:
+            file: settings.csv
+            tableName: settings
+            primaryKey: id
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+              - column:
+                  name: setting_name
+#                  type: STRING
+                  type: TEXT
+
+  - changeSet:
+      id: truncate-and-insert-layouts
+      author: Aliaksandr
+      changes:
+#        - delete:
+#            tableName: layouts
+        - sql:
+            sql: "TRUNCATE layouts CASCADE;"
+        - loadUpdateData:
+            file: layouts.csv
+            tableName: layouts
+            primaryKey: id
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+              - column:
+                  name: layout_name
+#                  type: STRING
+                  type: TEXT
