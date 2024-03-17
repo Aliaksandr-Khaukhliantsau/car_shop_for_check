@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-new-column-to-customers-table
+      author: Aliaksandr
+      changes:
+        - addColumn:
+            tableName: customers
+            columns:
+              - column:
+                  name: surname
+                  type: text
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: migrate-data-and-drop-middle_name-column
+      author: Aliaksandr
+      changes:
+        - sql:
+            sql: "UPDATE customers SET surname = middle_name;"
+        - dropColumn:
+            tableName: customers
+            columnName: middle_name
+
+  - changeSet:
+      id: modify-surname-column-nullable
+      author: Aliaksandr
+      changes:
+        - addNotNullConstraint:
+            tableName: customers
+            columnName: surname

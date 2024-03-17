@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: rollback-changes-of-customers-table
+      author: Aliaksandr
+      changes:
+        - addColumn:
+            tableName: customers
+            columns:
+              - column:
+                  name: middle_name
+                  type: text
+                  constraints:
+                    nullable: true
+        - sql:
+            sql: "UPDATE customers SET middle_name = surname;"
+        - addNotNullConstraint:
+            tableName: customers
+            columnName: middle_name
+        - dropColumn:
+            tableName: customers
+            columnName: surname
