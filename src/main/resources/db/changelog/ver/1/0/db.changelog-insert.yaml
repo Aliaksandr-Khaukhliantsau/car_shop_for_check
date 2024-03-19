@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data
+      author: Aliaksandr
+      changes:
+        - sql:
+            sql: "TRUNCATE customers, settings, layouts CASCADE;"
+        - loadData:
+            file: db/changelog/ver/1/0/customers.csv
+            tableName: customers
+            separator: ";"
+            columns:
+              - column:
+                  name: first_name
+                  type: text
+              - column:
+                  name: middle_name
+                  type: text
+              - column:
+                  name: last_name
+                  type: text
+        - loadData:
+            file: db/changelog/ver/1/0/settings.csv
+            tableName: settings
+            separator: ";"
+            columns:
+              - column:
+                  name: setting_name
+                  type: text
+        - loadData:
+            file: db/changelog/ver/1/0/layouts.csv
+            tableName: layouts
+            separator: ";"
+            columns:
+              - column:
+                  name: layout_name
+                  type: text
