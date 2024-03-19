@@ -81,8 +81,6 @@ databaseChangeLog:
       author: Aliaksandr
       changes:
         - sql:
-            sql: "DROP EXTENSION IF EXISTS \"uuid-ossp\";"
-        - sql:
             sql: "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";"
 
   - changeSet:

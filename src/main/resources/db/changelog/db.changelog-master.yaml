@@ -5,5 +5,3 @@ databaseChangeLog:
       file: db/changelog/ver/1/0/db.changelog-insert.yaml
   - include:
       file: db/changelog/ver/1/1/db.changelog-change-customers.yaml
-  - include:
-      file: db/changelog/ver/1/1/db.changelog-rollback-changes-customers.yaml

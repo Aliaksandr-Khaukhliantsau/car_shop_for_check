@@ -29,3 +29,11 @@ databaseChangeLog:
         - addNotNullConstraint:
             tableName: customers
             columnName: surname
+
+rollback:
+  - rollbackChangeSet:
+      id: modify-surname-column-nullable
+  - rollbackChangeSet:
+      id: migrate-data-and-drop-middle_name-column
+  - rollbackChangeSet:
+      id: add-new-column-to-customers-table
