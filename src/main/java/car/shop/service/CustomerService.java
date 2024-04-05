@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CustomerService {
+
     CustomerDto getById(UUID id);
 
     List<CustomerDto> getByFirstName(String firstName);

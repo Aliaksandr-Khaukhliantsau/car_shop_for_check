@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CompletionService {
+
     CompletionDto getById(UUID id);
 
     CompletionDto getByCompletionName(String completionName);
