@@ -2,9 +2,9 @@
 
 ## swagger:
 
-http://localhost:8080/swagger-ui.html
+http://localhost:8081/swagger-ui.html
 
 ## API documentation:
 
-http://localhost:8080/v3/api-docs/custom-api
+http://localhost:8081/v3/api-docs/custom-api
 
