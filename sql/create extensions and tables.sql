@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS settings, cars, completions, completions_settings, layouts, customers, purchases CASCADE;
+DROP TABLE IF EXISTS settings, cars, completions, completions_settings, layouts, customers, purchases, users CASCADE;
 
 DROP EXTENSION IF EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
@@ -84,4 +84,12 @@ CREATE TABLE purchases
         REFERENCES cars (id) MATCH SIMPLE
         ON UPDATE CASCADE
         NOT VALID
+);
+
+CREATE TABLE users
+(
+    id       UUID PRIMARY KEY    NOT NULL DEFAULT uuid_generate_v4(),
+    username VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255)        NOT NULL,
+    roles    VARCHAR(255)        NOT NULL
 );

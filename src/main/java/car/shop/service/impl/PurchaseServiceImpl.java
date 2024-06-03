@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -36,16 +35,15 @@ public class PurchaseServiceImpl implements PurchaseService {
     public List<PurchaseDto> getByCustomerId(UUID customerId) {
         return purchaseRepository.findByCustomerId(customerId).stream()
                 .map(purchaseMapper::purchaseToPurchaseDto)
-                .collect(Collectors.toList());
+                .toList();
     }
-
 
     @Override
     @Transactional
     public List<PurchaseDto> getByCarId(UUID carId) {
         return purchaseRepository.findByCarId(carId).stream()
                 .map(purchaseMapper::purchaseToPurchaseDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -53,7 +51,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     public List<PurchaseDto> getAll() {
         return purchaseRepository.findAll().stream()
                 .map(purchaseMapper::purchaseToPurchaseDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

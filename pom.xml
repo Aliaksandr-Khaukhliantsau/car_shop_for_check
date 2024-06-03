@@ -21,6 +21,7 @@
 		<javax.persistence-api.version>2.2</javax.persistence-api.version>
 		<springdoc-openapi-ui.version>1.7.0</springdoc-openapi-ui.version>
 		<springdoc-openapi-data-rest.version>1.7.0</springdoc-openapi-data-rest.version>
+		<reactor-core.version>3.6.6</reactor-core.version>
 	</properties>
 
 	<dependencies>
@@ -91,6 +92,23 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-core</artifactId>
+			<version>${reactor-core.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>

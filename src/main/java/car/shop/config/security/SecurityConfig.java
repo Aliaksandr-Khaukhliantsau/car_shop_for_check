@@ -29,7 +29,8 @@ public class SecurityConfig {
         return http.csrf().disable()
                 .authorizeHttpRequests(auth -> auth
                         .antMatchers("/api/v1/cars/", "/api/v1/users/new-user/").permitAll()
-                        .antMatchers("/api/v1/**").authenticated()
+//                        .antMatchers("/api/v1/**").authenticated()
+//                        .anyRequest().authenticated()
                 )
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .build();

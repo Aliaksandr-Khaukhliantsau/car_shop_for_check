@@ -17,6 +17,6 @@ public class UserController {
     @PostMapping("/new-user")
     public String create(@RequestBody User user) {
         userService.create(user);
-        return "user has been created";
+        return "User has been created.";
     }
 }

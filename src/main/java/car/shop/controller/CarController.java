@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+//@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 @RequestMapping("api/v1/cars")
 @RequiredArgsConstructor
 @Tag(name = "Cars", description = "Methods for working with cars")
@@ -54,7 +54,7 @@ public class CarController {
         return carService.getByVin(vin);
     }
 
-    @PreAuthorize("hasAuthority('ROLE_USER') || hasAuthority('ROLE_ADMIN')")
+//    @PreAuthorize("hasAuthority('ROLE_USER') || hasAuthority('ROLE_ADMIN')")
     @GetMapping()
     @Operation(summary = "Get information about all cars", description = "Returns information about all cars")
     @ApiResponses(value = {

@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+//@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 @RequestMapping("api/v1/settings")
 @RequiredArgsConstructor
 @Tag(name = "Settings", description = "Methods for working with settings")
